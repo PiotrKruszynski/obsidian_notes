@@ -21,7 +21,7 @@
   "amazonBedrockRegion": "",
   "siliconflowApiKey": "",
   "defaultChainType": "llm_chain",
-  "defaultModelKey": "gpt-4.1-mini|openai",
+  "defaultModelKey": "copilot-plus-flash|copilot-plus",
   "embeddingModelKey": "text-embedding-3-small|openai",
   "temperature": 0.1,
   "maxTokens": 6000,
