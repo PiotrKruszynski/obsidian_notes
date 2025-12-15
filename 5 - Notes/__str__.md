@@ -1,0 +1,1 @@
+reprezentacja tekstowa dla użytkownika

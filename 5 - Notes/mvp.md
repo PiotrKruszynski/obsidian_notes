@@ -1,0 +1,1 @@
+działająca funkcjonalność, bez dodatkowych funkcjonalności
