@@ -126,8 +126,8 @@
   "showNewVersionNotification": true,
   "latexBoilerplate": "\\color{blue}",
   "latexPreambleLocation": "preamble.sty",
-  "taskboneEnabled": false,
-  "taskboneAPIkey": "",
+  "taskboneEnabled": true,
+  "taskboneAPIkey": "004eef40-037a-49b5-8590-4dd543903e58",
   "pinnedScripts": [],
   "customPens": [
     {
