@@ -2,21 +2,20 @@
 
 [klasa bazowa] której nie można **instancjonować bezpośrednio**, i która **określa interfejs (API)** dla klas potomnych.
 
-  
 
-W Pythonie tworzy się ją dziedzicząc po abc.ABC i oznaczając metody za pomocą dekoratora @abstractmethod.
+W Pythonie tworzy się ją 
+- dziedzicząc po abc.ABC 
+- oznaczając metody za pomocą dekoratora @abstractmethod.
 ```python
 from abc import ABC, abstractmethod
 
 class Shape(ABC):  # dziedziczenie po ABC
     @abstractmethod
-    def area(self) -> float:
+    def area(self):
         pass
 ```
 
-- ABC: abstrakcyjna klasa bazowa z modułu abc
-    
-- @abstractmethod: oznacza metodę, którą MUSI zaimplementować każda podklasa
+**@abstractmethod**: oznacza metodę, którą **MUSI** zaimplementować każda podklasa
     
 
   
@@ -52,7 +51,6 @@ dog = Dog()  # 👈 działa
 
 ### **🧪 Case Study (PL):**
 
-  
 
 Załóżmy system z wieloma czujnikami (Sensor), które mają różne typy: TemperatureSensor, HumiditySensor, itd. Każdy musi mieć metodę read() – ale każdy inaczej.
 
@@ -87,21 +85,9 @@ class HumiditySensor(Sensor):
     
 - isinstance(obj, ABC) zadziała tylko na klasach abstrakcyjnych
     
-- __subclasshook__ można przeciążyć by dać duck-typing bez dziedziczenia
+- `__subclasshook__` można przeciążyć by dać duck-typing bez dziedziczenia
     
 
----
+Lista abstrakcyjnych interfejsów w collections.abc
 
-### **📚 Kluczowe pojęcia:**
-
-- abc.ABC, @abstractmethod
-    
-- instancjonowanie, interfejs, dziedziczenie
-    
-- ABCMeta jako metaklasa
-    
-- pełność klasy (abstractmethods == ∅)
-    
-- duck typing vs enforced interface
-
-[[duck typing]] 
+https://docs.python.org/pl/3.14/library/collections.abc.html#collections-abstract-base-classes 
