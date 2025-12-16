@@ -37,7 +37,7 @@ Installing and managing Python itself.
 
 See the [guide on installing Python](https://docs.astral.sh/uv/guides/install-python/) to get started.
 
-## [Scripts](https://docs.astral.sh/uv/getting-started/features/#scripts)
+ [Scripts](https://docs.astral.sh/uv/getting-started/features/#scripts)
 
 Executing standalone Python scripts, e.g., `example.py`.
 
@@ -47,7 +47,7 @@ Executing standalone Python scripts, e.g., `example.py`.
 
 See the [guide on running scripts](https://docs.astral.sh/uv/guides/scripts/) to get started.
 
-## [Projects](https://docs.astral.sh/uv/getting-started/features/#projects)
+ [Projects](https://docs.astral.sh/uv/getting-started/features/#projects)
 
 Creating and working on Python projects, i.e., with a `pyproject.toml`.
 
@@ -63,7 +63,7 @@ Creating and working on Python projects, i.e., with a `pyproject.toml`.
 
 See the [guide on projects](https://docs.astral.sh/uv/guides/projects/) to get started.
 
-## [Tools](https://docs.astral.sh/uv/getting-started/features/#tools)
+ [Tools](https://docs.astral.sh/uv/getting-started/features/#tools)
 
 Running and installing tools published to Python package indexes, e.g., `ruff` or `black`.
 
@@ -75,7 +75,7 @@ Running and installing tools published to Python package indexes, e.g., `ruff`�
 
 See the [guide on tools](https://docs.astral.sh/uv/guides/tools/) to get started.
 
-## [The pip interface](https://docs.astral.sh/uv/getting-started/features/#the-pip-interface)
+ [The pip interface](https://docs.astral.sh/uv/getting-started/features/#the-pip-interface)
 
 Manually managing environments and packages — intended to be used in legacy workflows or cases where the high-level commands do not provide enough control.
 
@@ -108,7 +108,7 @@ Important
 
 These commands do not exactly implement the interfaces and behavior of the tools they are based on. The further you stray from common workflows, the more likely you are to encounter differences. Consult the [pip-compatibility guide](https://docs.astral.sh/uv/pip/compatibility/) for details.
 
-## [Utility](https://docs.astral.sh/uv/getting-started/features/#utility)
+[Utility](https://docs.astral.sh/uv/getting-started/features/#utility)
 
 Managing and inspecting uv's state, such as the cache, storage directories, or performing a self-update:
 
