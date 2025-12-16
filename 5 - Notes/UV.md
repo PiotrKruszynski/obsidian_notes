@@ -13,7 +13,7 @@ Jest napisane w **Rust**, działa **szybko**.
 Pip -> zarządza pakietami, nie projektem. niestabilność w czasie,  requirements  ≠ **lockfile**
 Virtualenv -> izoluje, nie zarządza projektem - brak metadanych. wiele venv, 
 Poetry -> wprowadza pyproject.toml (one source of true). Jeden projekt = jedno środowisko przypisane do projektu.
-UV -> 
+UV -> projekt + pip-mode + tool-running., uvx jako pipx replacement
 
 ### **Do czego służy**
 
