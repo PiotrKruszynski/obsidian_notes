@@ -67,7 +67,7 @@ See the [guide on running scripts](https://docs.astral.sh/uv/guides/scripts/) 
 Creating and working on Python projects, i.e., with a `pyproject.toml`.
 
 - `uv init`: Create a new Python project. (**nie tworzy virtual env**)
-- `uv add`: Add a dependency to the project.
+- `uv add`: Add a dependency to the project. (**dodaje zależności do projektu**)
 - `uv remove`: Remove a dependency from the project.
 - `uv sync`: Sync the project's dependencies with the environment.
 - `uv lock`: Create a lockfile for the project's dependencies.
