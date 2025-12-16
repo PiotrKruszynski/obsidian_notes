@@ -10,6 +10,10 @@ asserty /
 asserty zbieramy w test case ( jedna logiczna sytuacja testowa)
 test case zbieramy w **test suite** (zestaw testów) - w [[pytest]] używa się funkcji
 
+🔴 napisz test (pytest)
+🟢 zaimplementuj minimum
+🔵 refactor
+
 ___
 Metadata:
 
