@@ -27,92 +27,99 @@ Jest napisane w **Rust**, dlatego działa **bardzo szybko**.
 
 **Commands**
 
-```bash
-# uv & uvx — Python cheat-sheet
+Installing and managing Python itself.
 
-## uv — środowiska, Python, zależności
+`uv python install`: Install Python versions.
+`uv python list`: View available Python versions.
+- `uv python find`: Find an installed Python version.
+- `uv python pin`: Pin the current project to use a specific Python version.
+- `uv python uninstall`: Uninstall a Python version.
 
-### Python
-uv python list
-uv python install 3.12
-uv python pin 3.12
+See the [guide on installing Python](https://docs.astral.sh/uv/guides/install-python/) to get started.
 
-### Virtualenv
-uv venv
-uv venv --python 3.12
-source .venv/bin/activate
+## [Scripts](https://docs.astral.sh/uv/getting-started/features/#scripts)
 
-### Pakiety (zamiennik pip)
-uv pip install requests
-uv pip install django pytest ruff
-uv pip install -r requirements.txt
-uv pip uninstall requests
-uv pip list
-uv pip freeze
-uv pip install --upgrade requests
+Executing standalone Python scripts, e.g., `example.py`.
 
-### Lockfile / deterministyczne zależności
-uv pip compile pyproject.toml -o uv.lock
-uv pip compile requirements.in -o requirements.txt
-uv pip sync uv.lock
+- `uv run`: Run a script.
+- `uv add --script`: Add a dependency to a script.
+- `uv remove --script`: Remove a dependency from a script.
 
-### Uruchamianie poleceń w venv
-uv run python main.py
-uv run pytest
-uv run django-admin startproject app
+See the [guide on running scripts](https://docs.astral.sh/uv/guides/scripts/) to get started.
 
-### Aktualizacje
-uv self update
+## [Projects](https://docs.astral.sh/uv/getting-started/features/#projects)
 
----
+Creating and working on Python projects, i.e., with a `pyproject.toml`.
 
-## uvx — jednorazowe narzędzia CLI (jak pipx)
+- `uv init`: Create a new Python project.
+- `uv add`: Add a dependency to the project.
+- `uv remove`: Remove a dependency from the project.
+- `uv sync`: Sync the project's dependencies with the environment.
+- `uv lock`: Create a lockfile for the project's dependencies.
+- `uv run`: Run a command in the project environment.
+- `uv tree`: View the dependency tree for the project.
+- `uv build`: Build the project into distribution archives.
+- `uv publish`: Publish the project to a package index.
 
-### Uruchamianie narzędzi
-uvx black .
-uvx ruff check .
-uvx mypy src/
-uvx pytest
+See the [guide on projects](https://docs.astral.sh/uv/guides/projects/) to get started.
 
-### Konkretna wersja pakietu
-uvx black==24.4.2 .
+## [Tools](https://docs.astral.sh/uv/getting-started/features/#tools)
 
-### Przekazywanie argumentów
-uvx django-admin startproject mysite
-uvx httpx https://example.com
+Running and installing tools published to Python package indexes, e.g., `ruff` or `black`.
 
-### Konkretna wersja Pythona
-uvx --python 3.12 black .
+- `uvx` / `uv tool run`: Run a tool in a temporary environment.
+- `uv tool install`: Install a tool user-wide.
+- `uv tool uninstall`: Uninstall a tool.
+- `uv tool list`: List installed tools.
+- `uv tool update-shell`: Update the shell to include tool executables.
 
----
+See the [guide on tools](https://docs.astral.sh/uv/guides/tools/) to get started.
 
-## Typowe workflow
+## [The pip interface](https://docs.astral.sh/uv/getting-started/features/#the-pip-interface)
 
-### Nowy projekt
-uv python install 3.12
-uv python pin 3.12
-uv venv
-uv pip install django pytest ruff
+Manually managing environments and packages — intended to be used in legacy workflows or cases where the high-level commands do not provide enough control.
 
-### CI / Docker
-uv pip sync uv.lock
-uv run pytest
+Creating virtual environments (replacing `venv` and `virtualenv`):
 
-### Jednorazowe narzędzie
-uvx ruff check .
-uvx black .
+- `uv venv`: Create a new virtual environment.
 
----
+See the documentation on [using environments](https://docs.astral.sh/uv/pip/environments/) for details.
 
-## TL;DR
-uv  → Python, venv, zależności, lockfile  
-uvx → jednorazowe narzędzia CLI z PyPI
+Managing packages in an environment (replacing [`pip`](https://github.com/pypa/pip) and [`pipdeptree`](https://github.com/tox-dev/pipdeptree)):
+
+- `uv pip install`: Install packages into the current environment.
+- `uv pip show`: Show details about an installed package.
+- `uv pip freeze`: List installed packages and their versions.
+- `uv pip check`: Check that the current environment has compatible packages.
+- `uv pip list`: List installed packages.
+- `uv pip uninstall`: Uninstall packages.
+- `uv pip tree`: View the dependency tree for the environment.
+
+See the documentation on [managing packages](https://docs.astral.sh/uv/pip/packages/) for details.
+
+Locking packages in an environment (replacing [`pip-tools`](https://github.com/jazzband/pip-tools)):
+
+- `uv pip compile`: Compile requirements into a lockfile.
+- `uv pip sync`: Sync an environment with a lockfile.
+
+See the documentation on [locking environments](https://docs.astral.sh/uv/pip/compile/) for details.
+
+Important
+
+These commands do not exactly implement the interfaces and behavior of the tools they are based on. The further you stray from common workflows, the more likely you are to encounter differences. Consult the [pip-compatibility guide](https://docs.astral.sh/uv/pip/compatibility/) for details.
+
+## [Utility](https://docs.astral.sh/uv/getting-started/features/#utility)
+
+Managing and inspecting uv's state, such as the cache, storage directories, or performing a self-update:
+
+- `uv cache clean`: Remove cache entries.
+- `uv cache prune`: Remove outdated cache entries.
+- `uv cache dir`: Show the uv cache directory path.
+- `uv tool dir`: Show the uv tool directory path.
+- `uv python dir`: Show the uv installed Python versions path.
+- `uv self update`: Update uv to the latest version.
 
 
-```
-
-
-___
 Metadata:
 
 Status: #pending
