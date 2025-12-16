@@ -10,8 +10,8 @@ Jedno narzędzie, które zastępuje kilka klasycznych:
 
 Jest napisane w **Rust**, działa **szybko**.
 
-Pip -> zarządza pakietami, nie projektem.
-Virtualenv -> 
+Pip -> zarządza pakietami, nie projektem. niestabilność w czasie,  requirements  ≠ **lockfile**
+Virtualenv -> izoluje, nie zarządza projektem
 Poetry -> wprowadza pyproject.toml (one source of true)
 
 ### **Do czego służy**
