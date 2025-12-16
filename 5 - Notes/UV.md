@@ -9,6 +9,11 @@ Jedno narzędzie, które zastępuje kilka klasycznych:
 - częściowo poetry / pipenv
 
 Jest napisane w **Rust**, działa **szybko**.
+
+Pip -> zarządza pakietami, nie projektem.
+Virtualenv -> 
+Poetry -> wprowadza pyproject.toml (one source of true)
+
 ### **Do czego służy**
 
 - tworzenie i zarządzanie **virtualenv**
