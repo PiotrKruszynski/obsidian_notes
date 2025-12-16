@@ -6,5 +6,5 @@ Note:
 ___
 Metadata:
 
-Status: #pending
+Status: #pending #draft #understood #applied
 Tags: #empty
