@@ -2,19 +2,26 @@ Created: 2025-12-15 23:19
 ___
 Note:
 
-uv to nowoczesny, ultralekki i szybki menedżer pakietów dla Python, alternatywa dla pip i virtualenv.
+uv to nowoczesny, ultralekki i szybki menedżer pakietów dla Python, alternatywa dla pip i virtualenv. Wysoka wydajność dzięki implementacji w **Rust**. 
 
-- pip
-- pip-tools (pip-compile)
-- virtualenv
-- częściowo poetry / pipenv
+**Kluczowe cechy uv:**
 
-Jest napisane w **Rust**, działa **szybko**.
+✅ **Szybkość** – działa znacznie szybciej niż pip, zwłaszcza przy instalacji wielu pakietów.
 
-Pip -> zarządza pakietami, nie projektem. niestabilność w czasie,  requirements  ≠ **lockfile**
-Virtualenv -> izoluje, nie zarządza projektem - brak metadanych. wiele venv, 
-Poetry -> wprowadza pyproject.toml (one source of true). Jeden projekt = jedno środowisko przypisane do projektu.
-UV -> projekt + pip-mode + tool-running., uvx jako pipx replacement
+✅ **Efektywność** – lepiej zarządza zależnościami, minimalizując konflikty.
+
+✅ **Samodzielność** – działa niezależnie od Pythona, nie wymaga środowisk wirtualnych.
+
+✅ **Kompatybilność** – współpracuje z pip, requirements.txt oraz pyproject.toml.
+
+
+**Pip** -> zarządza pakietami, nie projektem. niestabilność w czasie,  requirements  ≠ **lockfile**
+
+**Virtualenv** -> izoluje, nie zarządza projektem - brak metadanych. wiele venv, 
+
+**Poetry** -> wprowadza pyproject.toml (one source of true). Jeden projekt = jedno środowisko przypisane do projektu.
+
+**UV** -> projekt + pip-mode + tool-running., uvx jako pipx replacement
 
 ### **Do czego służy**
 
@@ -23,7 +30,6 @@ UV -> projekt + pip-mode + tool-running., uvx jako pipx replacement
 - generowanie lockfile (powtarzalne buildy)
 - zarządzanie wersjami Pythona
 - uruchamianie narzędzi w izolowanym środowisku 
-
 ### **Najważniejsze cechy**
 
 - **10–100× szybsze** niż pip
