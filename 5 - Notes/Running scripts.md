@@ -45,4 +45,5 @@ ___
 Metadata:
 
 Status: #pending
-Tags: #empty
+Tags: #uv #python_scripts #virtualenv #python 
+
