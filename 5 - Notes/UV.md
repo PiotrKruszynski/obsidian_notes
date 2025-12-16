@@ -8,7 +8,7 @@ Jedno narzędzie, które zastępuje kilka klasycznych:
 - virtualenv
 - częściowo poetry / pipenv
 
-Jest napisane w **Rust**, dlatego działa **bardzo szybko**.
+Jest napisane w **Rust**, działa **szybko**.
 ### **Do czego służy**
 
 - tworzenie i zarządzanie **virtualenv**
