@@ -1,4 +1,4 @@
-Created: {{date:YYYY-MM-DD}}{{time:HH:mm}}
+Created: {{date:YYYY-MM-DD}}  {{time:HH:mm}}
 ___
 Note:
 
@@ -6,5 +6,5 @@ Note:
 ___
 Metadata:
 
-Status: #pending #draft #understood #applied
+Status: #pending
 Tags: #empty

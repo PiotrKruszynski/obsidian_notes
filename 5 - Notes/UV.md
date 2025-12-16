@@ -1,7 +1,8 @@
-Created: 2025-12-1523:19
+Created: 2025-12-15 23:19
 ___
 Note:
-Jedno narzędzie, które zastępuje kilka klasycznych:
+
+uv to nowoczesny, ultralekki i szybki menedżer pakietów dla Python, alternatywa dla pip i virtualenv.
 
 - pip
 - pip-tools (pip-compile)
@@ -131,4 +132,4 @@ Managing and inspecting uv's state, such as the cache, storage directories, or p
 Metadata:
 
 Status: #pending
-Tags: #empty
+Tags: #pip #virtualenv #python_projects
