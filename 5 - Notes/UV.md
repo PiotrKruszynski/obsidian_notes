@@ -35,6 +35,8 @@ UV -> projekt + pip-mode + tool-running., uvx jako pipx replacement
 
 Installing and managing Python itself.
 
+`uv`: list of all comands
+
 `uv python install`: Install Python versions.
 `uv python list`: View available Python versions.
 - `uv python find`: Find an installed Python version.
