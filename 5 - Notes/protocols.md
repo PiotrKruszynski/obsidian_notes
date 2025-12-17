@@ -1,5 +1,38 @@
- 	sprawdzenie czy to coś ma wszystko żeby być tym czymś
- 	funkcjonalności, które możemy dodawać do klas, obiektów za pomocą:
+
+Created: 2025-12-17  14:57
+___
+Note:
+
+https://docs.python.org/3/library/typing.html#module-typing 
+
+obiekt spełnia protokół, jeśli **ma wymagane metody/atrybuty**, niezależnie od dziedziczenia.
+
+## **Istota Protocol**
+
+- **Nie wymaga dziedziczenia** od klasy bazowej.
+- Sprawdza **kształt (shape)** obiektu: nazwy i sygnatury metod/atrybutów.
+- Współpracuje z narzędziami statycznymi (mypy, pyright).
+- Może być użyty **runtime** tylko z @runtime_checkable (ograniczenia!).
+
+
+___
+Metadata:
+
+```yaml
+---
+type: tool    # concept | tool | pattern
+language: python # python | js | sql | etc.
+level: beginner  # beginner | intermediate | advanced
+status: understood    # draft | understood
+---
+```
+
+Status: #pending
+Tags: #empty
+
+
+
+
 
 [[virtual inheritance]] + sprawdzanie czy dana klasa jest podklasą innej klasy = [[protocols]]
 

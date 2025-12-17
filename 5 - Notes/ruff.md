@@ -38,6 +38,9 @@ ruff check . --fix # poprawia to co bezpieczne automatycznie
 ruff format . # formatuje wcięcia, długość linii, cudzysłowy , podobnie do black
 ```
 
+👉 **Lint** = poprawność + jakość + bezpieczeństwo (nieużywane importy, zmienne, składnia, PEP8)
+👉 **Format** = zmiana wyglądu, bez zmiany znaczenia (wcięcia, długości linii, spacje, jednolity styl (black))
+
 **pyproject.toml**
 
 ```toml
