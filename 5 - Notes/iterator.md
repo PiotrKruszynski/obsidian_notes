@@ -1,6 +1,6 @@
 	
-	obiekt <iterable objects>
-	 `__iter__()` -> zwraca samego siebie
+	obiekt <iterable objects> , który iteruje
+	 `__iter__()` -> zwraca samego siebie (self)
 	 `__next__()` -> zwraca kolejny element albo StopIteration
 
 trzymają następny element w swoim stanie
