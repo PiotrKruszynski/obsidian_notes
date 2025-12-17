@@ -2,6 +2,10 @@ Created: 2025-12-17  10:27
 ___
 Note:
 
+- https://docs.python.org/3/reference/datamodel.html#object.contains
+- https://docs.python.org/3/reference/datamodel.html#object.contains
+- https://docs.python.org/3/library/collections.abc.html#collections.abc.Container
+
 jeden z kluczowych protokołów, oparty na [[duck typing]] oraz ABC [[abstraction]]
 minimalny zestaw metod, by obiekt zachowywał się jak kontener.
 - czy coś w nim jest **in**
@@ -69,7 +73,11 @@ class Container(ABC):
 - Jeśli masz **Iterable**, ale nie __contains__, in nadal działa, ale wolniej (iteracja).
 - str jest **Container**, ale często wykluczany celowo (np. flatten).
 
+## **Mental model:
 
+- **Iterable** → „mogę po tym chodzić”
+- **Container** → „mogę zapytać, czy coś jest w środku”
+- **Sized** → „wiem, ile tego jest”
 
 ___
 Metadata:
