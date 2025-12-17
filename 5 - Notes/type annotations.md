@@ -9,7 +9,7 @@ od python 3.5 PEP 484
 
 [[type inference]] 
 
-[[MyPy]] - tam istnieje ściąga, która mówi nam co jak zapisać
+[[mypy]] - tam istnieje ściąga, która mówi nam co jak zapisać
 [[Pyright]]
 
 zmienne
