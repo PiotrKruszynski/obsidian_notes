@@ -2,9 +2,7 @@ Created: 2025-12-17  10:27
 ___
 Note:
 
-- https://docs.python.org/3/reference/datamodel.html#object.contains
-- https://docs.python.org/3/reference/datamodel.html#object.contains
-- https://docs.python.org/3/library/collections.abc.html#collections.abc.Container
+https://docs.python.org/3/library/collections.abc.html#collections-abstract-base-classes 
 
 jeden z kluczowych protokołów, oparty na [[duck typing]] oraz ABC [[abstraction]]
 minimalny zestaw metod, by obiekt zachowywał się jak kontener.
