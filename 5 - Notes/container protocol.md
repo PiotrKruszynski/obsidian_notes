@@ -82,12 +82,12 @@ Metadata:
 
 ```yaml
 ---
-type: tool    # concept | tool | pattern
+type: concept    # concept | tool | pattern
 language: python # python | js | sql | etc.
 level: beginner  # beginner | intermediate | advanced
-status: understood    # draft | understood
+status: draft    # draft | understood
 ---
 ```
 
 Status: #pending
-Tags: #empty
+Tags: #python #protocols #duck-typing #data-model
