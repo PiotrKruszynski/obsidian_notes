@@ -1,6 +1,6 @@
-[[single responsibility principle]]
-[[open close principle]]
-[[liskov substitution principle]]
-[[interface segregation principle]]
-[[dependency inversion principle]]
+[[single responsibility]]
+[[open close]]
+[[liskov substitution]]
+[[interface segregation]]
+[[dependency inversion]]
 
