@@ -8,6 +8,11 @@ Note:
 
 obiekt spełnia protokół, jeśli **ma wymagane metody/atrybuty**, niezależnie od dziedziczenia.
 
+**Protokoły wybiera się od strony użytkownika obiektu, nie od strony danych wewnętrznych.**
+To jest X, i może zrobić Y,Z
+X - semantyka
+Y,Z - protokoły
+
 | ABC / Protokół          | Dziedziczy z               | Metody abstrakcyjne                                          | Metody mixin / gotowe                                        | Istotne rzeczy o protokole                                                         |
 | ----------------------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
 | **[[Container ABC]]**   | –                          | `__contains__`                                               | –                                                            | Wystarczy `__contains__`, aby działał operator `in`.                               |

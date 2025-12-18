@@ -1,4 +1,7 @@
- 	__enter__
+protokół do zarządzania zasobami (pliki, locki, połączenia). 
+Gwarantuje poprawne wejście i wyjście z kontekstu - nawet gdy wystąpi wyjątek
+	
+	__enter__
 	__exit__
 
 to obiekty z `with
@@ -100,5 +103,20 @@ def yolo():
 
 ```
 
+W tym bloku kodu oczekuje ze zostanie rzucony StopIteration
+- jak wystąpi -> test przechodzi
+- nie wystąpi -> test failuje
+- wystąpi inny wyjątek -> test failuje
 
+```python
+def test_iter(sorted_frozen_set_duplicates):  
+    iterator = iter(sorted_frozen_set_duplicates)  
+    assert next(iterator) == 1  
+    assert next(iterator) == 2  
+    assert next(iterator) == 7  
+    assert next(iterator) == 9  
+  
+    with pytest.raises(StopIteration):  
+        next(iterator)
+```
 [[protocols]]
