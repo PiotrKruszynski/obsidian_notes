@@ -4,7 +4,9 @@ Note:
 
 ```python
 
-issubclass()
+issubclass(class, classinfo, /)
+
+isinstance(object, classinfo, /)
 
 ```
 
