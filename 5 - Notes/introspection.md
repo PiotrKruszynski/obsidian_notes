@@ -1,5 +1,5 @@
-odczytywanie kody.
-sprawdzanie z jakimi parametrami poszła funkcja
+odczytywanie kodu, 
+sprawdzanie z jakimi parametrami poszła funkcja, jakich ma memberów.
 
 Metody do introspekcji:
 ```python
