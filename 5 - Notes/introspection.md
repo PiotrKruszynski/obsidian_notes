@@ -2,6 +2,7 @@ odczytywanie kodu,
 sprawdzanie z jakimi parametrami poszła funkcja, jakich ma memberów.
 
 Metody do introspekcji:
+`type()`
 ```python
 i = 7
 type(i)
@@ -11,6 +12,7 @@ type(i)
 i.__class__
 ```
 
+`repr()` - reprezentacja tekstowa stworzona do użycia obiektu
 ```python
 i = 7
 repr(i)
