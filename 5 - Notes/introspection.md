@@ -56,7 +56,8 @@ email = getattr(user, "email")
 
 `obj.__dict__` -> rzeczywiste pola obiektu
 
-## import inspect
+# import inspect
+[Dokumentacja (oficjalna)](https://docs.python.org/3/library/inspect.html) 
 
 ```python
 import inspect
@@ -66,10 +67,122 @@ inspect.signature(func)      # sygnatura
 inspect.isclass(obj)         # czy to klasa
 inspect.ismethod(obj)        # czy metoda
 ```
+### Co potrafi?
+
+|**Obiekt**|**Co możesz sprawdzić**|
+|---|---|
+|funkcja|sygnatura, parametry, docstring, kod źródłowy|
+|klasa|metody, atrybuty, MRO|
+|obiekt|typ, metody, moduł pochodzenia|
+|stack|aktualna ramka, caller|
+|moduł|zawartość, lokalizacja pliku|
+
+### **🔹 Informacje o typie obiektu**
+
+- inspect.isfunction(obj) – sprawdza, czy obiekt jest funkcją
+- inspect.ismethod(obj) – czy jest metodą instancji
+- inspect.isclass(obj) – czy jest klasą
+- inspect.isbuiltin(obj) – czy jest funkcją wbudowaną (C)
+- inspect.isgenerator(obj) – czy jest generatorem
+- inspect.isgeneratorfunction(obj) – czy funkcja zwraca generator
+- inspect.iscoroutine(obj) – czy jest coroutine
+- inspect.iscoroutinefunction(obj) – czy funkcja async
+- inspect.isasyncgen(obj) – czy async generator
+- inspect.isasyncgenfunction(obj) – czy async generator function
+- inspect.ismodule(obj) – czy moduł
+- inspect.isdatadescriptor(obj) – czy deskryptor danych
+- inspect.isframe(obj) – czy ramka stosu (frame)
+
+---
+
+### **🔹 Sygnatura i argumenty funkcji**
+
+- inspect.signature(callable) – pełna sygnatura wywołania (parametry + typ zwracany) np. inspect.signature(<nazwapliku>.<klasa>.<co_kolwiek>)
+- inspect.getfullargspec(func) – kompletna specyfikacja argumentów (starsze API)
+- inspect.getargvalues(frame) – wartości argumentów w danej ramce stosu
+
+---
+
+### **🔹 Kod źródłowy**
+
+- inspect.getsource(obj) – zwraca kod źródłowy obiektu
+- inspect.getsourcelines(obj) – kod + numer pierwszej linii
+- inspect.getfile(obj) – plik, w którym obiekt jest zdefiniowany
+- inspect.getmodule(obj) – moduł, z którego pochodzi obiekt
+
+---
+
+### **🔹 Atrybuty i zawartość obiektów**
+
+- inspect.getmembers(obj) – lista (nazwa, wartość) wszystkich atrybutów
+- inspect.getmembers(obj, predicate) – atrybuty spełniające warunek (np. tylko metody)
+- inspect.getattr_static(obj, name) – atrybut **bez uruchamiania deskryptorów**
+
+---
+
+### **🔹 Stos wywołań (call stack)**
+
+- inspect.currentframe() – aktualna ramka stosu
+- inspect.stack() – pełny stos wywołań
+- inspect.getouterframes(frame) – ramki wywołujące
+- inspect.getinnerframes(tb) – ramki z tracebacka
+- inspect.trace() – skrócona forma stack trace
+
+---
+
+### **🔹 Ramki, tracebacki, kontekst**
+
+- inspect.getframeinfo(frame) – informacje o ramce (linia, plik, kod)
+- inspect.getlineno(obj) – numer linii definicji
+- inspect.getclosurevars(func) – zmienne z zamknięcia (closure)
+- inspect.cleandoc(doc) – czyści wcięcia w docstringach
+
+---
+
+### **🔹 Klasy i dziedziczenie**
+
+- inspect.getmro(cls) – kolejność rozwiązywania metod (MRO)
+- inspect.classify_class_attrs(cls) – klasyfikacja atrybutów klasy
+
+---
+
+### **🔹 Specjalne / zaawansowane**
+
+- inspect.unwrap(func) – usuwa dekoratory (dociera do oryginału)
+- inspect.formatannotation(obj) – formatowanie adnotacji typów
+- inspect.formatargspec(...) – formatowanie argumentów (legacy)
+
+---
+
+## **Minimalna ściąga mentalna**
+
+- **Co to jest?** → is*
+- **Jak wywołać?** → signature
+- **Skąd pochodzi?** → getmodule, getfile
+- **Jak wygląda w środku?** → getsource, getmembers
+- **Kto mnie wywołał?** → currentframe, stack
+- **Jakie dekoratory?** → unwrap
+
+---
 
 
+```python
+from itertools import chain  
+  
+  
+class Batch: # wywołuje metaklasę type i tworzy nowy obiekt  
+    def __init__(self, iterables=()):  
+        self._iterables = list(iterables)  
+  
+    def append(self, iterable):  
+        self._iterables.append(iterable)  
+  
+    def __iter__(self): # dzięki temu mamy spełniony protokół iterable  
+        return chain.from_iterable(self._iterables)
+```
+```bash
 
-
+```
 
 
 ___
