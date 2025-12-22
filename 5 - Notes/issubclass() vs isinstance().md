@@ -10,6 +10,8 @@ isinstance(object, classinfo, /)
 
 ```
 
+`__mro__` - zwraca rzeczywiste dziedziczenie
+`type.__mro__` - sprawdzi [[virtual inheritance]]] czy jak `issubclass()` -> `True` oraz `__mro__` puste 
 
 
 ## **Kiedy czego używać — ściąga**
