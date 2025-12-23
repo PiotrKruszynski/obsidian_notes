@@ -1,0 +1,1 @@
+`cat ~/.python_history ` - historia komend + shell
