@@ -1,5 +1,7 @@
 
-	Odpowiada za ustawienie początkowego stanu obiektu (np. przypisanie wartości pól).
+	odpowiada za ustawienie początkowego stanu obiektu (np. przypisanie wartości pól).
+	
+	setuje pola obiektu
 
 Jest wywoływany po utworzeniu instancji przez [[__new__]].
 
