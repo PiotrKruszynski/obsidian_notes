@@ -119,7 +119,7 @@ inspect.signature(add).parameters['a'].annotation
 
 ### **🔹 Atrybuty i zawartość obiektów**
 
-- inspect.getmembers(obj) – lista (nazwa, wartość) wszystkich atrybutów
+- ***inspect.getmembers(obj) – lista (nazwa, wartość) wszystkich atrybutów
 - inspect.getmembers(obj, predicate) – atrybuty spełniające warunek (np. tylko metody)
 - inspect.getattr_static(obj, name) – atrybut **bez uruchamiania deskryptorów**
 
@@ -141,6 +141,21 @@ inspect.signature(add).parameters['a'].annotation
 - inspect.getlineno(obj) – numer linii definicji
 - inspect.getclosurevars(func) – zmienne z zamknięcia (closure)
 - inspect.cleandoc(doc) – czyści wcięcia w docstringach
+- ***inspect.getdoc(obj) -*** 
+	- zwraca str albo None
+	- usuwa wspólne wcięcia (dedent)
+	- normalizuje białe znaki
+	- **dziedziczy docstring**, jeśli obiekt go nie ma
+
+## **getdoc() *vs*   __doc__**
+
+| **Cecha**              | `__doc__` | `inspect.getdoc()` |
+| ---------------------- | :-------: | :----------------: |
+| Surowy tekst           |     ✅     |         ❌          |
+| Usuwa wcięcia          |     ❌     |         ✅          |
+| Normalizuje whitespace |     ❌     |         ✅          |
+| Dziedziczy docstring   |     ❌     |         ✅          |
+| Bezpieczne API         |     ❌     |         ✅          |
 
 ---
 
