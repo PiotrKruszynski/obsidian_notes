@@ -97,7 +97,12 @@ inspect.ismethod(obj)        # czy metoda
 
 ### **🔹 Sygnatura i argumenty funkcji**
 
-- inspect.signature(callable) – pełna sygnatura wywołania (parametry + typ zwracany) np. inspect.signature(<nazwapliku>.<klasa>.<co_kolwiek>)
+- inspect.signature(callable) – pełna sygnatura wywołania (parametry + typ zwracany) np. inspect.signature(`<nazwapliku>.<klasa>.<co_kolwiek>).parametres["jakiś_param"]`
+```python
+import inspect
+
+inspect.signature(add).parameters['a'].annotation
+```
 - inspect.getfullargspec(func) – kompletna specyfikacja argumentów (starsze API)
 - inspect.getargvalues(frame) – wartości argumentów w danej ramce stosu
 
