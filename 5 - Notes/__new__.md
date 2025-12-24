@@ -7,7 +7,7 @@ musi zwrócić obiekt (zwykle instancje cls)
   
 class NameFive:  
     def __new__(cls, *args: Any, **kwargs: Any) -> "NameFive":  
-        self = super().__new__(cls) # object.__new__(cls) przypisuje pustą instancję klasy NameFive do self. 
+        self = super().__new__(cls) # object.__new__(cls) tworzy i przypisuje pustą instancję klasy NameFive do self. 
         # return self przekazuje ją dalej
 		# nasz __new__ nic nie robi , to defaultowa metoda tworzenia obiektu  
   
@@ -16,8 +16,53 @@ class NameFive:
         self.temp = 42
 
 ```
+```python
+cls is NameFive        # True
+isinstance(cls, NameFive)  # False
+isinstance(cls, type) # True
+```
 
 [[__init__]] 
 - działa na już istniejącym obiekcie
-- ustawia stan obiektu (atrybuty)
+- ustawia stan obiektu (setuje pola obiektu)
 - nic nie zwraca
+
+```python
+n_five = NameFive(666) #  666 trafia do __new__ (najpier) i automatycznie to co zwróci __new__ trafia pod self do __init__
+
+# wywoływany jest poniższy kod
+tmp = NameFive.__new__(NameFive, 666) # to trafia pod self
+
+if isinstance(tmp, NameFive):
+    NameFive.__init__(tmp, 666)
+
+n_five = tmp
+
+```
+
+ **✅**  **__init__** — 95% przypadków
+
+- ustawianie pól
+- walidacja
+- konfiguracja 
+
+ **✅** **__new__** — tylko gdy:
+
+- implementujesz **singleton**
+- tworzysz **immutable** obiekty (int, str, tuple)
+- chcesz **zwrócić inny obiekt**
+- kontrolujesz **czy obiekt w ogóle powstanie**
+
+
+`__new__` występuje tylko w object. Jak nadpisujemy, konieczne jest `super().__new__(cls)`
+```python
+class OnlyPositive:
+    def __new__(cls, value):
+        if value < 0:
+            return None
+        return super().__new__(cls)
+
+    def __init__(self, value):
+        self.value = value
+```
+
