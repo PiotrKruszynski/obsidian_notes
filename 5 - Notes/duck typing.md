@@ -7,7 +7,7 @@
 	    nie pytaj „czy jesteś kaczką?”, tylko „czy możesz kwakać?”.
 	    “If it walks like a duck and quacks like a duck, it’s a duck.”
 
-1. jest [[protocols]] a nie [[type]].
+1. jest [[protocols]] a nie [[type()]].
 
 		nie pytam _czy obiekt dziedziczy po Animal?_ zadaje pytanie _czy ma
 		metode run()?_

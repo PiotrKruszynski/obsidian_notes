@@ -1,3 +1,7 @@
+Created: 2025-12-24  11:28
+___
+Note:
+
 konstruktor, który tworzy obiekt. 
 ma go tylko **object**
 wywołuje się zawsze jako pierwszy
@@ -5,7 +9,7 @@ musi zwrócić obiekt (zwykle instancje cls)
 
 ```python
   
-class NameFive:  
+class NameFive(object, metaclass=type):  
     def __new__(cls, *args: Any, **kwargs: Any) -> "NameFive":  
         self = super().__new__(cls) # object.__new__(cls) tworzy i przypisuje pustą instancję klasy NameFive do self. 
         # return self przekazuje ją dalej
@@ -66,3 +70,20 @@ class OnlyPositive:
         self.value = value
 ```
 
+
+
+
+
+___
+Metadata:
+[[class]]
+
+```yaml
+---
+type: tool    # concept | tool | pattern
+language: python # python | js | sql | etc.
+---
+```
+
+Status: #pending
+Tags: #class 

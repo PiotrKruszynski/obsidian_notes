@@ -3,3 +3,11 @@
 [[class]] to specjalny namespace, w którym przechowywane są:
 - atrybuty klasowe (zmienne na poziomie klasy)
 - metody (fn przypisane do klas)
+
+
+### **Przykłady namespace’ów**
+
+- namespace modułu → globals()
+- namespace funkcji → locals()
+- namespace klasy → **dict klasy**
+

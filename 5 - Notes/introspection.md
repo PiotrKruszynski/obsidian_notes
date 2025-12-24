@@ -8,7 +8,7 @@ Note:
 
 Metody do introspekcji:
 
-1️⃣  `type()`
+1️⃣  [[type()]]
 
 ```python
 i = 7
@@ -19,7 +19,7 @@ type(i)
 i.__class__
 ```
 
-2️⃣ `repr()` - reprezentacja tekstowa stworzona do użycia obiektu
+2️⃣ `repr()` - reprezentacja tekstowa stworzona do użycia obiektu ( [[repr vs. str]] )
 ```python
 i = 7
 repr(i)
@@ -31,7 +31,7 @@ type(type(i))
 
 ```
 
-3️⃣ `isinstance()`    /   `issubclass()`
+3️⃣ `isinstance()`    /   `issubclass()`  ( [[issubclass() vs isinstance()]] )
 ```python
 isinstance([1,2], list)          # True
 issubclass(bool, int)            # True

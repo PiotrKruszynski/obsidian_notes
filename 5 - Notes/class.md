@@ -50,7 +50,7 @@ print(NameThree)
 
 # powstaje klasa NameThree bez klas bazowych (poza object) i bez dodatkowych atrybutów
 ```
-[[type]]  to wbudowana metaklasa , której wywołanie z argumentami
+[[type()]]  to wbudowana metaklasa , której wywołanie z argumentami
 
 ==`type(nazwa_klasy, tuple_klas_bazowych, słownik_atrybutów)`==
 
