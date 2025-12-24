@@ -1,8 +1,9 @@
 class = [[namespace]] (schema)
-
-[[class]]  to specjalny [[namespace]], w którym przechowywane są identyfikatory:
-
+[[class]]  to specjalny [[namespace]], w którym przechowywane są identyfikatory.
 to fabryki tworzące obiekty
+
+Klasa w Pythonie to obiekt, którego główną treścią jest namespace (`__dict__`).
+class to tylko ładniejszy zapis dla type(...)
 
 - ==fields== atrybuty klasowe (variable na poziomie klasy)
 	- class fields
@@ -58,17 +59,20 @@ zwraca nowy obiekt klasy `<class '__main__.NameThree'>`
 
 dowód, że klasa jest tylko namespace:
 ```python
-def init_(self, x):
+def init_(self, x): # _ żeby nie popsuć
     self.x = x
 
-attrs = {
+attrs = { # to jest namespace klasy
     "__init__": init_,
     "value": 42
 }
 
-NameFour = type('NameThree', (), attrs)
+NameFour = type('NameThree', (), attrs) # zrób mi klasę z namespace
 nf = NameFour(666)
 print(nf.x, nf.value)
+
+NameFour.__dict__['value'] = 100
+print(nf.value)  # 100
 ```
 `attrs` przechowuje identyfikatory jako klucze, a fn lub wartości jako obiekty
 klasa jest tworzona przez przekazanie słownika
@@ -105,3 +109,5 @@ print(w2) # <__main__.Widget2 object at 0x10179b4d0>
 ```
 
 #study
+
+#python #oop #metaclass #type #namespace #__dict__ #descriptor #object-model
