@@ -11,7 +11,7 @@ class TracingMeta(type):
     # __prepare__ służy do ustawienia namespace
     # custom __prepare__ dokłada print do normalnego zachowania  
     @classmethod  
-    def __prepare__(mcs, name, bases, **kwargs): # musieliśmy dołożyć dekorator bo to niejawna metoda  
+    def __prepare__(mcs, name, bases, **kwargs): # musieliśmy dołożyć dekorator bo __prepare__ przed __new__ 
         print("TracingMeta.__prepare__")  
         print(f" {mcs=}")  
         print(f'{name=}')  
