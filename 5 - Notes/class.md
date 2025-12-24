@@ -42,7 +42,7 @@ c.drive()  # 'Driving red car'
 
 
 
-==dowód, że metaclass tworzą class==
+**dowód, że metaclasy tworzą class
 
 ```python
 NameThree = type('NameThree', (), {})
@@ -54,10 +54,9 @@ print(NameThree)
 
 ==`type(nazwa_klasy, tuple_klas_bazowych, słownik_atrybutów)`==
 
-zwraca nowy obiekt klasy <class '__main__.NameThree'>
+zwraca nowy obiekt klasy `<class '__main__.NameThree'>`
 
-==dowód, że klasa jest tylko namespace==
-
+dowód, że klasa jest tylko namespace:
 ```python
 def init_(self, x):
     self.x = x
@@ -76,10 +75,33 @@ klasa jest tworzona przez przekazanie słownika
 powstaje klasa NameFour
 
 
-Najważniejsze metody na klasach i obiektach
+Najważniejsze metody na klasach i obiektach:
+	[[__dir__]]
+	[[__vars__]]
+	[[__mro__]]
 
-[[__dir__]]
-[[__vars__]]
-[[__mro__]]
+a teraz jeszcze raz na poważnie:
+```python
+# synthetic sugar do tworzenia klas  
+class Widget(object, metaclass=type):  
+    pass  
+  
+w = Widget()  
+  
+# a teraz jak naprawdę się tworzy klasy  
+name = "Widget2"  
+metaclass = type  
+bases = () # tuple klas, po których dziedziczymy  
+kwargs = {}  
+  
+# symuluje __prepere__  
+  
+namespace = metaclass.__prepare__(name, bases, **kwargs) # mam przestrzeń nazewniczą  
+Widget2 = metaclass.__new__(metaclass, name, bases, namespace, **kwargs)  
+metaclass.__init__(Widget2, name, bases, namespace, **kwargs)  
+  
+w2 = Widget2()  
+print(w2) # <__main__.Widget2 object at 0x10179b4d0>
+```
 
 #study

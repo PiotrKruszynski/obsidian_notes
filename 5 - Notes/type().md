@@ -27,6 +27,8 @@ print(obj.foo())
     
 Jeśli nie podasz metaclass=..., używany jest **type**.
 
+![[Pasted image 20251224124722.png]]
+
 ___
 Metadata:
 [[oop]]  , [[class]] , 
