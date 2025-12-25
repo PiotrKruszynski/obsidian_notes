@@ -41,11 +41,8 @@ dog = Dog()  # 👈 działa
 #### **🧵 Interpreter:**
 
 - interpreter widząc @abstractmethod, **rejestruje metodę jako niepełną**
-    
 - przy próbie utworzenia instancji Animal() → sprawdzana jest **pełność klasy**
-    
 - ponieważ sound() nie ma implementacji → TypeError
-    
 
 ---
 
@@ -80,13 +77,9 @@ class HumiditySensor(Sensor):
 - @abstractmethod może współistnieć z @classmethod, @staticmethod, @property (np. @abstractmethod @classmethod)
     
 - abstrakcyjna klasa **może** zawierać normalne metody z implementacją
-    
 - abc.ABCMeta to **metaklasa**, którą ABC używa
-    
 - isinstance(obj, ABC) zadziała tylko na klasach abstrakcyjnych
-    
 - `__subclasshook__` można przeciążyć by dać duck-typing bez dziedziczenia
-    
 
 Lista abstrakcyjnych interfejsów w collections.abc
 
