@@ -122,6 +122,10 @@ Hello
 
 ![[Pasted image 20251225121249.png]]
 
+![[Pasted image 20251225122652.png]]
+
+type(C) -> metaC
+
 ___
 Metadata:
 
