@@ -3,7 +3,14 @@ Created: 2025-12-24  13:38
 ___
 Note:
 
-**Commands**
+>[!IMPORTANT]
+> `__prepare__` odpowiada za **utworzenie przestrzeni nazw klasy** jeszcze _przed_ wykonaniem ciała klasy i umożliwia kontrolę struktury namespace (np. OrderedDict, walidację, rejestrowanie definicji).
+
+>[!IMPORTANT]
+> Metody zdefiniowane w metaklasie są **metodami klasy**, a nie metodami instancji — są dostępne na obiekcie klasy, nie na jej instancjach.
+> 
+> To konsekwencja dwupoziomowego modelu obiektowego Pythona
+>   instancja -> klasa -> metaklasa
 
 ```python
 
@@ -12,7 +19,7 @@ Note:
 class TracingMeta(type):  
     # __prepare__ używa się do manipulacji namespace  
     # custom __prepare__ dokłada print do normalnego zachowania    @classmethod  
-    def __prepare__(mcs, name, bases, **kwargs): # musieliśmy dołożyć dekorator, bo to niejawna metoda  
+    def __prepare__(mcs, name, bases, **kwargs): # musieliśmy dołożyć dekorator, bo przed __new__  
         print("TracingMeta.__prepare__")  
         print(f" {mcs=}")  
         print(f'{name=}')  
@@ -23,7 +30,7 @@ class TracingMeta(type):
         print("\n\033[94m" + "-" * 40 + "\033[00m")  
         return namespace  
   
-    # manipulujemy tworzeniem obiektu  
+    # manipulujemy tworzeniem obiektu klasy  
     def __new__(mcs, name, bases, namespace, **kwargs):  
         print("TracingMeta.__new__")  
         print(f" {mcs=}")  
@@ -36,7 +43,7 @@ class TracingMeta(type):
         print("\n\033[94m" + "-" * 40 + "\033[00m")  
         return cls  
   
-    # konfiguracja obiektu tej klasy  
+    # końcowa konfiguracja obiektu klasy, po utworzeniu  
     def __init__(cls, name, bases, namespace, **kwargs):  
         print("TracingMeta.__init__")  
         print(f" {cls=}")  
@@ -47,7 +54,7 @@ class TracingMeta(type):
         super().__init__(name, bases, namespace) # to nic nie zwraca więc nie ma sensu przypisywać do zmiennej  
         print("\033[94m" + "-" * 40 + "\033[00m\n")  
   
-    # to jest metoda klasy, aby wywołać robię Widget.meta_method(), ale na w.meta_method() NIE DZIAŁA  
+    # metoda klasy, działa Class.meta_method(), w.meta_method() NIE DZIAŁA  
     def meta_method(cls):  
         print("TracingMeta.meta_method")  
         print(f" {cls=}")  
@@ -67,7 +74,7 @@ w.action("Hello")
 # to fancy feature, że metoda klasy nie działa na obiektach. Określam metode w metaklasie i dzieci(obiekty) nie moga się babrać.  
   
   
-# tak jak obiekt nie może powstawać z dwóch klas, tak klasa nie może powstawać z 2meta  
+# tak jak obiekt nie może powstawać z dwóch klas, tak metaklasa może mieć tylko jedną metaklasę wynikową - przy wielu wymagane jest ich poprawne dziedziczenie
 class TracingSpecialMeta():  
     def __new__(mcs, name, bases, namespace, **kwargs):  
         print("TracingSpecialMeta.__new__")  
@@ -126,4 +133,10 @@ language: python # python | js | sql | etc.
 ```
 
 Status: #pending
-Tags: #empty
+Tags: 
+- #python
+- #metaclass
+- #type
+- #oop
+- #introspection
+- #class-creation
