@@ -120,7 +120,7 @@ TracingMeta.meta_method
 Hello
 ```
 
-
+![[Pasted image 20251225121249.png]]
 
 ___
 Metadata:
