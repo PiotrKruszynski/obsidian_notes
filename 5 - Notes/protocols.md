@@ -6,6 +6,9 @@ Note:
 [Typing](https://docs.python.org/3/library/typing.html#module-typing )
 [Typing-RealPython](https://realpython.com/python-protocol/#predefined-protocols-in-python)
 
+kontrakt bez dziedziczenia
+opisuje jakie metody/atrybuty muszą istnieć
+
 obiekt spełnia protokół, jeśli **ma wymagane metody/atrybuty**, niezależnie od dziedziczenia.
 
 **Protokoły wybiera się od strony użytkownika obiektu, nie od strony danych wewnętrznych.**
@@ -47,7 +50,6 @@ status: understood    # draft | understood
 
 Status: #pending
 Tags: #empty
-
 
 
 

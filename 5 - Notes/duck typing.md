@@ -1,3 +1,7 @@
+Created: 2025-12-27  15:14
+___
+Note:
+
 		paradygmat
 		o zgodności typu decyduje zachowanie obiektu, a nie jego dziedziczenie 
 		lub deklarowany typ
@@ -29,7 +33,7 @@
 		
 		Wystarczy, że obiekt ma te metody to jest deskryptorem
 		
-3. [[virtual inheritance]] = formalizacja duck typingu przez [[abstract class]] lub [[protocols]]
+4. [[virtual inheritance]] = formalizacja duck typingu przez [[abstract class]] lub [[protocols]]
 
 		duck typing jest dynamiczny! Ale czasem chcemy formalnie opisać kontrakt!
 		A. ABC [[abstract class]] -> klasyczne wirtualne dziedziczenie
@@ -65,6 +69,20 @@
 
 
 
+
+
+___
+Metadata:
+
+```yaml
+---
+type: paradygmat    # paradigm | concept | tool | pattern | practice
+language: python # python | js | sql | etc.
+---
+```
+
+Status: #pending
+Tags: #empty
 
 
 

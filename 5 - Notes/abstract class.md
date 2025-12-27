@@ -1,7 +1,10 @@
+	dziedziczenie + kontrakt
 	nie da się stworzyć obiektu. Służą do logiki
 
-[klasa bazowa] której nie można **instancjonować bezpośrednio**, i która **określa interfejs (API)** dla klas potomnych.
-
+- [klasa bazowa] której nie można **instancjonować bezpośrednio**
+- określa **interfejs (API)** dla klas potomnych.
+- wymaga jawnego dziedziczenia
+- definiuje kontrakt i może dawać implementację
 
 W Pythonie tworzy się ją 
 - dziedzicząc po abc.ABC 
@@ -16,7 +19,6 @@ class Shape(ABC):  # dziedziczenie po ABC
 ```
 
 **@abstractmethod**: oznacza metodę, którą **MUSI** zaimplementować każda podklasa
-    
 
   
 Próba stworzenia instancji klasy Shape **zwróci wyjątek** TypeError.

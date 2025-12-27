@@ -1,5 +1,8 @@
 [[design pattern]]
 
+szablon postępowania. 
+żeby zrobić kupę trzeba ... ... 
+
 **„Jak”** tworzymy stały szkielet, **„co dokładnie”** delegujemy do metod nadpisywanych w podklasach
 
 ## **Kluczowe elementy**
