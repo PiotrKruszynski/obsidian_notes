@@ -1,6 +1,11 @@
 class
 [[single tone]] 
 
+- **Czym jest:** specjalna **wartość** (singleton), nie wyjątek.
+- **Do czego służy:** sygnalizuje interpreterowi, że dana **operacja binarna** nie jest obsługiwana dla podanych typów.
+- **Kiedy używać:** w metodach operatorów porównań i arytmetyki (`__eq__`, `__lt__`, `__add__`, itd.).
+- **Co robi Python:** próbuje „odbitej” metody drugiego operandu (np. `other.__eq__(self)`), a jeśli obie strony zwrócą NotImplemented, operacja kończy się zwykle TypeError.
+
 ```python
 # teraz rozmawiamy o metodach specjalnych i próbujemy dodać wiek team = e1 + e2 dodajac __add  
 class Employee:  
