@@ -51,6 +51,7 @@ class ForwardIterator:
         return value
 ```
 
+![[Pasted image 20251229171254.png]]
 
 ___
 Metadata:
@@ -59,8 +60,6 @@ Metadata:
 ---
 type: tool    # concept | tool | pattern
 language: python # python | js | sql | etc.
-level: beginner  # beginner | intermediate | advanced
-status: understood    # draft | understood
 ---
 ```
 

@@ -4,11 +4,7 @@ Note:
 
 https://docs.python.org/3/library/collections.abc.html#collections-abstract-base-classes 
 
-jeden z kluczowych protokołów, oparty na [[duck typing]] oraz ABC [[abstraction]]
-minimalny zestaw metod, by obiekt zachowywał się jak kontener.
-- czy coś w nim jest **in**
-- poznać rozmiar **len()**
-- iterować po elementach
+
 
 **obiekt spełnia jeśli**
 ```python
@@ -77,6 +73,7 @@ class Container(ABC):
 - **Container** → „mogę zapytać, czy coś jest w środku”
 - **Sized** → „wiem, ile tego jest”
 
+![[Pasted image 20251229171055.png]]
 ___
 Metadata:
 
@@ -84,8 +81,6 @@ Metadata:
 ---
 type: concept    # concept | tool | pattern
 language: python # python | js | sql | etc.
-level: beginner  # beginner | intermediate | advanced
-status: draft    # draft | understood
 ---
 ```
 
