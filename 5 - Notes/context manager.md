@@ -2,7 +2,7 @@ protokół do zarządzania zasobami (pliki, locki, połączenia).
 Gwarantuje poprawne wejście i wyjście z kontekstu - nawet gdy wystąpi wyjątek
 	
 	__enter__
-	__exit__
+	__exit__ - zwraca False/None-> wyjątek leci dalej. True-> stłumiony
 
 to obiekty z `with
 
