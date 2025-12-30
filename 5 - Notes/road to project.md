@@ -20,5 +20,6 @@ github -> new respository
  3184  uv add "mypy==1.19.1" --dev
 ```
 
+konfiguracja templatki 
 
 
