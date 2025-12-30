@@ -1,3 +1,10 @@
-najbardziej optymalne rozwiązanie często występujących problemów
+optymalne rozwiązanie często występujących problemów
 
 [[iterator]]
+
+[[adapter]]
+
+[[template]]
+
+[[fasada]]
+
