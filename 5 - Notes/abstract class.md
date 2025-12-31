@@ -1,88 +1,158 @@
-	dziedziczenie + kontrakt
-	nie da się stworzyć obiektu. Służą do logiki
+Created: 2025-12-31  17:30
+___
+Note:
+# Abstract Base Classes (ABC) 
 
-- [klasa bazowa] której nie można **instancjonować bezpośrednio**
-- określa **interfejs (API)** dla klas potomnych.
-- wymaga jawnego dziedziczenia
-- definiuje kontrakt i może dawać implementację
+## Dlaczego istnieje ABC?
 
-W Pythonie tworzy się ją 
-- dziedzicząc po abc.ABC 
-- oznaczając metody za pomocą dekoratora @abstractmethod.
-```python
-from abc import ABC, abstractmethod
+ABC służą do **definiowania kontraktu**: określają _jakie metody i właściwości MUSI posiadać klasa_, aby była uznana za poprawną implementację.
 
-class Shape(ABC):  # dziedziczenie po ABC
-    @abstractmethod
-    def area(self):
-        pass
-```
+To narzędzie:
 
-**@abstractmethod**: oznacza metodę, którą **MUSI** zaimplementować każda podklasa
+- projektowe (API, architektura)
+- semantyczne (czytelność intencji)
+- ochronne (błędy wykrywane wcześnie)
 
-  
-Próba stworzenia instancji klasy Shape **zwróci wyjątek** TypeError.
+ABC **nie dostarcza zachowania**, tylko **wymagania**.
 
-```python
-from abc import ABC, abstractmethod
+---
+## Mentalny model (precyzyjny)
 
-class Animal(ABC):  # 👈 klasa abstrakcyjna
-    @abstractmethod
-    def sound(self) -> str:  # 👈 metoda abstrakcyjna
-        pass
+> Klasa w Pythonie to tylko **namespace**.  
+> ABC to **specjalny namespace**, który Python oznacza jako _niekompletny_, dopóki nie zostaną spełnione wszystkie wymagania.
 
-class Dog(Animal):
-    def sound(self) -> str:
-        return "woof"
+Instancja **nie powstaje**, jeśli klasa:
 
-dog = Dog()  # 👈 działa
-# animal = Animal()  # ❌ TypeError: Can't instantiate abstract class
-
-```
-
-#### **🧵 Interpreter:**
-
-- interpreter widząc @abstractmethod, **rejestruje metodę jako niepełną**
-- przy próbie utworzenia instancji Animal() → sprawdzana jest **pełność klasy**
-- ponieważ sound() nie ma implementacji → TypeError
+- dziedziczy po ABC
+- **nie implementuje wszystkich abstractmethod / abstractproperty**
 
 ---
 
-### **🧪 Case Study (PL):**
-
-
-Załóżmy system z wieloma czujnikami (Sensor), które mają różne typy: TemperatureSensor, HumiditySensor, itd. Każdy musi mieć metodę read() – ale każdy inaczej.
+## Minimalny przykład
 
 ```python
 from abc import ABC, abstractmethod
 
-class Sensor(ABC):
+class Repository(ABC):
     @abstractmethod
-    def read(self) -> float:
-        pass
+    def save(self, obj) -> None:
+        raise NotImplementedError
 
-class TemperatureSensor(Sensor):
-    def read(self) -> float:
-        return 21.5  # np. odczyt z API
-
-class HumiditySensor(Sensor):
-    def read(self) -> float:
-        return 58.2  # np. z hardware
+    @abstractmethod
+    def load(self, id_: int):
+        raise NotImplementedError
 ```
 
-> Dzięki abstrakcji wymuszamy **spójny interfejs read()** niezależnie od źródła danych.
+```python
+class InMemoryRepository(Repository):
+    def save(self, obj) -> None:
+        self._obj = obj
+
+    def load(self, id_: int):
+        return self._obj
+```
+
+```python
+repo = InMemoryRepository()  # OK
+```
+
+```python
+class BrokenRepo(Repository):
+    def save(self, obj) -> None:
+        pass
+
+BrokenRepo()  # TypeError
+```
 
 ---
 
-### **🧠 Techniczne ciekawostki:**
+## Co _dokładnie_ sprawdza Python?
 
-- @abstractmethod może współistnieć z @classmethod, @staticmethod, @property (np. @abstractmethod @classmethod)
-    
-- abstrakcyjna klasa **może** zawierać normalne metody z implementacją
-- abc.ABCMeta to **metaklasa**, którą ABC używa
-- isinstance(obj, ABC) zadziała tylko na klasach abstrakcyjnych
-- `__subclasshook__` można przeciążyć by dać duck-typing bez dziedziczenia
+Python **nie sprawdza sygnatur typów**, tylko **obecność nazw**:
 
-Lista abstrakcyjnych interfejsów w collections.abc
+- metoda istnieje
+- property istnieje
 
-https://docs.python.org/pl/3.14/library/collections.abc.html#collections-abstract-base-classes 
+To kontrola **strukturalna na poziomie runtime**, ale wymuszona **nominalnym dziedziczeniem**.
+
+---
+
+## ABC + @property
+
+```python
+class NotesLoaderABC(ABC):
+    @property
+    @abstractmethod
+    def folder_path(self) -> str:
+        raise NotImplementedError
+
+    @property
+    @abstractmethod
+    def tags(self) -> set[str]:
+        raise NotImplementedError
+```
+
+Implementacja **musi** użyć `@property`, zwykła metoda nie wystarczy.
+
+---
+
+## ABC a Protocol (kluczowa różnica)
+
+| Cecha                       | ABC |        Protocol        |
+| --------------------------- | :-: | :--------------------: |
+| Wymaga dziedziczenia        |  ✅  |           ❌            |
+| Sprawdzane w runtime        |  ✅  | ❌ (tylko type-checker) |
+| Typowanie strukturalne      |  ❌  |           ✅            |
+| Błąd przy tworzeniu obiektu |  ✅  |           ❌            |
+
+ABC = **twardy kontrakt runtime**  
+Protocol = **miękki kontrakt statyczny**
+
+---
+
+## Kiedy używać ABC?
+
+Używaj ABC gdy:
+- projektujesz **framework / bibliotekę**
+- chcesz **fail fast**
+- tworzysz warstwy (repozytoria, loadery, adaptery)
+- implementacja bez metod NIE MA sensu
+
+Nie używaj ABC gdy:
+- wystarczy duck typing
+- zależy Ci tylko na mypy / pyright
+
+---
+## Częste błędy
+
+❌ `raise NotImplementedError` zamiast `@abstractmethod`
+❌ traktowanie ABC jak interfejs z Javy
+❌ logika biznesowa w ABC
+
+---
+
+## Techniki zapamiętywania
+
+- **Mnemonika**: ABC = _Abstract Before Creation_ (nie utworzysz, dopóki nie spełnisz)
+- **Asocjacja**: projekt architektoniczny bez wykonania
+- **Wzorzec strukturalny**: _Template for requirements, not behavior_
+
+---
+
+## Dokumentacja
+
+- [https://docs.python.org/3/library/abc.html](https://docs.python.org/3/library/abc.html)
+- [https://peps.python.org/pep-3119/](https://peps.python.org/pep-3119/)
+- [https://realpython.com/python-abc/](https://realpython.com/python-abc/)
+
+___
+Metadata:
+
+```yaml
+---
+type: tool    # concept | tool | pattern
+language: python # python | js | sql | etc.
+---
+```
+
+Tags: #abc #oop #architecture #contract 
