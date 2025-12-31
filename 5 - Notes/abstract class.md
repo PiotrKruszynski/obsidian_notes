@@ -1,30 +1,46 @@
 Created: 2025-12-31  17:30
 ___
 Note:
-# Abstract Base Classes (ABC) 
 
-## Dlaczego istnieje ABC?
-
-ABC służą do **definiowania kontraktu**: określają _jakie metody i właściwości MUSI posiadać klasa_, aby była uznana za poprawną implementację.
-
-To narzędzie:
-
-- projektowe (API, architektura)
-- semantyczne (czytelność intencji)
-- ochronne (błędy wykrywane wcześnie)
-
-ABC **nie dostarcza zachowania**, tylko **wymagania**.
-
----
-## Mentalny model (precyzyjny)
-
+>[! Important]
 > Klasa w Pythonie to tylko **namespace**.  
 > ABC to **specjalny namespace**, który Python oznacza jako _niekompletny_, dopóki nie zostaną spełnione wszystkie wymagania.
 
-Instancja **nie powstaje**, jeśli klasa:
+- `ABC` to tylko skrót do `metaclass=ABCMeta`
+- `ABCMeta.__call__` **blokuje instancjonowanie**, jeśli `__abstractmethods__` nie jest puste
+- `__abstractmethods__` to **frozenset nazw**, wyliczany przy tworzeniu klasy
 
-- dziedziczy po ABC
-- **nie implementuje wszystkich abstractmethod / abstractproperty**
+ABC działa **na etapie tworzenia instancji**, nie w czasie definicji klasy.
+
+ ### 1. Abstractmethod ≠ brak implementacji
+```
+class Base(ABC):
+    @abstractmethod
+    def f(self):
+        print("default impl")
+```
+
+- metoda **może mieć ciało**
+- ale dopóki jest oznaczona jako `@abstractmethod`, klasa jest nieinstancjonowalna
+
+➡️ To pozwala pisać **Template Method** z częściową implementacją.
+
+### 2. Dziedziczenie abstrakcji jest transytywne
+
+```
+class A(ABC):
+    @abstractmethod
+    def f(self): ...
+
+class B(A):
+    pass
+```
+
+- `B` nadal jest **abstrakcyjna**
+- nawet jeśli **nic nie deklaruje**
+
+Senior widzi tu: **abstrakcyjność jest dziedziczona**, dopóki nie zostanie zamknięta.
+
 
 ---
 
