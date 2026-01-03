@@ -5,7 +5,7 @@ Note:
 >[! Important]
 np. open(), służy do wyjątków, błędów i automatyzacji powtarzających się czynności (pliki, locki, połączenia, transakcje, zmiana global).
 protokół do zarządzania zasobami 
-try / finally na sterydach
+with = try / finally na sterydach
 Gwarantuje poprawne wejście i wyjście z kontekstu wykonania - niezależnie, czy wystąpi wyjątek
 
 # Minimalny kontrakt:
@@ -59,13 +59,10 @@ Exception: oops
 - Context manager to _mechanizm, który gwarantuje cleanup nawet przy błędach_.
 
 # Do zapamiętania:
-
-- Context manager MUSI mieć __enter__ **i** **__exit__****.
 - **__enter__** zwraca zasób.
 - **__exit__** sprząta zasób.
 - **__exit__** dostaje pełną informację o ewentualnym wyjątku.
 - __exit__ może ZATRZYMAĆ wyjątek, zwracając True
-- Instrukcja **with** = try/finally + enter/exit.
 
 ![[context manager 1.png]]
 
@@ -83,20 +80,40 @@ file.close() # też zamyka ale jak pojawi się błąd w trakcie NIE zamknie
 ```
 
 
-można też dekoratorem @contextmanager
+#  @contextmanager:
+
+ >[! Important]
+ >w klasie jest to rozbite na dwie metody. Tu mamy jedną funkcję więc TEN SAM SCOPE. 
+ >
+ >
+ >
 
 ```python
 
 from contextlib import contextmanager
 
-@contextmanager
-def yolo():
-	# __enter__
-	
-	yield "cos tam"
-	
-	# __exit__
+@contextmanager  
+def yolo():  
+    # __enter__  
+    print("entering")  
+    try:  
+        yield "y"  
+    # __exit__  
+    except Exception:  
+        print('error exiting')  
+    finally:  
+        print("exiting")  
+  
+with yolo() as y:  
+    print(y)
+    raise ValueError()
 
+```
+```bash
+entering
+y
+error exiting # nie ma, jak nie ma ValueError
+exiting
 ```
 
 W tym bloku kodu oczekuje ze zostanie rzucony StopIteration
@@ -115,7 +132,8 @@ def test_iter(sorted_frozen_set_duplicates):
     with pytest.raises(StopIteration):  
         next(iterator)
 ```
-[[protocols]]
+
+
 
 
 
@@ -124,10 +142,11 @@ Metadata:
 
 ```yaml
 ---
-type: tool    # concept | tool | pattern
+type: pattern    # concept | tool | pattern
 language: python # python | js | sql | etc.
 ---
 ```
 
+[[protocols]] 
 Status: #pending
 Tags: #empty
