@@ -1,8 +1,23 @@
-protokół do zarządzania zasobami (pliki, locki, połączenia). 
-Gwarantuje poprawne wejście i wyjście z kontekstu - nawet gdy wystąpi wyjątek
-	
+Created: 2026-01-03  15:28
+___
+Note:
+
+>[! Important]
+np. open(), służy do wyjątków, błędów i automatyzacji powtarzających się czynności (pliki, locki, połączenia, transakcje, zmiana global).
+protokół do zarządzania zasobami 
+enkapsuluje wzorzec try / finally 
+Gwarantuje poprawne wejście i wyjście z kontekstu wykonania - niezależnie, czy wystąpi wyjątek
+
+# Minimalny kontrakt
 	__enter__
-	__exit__ - zwraca False/None-> wyjątek leci dalej. True-> stłumiony
+		- przed wejściem do bloku with
+		- jej wartość zwrotna leci do `f`
+	__exit__
+		- zwraca False/None-> wyjątek leci dalej. propagowany
+		- zwraca True-> stłumiony suppress exception
+		- wykonywana zawsze po wyjściu z bloku
+
+![[Pasted image 20260103153725.png]]
 
 to obiekty z `with
 
@@ -64,15 +79,10 @@ with Yolo() as y:
 ### **Do zapamiętania**
 
 - Context manager MUSI mieć __enter__ **i** **__exit__****.
-    
 - **__enter__** **zwraca zasób.**
-    
 - **__exit__** **sprząta zasób.**
-    
 - **__exit__** **dostaje pełną informację o ewentualnym wyjątku.**
-    
 - __exit__ może ZATRZYMAĆ wyjątek, zwracając True
-    
 - Instrukcja **with** = try/finally + enter/exit.
 
 ![[context manager 1.png]]
@@ -120,3 +130,18 @@ def test_iter(sorted_frozen_set_duplicates):
         next(iterator)
 ```
 [[protocols]]
+
+
+
+___
+Metadata:
+
+```yaml
+---
+type: tool    # concept | tool | pattern
+language: python # python | js | sql | etc.
+---
+```
+
+Status: #pending
+Tags: #empty
