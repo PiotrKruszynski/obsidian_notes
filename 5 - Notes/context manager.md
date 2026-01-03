@@ -5,10 +5,10 @@ Note:
 >[! Important]
 np. open(), służy do wyjątków, błędów i automatyzacji powtarzających się czynności (pliki, locki, połączenia, transakcje, zmiana global).
 protokół do zarządzania zasobami 
-enkapsuluje wzorzec try / finally 
+try / finally na sterydach
 Gwarantuje poprawne wejście i wyjście z kontekstu wykonania - niezależnie, czy wystąpi wyjątek
 
-# Minimalny kontrakt
+# Minimalny kontrakt:
 	__enter__
 		- przed wejściem do bloku with
 		- jej wartość zwrotna leci do `f`
@@ -52,82 +52,35 @@ Traceback (most recent call last):
 Exception: oops
 ```
 
-to obiekty z `with
 
-Służy do:
+# Służy do:
 - obsługa wyjątków, błędów
 - automatyzacja powtarzających się czynności
 - Context manager to _mechanizm, który gwarantuje cleanup nawet przy błędach_.
 
-```python
-def __enter__(self): ...
-def __exit__(self, exc_type, exc_val, exc_tb): ...
-```
-
-```python
-with SomeContext() as var:
-    # blok
-```
-
-```python
-ctx = SomeContext()
-var = ctx.__enter__()
-try:
-    # blok
-finally:
-    ctx.__exit__(*sys.exc_info())
-```
-
-
-
-mój context manager z dowodem, że return true zablokuje przekazanie info o błędzie :D
-
-```python
-class Yolo:
-	def __init__(self):
-		print('init')
-	
-	def __enter__(self):
-		print('entering')
-		return self
-
-	def __exit__(self, exc_type, exc_val, exc_tb):
-		if exc_type:
-			print('exception')
-		else:
-			print('exiting')
-		return True # nie da błędu. True blokuje propagacje błędu wyżej!! -             return False = **propaguj wyjątek dalej** !!
-
-
-with Yolo() as y:
-	print('normal code')
-	raise Exception(' o kurde coś nie poszło ... ') # __exit odpali sie tu jak błąd lub po raise jak nie ma błędu
-	
-# init
-# entering
-# normal code
-# exception
-```
-
-### **Do zapamiętania**
+# Do zapamiętania:
 
 - Context manager MUSI mieć __enter__ **i** **__exit__****.
-- **__enter__** **zwraca zasób.**
-- **__exit__** **sprząta zasób.**
-- **__exit__** **dostaje pełną informację o ewentualnym wyjątku.**
+- **__enter__** zwraca zasób.
+- **__exit__** sprząta zasób.
+- **__exit__** dostaje pełną informację o ewentualnym wyjątku.
 - __exit__ może ZATRZYMAĆ wyjątek, zwracając True
 - Instrukcja **with** = try/finally + enter/exit.
 
 ![[context manager 1.png]]
 
 
-jeszcze jedna ważna sprawa
-każdy obiekt, który spełnia protokół cm -> enter i exit działa tylko z słowem kluczowym with.
+# a co bez with .. ?
+dla każdego obiektu, który spełnia protokół CM -> enter i exit działa tylko z słowem kluczowym with.
 
-jak zrobie
+```python
+# with open('tekst.txt', 'w') as f:
+#    f.write('test')
 
-result = Yolo()
-wykona się tylko init
+file = open('test.txt., 'r')
+print(file.read())
+file.close() # też zamyka ale jak pojawi się błąd w trakcie NIE zamknie
+```
 
 
 można też dekoratorem @contextmanager
