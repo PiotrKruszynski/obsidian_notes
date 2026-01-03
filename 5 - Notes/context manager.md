@@ -12,12 +12,45 @@ Gwarantuje poprawne wejście i wyjście z kontekstu wykonania - niezależnie, cz
 	__enter__
 		- przed wejściem do bloku with
 		- jej wartość zwrotna leci do `f`
+		- najczęściej zwraca siebie (self)
 	__exit__
-		- zwraca False/None-> wyjątek leci dalej. propagowany
-		- zwraca True-> stłumiony suppress exception
+		- zwraca False/None (domyślnie nie ma return w __exit__ -> wyjątek leci dalej. propagowany
+		- zwraca True-> stłumiony, blokuje delegacje dalej (suppress exception)
 		- wykonywana zawsze po wyjściu z bloku
 
 ![[Pasted image 20260103153725.png]]
+
+```python
+class Yolo:  
+    def __init__(self):  
+        print("init")  
+  
+    def __enter__(self, *args, **kwargs):  
+        print("entering")  
+        return self  
+  
+    def __exit__(self, exc_type, exc_val, exc_tb):  
+        if exc_type:  
+             print("exception")  
+        else:  
+            print("exiting")  
+        return False  
+  
+with Yolo() as y:  
+    print("normal code")  
+    raise Exception('oops')  
+  
+print("kod widoczny gdy return True, return false zatrzyma wykonanie i wyrzuci błąd")
+```
+```
+init
+entering
+normal code
+exception
+Traceback (most recent call last):
+    raise Exception('oops')
+Exception: oops
+```
 
 to obiekty z `with
 
