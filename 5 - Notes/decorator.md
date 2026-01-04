@@ -97,14 +97,12 @@ print(hello('ola'))
 ```
 
 
-
-
 ___
 Metadata:
 
 ```yaml
 ---
-type: concept
+type: pattern
 language: python
 ---
 ```

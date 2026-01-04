@@ -16,13 +16,13 @@ def auto_repr(cls):
 Kluczowe jest to, że **nazwa klasy (identifier)** zostaje _zbindowana_ do **obiektu zwróconego przez dekorator**, a **nie** do obiektu wygenerowanego bezpośrednio przez `class`.
 
 Formalnie:
-```
+```python
 @decorator
 class C:
     ...
 ```
 jest równoważne:
-```
+```python
 class C:
     ...
 
@@ -45,8 +45,8 @@ C = decorator(C)
 
 ## Przykład 1 — dekorator _mutujący_ klasę
 
-```
-def add_repr(cls):
+```python
+def add_repr(cls): # cls == obiekt klasy A
     def __repr__(self):
         return f"{type(self).__name__}({self.__dict__})"
 
@@ -76,7 +76,7 @@ class User:
 
 ## Przykład 2 — dekorator _zastępujący_ klasę (wrapper)
 
-```
+```python
 def singleton(cls):
     instance = None
 
@@ -110,7 +110,7 @@ class Config:
 
 ## Przykład 3 — dekorator klasy jako alternatywa dla metaklasy
 
-```
+```python
 def auto_repr(cls):
     if "__init__" not in cls.__dict__:
         raise TypeError("__init__ required")
@@ -166,13 +166,9 @@ x = f(x)     # x → inny obiekt
 ## Techniki zapamiętywania
 
 - **Mnemonika**: `@class_decorator` = `Class = decorator(Class)`
-    
 - **Asocjacja**: jak dekorator funkcji, ale _po etapie_ `_class_`
-    
 - **Wzorzec strukturalny**: lokalna metaprogramistyka
-    
 - **Antywzorzec**: dekorator zwracający funkcję zamiast klasy
-    
 
 ---
 
@@ -189,10 +185,10 @@ Metadata:
 
 ```yaml
 ---
-type: tool    # concept | tool | pattern
+type: pattern   # concept | tool | pattern
 language: python # python | js | sql | etc.
 ---
 ```
 
 Status: #pending
-Tags: #empty
+Tags: #python #class-decorator #dekorator-klasy #metaprogramming #class-object #namespace #name-binding #reference-model #oop-python #python-senior #second-brain #obsidian
