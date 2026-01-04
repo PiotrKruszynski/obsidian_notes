@@ -1,4 +1,4 @@
-słownik ze wszystkimi property jakie istnieją w obiekcie
+słownik ze wszystkimi property (atrybutami) jakie istnieją w obiekcie
 
 zwraca **słownik atrybutów obiektu**.
 
