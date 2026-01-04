@@ -132,3 +132,4 @@ class NotesLoader(NotesLoaderABC):
   
         self._tags = tags_normalized
 ```
+
