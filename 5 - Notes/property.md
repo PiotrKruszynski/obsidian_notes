@@ -89,3 +89,46 @@ obiekt property tworzy się raz, podczas gdy interpreter przechodzi przez klasę
 
 
 ![[Pasted image 20251127150417.png]]
+
+
+
+poniższy przykład:
+	1.	Nie przypisujesz do _folder_path ani _tags bezpośrednio
+	2.	Przypisujesz do właściwości (property)
+	3.	To powoduje wywołanie:
+	•	folder_path.setter
+	•	tags.setter
+
+Czyli:
+	•	walidacja / normalizacja odbywa się już przy tworzeniu obiektu
+	•	obiekt nigdy nie istnieje w stanie „niepoprawnym”
+```python
+class NotesLoader(NotesLoaderABC):  
+    def __init__(self, folder_path: str, tags: Iterable[str]) -> None:  
+        self.folder_path = folder_path  # jakby był _ to setter nie odpaliłby się przy tworzeniu obiektu  
+        self.tags = tags  
+  
+    @override  
+    @property    def folder_path(self) -> str:  
+        return self._folder_path  
+  
+    @folder_path.setter  
+    def folder_path(self, folder_path: str) -> None:  
+        self._folder_path = folder_path  
+  
+    @override  
+    @property    def tags(self) -> Iterable[str]:  
+        return self._tags  
+  
+    @tags.setter  
+    def tags(self, tags: Iterable[str]) -> None:  
+        tags_normalized = set(tags)  
+  
+        for tag in tags:  
+            tag_ = tag.strip().lower()  
+            if not tag_.startswith("#"):  
+                tag_ = "#" + tag  
+            tags_normalized.add(tag_)  
+  
+        self._tags = tags_normalized
+```
