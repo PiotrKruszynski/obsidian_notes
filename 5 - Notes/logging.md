@@ -1,49 +1,86 @@
-# 🟦 Python Logging — Notatka dla programistów
+Created: 2026-01-04  16:58
+___
+Note:
 
-Pythonowy moduł **logging** to standardowy sposób rejestrowania zdarzeń w aplikacji.  
-Jest wydajny, konfigurowalny, w pełni thread-safe i gotowy do użycia w aplikacjach CLI, web, backend i systemach rozproszonych.
+Pythonowy moduł **logging** to **standardowy, produkcyjny mechanizm obserwowalności** aplikacji.  
+Zapewnia:
 
----
+- kontrolę przepływu informacji
+    
+- diagnostykę błędów
+    
+- audyt zdarzeń
+    
+- integrację z systemami monitoringu
+    
 
-## 1. Cel logowania
-- diagnoza błędów i problemów
-- monitoring zachowania aplikacji
-- zbieranie zdarzeń do analizy (audyt, bezpieczeństwo)
-- zrozumienie przepływu wykonania kodu
-
----
-
-## 2. Poziomy logowania (od najważniejszych)
-Odzwierciedlają powagę zdarzenia:
-
-| Poziom | Metoda | Znaczenie |
-|--------|--------|-----------|
-| CRITICAL | `logging.critical()` | system w stanie awaryjnym |
-| ERROR | `logging.error()` | błąd wymagający interwencji |
-| WARNING | `logging.warning()` | sytuacja nietypowa |
-| INFO | `logging.info()` | informacja o normalnym działaniu |
-| DEBUG | `logging.debug()` | szczegóły techniczne do debugowania |
-| NOTSET | — | poziom domyślny |
-
-Domyślny poziom: **WARNING** (info/debug nie będą widoczne bez konfiguracji).
+> logging ≠ print()
+> 
+> logging = **kontrakt obserwowalności aplikacji**
 
 ---
 
-## 3. Najprostsze użycie
+## 1. Mentalny model (kluczowe)
+
+**Logowanie to nie wypisywanie tekstu.**
+
+W Pythonie:
+
+- **logger** = obiekt emitujący zdarzenia
+    
+- **handler** = gdzie zdarzenie trafia
+    
+- **formatter** = jak wygląda zapis
+    
+- **level** = filtr semantyczny
+    
+
+➡️ Logger _nie wie_, gdzie zapisze log.  
+➡️ Handler _nie wie_, skąd pochodzi log.
+
+To celowy **rozplot odpowiedzialności**.
+
+---
+## 2. Poziomy logowania (semantyka)
+
+|Poziom|Znaczenie|Kiedy używać|
+|---|---|---|
+|CRITICAL|aplikacja w stanie awaryjnym|brak możliwości dalszego działania|
+|ERROR|błąd logiczny / runtime|operacja nie powiodła się|
+|WARNING|stan nietypowy|fallback, retry, degradacja|
+|INFO|normalny przebieg|lifecycle, start/stop|
+|DEBUG|detale techniczne|debug, śledzenie|
+
+Domyślny poziom root loggera: **WARNING**
+
+---
+## 3. Najczęstszy błąd początkujących ❌
 
 ```python
 import logging
 
-logging.warning("Uwaga!")
-logging.info("To się nie wyświetli bez konfiguracji")
-logging.debug("Debug info")
+logger = logging.getLogger(__name__)
+
+logging.basicConfig(level=logging.DEBUG)
+logger.info("info")
 ```
 
----
+**Dlaczego to jest problem?**
 
-## 4. Podstawowa konfiguracja
+- `basicConfig()` **konfiguruje root logger**
+    
+- wywołany w bibliotece → psuje konfigurację aplikacji
+    
+
+Zasada:
+
+> **basicConfig tylko w punkcie startowym aplikacji**
+
+---
+## 4. Poprawny wzorzec (entry point)
 
 ```python
+# main.py
 import logging
 
 logging.basicConfig(
@@ -51,178 +88,198 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(name)s | %(message)s"
 )
 
-logging.info("Aplikacja startuje")
+from app import run
+run()
 ```
 
-Parametry:
-- **level** – minimalny poziom wyświetlania
-- **format** – wygląd logu  
-- **filename** – zapis do pliku
-- **filemode='w'** – tryb nadpisywania
-
 ---
-
-## 5. Logowanie do pliku
+## 5. Logger per moduł (złoty standard)
 
 ```python
-logging.basicConfig(
-    filename="app.log",
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+# some_module.py
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def process():
+    logger.debug("start process")
+    logger.info("processing data")
 ```
 
-Efekt:  
-logi trafiają do `app.log`, nie na konsolę.
+Dlaczego `__name__`?
+
+- pełna ścieżka modułu
+- naturalna hierarchia loggerów
+- możliwość selektywnego filtrowania
 
 ---
+## 6. Analiza Twojego kodu (krok po kroku)
 
-## 6. Logger aplikacyjny (zalecany sposób)
+### Kod wejściowy
 
 ```python
 import logging
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
 
-logger.debug("Debug info")
-logger.error("Błąd krytyczny")
+
+def main():
+    logging.basicConfig(level=logging.DEBUG)
+
+    logger.debug("debug message")
+    logger.info("info message")
+    logger.warning("warning message")
+    logger.error("error message")
+    logger.critical("critical message")
+
+    try:
+        1 / 0
+    except ZeroDivisionError:
+        logger.exception("exception message")
+
+
+if __name__ == "__main__":
+    main()
 ```
 
-Dlaczego tak?
-- każdy moduł ma swój logger
-- łatwe filtrowanie
-- łatwe kierowanie logów do wielu odbiorców
+### Co tu się **naprawdę** dzieje
+
+1. `logger = logging.getLogger(__name__)`
+    
+    - tworzysz **referencję do loggera**
+    - brak handlerów → dziedziczy z root
+        
+2. `basicConfig()`
+    
+    - konfiguruje **root logger**
+    - dodaje `StreamHandler`
+        
+3. `logger.exception()`
+    
+    - loguje ERROR
+    - **automatycznie dołącza traceback**
+        
 
 ---
 
-## 7. Handlery — kierowanie logów do wielu miejsc jednocześnie
-
-```python
-import logging
-
-logger = logging.getLogger("app")
-logger.setLevel(logging.DEBUG)
-
-console = logging.StreamHandler()
-file = logging.FileHandler("app.log")
-
-logger.addHandler(console)
-logger.addHandler(file)
-
-logger.info("Log idzie do konsoli i do pliku")
-```
-
-Typy handlerów:
-- `StreamHandler` – konsola
-- `FileHandler` – plik
-- `RotatingFileHandler` – automatyczna rotacja plików
-- `SMTPHandler` – wysyłanie logów mailem
-- `SysLogHandler` – logi systemowe
-- i wiele innych
-
----
-
-## 8. Formatery — pełna kontrola wyglądu logów
-
-```python
-formatter = logging.Formatter(
-    "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
-)
-
-console.setFormatter(formatter)
-file.setFormatter(formatter)
-```
-
-Popularne pola:
-- `%(asctime)s` – timestamp
-- `%(levelname)s` – poziom
-- `%(name)s` – nazwa loggera
-- `%(message)s` – treść
-- `%(filename)s` – plik źródłowy
-- `%(lineno)d` – numer linii
-- `%(threadName)s` – wątek
-
----
-
-## 9. Logowanie wyjątków
-
-### Automatyczne logowanie stacktrace:
-
-```python
-try:
-    1 / 0
-except ZeroDivisionError:
-    logger.exception("Błąd podczas dzielenia")
-```
-
-`logger.exception()` = `logger.error(..., exc_info=True)`
-
----
-
-## 10. Najlepsze praktyki
-
-✔ Twórz logger dla każdego modułu:  
-`logger = logging.getLogger(__name__)`  
-
-✔ Nie używaj `print()` do debugowania produkcyjnego.
-
-✔ Nie ustawiaj globalnie `basicConfig()` w bibliotekach.
-
-✔ Unikaj logowania w pętli wysokiej częstotliwości bez ograniczeń.
-
-✔ Zawsze loguj wyjątki przez `logger.exception()`.
-
-✔ W aplikacjach większych używaj `RotatingFileHandler`.
-
----
-
-## 11. Logowanie asynchroniczne (zaawansowane)
-
-W systemach o dużej przepustowości zaleca się:
-
-- `QueueHandler`  
-- `QueueListener`
-
-Przykład:
-
-```python
-from logging.handlers import QueueHandler
-import logging, queue
-
-q = queue.Queue()
-qh = QueueHandler(q)
-
-logger = logging.getLogger("async")
-logger.addHandler(qh)
-```
-
-QueueListener obsługuje zapis do pliku w osobnym wątku.
-
----
-
-## 12. Ultra-skrót (TL;DR)
-
-- logging to standard do logów w Pythonie  
-- domyślny poziom to WARNING  
-- do profesjonalnych projektów → logger per moduł  
-- błędy loguj przez `logger.exception()`  
-- do produkcji → handlery + formattery  
-
----
-
-## 13. Minimalna konfiguracja produkcyjna
+## 7. Poprawiona wersja (produkcyjna)
 
 ```python
 import logging
 from logging.handlers import RotatingFileHandler
 
-logger = logging.getLogger("app")
-logger.setLevel(logging.INFO)
 
-handler = RotatingFileHandler("app.log", maxBytes=2_000_000, backupCount=5)
-formatter = logging.Formatter("%(asctime)s | %(levelname)s | %(message)s")
-handler.setFormatter(formatter)
+def configure_logging() -> None:
+    root = logging.getLogger()
+    root.setLevel(logging.DEBUG)
 
-logger.addHandler(handler)
+    handler = RotatingFileHandler(
+        "app.log",
+        maxBytes=2_000_000,
+        backupCount=5,
+        encoding="utf-8",
+    )
+
+    formatter = logging.Formatter(
+        "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+    )
+
+    handler.setFormatter(formatter)
+    root.addHandler(handler)
+
+
+logger = logging.getLogger(__name__)
+
+
+def main():
+    logger.debug("debug message")
+    logger.info("info message")
+    logger.warning("warning message")
+    logger.error("error message")
+
+    try:
+        1 / 0
+    except ZeroDivisionError:
+        logger.exception("division failed")
+
+
+if __name__ == "__main__":
+    configure_logging()
+    main()
 ```
+
+---
+
+## 8. Logowanie wyjątków — zasada seniora
+
+❌ źle:
+
+```python
+except Exception as e:
+    logger.error(e)
+```
+
+✔ dobrze:
+
+```python
+except Exception:
+    logger.exception("contextual message")
+```
+
+Dlaczego?
+
+- traceback = **najcenniejsza informacja diagnostyczna**
+    
+
+---
+
+## 9. Wzorce zapamiętywania
+
+### Mnemonika
+
+**LHF** → Logger → Handler → Formatter
+
+### Asocjacja
+
+Logger = _kamera_  
+Handler = _kabel_  
+Formatter = _filtr obrazu_
+
+### Wzorzec strukturalny
+
+```
+EVENT
+  ↓
+LOGGER
+  ↓
+FILTER
+  ↓
+HANDLER
+  ↓
+FORMATTER
+  ↓
+OUTPUT
+```
+
+---
+
+## 10. Dokumentacja i źródła
+
+- [https://docs.python.org/3/library/logging.html](https://docs.python.org/3/library/logging.html)
+- [https://docs.python.org/3/howto/logging.html](https://docs.python.org/3/howto/logging.html)
+- [https://docs.python.org/3/howto/logging-cookbook.html](https://docs.python.org/3/howto/logging-cookbook.html)
+    
+
+___
+Metadata:
+
+```yaml
+---
+type: tool    # concept | tool | pattern
+language: python # python | js | sql | etc.
+---
+```
+
+Status: #pending
+Tags: #logging #debuggin 
