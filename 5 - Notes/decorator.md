@@ -1,22 +1,26 @@
-	binduje name do obiektu
+Created: 2026-01-04  11:47
+___
+Note:
 
+>[! Definicja]
+> **binduje name do nowego obiektu**
+> Dekorator = name = decorator(name)
 
-- [[design pattern ]]
-- funkcjonalność python  
-  - dekoratory funkcji (konieczne użycie closure)  
-  - dekoratory class (sexy alternatywa do [[metaclass]])  
-  
-Możliwość modyfikacji działania funkcji bez zmiany jej implementacji.
+```python
+@decorator
+def fn(...):
+    ...
+# synthetic sugar do
+fn = decorator(fn)
+```
 
+  -  [[design pattern ]] 
+  - dekoratory funkcji (konieczne użycie [[closure]])  
+  -  [[decorator class]] (sexy alternatywa do metaclass)  
+  -  możliwość modyfikacji _działania_ funkcji bez zmiany jej implementacji.
 
-  
-
-Ad.1  
-  
 Dekorator to funkcja, która dodaje lub modyfikuje działanie innej funkcji.  
 Dekorator nakłada się na deklarację fn.
-  
-
   
 ```python
 def upper(fn):  
@@ -26,7 +30,7 @@ def upper(fn):
     return inner 
 ``` 
 
-dekorator binduje nowe ciało funkcji do identyfikatora
+# dekorator binduje nowe ciało funkcji do identyfikatora
 
 ```python
 def capitalize(function):  
@@ -48,14 +52,11 @@ def hello(name):
   
 print(hello('jarosław'))  
   
-@reverse  
-def hello(name):  
-    return f'Hello {name}'  
-  
-print(hello('jarosław'))
+# Hello Wałsoraj
 
 ```
 
+[curring]  [partial application]
 ```python
 
 def capitalize(function):  
@@ -85,29 +86,28 @@ def gen_html(tag='h1', highlight = 'b'):
   
   
 @capitalize  
-@gen_html # lub gen_html() !!  
+@gen_html # lub @gen_html('div', 'i') !!  
 def hello(name):  
     return f'Hello {name}'
 
 print(hello('ola'))
 
-```
-
-
-
-klasy
-
-```python
-class Example:
-	def __init__(self,p):
-	self.p = p
-	
-	@property
-	def p (self):
-		return self._p
-		
-	@p.setter
-	def p(self, value):
-	self._p = value
+# <h1>Hello <b>Ola</b></h1>
 
 ```
+
+
+
+
+___
+Metadata:
+
+```yaml
+---
+type: concept
+language: python
+---
+```
+
+Status: #pending
+Tags: #decorator #rebinding #namespace #losure #functional-programming #design-pattern #proxy #wrapper #metaprogramming #python-internals
