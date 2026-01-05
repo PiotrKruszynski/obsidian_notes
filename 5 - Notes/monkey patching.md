@@ -1,4 +1,5 @@
 	technika do podmiany kolaboranta, działa w runtime
+	pytest --fixture info o wszystkich 
 
 **Monkey patching** to **dynamiczna modyfikacja kodu w trakcie działania programu** (runtime), polegająca na **nadpisaniu metod, funkcji, klas lub atrybutów** w **istniejących obiektach lub modułach**, często z zewnętrznych bibliotek, **bez zmiany ich źródła**.
 
@@ -34,7 +35,6 @@ print(datetime.datetime.now())  # → 2000-01-01 00:00:00
 4. datetime.datetime.now = fake_now – dynamiczne przypisanie: interpreter aktualizuje atrybut now klasy datetime.datetime do wskazania na nową funkcję fake_now.
     
 5. print(...) – wywołanie datetime.datetime.now() tak naprawdę wywołuje fake_now().
-    
 
 ---
 
