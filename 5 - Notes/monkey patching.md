@@ -1,7 +1,7 @@
 	technika do podmiany kolaboranta, działa w runtime
 	pytest --fixture info o wszystkich 
 
-**Monkey patching** to **dynamiczna modyfikacja kodu w trakcie działania programu** (runtime), polegająca na **nadpisaniu metod, funkcji, klas lub atrybutów** w **istniejących obiektach lub modułach**, często z zewnętrznych bibliotek, **bez zmiany ich źródła**.
+**Monkey patching** to **dynamiczna modyfikacja kodu w trakcie działania programu** (w runtime), polegająca na **nadpisaniu metod, funkcji, klas lub atrybutów**, **bez zmiany ich źródła**.
 
   
 
@@ -11,18 +11,42 @@ Mechanizm ten wykorzystuje **dynamiczną naturę Pythona** (obiekty są modyfiko
 
 ### **Przykład (syntaktyczna analiza)**
 ```python
-import datetime
-
-# Patchujemy metodę now() w datetime.datetime
-original_now = datetime.datetime.now
-
-def fake_now():
-    return datetime.datetime(2000, 1, 1)
-
-datetime.datetime.now = fake_now
-
-print(datetime.datetime.now())  # → 2000-01-01 00:00:00
+def get_file_list(self) -> list[str]:  
+    file_list: list[str] = []  
+  
+    for filename in os.listdir(self.folder_path):  # jakby nie płaska to trzeba trawersy po folderach + rekurenc.  
+        if filename.endswith(".md"):  
+            file_list.append(filename)  
+  
+    if not file_list:  
+        logger.error("No markdown files found.")  
+        raise FileNotFoundError  
+  
+    return file_list
 ```
+
+```python
+import os
+import pytest
+
+def test_get_file_list_filters_only_md(monkeypatch):
+    # given
+    fake_files = ["file1.md", "file2.txt"]
+
+    def mock_listdir(path):
+        return fake_files
+
+    monkeypatch.setattr(os, "listdir", mock_listdir)
+    loader = MarkdownNotesLoader(folder_path="/fake/path", tags=[])
+
+    # when
+    result = loader.get_file_list()
+    # then
+    assert result == ["file1.md"]
+```
+
+
+
 
 📘 **Co tu się dzieje na poziomie interpretera?**
 
