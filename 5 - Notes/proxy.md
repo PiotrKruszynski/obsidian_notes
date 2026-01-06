@@ -4,7 +4,7 @@ obiekt opakowujemy innym obiektem
 ziemniak opakowujemy torebką -> torebka jest proxy dla ziemniaka
 sok pakujemy w proxy z nakrętką -> 
 kontnener w dokerze to proxy ->
-wódka w USA pakujemy w torbę -> torma jest proxy i umożliwia picie w miejscch publicznych
+wódka w USA pakujemy w torbę -> torba jest proxy i umożliwia picie w miejscch publicznych
 
 [[super()]] - proxy do klasy bazowej, przekierowuje do nadklasy 
 
