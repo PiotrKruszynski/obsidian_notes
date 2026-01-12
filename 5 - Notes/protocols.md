@@ -9,6 +9,7 @@ Note:
 kontrakt bez dziedziczenia
 opisuje jakie metody/atrybuty muszą istnieć
 
+
 obiekt spełnia protokół, jeśli **ma wymagane metody/atrybuty**, niezależnie od dziedziczenia.
 
 **Protokoły wybiera się od strony użytkownika obiektu, nie od strony danych wewnętrznych.**
