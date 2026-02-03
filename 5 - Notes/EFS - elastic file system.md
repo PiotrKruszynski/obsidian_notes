@@ -12,6 +12,7 @@ Note:
 - use security group to control acces to EFS
 - **compatible with Linux based AMI ( not Windows)
 - encryption at rest using KMS
+- scale automatically
 
 
 Amazon **Elastic File System (EFS)** to w pełni zarządzany, **sieciowy system plików (NFS)** dla instancji EC2 (Linux), umożliwiający **współdzielony dostęp** wielu maszyn do jednego filesystemu.
@@ -59,14 +60,12 @@ Use-case:
 Określa **ile MB/s** filesystem może dostarczyć.
 
 ### **Bursting (default)**
-
 - throughput zależny od rozmiaru danych
 - mały FS → niski throughput
 - duży FS → wysoki throughput
 - używa burst credits
 
 ### **Provisioned**
-
 - stały throughput (MB/s)
 - niezależny od rozmiaru FS
 - dodatkowy koszt
@@ -97,7 +96,6 @@ Cechy IA:
 - tańsze GB
 - opłata za odczyt
 
-
 ### **Single-AZ (One Zone)**
 
 - **EFS One Zone**
@@ -112,18 +110,15 @@ Cechy:
 
 ## **6. Lifecycle Management**
 
-  
 EFS może automatycznie przenosić **pliki** między klasami:
 - Standard → IA
 - One Zone → One Zone–IA
 
   
-
 Po czasie braku dostępu:
 - 7 / 14 / 30 / 60 / 90 dni
 
   
-
 Ważne:
 - dotyczy **plików**, nie całego filesystemu
 - mount point zawsze ten sam
