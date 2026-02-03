@@ -2,9 +2,11 @@ Created: 2026-02-03  10:31
 ___
 Note:
 
-backup of your EBS at a point in time
-recommended to detach voluime to do snapshot
-can copy snapshot across AZ 
+###### backup of your EBS at a point in time
+##### recommended to detach voluime to do snapshot
+#### can copy snapshot across AZ 
+
+![[Pasted image 20260203104908.png]]
 
 ___
 Metadata:
