@@ -4,117 +4,77 @@ Note:
 
 	highly available, scalable, expensive (3x more then gp2 volume), pay per use
 # managed NFS ( network file system) 
+folder sieciowy w AWS
 ## - can be mounted on many EC2
 ## - works with EC2 instances in multi-AZ
 
 ### Use cases:
 - content management, web services, data sharing, wordpress
-- uses NFSv4.1 protocol
-- use security group to control acces to EFS
+- uses **NFSv4.1 protocol
+- use **security group** to control acces to EFS
 - **compatible with Linux based AMI ( not Windows)
 - encryption at rest using KMS
 - scale automatically
 
-
-Amazon **Elastic File System (EFS)** to w pełni zarządzany, **sieciowy system plików (NFS)** dla instancji EC2 (Linux), umożliwiający **współdzielony dostęp** wielu maszyn do jednego filesystemu.
-
-> **EFS = folder sieciowy w AWS dla Linuxa**
-
 ---
+# Performance & Storage classes
 
-## **2. Architektura**
-
-- jeden **filesystem** w regionie
-- **Mount Targets** w każdej AZ
-- EC2 łączy się z najbliższym mount targetem
-- dostęp przez **NFSv4.1**
-
-EFS nie replikuje danych między regionami.
-
----
-# 3. Performance Mode
-
-Określa **latency i skalę równoległości**.
-
-### **General Purpose (default)**
-- niskie opóźnienia
-- najlepsze dla aplikacji webowych
-- ograniczona skala równoległości
-  
-Use-case
-- Django / Flask
-- CMS
-- shared uploads
-# Max I/O
-
+- scale automatically
+## Performance Mode:
+- **General Purpose (default)**
+	- niskie opóźnienia
+	- najlepsze dla aplikacji webowych
+	- ograniczona skala równoległości
+	- Django / Flask / CMS / shared uploads
+- **Max I/O
 - bardzo duża liczba klientów
 - wyższe latency
 - lepsze dla batch / analytics
+- big data / HPC /  ML pipelines
 
-Use-case:
-- big data
-- HPC
-- ML pipelines
-
-## **4. Throughput Mode**
+## Throughput Mode
 
 Określa **ile MB/s** filesystem może dostarczyć.
-
-### **Bursting (default)**
+### Bursting (default)
 - throughput zależny od rozmiaru danych
 - mały FS → niski throughput
 - duży FS → wysoki throughput
 - używa burst credits
-
-### **Provisioned**
+### Provisioned
 - stały throughput (MB/s)
 - niezależny od rozmiaru FS
 - dodatkowy koszt
-
 Use-case:
 - mało danych, ale intensywne I/O
-
-  
-### **Elastic**
+### Elastic
 - automatyczne skalowanie throughput
 - brak burst credits
 - płacisz za użycie
-
-  
 Rekomendowane w nowych projektach.
 
----
+## **Storage Classes (Tiers)**
 
-## **5. Storage Classes (Tiers)**
-
-Klasy storage dotyczą **kosztu i dostępności**, nie performance.
-### **Multi-AZ (High Availability)**
+Lifecycle management feature - move file after N days
+### Multi-AZ (High Availability)
 
 - **EFS Standard** – często używane dane
 - **EFS Infrequent Access (IA)** – rzadko używane dane
-
-Cechy IA:
-- tańsze GB
-- opłata za odczyt
-
-### **Single-AZ (One Zone)**
+	- tańsze GB
+	- opłata za odczyt
+### Single-AZ (One Zone)
 
 - **EFS One Zone**
 - **EFS One Zone–IA**
-  
-
-Cechy:
-- niższy koszt
-- brak odporności na awarię AZ
+	- niższy koszt
+	- brak odporności na awarię AZ
 
 ---
 
 ## **6. Lifecycle Management**
 
-EFS może automatycznie przenosić **pliki** między klasami:
+EFS może automatycznie przenosić **pliki** między storage classes:
 - Standard → IA
 - One Zone → One Zone–IA
-
   
 Po czasie braku dostępu:
 - 7 / 14 / 30 / 60 / 90 dni
@@ -123,20 +83,19 @@ Po czasie braku dostępu:
 Ważne:
 - dotyczy **plików**, nie całego filesystemu
 - mount point zawsze ten sam
+- to move implement **livecycle policies**
 
 ---
-
-## **7. Security**
+## **Security**
 
 ### **Szyfrowanie**
 
 - at rest: AES-256 (KMS)
 - in transit: TLS
 
-
 ### **Dostęp**
 
-- Security Groups (na mount targetach
+- Security Groups (na mount targetach)
 - IAM (kontrola API)
 - POSIX permissions (filesystem)
 
