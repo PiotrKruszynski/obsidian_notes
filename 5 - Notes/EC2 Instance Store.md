@@ -6,6 +6,7 @@ high-performance hardware disk
 	- ephemeral -> lose their storage if stopped
 	- good for buffer / cache/ scratch data / temporary content
 	- risk of data loss -> back up is your responsibility
+	- no snapshot, nie da się odłączyć i podpiąć do innej instancji
 
 ___
 Metadata:

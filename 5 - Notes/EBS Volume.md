@@ -20,10 +20,10 @@ gp2 / gp3 -> cost effective storage, low-latency
 
 PROVISIONED IOPS -> critical business app, greate for databases workloads
 HDD (st1, sc1):
-- cannot be boot volume
+- **cannot be boot volume**
 - lowest cost 
 - for data infrequently accessed
-- big data, data warehouses, log processing
+- big data, data warehouses, log processing, backup
 
 ## Multi-attach
 - attach the same EBS volume to multiple EC2 instance in the same AZ

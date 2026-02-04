@@ -3,8 +3,10 @@ ___
 Note:
 
 ###### backup of your EBS at a point in time
-##### recommended to detach voluime to do snapshot
+##### recommended to detach volume to do snapshot
 #### can copy snapshot across AZ 
+
+also use to encrypt ebs which are not encrypted
 
 ![[Pasted image 20260203104908.png]]
 
