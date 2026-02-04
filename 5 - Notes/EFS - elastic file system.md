@@ -155,6 +155,12 @@ Nie używać do:
 - zmienny ruch → Elastic Throughput
 - oszczędności → IA + Lifecycle
 
+![[Pasted image 20260204143122.png]]
+![[Pasted image 20260204143413.png]]
+
+
+
+
 
 ___
 Metadata:
@@ -165,6 +171,6 @@ type: tool    # concept | service | comparison
 language: aws
 ---
 ```
-
+[[EBS Volume]]
 Status: #pending
 Tags: #aws
