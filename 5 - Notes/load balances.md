@@ -8,7 +8,13 @@ Note:
 - spread load
 - expose a single point of access (DNS) to app
 - seamlessly handle failures of downstream instancees
-- do health checks to your instances
+- do regular health checks to your instances
+- provide SSL termination (HTTPS). SSL kończy się na tym komponencie,  dalej HTTP
+- enforce stickness with cookies (zapamietuje użytkownika, do której instancji trafił)
+- [[high availability]] across zones 
+- separate public from private traffic
+
+# ELB - elastic load balancer
 
 [upstream] - użytkownicy / klienci / internet
 [downstream] - wiele serwerów / instancji aplikacji
