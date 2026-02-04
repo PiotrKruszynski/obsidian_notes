@@ -6,7 +6,7 @@ ___
 network USB stick
 
 network drive
-bound to secyfic AZ
+bound to specyfic AZ
 persist data after termination
 to one instance at a time
 detach & attach quickly
