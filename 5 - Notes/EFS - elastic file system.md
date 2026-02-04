@@ -3,8 +3,9 @@ ___
 Note:
 
 	highly available, scalable, expensive (3x more then gp2 volume), pay per use
-# managed NFS ( network file system) that can be mounted on many EC2
-# works with EC2 instances in multi-AZ
+# managed NFS ( network file system) 
+## - can be mounted on many EC2
+## - works with EC2 instances in multi-AZ
 
 ### Use cases:
 - content management, web services, data sharing, wordpress
