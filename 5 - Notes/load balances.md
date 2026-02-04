@@ -5,6 +5,10 @@ Note:
 >[! Important]
 >are servers that forward traffic to multiple servers / instances downstream
 
+- spread load
+- expose a single point of access (DNS) to app
+- seamlessly handle failures of downstream instancees
+- do health checks to your instances
 
 [upstream] - użytkownicy / klienci / internet
 [downstream] - wiele serwerów / instancji aplikacji
