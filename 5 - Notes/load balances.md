@@ -14,12 +14,27 @@ Note:
 - [[high availability]] across zones 
 - separate public from private traffic
 
-# ELB - elastic load balancer
+
+## ELB - elastic load balancer type:
+
+# CLB - classic load balancer (old)
+- support HTTP, HTPS, WebSocket
+# ALB - application load balancer
+- support HTTP, HTPS, WebSocket
+- Layer 7 (HTTP) (warstwa aplikacji)
+- load balancing to multiple HTTP applications across machines ( [[target groups]])
+- **rozdziela ruch miedzy różne EC2
+- load balancing to multiple applications on the same machine ( ex: containers)
+- wiele aplikacji na jednej maszynie ([[ECS - elastic container service]] / EKS / Docker)
+# NLB - network load balancer
+- TCP, TLS (secure TCP), UDP
+# GWLB - gateway load balancer
+- operates at layer 3 (network layer) - IP Protocol
+
+
 
 [upstream] - użytkownicy / klienci / internet
 [downstream] - wiele serwerów / instancji aplikacji
-
-
 
 ___
 Metadata:
