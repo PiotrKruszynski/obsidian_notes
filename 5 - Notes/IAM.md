@@ -36,7 +36,7 @@ source: AWS Certified Solutions Architect Slides v45 (Stephane Maarek)
     - Lambda
     - ECS / EKS
     - Cross-account access
-- ✅ Always use **Roles for AWS services**
+- ✅ Always use **Roles for AWS services**[]()
 
 ---
 

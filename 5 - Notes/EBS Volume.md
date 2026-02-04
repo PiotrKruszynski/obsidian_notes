@@ -1,7 +1,9 @@
 Created: 2026-02-03  10:20
 ___
-Note:
-	elastic block store
+
+>[!Definition] 
+>elastic block store
+network USB stick
 
 network drive
 bound to secyfic AZ
@@ -57,4 +59,4 @@ language: aws
 ```
 
 Status: #pending
-Tags: #aws
+Tags: #aws #ebs #volume

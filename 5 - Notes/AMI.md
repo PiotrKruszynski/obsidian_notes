@@ -2,6 +2,9 @@ Created: 2026-02-03  11:57
 ___
 Note:
 
+>[! Important]
+>Amazon Machine Image
+
 customization of an Ec2 instance
 faster boost / config
 
