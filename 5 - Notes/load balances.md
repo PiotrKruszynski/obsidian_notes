@@ -13,7 +13,12 @@ Note:
 - enforce stickness with cookies (zapamietuje użytkownika, do której instancji trafił)
 	- sticky sessions (session affinity)
 	- work with CLB, ALB, NLB
-	- cookie used for stic
+	- cookie used for stickness has an expiration date you control
+	- use case: make sure user doesnt lose his session data
+	- may bring imbalance to the load
+	- type of cookies:
+		- application-based cookies: custom cookie and application cookie
+		- duration-based cookies: generate by LB
 - [[high availability]] across zones 
 - separate public from private traffic
 
