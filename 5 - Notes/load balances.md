@@ -59,7 +59,7 @@ These headers allow backend applications to correctly identify the **real client
 # GWLB - gateway load balancer
 - brama do API
 - operates at layer 3 (network layer) - IP Protocol
-
+- deploy, scale and manage a fleet of 3rd party network virtual appliances in AWS
 
 
 [upstream] - użytkownicy / klienci / internet
