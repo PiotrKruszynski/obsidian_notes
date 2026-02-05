@@ -25,9 +25,26 @@ Note:
 - support HTTP, HTPS, WebSocket
 - Layer 7 (HTTP) (warstwa aplikacji)
 - load balancing to multiple HTTP applications across machines ( [[target groups]])
+	- routing based on path ) `example.com/users` & `example.com/post
+	-  routing based on hostname in URL `one.example.com % other.example.com`
+	- routing based on Query String, Headers `example.com/users?id=123&order=false`
 - **rozdziela ruch miedzy różne EC2
 - load balancing to multiple applications on the same machine ( ex: containers)
 - wiele aplikacji na jednej maszynie ([[ECS - elastic container service]] / EKS / Docker)
+- świetne dla micro services & container-based application ( Docker & Amazon ECS)
+- ma port mapping feature to redirect to a dynamic port in ECS
+- może zastępować potrzebę multiple Classic Load Balancer per application
+
+![[Pasted image 20260205094026.png]]
+
+- During request forwarding, the **load balancer adds headers** that pass client connection details to the target:
+	- **X-Forwarded-For** → original **client IP address**
+	- **X-Forwarded-Port** → **destination port** used by the client
+	- **X-Forwarded-Proto** → **protocol** used (http or https)
+
+These headers allow backend applications to correctly identify the **real client IP**, port, and protocol, even though the request is proxied by the load balancer.
+![[Pasted image 20260205100253.png]]
+
 # NLB - network load balancer
 - szybki, nie patrzy na HTTP, działa na warstwie 4 (transport) interesuje sie portem IP
 - TCP, TLS (secure TCP), UDP
