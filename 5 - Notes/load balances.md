@@ -29,6 +29,7 @@ Note:
 - support HTTP, HTTPS, troche[[WebSocket]] 
 - obsługuje warstwa 4 + 7 częściowo
 - brak nowoczesnych fn
+- cross-zone disable by default, no charges for inter AZ data
 # ALB - application load balancer
 - support HTTP, HTPS, WebSocket
 - Layer 7 (HTTP) (warstwa aplikacji)
@@ -41,6 +42,7 @@ Note:
 - wiele aplikacji na jednej maszynie ([[ECS - elastic container service]] / EKS / Docker)
 - świetne dla micro services & container-based application ( Docker & Amazon ECS)
 - ma port mapping feature to redirect to a dynamic port in ECS
+- cross-zone enabled by default, disable by target group, no chaarges for inter AZ data
 - może zastępować potrzebę multiple Classic Load Balancer per application
 
 ![[Pasted image 20260205094026.png]]
@@ -64,6 +66,7 @@ These headers allow backend applications to correctly identify the **real client
 	- IP Addresses - must be private IPs
 	- Application Load Balancer -> NLB daje fix IP adresses, a ALB regóły z HTTP
 - health checks support TCP, HTTP, HTTPS protocols
+- cross-zone disable by default, $ $ $ for inter AZ data
 # GWLB - gateway load balancer
 - brama do API
 - operates at OSI layer 3 (network layer) - handle IP packets, not app protocol
@@ -73,7 +76,7 @@ These headers allow backend applications to correctly identify the **real client
 - target group:
 	- ec2 instances
 	- ip addresses - must be private IP
-
+- cross-zone disable by default, $ $ $ for inter AZ data
 
 [upstream] - użytkownicy / klienci / internet
 [downstream] - wiele serwerów / instancji aplikacji
