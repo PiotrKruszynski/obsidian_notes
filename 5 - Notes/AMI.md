@@ -3,15 +3,45 @@ ___
 Note:
 
 >[! Important]
->Amazon Machine Image
-customization of an Ec2 instance
+>Amazon Machine Image - zdjęcie stanu instancji w czasie
+template for customization of  EC2 instance
 faster boost / config
+build for specific region
 
 I can launch EC2 instance from
-- public AMI ( other AMI)
+- public AMI
 - my own AMI
+- AWS Marketplace AMI
 
 AMIs are build for specyfic region. You must copy the AMI to the target AWS Region
+
+# AMI Process from EC2 instance
+
+1. **Launch EC2 instance**
+    Startujesz instancję EC2 z bazowego AMI.
+2. **Customize the instance**
+    Instalujesz software, konfigurujesz system i aplikację.
+3. **Stop the instance (recommended)**
+    Zapewnia **data integrity** (spójność systemu plików).
+    > Stop ≠ delete (EBS volumes remain).
+4. **Create AMI from the instance**
+    AWS:
+    - creates **EBS snapshots**,
+    - stores **boot & volume metadata**,
+    - does **not remove the original instance**.
+    
+5. **AMI is created (immutable template)**
+    AMI = snapshots + launch configuration.
+6. **Launch new EC2 instances from AMI**
+    Each new instance:
+    - gets **new EBS volumes**,
+    - data is copied **from snapshots**,
+    - is fully **independent**
+### **What happens to the original instance?**
+- Can be **restarted**,
+- can stay **stopped** (pay only for EBS),
+- or can be **terminated manually**.
+    👉 AMI is **not dependent** on it.
 
 ___
 Metadata:

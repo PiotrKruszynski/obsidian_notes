@@ -3,7 +3,7 @@ ___
 Note:
 
 >[! Important]
->are servers that forward traffic to multiple servers / instances downstream
+>are servers that forward traffic to multiple servers / instances / downstream
 
 - spread load
 - expose a single point of access (DNS) to app
@@ -18,7 +18,9 @@ Note:
 ## ELB - elastic load balancer type:
 
 # CLB - classic load balancer (old)
-- support HTTP, HTPS, WebSocket
+- support HTTP, HTTPS, troche[[WebSocket]] 
+- obsługuje warstwa 4 + 7 częściowo
+- brak nowoczesnych fn
 # ALB - application load balancer
 - support HTTP, HTPS, WebSocket
 - Layer 7 (HTTP) (warstwa aplikacji)
@@ -27,8 +29,10 @@ Note:
 - load balancing to multiple applications on the same machine ( ex: containers)
 - wiele aplikacji na jednej maszynie ([[ECS - elastic container service]] / EKS / Docker)
 # NLB - network load balancer
+- szybki, nie patrzy na HTTP, działa na warstwie 4 (transport) interesuje sie portem IP
 - TCP, TLS (secure TCP), UDP
 # GWLB - gateway load balancer
+- brama do API
 - operates at layer 3 (network layer) - IP Protocol
 
 

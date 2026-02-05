@@ -5,12 +5,12 @@ ___
 >elastic block store
 network USB stick
 
-network drive
-bound to specyfic AZ
-persist data after termination
-to one instance at a time
-detach & attach quickly
-delete on termination
+- network drive
+- bound to specific AZ
+- persist data after termination
+- to one instance at a time
+- detach & attach quickly
+- delete on termination
 
 snapshot - kopia punktu w czasie
 
@@ -18,12 +18,14 @@ snapshot - kopia punktu w czasie
 
 gp2 / gp3 -> cost effective storage, low-latency
 
-PROVISIONED IOPS -> critical business app, greate for databases workloads
+io1, io2 -> Provisioned IOPS SSD -> critical business app, greate for databases workloads
+
 HDD (st1, sc1):
 - **cannot be boot volume**
 - lowest cost 
 - for data infrequently accessed
-- big data, data warehouses, log processing, backup
+- big data, data warehouses, log processing, backup, cookie
+- NIE do systemów operacyjnych i DB
 
 ## Multi-attach
 - attach the same EBS volume to multiple EC2 instance in the same AZ
