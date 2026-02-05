@@ -11,6 +11,9 @@ Note:
 - do regular health checks to your instances
 - provide SSL termination (HTTPS). SSL kończy się na tym komponencie,  dalej HTTP
 - enforce stickness with cookies (zapamietuje użytkownika, do której instancji trafił)
+	- sticky sessions (session affinity)
+	- work with CLB, ALB, NLB
+	- cookie used for stic
 - [[high availability]] across zones 
 - separate public from private traffic
 
@@ -58,8 +61,13 @@ These headers allow backend applications to correctly identify the **real client
 - health checks support TCP, HTTP, HTTPS protocols
 # GWLB - gateway load balancer
 - brama do API
-- operates at layer 3 (network layer) - IP Protocol
+- operates at OSI layer 3 (network layer) - handle IP packets, not app protocol
 - deploy, scale and manage a fleet of 3rd party network virtual appliances in AWS
+- **transparent** network gateway - single enter/exit for all trafic
+- uses the **GENEVE** protocol on port 6081
+- target group:
+	- ec2 instances
+	- ip addresses - must be private IP
 
 
 [upstream] - użytkownicy / klienci / internet
