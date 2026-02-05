@@ -47,7 +47,15 @@ These headers allow backend applications to correctly identify the **real client
 
 # NLB - network load balancer
 - szybki, nie patrzy na HTTP, działa na warstwie 4 (transport) interesuje sie portem IP
-- TCP, TLS (secure TCP), UDP
+- forward TCP, TLS (secure TCP), UDP traffic to your instance
+- handle milions of request per sec
+- ultra-low latency
+- has **one static IP per AZ**, and supports assigning Elastic IP -> helpful for whitelisting spec IP
+- jego [[target groups]]:
+	- EC2 instances
+	- IP Addresses - must be private IPs
+	- Application Load Balancer -> NLB daje fix IP adresses, a ALB regóły z HTTP
+- health checks support TCP, HTTP, HTTPS protocols
 # GWLB - gateway load balancer
 - brama do API
 - operates at layer 3 (network layer) - IP Protocol
