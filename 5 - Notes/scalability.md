@@ -5,12 +5,14 @@ Note:
 >[! Important]
 > to handle grater loads( users) by adapting
 
-## vertical scalability
+## vertical scalability **==up / down
 - database and other non distributed system
-## horizontal scalability (=elastic)
+## horizontal scalability (=elastic) ==out / in
 - increasing the numbers of instances / systems for application
 - implies distributed systems
 - for web applications / modern app
+- auto scaling group
+- load balancer
 
 
 

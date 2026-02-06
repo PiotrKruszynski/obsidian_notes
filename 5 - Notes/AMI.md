@@ -3,18 +3,28 @@ ___
 Note:
 
 >[! Important]
->Amazon Machine Image - zdjęcie stanu instancji w czasie
-template for customization of  EC2 instance
-faster boost / config
-build for specific region
+>- Amazon Machine Image - snapshot-based image of instance state
+>- immutable template for customization of  EC2 instance
+>- faster boost & consistent configuration
+>- build for specific region
 
+# AMI sources:
 I can launch EC2 instance from
 - public AMI
 - my own AMI
 - AWS Marketplace AMI
 
-AMIs are build for specyfic region. You must copy the AMI to the target AWS Region
+AMIs are ==build for specific region==. You must copy the AMI to the target AWS Region==
+# What AMI contains
+- EBS snapshot (root + optional data volumes)
+- boot configuration & metadata
+- permissions (private / public / shared)
 
+#### What AMI does not contains
+- running instance itself
+- instance ID
+- elastic IP
+- instance store data (lost)
 # AMI Process from EC2 instance
 
 1. **Launch EC2 instance**

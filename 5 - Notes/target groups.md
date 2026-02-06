@@ -3,10 +3,30 @@ ___
 Note:
 
 >[! Important]
->zbiór backendów (np. EC2, ECS tasks, IP adress) do których [[load balances]] faktycznie wysyła ruch
+>**target groups = collection of backends** (np. EC2, ECS tasks, IP adress) do których [[load balances]] faktycznie wysyła ruch
+>- actual destination for load balancer traffic
+>- load balancer routes traffic to target groups, not directly to instances
 
-- can route traffic to multiple target groups
-- routing is based on **Layer 7**APP rules (host, path, headers)
+# Defaults:
+- target group **is regional** ❌ AZ
+- targets must be reachable from VPC
+- health check failure = target removed from routing
+
+#### Common exam trap:
+- ❌ LB sends traffic directly to EC2
+- ❌ healtch checks configured on LB
+- ❌ IP targets can be public IPs
+- ❌ target groups are AZ-scoped
+
+# Routing rules
+- one LB -> multiple target groups
+- routing based on:
+	- host
+	- path
+	- headers
+- layer7(application) rules -> ALB
+
+# Health checks
 - **health checks** are defined at the target group level
 - traffic is sent only to healthy targets
 

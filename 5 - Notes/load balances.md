@@ -5,32 +5,34 @@ Note:
 >[! Important]
 >are servers that forward traffic to multiple servers / instances / downstream
 
-- spread load
-- expose a single point of access (DNS) to app
-- seamlessly handle failures of downstream instancees
-- do regular health checks to your instances
-- provide SSL termination (HTTPS). SSL kończy się na tym komponencie,  dalej HTTP
-- enforce stickness with cookies (zapamietuje użytkownika, do której instancji trafił)
-	- sticky sessions (session affinity)
-	- work with CLB, ALB, NLB
-	- cookie used for stickness has an expiration date you control
+# Defaults
+- load balancer = **entry point** for application traffic
+- spread load & forwards traffic to downstream targets
+- [[high availability]] across multiple AZs
+- separate public from private traffic
+- expose **single DNS name
+- handle failures of downstream instances
+- perform health checks
+- can terminate SSL/TSL (HTTPS -> HTTP)
+- **sticky sessions (session affinity)**
+	- keeps users bound to same target
+	- implemented via cookies
+	- ==supported by: **CLB, ALB, NLB
+	- cookie has config expiration
 	- use case: make sure user doesnt lose his session data
 	- may bring imbalance to the load
 	- type of cookies:
 		- application-based cookies: custom cookie and application cookie
 		- duration-based cookies: generate by LB
-- [[high availability]] across zones 
-- separate public from private traffic
 
+# ELB types:
 
-## ELB - elastic load balancer type:
-
-# CLB - classic load balancer (old)
+## CLB - classic load balancer
 - support HTTP, HTTPS, troche[[WebSocket]] 
 - obsługuje warstwa 4 + 7 częściowo
 - brak nowoczesnych fn
 - cross-zone disable by default, no charges for inter AZ data
-# ALB - application load balancer
+## ALB - application load balancer
 - support HTTP, HTPS, WebSocket
 - Layer 7 (HTTP) (warstwa aplikacji)
 - load balancing to multiple HTTP applications across machines ( [[target groups]])
@@ -55,7 +57,7 @@ Note:
 These headers allow backend applications to correctly identify the **real client IP**, port, and protocol, even though the request is proxied by the load balancer.
 ![[Pasted image 20260205100253.png]]
 
-# NLB - network load balancer
+## NLB - network load balancer
 - szybki, nie patrzy na HTTP, działa na warstwie 4 (transport) interesuje sie portem IP
 - forward TCP, TLS (secure TCP), UDP traffic to your instance
 - handle milions of request per sec
@@ -67,7 +69,7 @@ These headers allow backend applications to correctly identify the **real client
 	- Application Load Balancer -> NLB daje fix IP adresses, a ALB regóły z HTTP
 - health checks support TCP, HTTP, HTTPS protocols
 - cross-zone disable by default, $ $ $ for inter AZ data
-# GWLB - gateway load balancer
+## GWLB - gateway load balancer
 - brama do API
 - operates at OSI layer 3 (network layer) - handle IP packets, not app protocol
 - deploy, scale and manage a fleet of 3rd party network virtual appliances in AWS
@@ -78,8 +80,10 @@ These headers allow backend applications to correctly identify the **real client
 	- ip addresses - must be private IP
 - cross-zone disable by default, $ $ $ for inter AZ data
 
-[upstream] - użytkownicy / klienci / internet
-[downstream] - wiele serwerów / instancji aplikacji
+
+>[! Important]
+**[upstream]** - użytkownicy / klienci / internet
+**[downstream]** - wiele serwerów / instancji aplikacji
 
 ___
 Metadata:

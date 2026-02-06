@@ -3,10 +3,13 @@ ___
 Note:
 
 	highly available, scalable, expensive (3x more then gp2 volume), pay per use
-# managed NFS ( network file system) 
-folder sieciowy w AWS
-## - can be mounted on many EC2
-## - works with EC2 instances in multi-AZ
+
+
+- managed NFS ( network file system) -> folder sieciowy w AWS
+- can be mounted on many EC2
+- works with EC2 instances in multi-AZ
+
+![[Pasted image 20260206111051.png]]
 
 ### Use cases:
 - content management, web services, data sharing, wordpress
@@ -55,6 +58,8 @@ Rekomendowane w nowych projektach.
 ## **Storage Classes (Tiers)**
 
 Lifecycle management feature - move file after N days
+
+
 ### Multi-AZ (High Availability)
 
 - **EFS Standard** – często używane dane

@@ -8,6 +8,8 @@ Note:
 the goal of high availability is to survive a data center loss
 
 can be passive (RDS Multi AZ - to sposób uruchomienia DB tak by nie przestała działać przy awarii) or active (horizontal scaling)
+- auto scaling group multi AZ
+- load balancer multi AZ
 
 
 

@@ -6,7 +6,7 @@ Note:
 ##### recommended to detach volume to do snapshot
 #### can copy snapshot across AZ 
 
-also use to encrypt ebs which are not encrypted
+also use to encrypt ebs which are not encrypted !
 
 ![[Pasted image 20260203104908.png]]
 

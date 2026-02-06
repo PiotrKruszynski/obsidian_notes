@@ -3,19 +3,13 @@ ___
 Note:
 
 
-tags: #aws #iam #security #exam #saa  
-type: exam-note  
-source: AWS Certified Solutions Architect Slides v45 (Stephane Maarek)
-
 ## 👤 IAM Users
 
 - 1 **physical person = 1 IAM user**
-    
 - User may have:
     - **Password** → AWS Management Console
     - **Access Keys** → CLI / SDK
 - ❌ Never share users or access keys
-    
 
 ---
 
@@ -41,10 +35,8 @@ source: AWS Certified Solutions Architect Slides v45 (Stephane Maarek)
 ---
 
 ## 📜 IAM Policies
-
 - JSON documents defining permissions
 - Key fields:
-    
     - Effect (Allow / Deny)
     - Action
     - Resource
@@ -62,7 +54,6 @@ source: AWS Certified Solutions Architect Slides v45 (Stephane Maarek)
 > **Everything is denied by default**
 
 Evaluation order:
-
 1. Explicit **Deny** → always wins
 2. Explicit **Allow** → access granted
 3. No rule → Deny

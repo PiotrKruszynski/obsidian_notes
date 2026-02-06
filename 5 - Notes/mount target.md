@@ -3,15 +3,17 @@ ___
 Note:
 
 >[! Important]
->> **wejście do EFS w danej AZ**
+>> **wejście do [[EFS - elastic file system]] w danej AZ**
+>EFS to usługa magazynowania, aby się podłączyć potrzebujesz Mount Target = most między EC2 a EFS
 
-- **EFS jest regionalny**
-- **Mount Target jest AZ-owy**
-- **1 AZ → 1 Mount Target**
 
-Bez Mount Targetu w danej AZ:
+# Cechy
+- jedne na subnet
+- ENI pod spodem: Mount Target wykorzystuje ENI do komunikacji
+- IP w sieci: ma przypisany prywatny IP w danej subnet
+- Security group: można ustawić zasady dostępu
 
-❌ **nie da się zamontować EFS**
+Bez Mount Targetu w danej AZ ❌ **nie da się zamontować EFS**
 
 
 ___
