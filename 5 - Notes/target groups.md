@@ -3,7 +3,7 @@ ___
 Note:
 
 >[! Important]
->**target groups = collection of backends** (np. EC2, ECS tasks, IP adress) do których [[load balances]] faktycznie wysyła ruch
+>**target groups = collection of backends** (np. EC2, ECS tasks, IP adress) do których [[load balancer]] faktycznie wysyła ruch
 >- actual destination for load balancer traffic
 >- load balancer routes traffic to target groups, not directly to instances
 
