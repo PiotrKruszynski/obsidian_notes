@@ -19,11 +19,12 @@ Note:
 		    - set max storage threshold
 		    - auto modifi storage
     - storage backed by EBS
-    - BUT you cant SSH into your instance
+
 - You manage:
     - schema
     - queries
     - indexes
+    - but cant SSH into instance ❌
 - Supported Engines
 	- MySQL
 	- PostgreSQL
@@ -40,7 +41,7 @@ Note:
 - Lower cos    
 - ❌ No high availability
 ## From single-AZ to Multi-AZ
-- zero downtime operation, no need to stop
+- **zero downtime** operation, no need to stop
 - just click 'modify' (snapshot->new DB restore->Sync)
 ### **Multi-AZ** (Disaster Recovery)
 - Synchronous replication
@@ -64,8 +65,9 @@ Note:
 - Used for **read scaling** ==skalowanie odczytów, nie zapisów==
 - zapisy muszą iść na **primary** (master)
 - Separate DB instance with its own endpoint
-- Can be in same AZ / cross-AZ / cross-region
+- Can be in same AZ / cross-AZ / cross-region ==`$$$`==
 - can be manual promotion to standalone DB
+- **==Read Replica can be setup as Multi AZ for Disaster Recovery (DR)==
 
 ![[Pasted image 20260206151936.png]]
 ---
