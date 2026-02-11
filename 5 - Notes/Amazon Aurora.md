@@ -136,6 +136,8 @@ It is designed for high performance, high availability, and automatic scaling in
 
 ![[Pasted image 20260211111158.png]]
 
+
+
 ___
 Metadata:
 

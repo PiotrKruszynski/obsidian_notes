@@ -77,10 +77,14 @@ Note:
 - Automated backups:
     - Enabled by default
     - PITR (Point-In-Time Recovery)
+    - 1 to 35 day of retention, set 0 to disable automated backups
     
 - Manual snapshots:
     - User-managed
     - Persist after DB deletion
+    - ** snapshot & restore better than stop (still $)
+
+
 
 ---
 
