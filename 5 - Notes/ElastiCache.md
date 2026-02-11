@@ -43,6 +43,8 @@ Wykorzystanie ElastiCache wymaga znacznych zmian w kodzie aplikacji.
     ◦ **Encryption:** Wsparcie dla szyfrowania SSL w locie (in-flight encryption).
     ◦ **Network:** Bezpieczeństwo poprzez Security Groups
 
+![[Pasted image 20260211120837.png]]
+
 ___
 Metadata:
 
