@@ -2,6 +2,20 @@ Created: 2026-02-11  11:37
 ___
 Note:
 
+**Amazon RDS Proxy** to w pełni zarządzany proxy bazodanowy, który umożliwia aplikacjom tworzenie puli (pooling) oraz współdzielenie połączeń nawiązanych z bazą danych. Dzięki temu rozwiązaniu zwiększa się wydajność bazy danych poprzez zmniejszenie obciążenia jej kluczowych zasobów, takich jak procesor (CPU) i pamięć (RAM), a także minimalizuje się liczbę otwartych połączeń i ryzyko wystąpienia timeoutów.
+
+Oto kluczowe aspekty tej usługi:
+• **Skalowalność i dostępność:** RDS Proxy jest usługą typu **serverless**, która automatycznie się skaluje i charakteryzuje się wysoką dostępnością (Multi-AZ).
+• **Szybszy Failover:** Usługa potrafi skrócić czas przełączania awaryjnego (failover) dla baz RDS i Aurora nawet o **66%**, zachowując przy tym istniejące połączenia.
+• **Obsługiwane silniki:** Proxy wspiera bazy RDS (MySQL, PostgreSQL, MariaDB, MS SQL Server) oraz Amazon Aurora (MySQL, PostgreSQL).
+• **Bezpieczeństwo:** RDS Proxy wymusza **uwierzytelnianie IAM** dla bazy danych i integruje się z **AWS Secrets Manager** w celu bezpiecznego przechowywania poświadczeń. Co istotne, proxy nigdy nie jest dostępne publicznie i musi być uzyskiwane z poziomu **VPC**.
+• **Współpraca z AWS Lambda:** Jest to rozwiązanie szczególnie zalecane dla aplikacji korzystających z funkcji Lambda, które przy wysokim obciążeniu mogą otwierać zbyt wiele bezpośrednich połączeń z bazą. Proxy zarządza tymi połączeniami w sposób efektywny, poprawiając skalowalność całego systemu.
+• **Brak zmian w kodzie:** Dla większości aplikacji wdrożenie RDS Proxy nie wymaga modyfikacji kodu źródłowego.
+• **Monitorowanie:** Informacje o stanie i zdarzeniach RDS Proxy można monitorować poprzez **RDS Event Notifications**.
+
+W architekturze rozwiązań AWS, RDS Proxy stanowi warstwę pośredniczącą, która pozwala oddzielić logikę aplikacji od fizycznych połączeń z instancją bazy danych, co jest kluczowe w projektowaniu wysoce dostępnych i wydajnych systemów.
+
+
 # Amazon RDS Proxy – Overview
 
 • **Fully managed** database proxy for RDS.
@@ -11,8 +25,6 @@ Note:
 • **Reduced failover time:** Skraca czas przełączania awaryjnego dla RDS & Aurora o **66%**.
 • **Supported Engines:** RDS (MySQL, PostgreSQL, MariaDB, MS SQL Server) oraz Aurora (MySQL, PostgreSQL).
 
-• no code changes required for most apps
-•  ** Enforce 
 
 # Amazon RDS Proxy – Security & Access
 
