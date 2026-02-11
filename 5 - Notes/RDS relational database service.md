@@ -47,7 +47,7 @@ Note:
 - Synchronous replication
 - Standby instance in another AZ
 - Automatic failover
-- Same endpoint (DNS)
+- Same endpoint (DNS), keep the same connection string regardless of which db is up
 - Used for **High Avalibility**, not scaling
 
 ![[Pasted image 20260206152157.png]]
