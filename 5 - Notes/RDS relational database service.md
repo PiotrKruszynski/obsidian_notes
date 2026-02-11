@@ -68,6 +68,7 @@ Note:
 - Can be in same AZ / cross-AZ / cross-region ==`$$$`==
 - can be manual promotion to standalone DB
 - **==Read Replica can be setup as Multi AZ for Disaster Recovery (DR)==
+- you cant create encrypted RR from unencrypted
 
 ![[Pasted image 20260206151936.png]]
 ---
