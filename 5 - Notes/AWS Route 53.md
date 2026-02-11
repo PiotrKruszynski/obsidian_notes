@@ -2,19 +2,30 @@ Created: 2026-02-11  13:07
 ___
 Note:
 
-**Amazon Route 53 – Overview**
+>[! Definition]
+• **Fully managed Authoritative DNS:** 
+Usługa DNS, w której klient może samodzielnie aktualizować rekordy
+• **100% Availability SLA:** 
+Jedyna usługa AWS oferująca gwarancję stuprocentowej dostępności.
+• **Domain Registrar:** 
+Możliwość zakupu i rejestracji domen (np. przez Amazon Registrar Inc. lub GoDaddy)
+• **Resource Health Checks:** 
+Możliwość sprawdzania stanu zdrowia zasobów i automatycznego przełączania ruchu (DNS failover).
 
-• **Fully managed Authoritative DNS:** Usługa DNS, w której klient może samodzielnie aktualizować rekordy
-• **100% Availability SLA:** Jedyna usługa AWS oferująca gwarancję stuprocentowej dostępności.
-• **Domain Registrar:** Możliwość zakupu i rejestracji domen (np. przez Amazon Registrar Inc. lub GoDaddy)
-• **Resource Health Checks:** Możliwość sprawdzania stanu zdrowia zasobów i automatycznego przełączania ruchu (DNS failover).
 
+**Ważne:** Route 53 nie „przesyła ruchu”. DNS tylko daje odpowiedź: _„idź pod ten endpoint”_.
 
-**Route 53 – Records & Hosted Zones**
+**DNS wybiera endpoint**, **LB rozdziela ruch**, a **ENI to fizyczno-logiczny port sieciowy**, przez który ten ruch płynie.
+
+#  Records & Hosted Zones
 
 • **Public Hosted Zone:** Zawiera rekordy określające sposób kierowania ruchu w Internecie (publiczne domeny).
 • **Private Hosted Zone:** Kieruje ruch wewnątrz jednej lub więcej sieci VPC (prywatne domeny).
+**Hosted Zones:
+![[Pasted image 20260211174309.png]]
 • **TTL (Time To Live):** Czas przechowywania rekordu w pamięci cache resolverów; obowiązkowy dla każdego rekordu z wyjątkiem Aliasów.
+
+![[Pasted image 20260211173351.png]]
 
 • **Record Types:**
     ◦ **A:** mapuje nazwę hosta na IPv4.
@@ -22,7 +33,15 @@ Note:
     ◦ **CNAME:** mapuje nazwę hosta na inną nazwę hosta (tylko dla domen podrzędnych/non-root).
     ◦ **Alias:** Mapuje nazwę hosta na zasób AWS (np. ELB, CloudFront); działa dla domen głównych (Zone Apex), jest darmowy i posiada natywny health check.
 
-**Route 53 – Routing Policies**
+![[Pasted image 20260211173940.png]]
+
+![[Pasted image 20260211174805.png]]
+
+![[Pasted image 20260211175536.png]]
+
+![[Pasted image 20260211175611.png]]
+
+# Route 53 – Routing Policies
 
 • **Simple:** Kieruje ruch do pojedynczego zasobu lub zwraca wiele losowych wartości.
 • **Weighted:** Kontroluje procentowy udział ruchu (traffic %) kierowanego do poszczególnych zasobów.
@@ -34,7 +53,8 @@ Note:
 
 • **Multi-Value Answer:** Zwraca do 8 zdrowych rekordów (healthy records) dla jednego zapytania; nie zastępuje ELB.
 
-**Health Checks & Hybrid DNS**
+![[Pasted image 20260211175714.png]]
+# Health Checks & Hybrid DNS
 
 • **Health Checks:** Około 15 globalnych „sprawdzaczy” monitoruje punkty końcowe (HTTP/HTTPS/TCP); wymagają przepuszczenia ruchu na firewallu/routerze.
 • **Calculated Health Checks:** Monitorowanie innych health checków w celu stworzenia złożonych reguł.
