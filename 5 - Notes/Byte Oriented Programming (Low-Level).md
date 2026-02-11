@@ -8,11 +8,11 @@ memoryview()
 
 # bitwise operator
 
-| **Operator** | **Nazwa**        | **Opis**                         | **Przykład**                 | **Wynik** |
-| ------------ | ---------------- | -------------------------------- | ---------------------------- | --------- |
-| &            | AND              | 1 jeśli oba bity = 1             | 0b1100 & 0b1010              | 0b1000    |
-| `            | `                | OR                               | 1 jeśli którykolwiek bit = 1 | `0b1100   |
-| ^            | XOR (caret)      | 1 jeśli bity różne               | 0b1100 ^ 0b1010              | 0b0110    |
-| ~            | NOT (complement) | negacja bitów (two’s complement) | ~0b00001111                  | -16       |
-| <<           | Left Shift       | przesunięcie w lewo (× 2ⁿ)       | 0b0001 << 3                  | 0b1000    |
-| >>           | Right Shift      | przesunięcie w prawo (÷ 2ⁿ)      | 0b1000 >> 3                  | 0b0001    |
+|**Nazwa operacji**|**Symbol**|**Odpowiednik logiczny**|**Przykład**|**Wyjaśnienie**|
+|---|---|---|---|---|
+|Bitwise AND|&|and|5 & 3  → 1|101 & 011 = 001|
+|Bitwise OR|\||or|5 \| 3 → 7|101 \| 011 = 111|
+|Bitwise XOR|^|!= (exclusive OR)|5 ^ 3 → 6|101 ^ 011 = 110|
+|Bitwise NOT (complement)|~|not|~5 → -6|Odwraca wszystkie bity (2’s complement)|
+|Left shift|<<|—|5 << 1 → 10|101 << 1 = 1010|
+|Right shift|>>|—|5 >> 1 → 2|101 >> 1 = 10|
