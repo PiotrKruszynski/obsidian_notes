@@ -18,10 +18,13 @@ now earthquake, we want multi AZ
 oszczędności
 ![[Pasted image 20260214173043.png]]
 
+MyClothes.com
 
 ![[Pasted image 20260214190743.png]]
 
 ![[Pasted image 20260214190902.png]]
+
+![[Pasted image 20260214203104.png]]
 
 
 
