@@ -26,6 +26,16 @@ MyClothes.com
 
 ![[Pasted image 20260214203104.png]]
 
+![[Pasted image 20260214205542.png]]
+
+![[Pasted image 20260214205644.png]]
+
+![[Pasted image 20260214205808.png]]
+
+![[Pasted image 20260214205934.png]]
+
+![[Pasted image 20260214210041.png]]
+
 
 
 ___
