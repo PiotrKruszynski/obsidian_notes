@@ -50,8 +50,7 @@ Możliwość sprawdzania stanu zdrowia zasobów i automatycznego przełączania 
 • **Geolocation:** Kierowanie ruchu na podstawie fizycznej lokalizacji użytkownika (kontynent, kraj).
 • **Geoproximity:** Kierowanie oparte na lokalizacji użytkownika i zasobów z możliwością zmiany zasięgu regionu (bias).
 • **IP-based:** Routing oparty na adresach IP klientów (listy CIDR).
-
-• **Multi-Value Answer:** Zwraca do 8 zdrowych rekordów (healthy records) dla jednego zapytania; nie zastępuje ELB.
+• **Multi-Value:** when routing traffic to multiple reseorces, asssociated with health-check. Zwraca do 8 zdrowych rekordów (healthy records) dla jednego zapytania; nie zastępuje ELB.
 
 ![[Pasted image 20260211175714.png]]
 # Health Checks & Hybrid DNS
