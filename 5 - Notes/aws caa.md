@@ -36,6 +36,20 @@ MyClothes.com
 
 ![[Pasted image 20260214210041.png]]
 
+MyWorrdPress.com
+- fully scalable wordpress website
+- access and correctly display picture upload
+- our user data and blog should be stored in MySQL
+
+![[Pasted image 20260214213832.png]]
+
+problem: zdjecie leci do 1 i niedostepne w 2
+![[Pasted image 20260214214052.png]]
+
+![[Pasted image 20260214214138.png]]
+
+![[Pasted image 20260214214207.png]]
+
 
 
 ___
