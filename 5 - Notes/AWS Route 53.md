@@ -43,14 +43,89 @@ Możliwość sprawdzania stanu zdrowia zasobów i automatycznego przełączania 
 
 # Route 53 – Routing Policies
 
-• **Simple:** Kieruje ruch do pojedynczego zasobu lub zwraca wiele losowych wartości.
-• **Weighted:** Kontroluje procentowy udział ruchu (traffic %) kierowanego do poszczególnych zasobów.
-• **Latency-based:** Kieruje użytkownika do regionu AWS z najniższym opóźnieniem (lowest latency).
-• **Failover:** Wykorzystywany w konfiguracjach Active-Passive do odzyskiwania po awarii (Disaster Recovery).
-• **Geolocation:** Kierowanie ruchu na podstawie fizycznej lokalizacji użytkownika (kontynent, kraj).
-• **Geoproximity:** Kierowanie oparte na lokalizacji użytkownika i zasobów z możliwością zmiany zasięgu regionu (bias).
-• **IP-based:** Routing oparty na adresach IP klientów (listy CIDR).
-• **Multi-Value:** when routing traffic to multiple reseorces, asssociated with health-check. Zwraca do 8 zdrowych rekordów (healthy records) dla jednego zapytania; nie zastępuje ELB.
+### Simple Routing
+
+- Default routing policy.
+- Routes traffic to a single resource.
+- Can return multiple IPs (random order).
+- No built-in traffic control logic.
+
+### Weighted Routing
+
+- Distributes traffic based on defined percentage weights.
+- Used for Blue/Green or Canary deployments.
+- Allows gradual traffic shifting between resources.
+
+### Latency-Based Routing
+
+- Routes users to the AWS region with lowest latency.
+- Improves performance for global applications.
+- Based on AWS latency measurements, not geography.
+
+### Failover Routing
+
+- Active–Passive configuration.
+- Uses health checks to detect failure.
+- Automatically redirects traffic to secondary resource if primary fails.
+
+### Geolocation Routing
+
+- Routes based on user geographic location (continent, country, US state).
+- Used for compliance, localization, or regional restrictions.
+- Decision is strictly location-based.
+
+### Geoproximity Routing
+
+- Routes based on user and resource geographic location.
+- Supports bias to expand or shrink traffic region.
+- Provides fine-grained geographic traffic control.
+
+### IP-Based Routing
+
+- Routes traffic based on client IP CIDR blocks.
+- Enables custom routing for specific networks.
+- Useful for enterprise or partner-specific routing.
+
+### Multi-Value Routing
+
+- Returns up to 8 healthy records per DNS query.
+- Supports health checks.
+- Provides simple DNS-based load distribution.
+- Does NOT replace ELB (no L4/L7 features).
+
+---
+
+## Critical Rules / Defaults
+
+- Route 53 routing policies operate at DNS level.
+- They do not inspect HTTP headers or application traffic.
+- Multi-Value is not a substitute for Elastic Load Balancing.
+- Weighted uses relative weights, not strict percentages.
+- Failover requires health checks for automation.
+
+---
+
+## Common Exam Traps
+
+- Confusing Latency-Based with Geolocation.
+- Assuming Multi-Value equals load balancer.
+- Forgetting that DNS caching (TTL) affects failover speed.→ Even if health check detects failure immediately, clients may continue using cached DNS records until TTL expires.
+- Mixing Weighted routing with Geoproximity bias.
+
+---
+
+## Exam Question Patterns
+
+- "Control traffic percentage" → Weighted.
+- "Disaster recovery active-passive" → Failover.
+- "Lowest response time globally" → Latency-Based.
+- "Compliance by country" → Geolocation.
+- "CIDR-based routing" → IP-Based.
+- "Simple DNS load distribution without ELB" → Multi-Value.
+- "Need SSL termination or path-based routing" → Use ELB (not Route 53).
+    
+
+---
 
 ![[Pasted image 20260211175714.png]]
 # Health Checks & Hybrid DNS
