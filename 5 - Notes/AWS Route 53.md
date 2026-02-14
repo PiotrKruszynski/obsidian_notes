@@ -44,57 +44,48 @@ Możliwość sprawdzania stanu zdrowia zasobów i automatycznego przełączania 
 # Route 53 – Routing Policies
 
 ### Simple Routing
-
 - Default routing policy.
 - Routes traffic to a single resource.
 - Can return multiple IPs (random order).
 - No built-in traffic control logic.
 
 ### Weighted Routing
-
 - Distributes traffic based on defined percentage weights.
 - Used for Blue/Green or Canary deployments.
 - Allows gradual traffic shifting between resources.
 
 ### Latency-Based Routing
-
 - Routes users to the AWS region with lowest latency.
 - Improves performance for global applications.
 - Based on AWS latency measurements, not geography.
 
 ### Failover Routing
-
 - Active–Passive configuration.
 - Uses health checks to detect failure.
 - Automatically redirects traffic to secondary resource if primary fails.
 
 ### Geolocation Routing
-
 - Routes based on user geographic location (continent, country, US state).
 - Used for compliance, localization, or regional restrictions.
 - Decision is strictly location-based.
 
 ### Geoproximity Routing
-
 - Routes based on user and resource geographic location.
 - Supports bias to expand or shrink traffic region.
 - Provides fine-grained geographic traffic control.
 
 ### IP-Based Routing
-
 - Routes traffic based on client IP CIDR blocks.
 - Enables custom routing for specific networks.
 - Useful for enterprise or partner-specific routing.
 
 ### Multi-Value Routing
-
 - Returns up to 8 healthy records per DNS query.
 - Supports health checks.
 - Provides simple DNS-based load distribution.
 - Does NOT replace ELB (no L4/L7 features).
 
 ---
-
 ## Critical Rules / Defaults
 
 - Route 53 routing policies operate at DNS level.
@@ -137,7 +128,16 @@ Możliwość sprawdzania stanu zdrowia zasobów i automatycznego przełączania 
     ◦ **Inbound Endpoint:** Pozwala zewnętrznym resolverom na rozwiązywanie nazw zasobów wewnątrz AWS.
     ◦ **Outbound Endpoint:** Pozwala Route 53 na przekazywanie zapytań do zewnętrznych serwerów DNS (np. on-premises).
 
+# Route 53 Resolver
+automatically answers DNS queries for
+- local domain names for ec2 instances
+- records in private hosted zone
+- records in public hosted zone
 
+hybrid DNS - resolving DNS queries between VPC (Route 53 Resolver) and your networks (other DNS Resolvers)
+Network can be:
+- VPC itself / peered VPC
+- on-permises Network (connected through [[AWS Direct Connect]] or AWS VPN)
 ___
 Metadata:
 
