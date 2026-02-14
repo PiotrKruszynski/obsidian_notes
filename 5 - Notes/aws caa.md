@@ -19,6 +19,11 @@ oszczędności
 ![[Pasted image 20260214173043.png]]
 
 
+![[Pasted image 20260214190743.png]]
+
+![[Pasted image 20260214190902.png]]
+
+
 
 ___
 Metadata:
