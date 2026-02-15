@@ -24,7 +24,7 @@ Note:
 - **Environment** → collection of AWS resources running ONE application version
 - Multiple environments supported (dev / test / prod)
 
-### Environment Tiers
+### Environment [[tier]]
 
 1. **Web Server Tier**
     - Uses ELB + ASG + EC2

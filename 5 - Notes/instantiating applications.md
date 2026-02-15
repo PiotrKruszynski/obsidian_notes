@@ -16,7 +16,7 @@ Note:
 
 **3. Zarządzane usługi do wdrażania aplikacji**
 
-• **[[AWS Elastic Beanstalk]]:** Usługa zorientowana na programistów, która automatycznie obsługuje **prowizjonowanie pojemności, równoważenie obciążenia (load balancing), skalowanie oraz monitorowanie stanu aplikacji**. Programista odpowiada jedynie za kod aplikacji.
+• **[[Elastic Beanstalk]]:** Usługa zorientowana na programistów, która automatycznie obsługuje **prowizjonowanie pojemności, równoważenie obciążenia (load balancing), skalowanie oraz monitorowanie stanu aplikacji**. Programista odpowiada jedynie za kod aplikacji.
 
 • **[[AWS App Runner]]:** W pełni zarządzana usługa do szybkiego wdrażania aplikacji webowych i API na dużą skalę, startując bezpośrednio z kodu źródłowego lub obrazu kontenera. Nie wymaga doświadczenia w zarządzaniu infrastrukturą.
 
