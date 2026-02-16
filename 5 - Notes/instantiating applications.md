@@ -11,7 +11,7 @@ Note:
 • **[[Golden AMI]] (Złoty Obraz):** Polega na stworzeniu własnego obrazu AMI z zainstalowanymi wcześniej aplikacjami, zależnościami systemowymi i konfiguracją. Zapewnia to **najszybszy czas rozruchu**, ponieważ maszyna nie musi instalować niczego przy starcie.
 • **[[Bootstrapping (User Data)]]:** Wykorzystanie skryptów User Data do dynamicznej konfiguracji przy pierwszym uruchomieniu. Jest to rozwiązanie elastyczne, ale wolniejsze niż Golden AMI.
 • **Podejście hybrydowe:** Łączenie Golden AMI (dla stałych elementów) oraz skryptów User Data (dla zmiennych parametrów).
-• [[RDS relational database service]] Zamiast ręcznej konfiguracji, można **przywrócić bazę danych z migawki (snapshot)**, co sprawia, że schematy i dane są gotowe od razu po uruchomieniu instancji.
+• [[RDS database]] Zamiast ręcznej konfiguracji, można **przywrócić bazę danych z migawki (snapshot)**, co sprawia, że schematy i dane są gotowe od razu po uruchomieniu instancji.
 • [[EBS Volume]] Przywrócenie wolumenu EBS z migawki pozwala na natychmiastowe uzyskanie sformatowanego dysku z kompletem danych.
 
 **3. Zarządzane usługi do wdrażania aplikacji**

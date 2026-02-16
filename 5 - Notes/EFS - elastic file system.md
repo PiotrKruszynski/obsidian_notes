@@ -161,7 +161,7 @@ Nie używać do:
 - oszczędności → IA + Lifecycle
 
 ![[Pasted image 20260204143122.png]]
-![[Pasted image 20260204143413.png]]
+
 
 
 
