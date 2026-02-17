@@ -6,9 +6,17 @@ Note:
 >powiadomienie, np.:
 >-  **S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, and S3:Replication**,. 
 >
-These notifications can be delivered directly to three primary AWS targets: **AWS Lambda functions, Amazon SQS queues, or Amazon SNS topics**,.
+These notifications can be delivered directly to three primary AWS targets: 
+**[[AWS Lambda functions]], 
+[[Amazon SQS queues]], 
+[[Amazon SNS topics]]**, 
+>
+The target resource must have a **Resource-based Policy** (such as a Lambda Resource Policy or SQS/SNS Access Policy) that explicitly allows the S3 service (`s3.amazonaws.com`) to perform the action.
 
 
+
+
+![[Pasted image 20260217133035.png]]
 
 **Key Features and Configurations**
 
@@ -29,6 +37,8 @@ As an alternative to direct SQS/SNS/Lambda targets, you can send all S3 events t
 • **Expanded Targets:** EventBridge can route S3 events to over **18 AWS services**, including Step Functions and Kinesis Data Streams,.
 
 • **Reliability:** It supports **archiving and replaying events**, ensuring reliable delivery for complex workflows,.
+
+![[Pasted image 20260217133731.png]]
 
 **Common Use Cases and Monitoring**
 
