@@ -3,7 +3,8 @@ ___
 Note:
 
 >[!tip]
->**AWS Global Accelerator** is a networking service (usługa sieciowa) optymalizująca routing sieciowy (TCP/UDP) do wielu regionów, poprawiając stabilność i redukując opóźnienia
+>**AWS Global Accelerator** is a networking service (usługa sieciowa) optymalizująca routing sieciowy (TCP/UDP) do wielu regionów, poprawiając stabilność i redukując opóźnienia.
+>Używa **anycast ip** to work
 
 [[Amazon CloudFront]] - globalny CDN, który cachuje i dostarcza treści (statyczne i dynamiczne) 
 Global accelerator - optymalizator ruchu do aplikacji globalnych

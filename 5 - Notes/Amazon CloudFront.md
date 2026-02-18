@@ -18,23 +18,26 @@ Note:
 
 # CloudFront – Origins (backend to connect to)
 
+![[Pasted image 20260218122624.png]]
+
 1. **S3 Bucket:** 
 - for distributing files and caching them at the edge.
 - for uploading files to S3 through CloudFront
 - secured using **Origin Access Control (OAC)
+![[Pasted image 20260218122640.png]]
 
 2. **VPC Origins:**  
 - for applications hosted in private subnets, such as an **ALB, NLB, EC2 Instances**
-
-3. **Custom Origin (HTTP):** 
+![[Pasted image 20260218191026.png]]
+1. **Custom Origin (HTTP):** 
 - S3 website (must first enable bucket as a static S3 website)
 - Any public HTTP backend you want (public ALB)
 
-![[Pasted image 20260218122624.png]]
 
-![[Pasted image 20260218122640.png]]
 
-![[Pasted image 20260218191026.png]]
+
+
+
 
 # CloudFront – Performance & Caching
 
