@@ -9,10 +9,10 @@ Note:
 
 # CloudFront – Global Infrastructure
 
-- content is cached at the adge
+- content is cached at the edge
 - improves read performance and user experience
 - DDoS protection (because worldwide), integration with Shield, [[AWS Web Application Firewall]]
-- great for static content that must be ava everyware
+- great for static content that must be available everywhere
 
 ![[Pasted image 20260218130450.png]]
 
