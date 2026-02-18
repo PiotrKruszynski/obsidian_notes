@@ -33,6 +33,9 @@ Note:
 ![[Pasted image 20260218122624.png]]
 
 ![[Pasted image 20260218122640.png]]
+
+![[Pasted image 20260218191026.png]]
+
 # CloudFront – Performance & Caching
 
 - **TTL (Time To Live):** Files are cached at edge locations for a specific duration (TTL); CloudFront only checks the origin for updates after the TTL expires.
@@ -41,10 +44,9 @@ Note:
 
 • **Cache Invalidations:** If you update your backend, you can force CloudFront to bypass the TTL and refresh the cache immediately by performing an **Invalidation** (e.g., path `/images/*` or all files `*`).
 
-• **Price Classes:** You can reduce costs by limiting the number of edge locations used:
-    ◦ **Price Class All:** All regions (best performance).
-    ◦ **Price Class 200:** Most regions, excluding the most expensive ones.
-    ◦ **Price Class 100:** Only the least expensive regions.
+![[Pasted image 20260218191756.png]]
+
+
 
 # CloudFront – Security
 
