@@ -5,7 +5,7 @@ oto pseudo kod jak działa look up w pythonie ( bo oryginał napisany w C)
 
 ## **__getattribute__**
 
-##  **— zawsze jako pierwszy krok**
+##  **— always jako pierwszy krok**
 
 
 ## **2) Sprawdzanie atrybutów instancji**
@@ -91,7 +91,7 @@ Wywoływana **na samym końcu**, tylko jeśli:
 
 ### **__getattribute__**
 
-- wywoływane **zawsze**
+- wywoływane **always**
     
 - przechwytuje cały dostęp
     
