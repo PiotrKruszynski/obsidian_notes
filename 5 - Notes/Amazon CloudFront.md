@@ -78,6 +78,10 @@ Many modern applications execute logic at the edge to minimize latency. CloudFro
 • **CloudFront:** Improves performance for **cacheable content** (images/videos) and **dynamic web content** (HTTP). Content is served directly from the edge.
 • **Global Accelerator:** Improves performance for a wide range of applications over **TCP or UDP** (e.g., gaming, VoIP). It proxies packets at the edge to applications in AWS Regions and provides **fixed IP addresses**.
 
+![[Pasted image 20260218204828.png]]
+
+![[Pasted image 20260218204842.png]]
+
 # Solutions Architect – Cost Optimization Tip
 
 CloudFront can make an existing application **scalable and cheaper**. By caching static software update files or website assets at the edge, it reduces the load on your EC2 Auto Scaling Group (ASG), saving on compute and network bandwidth costs.
