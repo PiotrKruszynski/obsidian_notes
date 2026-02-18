@@ -5,14 +5,16 @@ Note:
 >[!tip]
 >fast **Content Delivery Network (CDN)** service that improves read performance by caching content at the "edge". It is a global service designed to deliver data, videos, applications, and APIs to customers around the world with low latency and high transfer speeds
 >
->_CloudFront to sieć serwerów na całym świecie, które trzymają kopie Twoich plików blisko użytkownika, dzięki czemu strona ładuje się błyskawicznie_
+>_CloudFront to sieć serwerów na całym świecie, które trzymają kopie Twoich plików blisko użytkownika, dzięki czemu strona ładuje się błyskawicznie. **Tymczasowo catch'uje dane**_
 
 # CloudFront – Global Infrastructure
 
 - content is cached at the adge
 - improves read performance and user experience
 - DDoS protection (because worldwide), integration with Shield, [[AWS Web Application Firewall]]
+- great for static content that must be ava everyware
 
+![[Pasted image 20260218130450.png]]
 
 # CloudFront – Origins (backend to connect to)
 
@@ -33,16 +35,15 @@ Note:
 ![[Pasted image 20260218122640.png]]
 # CloudFront – Performance & Caching
 
-• **TTL (Time To Live):** Files are cached at edge locations for a specific duration (TTL); CloudFront only checks the origin for updates after the TTL expires.
+- **TTL (Time To Live):** Files are cached at edge locations for a specific duration (TTL); CloudFront only checks the origin for updates after the TTL expires.
+- Cross Region Replication
+
 
 • **Cache Invalidations:** If you update your backend, you can force CloudFront to bypass the TTL and refresh the cache immediately by performing an **Invalidation** (e.g., path `/images/*` or all files `*`).
 
 • **Price Classes:** You can reduce costs by limiting the number of edge locations used:
-
     ◦ **Price Class All:** All regions (best performance).
-
     ◦ **Price Class 200:** Most regions, excluding the most expensive ones.
-
     ◦ **Price Class 100:** Only the least expensive regions.
 
 # CloudFront – Security
@@ -60,27 +61,19 @@ Note:
 Many modern applications execute logic at the edge to minimize latency. CloudFront offers two serverless options for this:
 
 • **CloudFront Functions:**
-
     ◦ Written in **JavaScript**.
-
     ◦ Lightweight and designed for high-scale (millions of requests/sec).
-
     ◦ Used for simple manipulations of **Viewer Request** and **Viewer Response** (e.g., URL rewrites, header manipulation).
 
 • **Lambda@Edge:**
-
     ◦ Written in **Node.js or Python**.
-
     ◦ Scales to thousands of requests/sec.
-
     ◦ Supports all four triggers: **Viewer Request/Response** and **Origin Request/Response**.
-
     ◦ Used for complex logic, such as A/B testing, image transformation, or accessing external libraries.
 
 # CloudFront vs. AWS Global Accelerator
 
 • **CloudFront:** Improves performance for **cacheable content** (images/videos) and **dynamic web content** (HTTP). Content is served directly from the edge.
-
 • **Global Accelerator:** Improves performance for a wide range of applications over **TCP or UDP** (e.g., gaming, VoIP). It proxies packets at the edge to applications in AWS Regions and provides **fixed IP addresses**.
 
 # Solutions Architect – Cost Optimization Tip
