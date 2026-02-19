@@ -43,19 +43,13 @@ Global accelerator - optymalizator ruchu do aplikacji globalnych
 Both services use the global AWS network and edge locations, but they serve different purposes:
 
 • **Amazon CloudFront:**
-
     ◦ Designed for **cacheable content** (images, videos) and dynamic site delivery.
-
     ◦ Content is **served at the edge**.
 
 • **AWS Global Accelerator:**
-
 - Improves performance for a wide range of applications over **TCP or UDP**.
-
 - **Proxies packets at the edge** to applications running in one or more AWS Regions.
-
 - Ideal for **non-HTTP use cases** like gaming (UDP), IoT (MQTT), or Voice over IP (VoIP).
-
 - Best for HTTP use cases that require **fixed IP addresses** or deterministic, fast failover.
 
 

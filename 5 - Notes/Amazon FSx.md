@@ -13,7 +13,7 @@ ale **overkill i kosztowna pułapka**, jeśli użyte „bo to file system”.
 Dostajesz:
 - współdzielony system plików
 - działający w twoim VPC
-- moŹbyć montowany na Linux EC2 instance
+- może być montowany na Linux EC2 instance
 - wspiera Microsoft Distribution File System DFS
 
 Storage:
