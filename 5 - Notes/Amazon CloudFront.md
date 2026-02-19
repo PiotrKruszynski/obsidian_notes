@@ -3,7 +3,7 @@ ___
 Note:
 
 >[!tip]
->fast **Content Delivery Network (CDN)** service that improves read performance by caching content at the "edge". It is a global service designed to deliver data, videos, applications, and APIs to customers around the world with low latency and high transfer speeds
+>fast **Content Delivery Network (CDN)** service that provide **Read performance** by caching content at the "edge". It is a global service designed to deliver data, videos, applications, and APIs to customers around the world with low latency and high transfer speeds
 >
 >_CloudFront to sieć serwerów na całym świecie, które trzymają kopie Twoich plików blisko użytkownika, dzięki czemu strona ładuje się błyskawicznie. **Tymczasowo catch'uje dane**_
 
