@@ -37,20 +37,11 @@ response = sqs.send_message(
 print(response['MessageId'])
 ```
 
-**Co się dzieje pod spodem:**
+		Co się dzieje pod spodem:
 ```
 boto3 → HTTP POST → SQS endpoint → wiadomość w kolejce
 ```
 
-boto3 sam podpisuje request, dobiera endpoint, obsługuje błędy.
-
-**Najważniejsze parametry:**
-- `MessageBody` — treść, max 256KB
-- `DelaySeconds` — opóźnij dostarczenie (0-900 sek)
-- `MessageGroupId` — tylko FIFO, grupuje wiadomości
-- `MessageDeduplicationId` — tylko FIFO, zapobiega duplikatom
-
-To tyle — jedna funkcja, wiadomość leci do kolejki.
 
 **SDK** = Software Development Kit = biblioteka którą instalujesz w kodzie żeby gadać z AWS bez pisania HTTP requestów ręcznie.
 
@@ -73,6 +64,7 @@ If the load is too big, some transactions may be lost
 
 • **Key Mechanisms:**
     ◦ **Visibility Timeout:** After being polled, a message becomes invisible to others for 30 seconds (default). If not deleted after processing, it becomes visible again.
+    _musi być ustawiony dłuższy niż max czas przetwarzania wiadomości_
     ◦ **Long Polling:** A consumer "waits" for messages to arrive (up to 20s), which decreases API calls and costs.
     ◦ **Auto Scaling:** You can scale an Auto Scaling Group (ASG) based on the `ApproximateNumberOfMessages` metric in CloudWatch
 
@@ -118,12 +110,16 @@ json
 }
 ```
 
+![[Pasted image 20260223214028.png]]
+
 >[!tip]
 >**resource-based policy** przypięta do zasobu.
->>```
-Queue Policy    → przyczepiasz do SQS kolejki
-Bucket Policy   → przyczepiasz do S3 bucketa
-Key Policy      → przyczepiasz do KMS klucza
+>>
+`Queue Policy    → przyczepiasz do SQS kolejki`
+`Bucket Policy   → przyczepiasz do S3 bucketa`
+`Key Policy      → przyczepiasz do KMS klucza`
+
+
 
 ---
 

@@ -5,6 +5,15 @@ Note:
 >[!tip]
 >Collect and store **streaming** data in **real-time**
 
+• Retention between up to 365 days 
+• Ability to reprocess (replay) data by consumers 
+• Data can’t be deleted from Kinesis (until it expires) 
+• Data up to 1MB (typical use case is lot of “small” real-time data) 
+• Data ordering guarantee for data with the same** **Partition ID**
+• At-rest KMS encryption, in-flight HTTPS encryption 
+• Kinesis Producer Library (KPL) to write an optimized producer application 
+• Kinesis Client Library (KCL) to write an optimized consumer application
+
 
 ![[Pasted image 20260223185925.png]]
 
@@ -64,6 +73,8 @@ kliknięcia użytkowników → KDS → Lambda (real-time analityka)
 ```
 
 Wszyscy trzej czytają te same dane niezależnie.
+
+![[Pasted image 20260223214010.png]]
 
 ___
 Metadata:

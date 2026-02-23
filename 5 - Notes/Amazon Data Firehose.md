@@ -12,6 +12,8 @@ Nie trzeba zarządzać infrastrukturą — AWS ogarnia skalowanie, replikację i
 
 Firehose **NIE jest kolejką** — wiadomości nie czekają na konsumenta. To potok z buforem.
 
+ma wbudowane **buffering + retries + batching + compression**
+
 ---
 
 ## Jak działa?
@@ -121,6 +123,8 @@ EC2 (CloudWatch Logs)  ->  Firehose  ->  S3 (partycjonowane)
 
 ❌ NIE używaj gdy potrzebujesz real-time processing z wieloma niezależnymi konsumentami — wtedy **Kinesis Data Streams**
 
+
+![[Pasted image 20260223214019.png]]
 
 ___
 Metadata:

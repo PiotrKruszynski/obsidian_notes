@@ -29,7 +29,10 @@ SNS → pub/sub, push do wielu naraz, wiadomość nie czeka
 ![[Pasted image 20260223162512.png]]
 
 ![[Pasted image 20260223162544.png]]
-___
+
+![[Pasted image 20260223214028.png]]
+
+
 Metadata:
 
 ```yaml
