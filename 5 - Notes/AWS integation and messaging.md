@@ -22,28 +22,18 @@ Note:
 ### [[Amazon SQS]]
 
 - Standard queue → unlimited throughput, best-effort ordering
-    
 - FIFO queue → strict ordering, exactly-once processing (with deduplication)
-    
 - Message retention → 1 minute to 14 days (default 4 days)
-    
 - Visibility timeout → prevents other consumers from processing same message
-    
 - Dead-Letter Queue (DLQ) → isolates failed messages
-    
 
 ### [[Amazon SNS]]
 
 - Pub/Sub model
-    
 - Push-based delivery
-    
 - Supports multiple protocols (HTTP, SQS, Lambda, email, SMS)
-    
 - No message persistence for consumers that are offline
-    
 - Used for fan-out architectures
-    
 
 ### [[Amazon EventBridge]]
 

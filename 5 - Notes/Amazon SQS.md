@@ -12,8 +12,10 @@ You can decouple your applications,
 • using SNS: pub/sub model 
 • using Kinesis: real-time streaming model
 
+![[Pasted image 20260223110148.png]]
+
 • **Standard Queue:**
-    ◦ Unlimited throughput and unlimited messages in the queue.
+    ◦ Unlimited throughput (MB/s) and unlimited messages in the queue.
     ◦ **Retention:** Default 4 days, maximum 14 days.
     ◦ **Message size:** Maximum 256 KB per message.
     ◦ **Delivery:** "At-least-once delivery" (occasionally duplicates may occur).
