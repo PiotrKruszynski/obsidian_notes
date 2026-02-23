@@ -19,8 +19,16 @@ SNS → pub/sub, push do wielu naraz, wiadomość nie czeka
 
 • **Message Filtering:** Uses a JSON policy to filter which messages are sent to specific subscriptions.
 
+# Architecture Pattern: Fan-Out
 
+• **Process:** Push once to an SNS Topic and receive it in multiple SQS queues that are subscribers.
 
+• **Benefits:** Fully decoupled, no data loss, and allows for delayed processing or retries via SQS.
+
+• **Common Use Case:** Sending S3 Event Notifications to multiple SQS queues (since one S3 event rule only supports one destination, fan-out is required to bypass this)
+![[Pasted image 20260223162512.png]]
+
+![[Pasted image 20260223162544.png]]
 ___
 Metadata:
 
