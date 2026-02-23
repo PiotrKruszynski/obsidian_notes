@@ -3,7 +3,7 @@ ___
 Note:
 
 >[!tip]
->A fully managed service used to decouple applications
+>A fully managed service used to decouple (rozsprzęganie) applications
 
 **Decoupling** → services communicate asynchronously to improve scalability and fault isolation
 
