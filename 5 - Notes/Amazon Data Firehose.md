@@ -4,6 +4,8 @@ Note:
 
 >[!tip]
 >Managed delivery pipeline — zarządzany potok dostarczania danych strumieniowych do miejsc docelowych.
+>- automatic scaling, serverless, pay for use
+>- **near real-time** with buffering capability based on size / time ( zapisuje co jakiś czas paczkami)
 
 
 Nie trzeba zarządzać infrastrukturą — AWS ogarnia skalowanie, replikację i dostępność.
@@ -19,6 +21,8 @@ Producer  ->  Firehose  ->  [bufor]  ->  transformacja (opcja)  ->  S3 / Redshif
 ```
 
 Firehose zbiera dane, buforuje je, opcjonalnie przetwarza i zapisuje w batchach.
+
+![[Pasted image 20260223193403.png]]
 
 ---
 
@@ -70,7 +74,7 @@ Przykłady użycia:
 
 ---
 
-## Porównanie: SQS vs Kinesis Data Streams vs Firehose
+# [[Amazon SQS]] vs [[Kinesis Data Streams]] vs [[Amazon Data Firehose]]
 
 |Cecha|SQS|Kinesis Data Streams|Firehose|
 |---|---|---|---|

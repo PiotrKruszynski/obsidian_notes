@@ -10,7 +10,7 @@ Note:
 You can decouple your applications, 
 • using SQS: queue model 
 • using SNS: pub/sub model 
-• using Kinesis: real-time streaming model
+• using Data Firehose: real-time streaming model
 
 ![[Pasted image 20260223110148.png]]
 
