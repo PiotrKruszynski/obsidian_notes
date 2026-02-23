@@ -18,8 +18,8 @@ You can decouple your applications,
     ◦ Unlimited throughput (MB/s) and unlimited messages in the queue.
     ◦ **Retention:** Default 4 days, maximum 14 days.
     ◦ **Message size:** Maximum 256 KB per message.
-    ◦ **Delivery:** "At-least-once delivery" (occasionally duplicates may occur).
-    ◦ **Ordering:** "Best-effort ordering" (messages might arrive out of order).
+    ◦ **Delivery:** "At-least-once delivery" (occasionally duplicates may occur). BE PREPARE
+    ◦ **Ordering:** "Best-effort ordering" (messages might arrive out of order). BE PREPARE
 
 • **FIFO Queue (First-In-First-Out):**
     ◦ Guarantees strict ordering and exactly-once send capability.
