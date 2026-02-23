@@ -22,9 +22,7 @@ Producer  ->  Firehose  ->  [bufor]  ->  transformacja (opcja)  ->  S3 / Redshif
 
 Firehose zbiera dane, buforuje je, opcjonalnie przetwarza i zapisuje w batchach.
 
-![[Pasted image 20260223193403.png]]
-
----
+![[Pasted image 20260223210523.png]]
 
 ## Miejsca docelowe (Destinations)
 
@@ -85,6 +83,8 @@ Przykłady użycia:
 |Cel|task queue|analityka, wiele konsumentów|zapis do S3/Redshift|
 |Zarządzanie|managed|shardy (ręczne skalowanie)|w pełni managed|
 
+![[Pasted image 20260223210549.png]]
+---
 ---
 
 ## Typowe patterny
