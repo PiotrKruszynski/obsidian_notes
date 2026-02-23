@@ -60,6 +60,17 @@ To tyle — jedna funkcja, wiadomość leci do kolejki.
     ◦ Guarantees strict ordering and exactly-once send capability.
     ◦ Limited throughput: 300 msg/s without batching, 3000 msg/s with batching.
 
+![[Pasted image 20260223152556.png]]
+
+**Batching** = wysyłaj/odbieraj wiele wiadomości na raz zamiast jedna po jednej.
+
+If the load is too big, some transactions may be lost
+![[Pasted image 20260223153317.png]]
+	**Enqueue** = wrzuć wiadomość do kolejki = `send_message`
+	**Dequeue** = wyciągnij wiadomość z kolejki = `receive_message` + `delete_message`
+	`Producer  →  enqueue  →  [A, B, C]  →  dequeue  →  Consumer`
+	
+
 • **Key Mechanisms:**
     ◦ **Visibility Timeout:** After being polled, a message becomes invisible to others for 30 seconds (default). If not deleted after processing, it becomes visible again.
     ◦ **Long Polling:** A consumer "waits" for messages to arrive (up to 20s), which decreases API calls and costs.
@@ -70,7 +81,7 @@ To tyle — jedna funkcja, wiadomość leci do kolejki.
 SQS to decouple between application tiers
 ![[Pasted image 20260223145444.png]]
 
-# Szyfrowanie:
+# Szyfrowanie SQS SNS:
 Krótko: IAM kontroluje kto, Queue Policy kontroluje co z zewnątrz, KMS szyfruje dane, VPC Endpoint izoluje sieć.
 
 - w spoczynku (at rest): SSE (Server Side Encryption) — AWS KMS szyfruje wiadomości na dysku
