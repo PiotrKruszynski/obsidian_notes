@@ -119,45 +119,75 @@ SQS / Kinesis / DynamoDB  →  [Event Source Mapping]  →  Lambda (batch)
 Przy błędzie batch może trafić do DLQ lub być podzielony na mniejsze.
 
 ---
-
-## Lambda@Edge i CloudFront Functions
+# Customization at the edge
+#### Lambda@Edge - pełna moc aws lambda /  CloudFront Functions - lżejszy do prostszych działa w momentach viewer request (jak trafia do CloudFront) lub viewer response (przed response)
 
 Uruchamiasz kod blisko użytkownika przy edge locations.
 
-||Lambda@Edge|CloudFront Functions|
-|---|---|---|
-|Gdzie|CloudFront edge locations|CloudFront edge locations|
-|Runtime|Node.js, Python|JavaScript|
-|Timeout|5–30 sekund|< 1 ms|
-|Użycie|heavy logic, auth, A/B testing|lekkie transformacje headers/URL|
+| -       |          Lambda@Edge           |       CloudFront Functions       |
+| ------- | :----------------------------: | :------------------------------: |
+| Gdzie   |   CloudFront edge locations    |    CloudFront edge locations     |
+| Runtime |        Node.js, Python         |            JavaScript            |
+| Timeout |          5–30 sekund           |              < 1 ms              |
+| Użycie  | heavy logic, auth, A/B testing | lekkie transformacje headers/URL |
 
-**Przypadki użycia Lambda@Edge:**
+**Przypadki użycia**
 
-- modyfikacja request/response w locie
-- autoryzacja przed dotarciem do origin
-- A/B testing
-- dynamiczne przekierowania
+| Use case                                           | CloudFront Functions | Lambda@Edge | kiedy które                                                                                                                                  |
+| -------------------------------------------------- | -------------------: | ----------: | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Website security and privacy                       |                    ✅ |           ✅ | Functions: proste blokady/headers/redirect HTTPS. Lambda@Edge: bardziej złożone reguły/rewriting/odpowiedzi.                                 |
+| Dynamic web app at the edge                        |                    ❌ |           ✅ | Zwykle wymaga generowania/transformacji odpowiedzi.                                                                                          |
+| SEO                                                |                    ✅ |           ✅ | Functions: redirect/rewrite dla botów, canonical, headers. Lambda@Edge: prerender / warianty treści dla crawlerów.                           |
+| Intelligently route across origin and data centers |                   ⚠️ |           ✅ | Functions: proste przełączanie origin po host/path (limited). Lambda@Edge: routing na origin-request z większą logiką.                       |
+| Bot mitigation at the edge                         |                    ✅ |           ✅ | Functions: szybkie blokowanie po UA/IP/cookies. Lambda@Edge: bardziej zaawansowane challenge/flow (często i tak z WAF).                      |
+| Real-time image transformation                     |                    ❌ |           ✅ | Wymaga obróbki/zmiany payloadu (Functions nie).                                                                                              |
+| A/B testing                                        |                    ✅ |           ✅ | Functions: split po cookie/header i rewrite. Lambda@Edge: bardziej złożone reguły + modyfikacja odpowiedzi.                                  |
+| User auth and authorization                        |                    ✅ |           ✅ | Functions: JWT/cookie check + allow/deny/redirect. Lambda@Edge: bardziej złożone flow (np. token refresh, dynamic policies).                 |
+| User prioritization                                |                    ✅ |           ✅ | Functions: proste reguły i headers. Lambda@Edge: złożone priorytety + routing/odpowiedzi.                                                    |
+| User tracking and analytics                        |                    ✅ |           ✅ | Functions: dodanie/normalizacja headers/cookies, lightweight tracking. Lambda@Edge: bardziej rozbudowane przekształcenia odpowiedzi/żądania. |
+# VPC
+
+Domyślnie Lambda działa **poza VPC** — ma dostęp do internetu, ale nie do zasobów prywatnych (RDS, ElastiCache, prywatne EC2).
+
+Żeby Lambda mogła łączyć się z zasobami w VPC:
+- konfigurujesz VPC, subnety i Security Group w ustawieniach Lambdy
+- Lambda tworzy **ENI (Elastic Network Interface)** w Twoim VPC
+- jeśli potrzebuje internetu → potrzebny **NAT Gateway** w publicznym subnecie
+
+Lambda (w VPC)  →  NAT GW  →  Internet  
+Lambda (w VPC)  →  RDS (private subnet)  ✅
 
 ---
 
-## VPC
+## Problem: Lambda + RDS (bez proxy)
 
-Domyślnie Lambda działa **poza VPC** — ma dostęp do internetu, ale nie do zasobów prywatnych (RDS, ElastiCache).
+Lambda skaluje się automatycznie.
 
-Żeby Lambda mogła gadać z zasobami w VPC:
+Jeśli masz 1000 równoczesnych wywołań:  
+→ możesz mieć 1000 połączeń do bazy.
 
-- skonfiguruj VPC, subnet, Security Group w ustawieniach Lambdy
-- Lambda dostaje ENI w Twoim VPC
-- jeśli potrzebuje internetu → NAT Gateway w publicznym subnecie
+Relacyjne bazy (MySQL, PostgreSQL) **nie lubią tysięcy krótkich połączeń**.
 
-```
-Lambda (w VPC)  →  NAT GW  →  Internet
-Lambda (w VPC)  →  RDS (prywatny subnet)  ✅
-```
+Skutek:
+- exhausted connections
+- timeouts
+- niestabilność
 
----
+## RDS Proxy – rozwiązanie
 
-## Concurrency i Throttling
+**Amazon RDS Proxy** to warstwa pośrednia między Lambda a RDS.
+
+Działa jako:
+
+- connection pooler
+- zarządca połączeń
+- bufor połączeń do DB
+
+### Architektura:
+
+Lambda  →  RDS Proxy  →  RDS
+
+# Concurrency i Throttling
 
 **Concurrency** = ile funkcji działa równolegle.
 
@@ -170,7 +200,7 @@ Lambda (w VPC)  →  RDS (prywatny subnet)  ✅
 
 ---
 
-## Cold Start
+# Cold Start
 
 Przy pierwszym wywołaniu (lub po długiej przerwie) Lambda musi:
 
@@ -188,7 +218,7 @@ To trwa kilkaset ms do kilku sekund — **cold start**.
 
 ---
 
-## Lambda Layers
+# Lambda Layers
 
 Mechanizm współdzielenia kodu i bibliotek między funkcjami.
 
@@ -204,7 +234,7 @@ Lambda Function
 
 ---
 
-## Storage
+# Storage
 
 |Typ|Zakres|Rozmiar|Kiedy|
 |---|---|---|---|
@@ -215,7 +245,7 @@ Lambda Function
 
 ---
 
-## Typowe patterny (egzamin)
+# Typowe patterny (egzamin)
 
 **Serverless API:**
 

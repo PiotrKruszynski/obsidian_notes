@@ -34,11 +34,6 @@ Note:
 - Any public HTTP backend you want (public ALB)
 
 
-
-
-
-
-
 # CloudFront – Performance & Caching
 
 - **TTL (Time To Live):** Files are cached at edge locations for a specific duration (TTL); CloudFront only checks the origin for updates after the TTL expires.
@@ -48,7 +43,6 @@ Note:
 • **Cache Invalidations:** If you update your backend, you can force CloudFront to bypass the TTL and refresh the cache immediately by performing an **Invalidation** (e.g., path `/images/*` or all files `*`).
 
 ![[Pasted image 20260218191756.png]]
-
 
 
 # CloudFront – Security
