@@ -281,13 +281,50 @@ SNS  →  Lambda  →  błąd  →  SQS DLQ  →  analiza
 
 ## Lambda vs EC2 vs ECS
 
-||Lambda|EC2|ECS/Fargate|
+|-|Lambda|EC2|ECS/Fargate|
 |---|---|---|---|
 |Max czas|15 min|nieograniczony|nieograniczony|
 |Skalowanie|automatyczne natychmiastowe|wolniejsze (ASG)|szybsze niż EC2|
 |Cold start|tak|nie|nie|
 |Cena|per ms|per godzinę|per vCPU/RAM/s|
 |Kiedy|krótkie zadania event-driven|długie procesy, pełna kontrola|kontenery, długie zadania|
+
+# RDS → Lambda vs RDS Event Notifications
+
+### 1️⃣ Invoke Lambda from RDS i Aurora
+- Dotyczy **zmian danych** (INSERT / UPDATE)
+- Wspierane tylko przez : **RDS PostgreSQL, Aurora MySQL**
+- DB musi mieć:
+  - outbound access (Public / NAT / VPC Endpoint)
+  - IAM permissions (DB + Lambda resource policy)
+- Use case: reagowanie na zapis danych (np. wysyłka maila po zapisie)
+
+➡ Data-level event
+
+---
+
+### 2️⃣ RDS Event Notifications
+- Dotyczą stanu **infrastruktury DB**, a nie samych danych. To bardziej operacyjny mechanizm
+- Przykłady:
+  - instance created / stopped / failed
+  - snapshot events
+  - parameter group changes
+- Wysyłane do: **SNS / EventBridge**
+- Opóźnienie: do ~5 minut
+- Nie zawiera informacji o danych
+
+➡ Infrastructure-level event
+
+---
+
+### 🔥 Zapamiętaj
+Data change → Invoke Lambda  
+Infra change → Event Notification
+
+
+
+
+
 
 ---
 
