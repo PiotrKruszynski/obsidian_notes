@@ -7,7 +7,7 @@ Note:
 >-  **S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, and S3:Replication**,. 
 >
 These notifications can be delivered directly to three primary AWS targets: 
-**[[AWS Lambda functions]], 
+**[[AWS Lambda]], 
 [[Amazon SQS queues]], 
 [[Amazon SNS topics]]**, 
 >
