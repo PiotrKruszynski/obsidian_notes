@@ -1,6 +1,6 @@
 to pudełko , które może ograniczać dostęp do oryginalnej funkcji obiektu, może modyfikować, może dodawać mu różnych funkcjonalności
 
-obiekt opakowujemy innym obiektem
+obiekt opakowujemy innym obiektem, oryginał nieruszony
 ziemniak opakowujemy torebką -> torebka jest proxy dla ziemniaka
 sok pakujemy w proxy z nakrętką -> 
 kontnener w dokerze to proxy ->

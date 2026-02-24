@@ -1,2 +1,8 @@
 Obraz Dockera to niezmienna „migawka” środowiska aplikacji: zawiera system plików, zależności, kod źródłowy i instrukcje uruchomieniowe. Z obrazu można tworzyć wiele kontenerów. Obraz jest jak przepis kulinarny – kontener to danie zrobione według tego przepisu.
+
+Przechowuje sie je w Docker Repositories 
+	- Docker Hub
+	- [[Amazon ECR]] private and public (Amazon ECR Public Gallery https://gallery.ecr.aws)
+
+
 [[docker]]
