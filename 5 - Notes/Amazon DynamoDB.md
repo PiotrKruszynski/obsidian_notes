@@ -150,6 +150,8 @@ DynamoDB Table  →  Stream  →  Lambda / Kinesis / inne
 - audyt zmian
 - agregacja / analityka real-time
 
+![[Pasted image 20260224214302.png]]
+
 ---
 
 ## TTL — Time To Live
@@ -203,6 +205,8 @@ App  →  DAX (cache)  →  DynamoDB
 
 - DAX — tylko DynamoDB, prostszy setup
 - ElastiCache — dowolna baza, bardziej elastyczny
+
+![[Pasted image 20260224214224.png]]
 
 ---
 
