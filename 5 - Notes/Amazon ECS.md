@@ -53,7 +53,7 @@ Przepis na kontener — plik JSON opisujący:
 
 ### ECS Task
 
-Uruchomiona instancja Task Definition. Jeden lub więcej kontenerów działających razem (jak Pod w Kubernetes).
+Jeden lub więcej kontenerów działających razem (jak Pod w Kubernetes).
 
 ### Service
 
@@ -105,7 +105,7 @@ ECS obsługuje trzy tryby sieci:
 ECS integruje się z:
 
 - **ALB** (Application Load Balancer) — HTTP/HTTPS, path-based routing, zalecany
-- **NLB** (Network Load Balancer) — TCP, high performance, static IP
+- **NLB** (Network Load Balancer) — TCP, high throughput, static IP, [[AWS Private Link]]
 - **CLB** — legacy, nie używaj
 
 ALB + ECS = dynamiczny port mapping. Wiele Tasków na jednej instancji EC2, ALB sam ogarnia porty.
@@ -115,16 +115,21 @@ ALB + ECS = dynamiczny port mapping. Wiele Tasków na jednej instancji EC2, ALB 
 
 Dwie warstwy skalowania:
 
-**1. Service Auto Scaling** — skaluje liczbę Tasków
+**1. Auto Scaling Group Scaling** — skaluje liczbę Tasków
+- Av COU utilization -
+- Av memory utilization - scale in RAM
+- Count per Target - metric from ALB
+Target Scaling
+Step Scaling
+Scheduled Scaling
 
-- Target Tracking (np. CPU 70%)
-- Step Scaling
-- Scheduled Scaling
+**Auto Scaling Group Scaling** to nie to smo co EC2 [[Auto Scaling]]
 
-**2. Cluster Auto Scaling** (tylko EC2 launch type) — skaluje liczbę instancji EC2 w klastrze przez [[Auto Scaling]] Group + Capacity Provider.
+**2. ECS Cluster Capacity Provider** (tylko EC2 launch type) — skaluje liczbę instancji EC2 w klastrze przez [[Auto Scaling]] Group + Capacity Provider.
 
 **Fargate** — tylko Service Auto Scaling, EC2 nie dotyczy.
 
+![[Pasted image 20260224121124.png]]
 
 ---
 
@@ -169,13 +174,16 @@ docker push 123456.dkr.ecr.eu-west-1.amazonaws.com/my-app:latest
 
 **Opcje montowania storage w ECS:**
 
-|Typ|Opis|Kiedy|
-|---|---|---|
-|EFS (Elastic File System)|współdzielony filesystem, działa z Fargate|dane współdzielone między Taskami|
-|EBS|blokowy dysk, tylko EC2 launch type|jeden Task, wysokie IOPS|
-|Bind Mount|lokalny folder hosta, EC2|tymczasowe dane, logi|
+| Typ                       | Opis                                       | Kiedy                             |
+| ------------------------- | ------------------------------------------ | --------------------------------- |
+| EFS (Elastic File System) | współdzielony filesystem, działa z Fargate | dane współdzielone między Taskami |
+| EBS                       | blokowy dysk, tylko EC2 launch type        | jeden Task, wysokie IOPS          |
+| Bind Mount                | lokalny folder hosta, EC2                  | tymczasowe dane, logi             |
+| S3                        | x                                          | x                                 |
 
 **Fargate + EFS** = serverless + persistent storage. Popularny pattern na egzaminie.
+
+![[Pasted image 20260224115308.png]]
 
 ---
 
@@ -243,17 +251,25 @@ ALB  →  /api/*  →  ECS Service A (Fargate)
      →  /web/*  →  ECS Service B (Fargate)
 ```
 
-**Batch processing:**
+**Batch processing:** with [[Amazon EventBridge]]
 
 ```
 S3 upload  →  EventBridge  →  ECS Task (jednorazowy, nie Service)
 ```
+
+![[Pasted image 20260224121649.png]]
+
+![[Pasted image 20260224122317.png]]
+
+![[Pasted image 20260224122349.png]]
 
 **Auto Scaling na SQS:**
 
 ```
 SQS  →  ECS Service  →  CloudWatch Alarm (QueueDepth)  →  Scale Out/In
 ```
+
+![[Pasted image 20260224122332.png]]
 
 ---
 
