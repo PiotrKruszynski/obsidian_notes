@@ -63,7 +63,7 @@ Dobry partition key = wysoka kardynalność = równomierny rozkład danych.
 - automatyczne skalowanie bez konfiguracji
 - płacisz za każdy odczyt/zapis (RRU/WRU)
 - droższe per operację, ale zero planowania
-- **kiedy:** nieregularny ruch, nowy projekt, nie znasz wzorców
+- **kiedy:** nieregularny ruch, nowy projekt, nie znasz wzorców, szybkie zmiany
 
 ### Provisioned (domyślny)
 
