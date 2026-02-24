@@ -44,7 +44,7 @@ Note:
 	- microservices
 	- containers (ECS / EKS)
 	- multiple app on one instance
-- ma dynamic port mapping ([[ECS - elastic container service]] / EKS / Docker)
+- ma dynamic port mapping ([[Amazon ECS]] / EKS / Docker)
 - świetne dla micro services & container-based application ( Docker & Amazon ECS)
 - **cross-zone enabled by default**
 - może zastępować potrzebę multiple Classic Load Balancer per application

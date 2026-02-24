@@ -1,11 +1,11 @@
-Created: 2026-02-04  20:50
+Created: 2026-02-24  09:10
 ___
 Note:
 
->[! Important]
->AWSowy orkiestrator kontenerów, prosty i w pełni zarządzany przez AWS
+>[!tip]
+>definition
 
-
+![[Pasted image 20260224091049.png]]
 
 
 ___
