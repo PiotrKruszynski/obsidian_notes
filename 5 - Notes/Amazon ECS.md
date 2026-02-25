@@ -51,7 +51,7 @@ Przepis na kontener — plik JSON opisujący:
 }
 ```
 
-### ECS Task
+### Task
 
 Jeden lub więcej kontenerów działających razem (jak Pod w Kubernetes).
 
