@@ -135,6 +135,8 @@ GSI 2: PK = Status   → wszystkie zamówienia o danym statusie
 
 Ordered stream zmian w tabeli (INSERT, UPDATE, DELETE) — w czasie rzeczywistym.
 
+DynamoDB Streams to mechanizm, który rejestruje każdą zmianę w tabeli. Dzięki strumieniom możesz reagować na zmiany (np. wywołać Lambda i uruchomić logikę biznesową)
+
 ```
 DynamoDB Table  →  Stream  →  Lambda / Kinesis / inne
 ```
@@ -224,6 +226,8 @@ App  →  DAX (cache)  →  DynamoDB
 - przechowywany dopóki nie usuniesz
 - przywracanie do nowej tabeli
 
+![[Pasted image 20260224223803.png]]
+
 ---
 
 ## Security
@@ -309,7 +313,7 @@ App  →  DAX  →  DynamoDB
 
 **Q: Co wymaga Global Tables?** A: Włączone DynamoDB Streams.
 
-
+# Max size of an item in a DynamoDB table is 400 KB
 
 ___
 Metadata:
