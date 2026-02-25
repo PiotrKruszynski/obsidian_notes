@@ -83,7 +83,13 @@ jeszcze S2 one zone
 • **[[resource-based policy]]:**
     ◦ **Bucket Policies:** JSON-based rules for the entire bucket (often used for public access or cross-account permissions).
     ◦ **Access Control Lists (ACLs):** Legacy fine-grained control (can be disabled).
-    
+    ◦ **Origin Access Control (OAC):** Used when **CloudFront accesses a private S3 bucket**.
+ Why OAC?
+- Keeps bucket **private**
+- Prevents direct S3 URL access
+- Enforces secure CloudFront-only access
+- ![[Pasted image 20260225121304.png]]
+
 • **Block Public Access:** Settings used to prevent accidental data leaks; can be applied at the account or bucket level.
 • **MFA Delete:** Requires multi-factor authentication to permanently delete a version or suspend versioning.
 • **[access points]:** Simplify managing data access for shared datasets by creating unique hostnames for different applications.
