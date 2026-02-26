@@ -1,0 +1,82 @@
+Created: 2026-02-06  14:37
+___
+Note:
+
+>[!info]
+>- RDS = managed DB service for DB use SQL as a query language
+>
+>- RDBMS _system_ (=SQL _język_  /OLTP online transaction processing - _typ obciążenia_) 
+>- RDS i Aurora => **greate for joints and transactions**
+
+**Use case:** store relational datasets (RDBMS / OLTP), perform SQL queries and transactions
+# Basic:
+- managed **relational database** service
+	- MySQL, PostgreSQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2, Aurora (AWS-native) 
+- provisioned RDS Instance Size (vCPU i RAM) and [[EBS Volume]] Type & Size
+- **AWS manage:
+	- support for _read replicas_ and _Multi AZ_
+     - **Auto-Scaling** capability (vertical and ~horizontal _(read replicas)_)
+		    - set max storage threshold (np. 64TB)
+		    - auto modify storage (gdy zapełnienie zbliża się do 90% doda wiecej)
+- **You manage:
+    - schema
+    - queries
+    - indexes
+    - _but cant SSH into instance 
+
+# Security
+- Deployed inside **VPC**
+- Controlled by **Security Groups** _firewall (porty i IP) na poziomie sieciowym_
+- IAM authentication ( _kto i jak_)
+- Encryption:
+    - At rest (_KMS_)
+    - In transit [[SSL TLS]]
+
+# Backups & Snapshots
+- Automated Backup with _Point-In-Time Restore_ feature (_up to 35 days_)
+- for _long-term recovery_ manual _snapshots_ 
+	- snapshot restore cheaper then stop
+	- persist after db deletion
+
+# Deployment Models
+ **Single-AZ**
+- One DB instancs
+- Lower cost    
+ - From single-AZ to Multi-AZ **zero downtime** operation, no need to stop 
+ 
+ **Multi-AZ** (Disaster Recovery):
+ - Used for **High Avalibility**, not scaling
+- Synchronous replication
+- Standby instance in another AZ
+- Automatic failover
+- Same endpoint (DNS), keep the same connection string regardless of which db is up
+
+![[Pasted image 20260206152157.png]]
+# Read Replicas
+
+- działa _SELECT_ , nie działa INSERT, UPDATE, DELETE
+- up to 15 read replicas
+- use _Asynchronous_ replication
+- Used for _Read_
+- zapisy muszą iść na master
+- Separate DB instance with its own endpoint
+- Can be in same AZ / cross-AZ / cross-region ==`$$$`==
+- _RR_ można awansować do samodzielnej db
+- _RR_ można ustawić na Multi AZ for _Disaster Recovery_
+- można utworzyć encrypted _RR_ form unencrypted db
+- w AWS płaci się za przechodzenie danych z AZ, w _RR_ nie _nawet między regionami_
+
+
+
+___
+Metadata:
+
+```yaml
+---
+type: tool    # concept | service | comparison
+language: aws
+---
+```
+
+Status: #pending
+Tags: #aws
