@@ -25,40 +25,7 @@ W praktyce:
 - **Nowe projekty → Redis**
 - Memcached = prosty, lekki cache bez HA
 
-
-
-
-Podobnie jak RDS służy do zarządzania bazami relacyjnymi, ElastiCache zarządza bazami in-memory.
-
-
-• **Reduces stress on DB:** 
-Pomaga odciążyć bazy danych w przypadku obciążeń intensywnie korzystających z odczytu (read-intensive workloads).
-• **Stateless Applications:** 
-Pomaga uczynić aplikację bezstanową poprzez przechowywanie danych sesji.
-
-
-**Redis vs. Memcached**
-• **Redis:**
-    ◦ **High Availability:** Wspiera Multi-AZ z funkcją Auto-Failover.
-    ◦ **Scalability:** Posiada repliki do odczytu (Read Replicas) do skalowania odczytów.
-    ◦ **Durability:** Dane są trwałe (persistence) dzięki funkcji AOF.
-    ◦ **Features:** Obsługuje zaawansowane zestawy danych (np. Sorted Sets).
-
-• **Memcached:**
-    ◦ **Sharding:** Wykorzystuje wiele węzłów do partycjonowania danych.
-    ◦ **No High Availability:** Brak replikacji danych.
-    ◦ **Non-persistent:** Dane nie są przechowywane na stałe.
-    ◦ **Multi-threaded:** Posiada architekturę wielowątkową.
-
 ![[Pasted image 20260211120814.png]]
-
-**Caching Patterns & Security**
-• **Lazy Loading:** Dane są buforowane tylko wtedy, gdy są odczytywane; dane w pamięci podręcznej mogą stać się nieaktualne (stale).
-• **Write Through:** Dane są dodawane lub aktualizowane w pamięci podręcznej natychmiast po zapisaniu do bazy danych (brak nieaktualnych danych).
-• **Session Store:** Przechowywanie tymczasowych danych sesji z wykorzystaniem funkcji TTL (Time To Live).
-
-
-
 
 
 ___

@@ -3,7 +3,18 @@ ___
 Note:
 
 >[! Important]
->**Amazon Simple Storage Service (Amazon S3)** is an "infinitely scaling" **object storage** service and one of the fundamental building blocks of AWS. It stores data as objects within containers called **buckets**
+>- _Amazon Simple Storage Service_ is a key / value store for objects
+>- greate for bigger objects, not so great for many small object
+>- serverless, scales infinitely, max object size is 5TB, versioning capability
+>- _Tiers_: _S3 Standard_, _S3 Infrequent Access_, _S3 Intelligent_, _S3 Glacier_ + lifecycle policy
+>- features: Versioning, Encryption, Replication, MFA-Delete, Access Log ..
+>- security: [[IAM]], _bucket policies_, _ACL_, _Access Points_, _Object Lambda_, [[CORS cross-origin resource sharing]], _Object/Vault Lock_
+>- encription: _SSE-S3_, _SSE-KMS_, _SSE-C_, client-side, [[SSL TLS]] in transit, default encription
+>- _batch operations_ on objects using _S3 Batch_, listing files using _S3 Inventory_
+>- performance: _Multi-part uploads_, _S3 Transfer Acceleration_, _S3 Select_
+>- automation: S3 Event Notifications -> [[Amazon SNS]], [[Amazon SQS]], [[AWS Lambda]], [[Amazon EventBridge]]
+
+**Use case:** static files, key value store for big files, website hosting
 
 usecase:
 - backup and storage
@@ -16,8 +27,7 @@ usecase:
 - software delivery
 - static website
 
---------------------------------------------------------------------------------
-
+---
 # 📋 1. Core Concepts: Buckets & Objects
 
 • **Buckets:**
@@ -58,7 +68,6 @@ AWS offers various storage tiers depending on access frequency and cost requirem
 
 ![[Pasted image 20260217115035.png]]
 
-
 • **Lifecycle Rules:** Automate the:
 - **transition between classes** (e.g., move to Glacier after 60 days) or 
 - **expire (delete)**  objects.
@@ -74,8 +83,7 @@ AWS offers various storage tiers depending on access frequency and cost requirem
 jeszcze S2 one zone
 ![[Pasted image 20260217122500.png]]
 
---------------------------------------------------------------------------------
-
+---
 # 🔒 3. Security and Access Control
 
 • **User-Based:** **IAM Policies** define which API calls a specific user can make.
@@ -101,8 +109,7 @@ jeszcze S2 one zone
 access point - [[VPC origin]]
 ![[Pasted image 20260217235655.png]]
 
---------------------------------------------------------------------------------
-
+--------------------
 # 🔑 4. Data Encryption
 
 • **Encryption at Rest:**
@@ -122,8 +129,6 @@ access point - [[VPC origin]]
 
 a jak wymusić encription in transit? DAJĄC **bucket policy** z SecureTransport
 ![[Pasted image 20260217143357.png]]
-
-
 
 --------------------------------------------------------------------------------
 

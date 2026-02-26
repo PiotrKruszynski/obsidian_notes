@@ -5,22 +5,20 @@ Note:
 >[!info]
 >- RDBMS_ystem_ (=SQL _język_  /OLTP online transaction processing - _typ obciążenia_) 
 >- RDS i Aurora => greate for _joints_ and _transactions_
+>- managed: _MySQL_, _PostgreSQL_, _MariaDB_, _Oracle_, _Microsoft SQL Server_, _IBM DB2_, _Aurora_ (AWS-native), Custom
+>- provisioned RDS Instance Size (vCPU i RAM) and [[EBS Volume]] Type & Size
+>
+>**AWS manage:**
+>- support for _read replicas_ and _Multi AZ_
+>- _Auto-Scaling_ capability (vertical and ~horizontal (_read replicas_)
+>	- set max storage threshold (np. 64TB)
+>	- auto modify storage (gdy zapełnienie zbliża się do 90% doda więcej)
+>
+>**You manage:**
+>	- schema, queries, indexes
+>	- but cant SSH into instance 
 
 **Use case:** store relational datasets (_RDBMS / OLTP_), perform _SQL queries_ and _transactions_.
-# Basic:
-- managed **relational database** service
-	- MySQL, PostgreSQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2, Aurora (AWS-native) 
-- provisioned RDS Instance Size (vCPU i RAM) and [[EBS Volume]] Type & Size
-- **AWS manage:
-	- support for _read replicas_ and _Multi AZ_
-     - **Auto-Scaling** capability (vertical and ~horizontal _(read replicas)_)
-		    - set max storage threshold (np. 64TB)
-		    - auto modify storage (gdy zapełnienie zbliża się do 90% doda wiecej)
-- **You manage:
-    - schema
-    - queries
-    - indexes
-    - _but cant SSH into instance 
 
 # Security
 - Deployed inside **VPC**

@@ -1,23 +1,26 @@
 Created: 2026-02-24  16:38
 ___
 Note:
+>[! Important]
+>- AWS native technology
+>- managed _serverless NoSQL_ database, 
+>- _milisecond_ latency
+>- capacity (througnput) mode: 
+>	- _provisioned_ capacity with _auto scaling_ option
+>	- _on-demand_ capacity
+>- can replace [[Amazon ElastiCache]] as a key/value store (np. storing session data using _TTL_ feature)
+>- _Highly Available_ , _Multi AZ_ by default, Read and Writes are decupled
+>- transaction capability
+>- DAX cluster for read cache, _microsecond_ read latency
+>- security, authentication and authorization is dane throuht [[IAM]]
+>- event processing: _DynamDB Stream_ to integrate with [[AWS Lambda]], or [[Kinesis Data Streams]]
+>- _Global Table_ feature: active-active setup
+>- auto backups up to 35 day with _PITR_ window, import from S3 without using WCU
+>- **greate to rapidly evolve schemas**
+>- max _item_ size 400 KB
 
->[!tip]
->Serverless NoSQL database. 
->Klucz-wartość + dokument. 
->Millisecond latency w dowolnej skali.
+**Use case:** serverless applications development (small docks 100s KB), distributed serverless cache
 
-# Amazon DynamoDB
-
-DynamoDB to w pełni zarządzana baza NoSQL — serverless, automatycznie skaluje throughput i storage, replikuje dane w 3 AZ domyślnie.
-
-**Kluczowe cechy:**
-
-- **Serverless** — zero zarządzania serwerami, patchy, backupów ręcznych
-- **Millisecond latency** — single-digit ms dla odczytów i zapisów
-- **Automatic scaling** — throughput skaluje się automatycznie (on-demand) lub ręcznie (provisioned)
-- **Highly available** — replikacja między 3 AZ w regionie
-- **Maksymalny rozmiar itemu:** 400 KB
 
 ---
 
