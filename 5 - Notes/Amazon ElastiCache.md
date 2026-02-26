@@ -2,7 +2,8 @@ Created: 2026-02-11  11:58
 ___
 Note:
 
-• **Managed Redis or Memcached:** 
+- Menaged _Redis_ / _Memcached_ (similar offering as [[Amazon RDS]] but for _cache_)
+- __
 
 Podobnie jak RDS służy do zarządzania bazami relacyjnymi, ElastiCache zarządza bazami in-memory.
 
