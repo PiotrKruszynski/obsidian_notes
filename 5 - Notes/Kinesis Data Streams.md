@@ -4,6 +4,12 @@ Note:
 
 >[!tip]
 >Collect and store **streaming** data in **real-time**
+>pozwala zbierać i przetwarzać ogromne ilości danych np logi, zdarzenia niemal natychniast. Dane są dzielone na _shard'y_ które pozwalają na równoległy zapis i odczyt.
+
+streaming - dane napływają ciągle, na bieżąco, w małych porcjach.
+batch
+transaction interaction
+
 
 • Retention between up to 365 days 
 • Ability to reprocess (replay) data by consumers 
