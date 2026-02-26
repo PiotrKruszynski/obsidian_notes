@@ -3,20 +3,39 @@ ___
 Note:
 
 - Menaged _Redis_ / _Memcached_ (similar offering as [[Amazon RDS]] but for _cache_)
-- __
+- **Cache** = in-memory data store, _sub-millisecond_ latency
+- select _ElastiCache_ instance type (np. cache.m6g.large)
+- code change require!
+- security through _IAM_, _Security Groups_, _KMS_, _Redis Auth_
+- backup / snapshot / point in time restore feature
+- managed and scheduled maintenance
+
+**Use case:** key-value store, frequent reads - less writes, cache results for DB queries, store session data for websites, cannot use SQL
+
+# Redis vs Memcached
+
+|**Cecha**|**Redis**|**Memcached**|
+|---|---|---|
+|Typ|key-value + struktury danych|czysty key-value|
+|Trwałość|snapshot / AOF|brak|
+|Replikacja|tak|nie|
+|Cluster mode|tak|nie|
+|Zastosowanie|sessions, rate limiting, pub/sub|prosty cache|
+W praktyce:
+- **Nowe projekty → Redis**
+- Memcached = prosty, lekki cache bez HA
+
+
+
 
 Podobnie jak RDS służy do zarządzania bazami relacyjnymi, ElastiCache zarządza bazami in-memory.
 
-• **In-memory database:** 
-Charakteryzuje się bardzo wysoką wydajnością i opóźnieniami poniżej milisekundy (sub-millisecond latency).
+
 • **Reduces stress on DB:** 
 Pomaga odciążyć bazy danych w przypadku obciążeń intensywnie korzystających z odczytu (read-intensive workloads).
 • **Stateless Applications:** 
 Pomaga uczynić aplikację bezstanową poprzez przechowywanie danych sesji.
-• **Fully Managed:** 
-AWS dba o konserwację systemu, łatki (patching), konfigurację, monitorowanie oraz odzyskiwanie po awarii.
-• **Code changes required:** 
-Wykorzystanie ElastiCache wymaga znacznych zmian w kodzie aplikacji.
+
 
 **Redis vs. Memcached**
 • **Redis:**
@@ -38,13 +57,9 @@ Wykorzystanie ElastiCache wymaga znacznych zmian w kodzie aplikacji.
 • **Write Through:** Dane są dodawane lub aktualizowane w pamięci podręcznej natychmiast po zapisaniu do bazy danych (brak nieaktualnych danych).
 • **Session Store:** Przechowywanie tymczasowych danych sesji z wykorzystaniem funkcji TTL (Time To Live).
 
-• **Security:**
-    ◦ **IAM Authentication:** Wspierane dla Redis.
-    ◦ **Redis AUTH:** Możliwość ustawienia hasła/tokenu przy tworzeniu klastra.
-    ◦ **Encryption:** Wsparcie dla szyfrowania SSL w locie (in-flight encryption).
-    ◦ **Network:** Bezpieczeństwo poprzez Security Groups
 
-![[Pasted image 20260211120837.png]]
+
+
 
 ___
 Metadata:
