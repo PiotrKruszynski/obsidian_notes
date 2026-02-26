@@ -3,12 +3,10 @@ ___
 Note:
 
 >[!info]
->- RDS = managed DB service for DB use SQL as a query language
->
->- RDBMS _system_ (=SQL _język_  /OLTP online transaction processing - _typ obciążenia_) 
->- RDS i Aurora => **greate for joints and transactions**
+>- RDBMS_ystem_ (=SQL _język_  /OLTP online transaction processing - _typ obciążenia_) 
+>- RDS i Aurora => greate for _joints_ and _transactions_
 
-**Use case:** store relational datasets (RDBMS / OLTP), perform SQL queries and transactions
+**Use case:** store relational datasets (_RDBMS / OLTP_), perform _SQL queries_ and _transactions_.
 # Basic:
 - managed **relational database** service
 	- MySQL, PostgreSQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2, Aurora (AWS-native) 
