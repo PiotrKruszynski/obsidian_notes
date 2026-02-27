@@ -8,7 +8,7 @@ Note:
 >- serverless, scales infinitely, max object size is 5TB, versioning capability
 >- _Tiers_: _S3 Standard_, _S3 Infrequent Access_, _S3 Intelligent_, _S3 Glacier_ + lifecycle policy
 >- features: Versioning, Encryption, Replication, MFA-Delete, Access Log ..
->- security: [[IAM]], _bucket policies_, _ACL_, _Access Points_, _Object Lambda_, [[CORS cross-origin resource sharing]], _Object/Vault Lock_
+>- security: [[IAM]], _bucket policies_, _ACL_ (stare), _Access Points_, _Object Lambda_, [[CORS cross-origin resource sharing]], _Object/Vault Lock_
 >- encription: _SSE-S3_, _SSE-KMS_, _SSE-C_, client-side, [[SSL TLS]] in transit, default encription
 >- _batch operations_ on objects using _S3 Batch_, listing files using _S3 Inventory_
 >- performance: _Multi-part uploads_, _S3 Transfer Acceleration_, _S3 Select_
