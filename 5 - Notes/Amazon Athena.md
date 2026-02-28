@@ -12,13 +12,18 @@ Note:
 >	- Apache Parquet or ORC is recommended
 >	- huge performence improvement
 >	- use [[Amazon Glue]] to conver your data to Parquet or ORC
+>- compress daa for smaller _retrievals_ (bzip2, gzip, lz4, snappy, zlip ..)
+>- partition datasets in S3 for easy querying on virtual columns, a każdy / w ścieżce to osobna kolumna
+>- prefere bigger files (>128 MB) to minimize _overhead_
+
 
 **Use case:** Business Inteligence / analitics / reporting
 when you want to analyze data in S3 using serverless SQL -> Athena
 
->
->
+# Federated Query
 
+domyślnie Athena can query z S3, a jak chce z innych:
+- **Data Source Connectors** that run on [[AWS Lambda]] to run _Federated Queries_ (np. CloudWatch Logs, DynamoDB, RDS)
 
 
 
