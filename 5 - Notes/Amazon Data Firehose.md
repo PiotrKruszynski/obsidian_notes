@@ -7,7 +7,6 @@ Note:
 >- automatic scaling, serverless, pay for use
 >- **near real-time** with buffering capability based on size / time ( zapisuje co jakiś czas paczkami)
 
-
 Nie trzeba zarządzać infrastrukturą — AWS ogarnia skalowanie, replikację i dostępność.
 
 Firehose **NIE jest kolejką** — wiadomości nie czekają na konsumenta. To potok z buforem.
@@ -76,14 +75,14 @@ Przykłady użycia:
 
 # [[Amazon SQS]] vs [[Kinesis Data Streams]] vs [[Amazon Data Firehose]]
 
-|Cecha|SQS|Kinesis Data Streams|Firehose|
-|---|---|---|---|
-|Typ|Kolejka|Stream|Delivery pipeline|
-|Konsument|Pull (sam bierze)|Pull (wiele niezależnych)|Push (automatyczny)|
-|Retencja|do 14 dni|do 365 dni|brak — dostarcza od razu|
-|Real-time|tak|tak|mini-batch (bufor)|
-|Cel|task queue|analityka, wiele konsumentów|zapis do S3/Redshift|
-|Zarządzanie|managed|shardy (ręczne skalowanie)|w pełni managed|
+| Cecha       | SQS               | Kinesis Data Streams         | Firehose                          |
+| ----------- | ----------------- | ---------------------------- | --------------------------------- |
+| Typ         | Kolejka           | Stream, niskopoziomowe       | Delivery , pipeline fully managed |
+| Konsument   | Pull (sam bierze) | Pull (wiele niezależnych)    | Push (automatyczny)               |
+| Retencja    | do 14 dni         | do 365 dni                   | brak — dostarcza od razu          |
+| Real-time   | tak               | tak                          | mini-batch (bufor)                |
+| Cel         | task queue        | analityka, wiele konsumentów | zapis do S3/Redshift              |
+| Zarządzanie | managed           | shardy (ręczne skalowanie)   | w pełni managed                   |
 
 ![[Pasted image 20260223210549.png]]
 ---

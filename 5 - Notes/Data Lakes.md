@@ -5,7 +5,8 @@ Note:
 >[!tip]
 >central place to have all your data for analytics purposes
 >fully managed service that makes it easy to setup a data lake in few days
->
+
+
 
 
 
