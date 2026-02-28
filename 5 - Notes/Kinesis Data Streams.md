@@ -82,6 +82,8 @@ Wszyscy trzej czytają te same dane niezależnie.
 
 ![[Pasted image 20260223214010.png]]
 
+
+jest jeszcze _Kinesis Data Analytic_ when you want to perform real-time analytics on streams of data
 ___
 Metadata:
 

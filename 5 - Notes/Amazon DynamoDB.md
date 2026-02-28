@@ -12,7 +12,7 @@ Note:
 >- _Highly Available_ , _Multi AZ_ by default, Read and Writes are decupled
 >- transaction capability
 >- DAX cluster for read cache, _microsecond_ read latency
->- security, authentication and authorization is dane throuht [[IAM]]
+>- security, authentication and authorization is done throuht [[IAM]]
 >- event processing: _DynamDB Stream_ to integrate with [[AWS Lambda]], or [[Kinesis Data Streams]]
 >- _Global Table_ feature: active-active setup
 >- auto backups up to 35 day with _PITR_ window, import from S3 without using WCU
