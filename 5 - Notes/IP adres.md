@@ -22,5 +22,6 @@ Obliczamy adres sieci dla podanego adresu IP
 ![[Pasted image 20260301114257.png]]
 
 
+[[port]]
 
 #sieci_komputerowe
