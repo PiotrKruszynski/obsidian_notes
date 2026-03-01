@@ -26,7 +26,6 @@ AMIs are ==build for specific region==. You must copy the AMI to the target AWS 
 - elastic IP
 - instance store data (lost)
 # AMI Process from EC2 instance
-
 1. **Launch EC2 instance**
     Startujesz instancję EC2 z bazowego AMI.
 2. **Customize the instance**
