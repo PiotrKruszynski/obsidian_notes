@@ -1,6 +1,6 @@
 {
   "collapse-filter": false,
-  "search": "aws",
+  "search": "",
   "showTags": true,
   "showAttachments": false,
   "hideUnresolved": true,
@@ -17,6 +17,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 0.848519460387317,
+  "scale": 1.0642277458999045,
   "close": false
 }
