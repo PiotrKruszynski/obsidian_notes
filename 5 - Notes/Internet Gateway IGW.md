@@ -8,6 +8,9 @@ Note:
 >- It is _highly available_, _redundant_, and scales horizontally.
 >- **Constraint:** One VPC can be attached to only one IGW, and vice versa.
 >- **Note:** Creating an IGW is not enough; you must also edit _Route Tables_ to allow Internet access.
+>- działa w warstwie sieciowej
+
+
 
 
 
