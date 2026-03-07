@@ -3,9 +3,11 @@ ___
 Note:
 
 >[!tip]
->definition
+>**VPC (Virtual Private Cloud):** A private network within AWS
+>- **Limits:** Max 5 VPCs per region (soft limit)
+>
 
-**Understanding CIDR – IPv4**
+**Understanding [[CIDR]] – IPv4**
 
 - **Classless Inter-Domain Routing:** A method for allocating IP addresses used in Security Groups rules and AWS networking in general.
 - **IP Address Range Definition:**
