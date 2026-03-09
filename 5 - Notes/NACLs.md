@@ -28,7 +28,7 @@ _(Wytłumaczenie: NACL to pierwsza linia obrony na poziomie całej podsieci. Zan
 - **Custom NACL:**
     - **Denies everything** inbound and outbound by default until you manually add allow rules.
     - Great for **blocking specific IP addresses** at the subnet level, which Security Groups cannot do (SGs only support "allow" rules).
-
+![[Pasted image 20260309191710.png]]
 # Statelessness and Ephemeral Ports
 
 - **Stateless Nature:** NACLs are **stateless**, meaning return traffic is **not** automatically allowed. You must explicitly define rules for both inbound and outbound traffic.
