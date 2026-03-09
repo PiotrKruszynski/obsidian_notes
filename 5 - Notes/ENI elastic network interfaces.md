@@ -20,7 +20,7 @@ Note:
 - delete on termination flag
 - one EC2 can have multiple ENIs
 
-#### Core exam traps
+# Core for exam 
 - ENI może być podłączony tylko do **jednej** instancji naraz
 - ENI musi być w tej samej AZ co instancja. **nie da się przenieść ENI do innej AZ**
 - Auto Scaling Group nie przenosi ENI
