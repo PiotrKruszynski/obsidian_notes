@@ -19,6 +19,7 @@ Gateway
 - pay per hour of usage and bandwidth
 - NATGW is ceated in specyfic AZ, uses an _Elastic IP_
 - can't be used by EC2 instance in the same subnet (only from other subnets)
+- 
 
 
 
