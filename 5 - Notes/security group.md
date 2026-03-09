@@ -5,6 +5,7 @@ Note:
 >[! Important]
 >control how traffic is allowed in or out of  EC2 Instances
 >fundamental of network security in AWS
+>są _statefull_
 
 ![[Pasted image 20260206121052.png]]
 

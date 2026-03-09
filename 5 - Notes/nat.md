@@ -59,7 +59,6 @@ The recommended, AWS-managed alternative to NAT Instances.
 - It functions similarly to a NAT Gateway by allowing outbound-only communication for IPv6 while preventing the Internet from initiating a connection to your instances.
 
 
-
 ___
 Metadata:
 
