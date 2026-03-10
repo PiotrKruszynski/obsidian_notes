@@ -14,7 +14,7 @@ access public (S3) and private (EC2) on same connection
 
 # Direct Connect Gateway
 
-dedicated
+dedicated, to many VPCs
 hosted
 	capacity on demend
 
