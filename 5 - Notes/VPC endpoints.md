@@ -48,8 +48,8 @@ AWS offers two types of endpoints depending on the service you want to access:
 # Troubleshooting and Security
 
 - **Connectivity Issues:** If an endpoint is not working, check:
-    - **DNS Settings:** Resolution must be enabled in your VPC.
-    - **Route Tables:** Ensure the Gateway Endpoint is listed as a target.
+    - **DNS Settings:** Resolution must be enabled in your VPC. _to DNS kieruje na właściwą nazwę_
+    - **Route Tables:** Ensure the Gateway Endpoint is listed as a target. _bez wpis nie trafi_
     - **Endpoint Policies:** Resource policies can be used to define which users or actions are allowed through the endpoint.
 - **VPC Flow Logs:** Can capture information about traffic going through endpoints to help identify rejected requests or potential attacks.
 
