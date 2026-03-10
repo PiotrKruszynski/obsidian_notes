@@ -54,6 +54,14 @@ AWS offers two types of endpoints depending on the service you want to access:
 - **VPC Flow Logs:** Can capture information about traffic going through endpoints to help identify rejected requests or potential attacks.
 
 
+# Alternatywa:
+s2s - lokalna infrastruktura z AWS, jednak ruch jest szyfrowany przez publiczny internet
+direct connect - dedykowana prywatna ścieżka
+VPC Endpoint - dla usług wewnętrznych AWS
+Transit Gateway
+ - centralizacja ruchu między VPC i sieciami
+VPC Peering - prywatne między VPC
+
 ___
 Metadata:
 

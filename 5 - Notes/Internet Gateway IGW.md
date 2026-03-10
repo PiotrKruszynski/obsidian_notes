@@ -18,7 +18,14 @@ Note:
 ![[Pasted image 20260307211525.png]]
 
 
+# Egress-only Internet Gateway
 
+used for IPv6 only
+similar to NAT Gateway but for IPv6
+you must update Route Tables
+
+## zestawienie możliwości
+![[Pasted image 20260310102739.png]]
 
 
 

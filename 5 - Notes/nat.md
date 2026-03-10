@@ -23,6 +23,7 @@ Although considered outdated, NAT Instances still appear on the exam as a legacy
     - Bandwidth depends entirely on the chosen EC2 instance type.
 - _(Wytłumaczenie po polsku: NAT Instance to po prostu zwykła maszyna EC2, którą sam konfigurujesz. Musisz pamiętać o wyłączeniu "Source/Destination Check", inaczej nie będzie przesyłać ruchu)._
 
+![[Pasted image 20260310102203.png]]
 # NAT Gateway
 
 The recommended, AWS-managed alternative to NAT Instances.
