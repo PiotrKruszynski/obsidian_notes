@@ -5,6 +5,8 @@ Note:
 >[!tip]
 >**VPC (Virtual Private Cloud):** A private network within AWS
 >- **Limits:** Max 5 VPCs per region (soft limit)
+>• Min. size is /28 (16 IP addresses) 
+>• Max. size is /16 (65536 IP addresses)
 >
 
 **Understanding [[CIDR]] – IPv4**

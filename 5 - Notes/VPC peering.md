@@ -3,7 +3,7 @@ ___
 Note:
 
 >[!tip]
->**VPC Peering** is a networking connection that allows you to privately connect two VPCs using the AWS global network. This connection makes the VPCs behave as if they were part of the same network. _(Wytłumaczenie: VPC Peering to najprostszy sposób na połączenie dwóch chmurowych sieci tak, aby serwery mogły ze sobą rozmawiać bezpośrednio__)._
+>**VPC Peering** is a networking connection that allows you to privately connect two VPCs using the AWS global network. This connection makes the VPCs behave as if they were part of the same network. _(Wytłumaczenie: VPC Peering to najprostszy sposób na połączenie dwóch chmurowych sieci tak, aby serwery mogły ze sobą rozmawiać bezpośrednio)._
 
 Key Rules and Characteristics
 - **No Overlapping CIDRs:** The VPCs involved in a peering connection must not have overlapping IP address ranges.
