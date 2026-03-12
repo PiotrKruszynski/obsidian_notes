@@ -3,21 +3,40 @@ ___
 Note:
 
 >[! Important]
->- relational database engine managed under [[Amazon RDS]]
->- compatible API for _MySQL_ and _PostgreSQL_
->- _storage_ and _compute_ are seperated!!
->- Storage: data is stored in _6 replicas_, across _3 AZ_ and _highly available_, _self-healing_, _auto-scaling_ from **10 GB up to 256 TB**
->- Compute: Cluster of DB Instance across multiple AZ, _auto-scaling_ of _RR_
->- _Cluster_ (klaser) custom endpoint for writer and reader DB instances
->- same security / monitoring / maintenance features as [[Amazon RDS]]
->- _Multi-AZ_ build-in
->-  +20% więcej kosztuje od RDS
+>- **Managed relational database** in the Amazon RDS family
+>- Compatible with **MySQL** and **PostgreSQL**
+>### Architecture
+>- Storage and compute are separated
+> ### Storage layer
+> - Distributed storage
+> - 6 copies across 3 Availability Zones
+> - **Self-healing**
+> - **Auto-scaling storage:** **10 GB → 256 TB**
+> - Replication happens at **storage level**
+> ### Compute layer
+> - **Aurora Cluster**
+> - 1 Writer instance
+> - 0–15 Aurora Read Replicas
+> - Read replicas share the **same storage**
+> ### Endpoints
+> - **Writer endpoint** → write queries
+> - **Reader endpoint** → load-balances read queries across replicas
+> - **Custom endpoints** possible
+> ### Availability
+> - Built-in Multi-AZ storage
+> - Automatic **failover (~30s)** to another instance
+> ### Performance
+> - Up to 5× faster than MySQL
+> - Up to 3× faster than PostgreSQL
+> - Read scaling via **Aurora Replicas**
+> ### Cost
+> - Typically **~20% more expensive than standard RDS**
 
 **Use case:** same as RDS, but with _less maintenance / more flexibility / more performance_
 
 ![[Pasted image 20260211105457.png]]
 
-
+![[Pasted image 20260312161051.png]]
 #  Backup & Restore
 
 | Cecha              | RDS            | Aurora                                                          |
