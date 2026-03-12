@@ -14,8 +14,6 @@ Oto kluczowe aspekty tej usługi:
 • **Monitorowanie:** Informacje o stanie i zdarzeniach RDS Proxy można monitorować poprzez **RDS Event Notifications**.
 
 W architekturze rozwiązań AWS, RDS Proxy stanowi warstwę pośredniczącą, która pozwala oddzielić logikę aplikacji od fizycznych połączeń z instancją bazy danych, co jest kluczowe w projektowaniu wysoce dostępnych i wydajnych systemów.
-
-
 # Amazon RDS Proxy – Overview
 
 • **Fully managed** database proxy for RDS.
@@ -24,15 +22,12 @@ W architekturze rozwiązań AWS, RDS Proxy stanowi warstwę pośredniczącą, kt
 • **Serverless**, autoscaling, and **highly available** (Multi-AZ).
 • **Reduced failover time:** Skraca czas przełączania awaryjnego dla RDS & Aurora o **66%**.
 • **Supported Engines:** RDS (MySQL, PostgreSQL, MariaDB, MS SQL Server) oraz Aurora (MySQL, PostgreSQL).
-
-
 # Amazon RDS Proxy – Security & Access
 
 • **No code changes** required for most applications.
 • Enforce **IAM Authentication** for DB (wymusza uwierzytelnianie IAM).
 • Securely store credentials in **AWS Secrets Manager**.
 • **Not publicly accessible:** Proxy nigdy nie jest dostępne publicznie; must be accessed from **VPC**.
-
 # Lambda with RDS Proxy
 • **Problem:** Jeśli funkcje Lambda bezpośrednio uzyskują dostęp do bazy, mogą otworzyć zbyt wiele połączeń pod wysokim obciążeniem (high load).
 • **Solution:** RDS Proxy improves **scalability** by pooling and sharing connections.

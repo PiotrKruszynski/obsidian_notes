@@ -23,9 +23,9 @@ Note:
 # Security
 - Deployed inside **VPC**
 - Controlled by **Security Groups** _firewall (porty i IP) na poziomie sieciowym_
-- IAM authentication ( _kto i jak_)
+- IAM authentication ( _kto i jak_ )
 - Encryption:
-    - At rest (_KMS_)
+    - At rest ( _KMS_ )
     - In transit [[SSL TLS]]
 
 # Backups & Snapshots
@@ -61,6 +61,10 @@ Note:
 - _RR_ można ustawić na Multi AZ for _Disaster Recovery_
 - można utworzyć encrypted _RR_ form unencrypted db
 - w AWS płaci się za przechodzenie danych z AZ, w _RR_ nie _nawet między regionami_
+- - replikacja jest **binlog-based**
+- jest **asynchronous**
+- przy globalnym ruchu pojawia się **replication lag**
+- każda replica ma **własny storage**
 
 
 

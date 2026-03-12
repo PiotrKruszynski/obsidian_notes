@@ -162,7 +162,6 @@ DynamoDB Table  →  Stream  →  Lambda / Kinesis / inne
 ## TTL — Time To Live
 
 Automatyczne usuwanie itemów po określonym czasie — zero kosztów za usunięcie.
-
 - ustawiasz atrybut z Unix timestamp (np. `expires_at`)
 - DynamoDB sam usuwa item po upływie czasu
 - usunięte itemy pojawiają się w DynamoDB Streams (możesz archiwizować)
