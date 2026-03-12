@@ -9,7 +9,7 @@ Note:
 
 Nie trzeba zarządzać infrastrukturą — AWS ogarnia skalowanie, replikację i dostępność.
 
-Firehose **NIE jest kolejką** — wiadomości nie czekają na konsumenta. To potok z buforem.
+Firehose **NIE jest kolejką** — wiadomości nie czekają na Consumer. To potok z buforem.
 
 ma wbudowane **buffering + retries + batching + compression**
 
@@ -85,7 +85,7 @@ Przykłady użycia:
 | Zarządzanie | managed           | shardy (ręczne skalowanie)   | w pełni managed                   |
 
 ![[Pasted image 20260223210549.png]]
----
+
 ---
 
 ## Typowe patterny

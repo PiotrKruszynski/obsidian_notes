@@ -3,7 +3,15 @@ ___
 Note:
 
 >[!tip]
->A "Pub/Sub" (Publish/Subscribe) service where one message can be sent to many receivers.
+>a _highly available_, _durable bo niezawodnie dostarcza_, secure, fully managed pub/sub messaging service 
+>that enables you to decouple microservices, distributed systems, and serverless applications. SNS cannot be used to decouple the producers and consumers for the real-time data
+
+| Cecha         | SNS   | SQS   |                                                                                                |
+| ------------- | ----- | ----- | ---------------------------------------------------------------------------------------------- |
+| decoupling    | ✅ tak | ✅ tak |                                                                                                |
+| fan-out       | ✅     | ❌     |                                                                                                |
+| buffering     | ❌     | ✅     |                                                                                                |
+| durable queue | ❌     | ✅     | SNS **rozsyła eventy**, ale **nie buforuje ich długo**. Dlatego uzywa się wzorca fan-out z SQS |
 
 ![[Pasted image 20260223154121.png]]
 [[Amazon SQS]] → kolejka, jeden konsument ciągnie, wiadomość czeka 
@@ -32,6 +40,12 @@ SNS → pub/sub, push do wielu naraz, wiadomość nie czeka
 
 ![[Pasted image 20260223214028.png]]
 
+|Cecha|SNS|SQS|
+|---|---|---|
+|decoupling|✅ tak|✅ tak|
+|fan-out|✅|❌|
+|buffering|❌|✅|
+|durable queue|❌|✅|
 
 Metadata:
 
