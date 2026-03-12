@@ -8,8 +8,8 @@ Note:
 >
 These notifications can be delivered directly to three primary AWS targets: 
 **[[AWS Lambda]], 
-[[Amazon SQS queues]], 
-[[Amazon SNS topics]]**, 
+[[Amazon SQS]], 
+[[Amazon SNS]]**, 
 >
 The target resource must have a **Resource-based Policy** (such as a Lambda Resource Policy or SQS/SNS Access Policy) that explicitly allows the S3 service (`s3.amazonaws.com`) to perform the action.
 
