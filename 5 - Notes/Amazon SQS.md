@@ -50,6 +50,7 @@ boto3 → HTTP POST → SQS endpoint → wiadomość w kolejce
 • **FIFO Queue (First-In-First-Out):**
     ◦ Guarantees strict ordering and exactly-once send capability.
     ◦ Limited throughput: 300 msg/s without batching, 3000 msg/s with batching.
+    - muszą kończyć się na `.fifo`
 
 ![[Pasted image 20260223152556.png]]
 

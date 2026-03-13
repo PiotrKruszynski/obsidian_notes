@@ -74,7 +74,8 @@ _Unified Aget_:
 	- System status = check the underlying hardware
 	- Attached EBS status = check attached EBS volumes 
 - Recovery: Same Private, Public, Elastic IP, metadata, placement group
-
+_alarm bezpośrednio wykonuje akcje na instancji!_
+- reboot, recover, stop, terminate
 ## CloudWatch Alarm - good to know
 - Alarms can be created based on CloudWatch Logs Metrics Filters
 - To test alarms and notifications, set the alarm state to Alarm using CLI 
@@ -149,6 +150,18 @@ aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --stat
 - CloudWatch Application Insights
 - Automatic dashboard to troubleshoot your application and related AWS services
 
+|Cecha|Amazon CloudWatch|Amazon EventBridge|Amazon Simple Notification Service|Amazon Simple Queue Service|AWS Step Functions|
+|---|---|---|---|---|---|
+|Główna rola|monitoring i metryki|event routing|broadcast powiadomień|kolejka wiadomości|orchestracja workflow|
+|Model działania|metryki → alarm|event → rule → target|pub/sub|producer → queue → consumer|state machine|
+|Czy przechowuje dane|tylko metryki/logi|nie|nie|tak|stan workflow|
+|Push / Pull|push (alarm)|push|push|pull|push|
+|Filtrowanie|proste|bardzo zaawansowane|proste|brak|logika workflow|
+|Ordering|brak|brak|brak|FIFO opcjonalnie|kontrolowany|
+|Retencja|logi do 10 lat|krótka|brak|do 14 dni|runtime workflow|
+|Fan-out|przez SNS|natywnie|natywnie|nie|nie|
+|Automatyczne akcje|tak|tak|nie|nie|tak|
+|Najczęstszy use case|monitoring systemu|event-driven architektura|alerty|decoupling|orchestracja microservices|
 
 ___
 Metadata:
