@@ -3,6 +3,7 @@ ___
 Note:
 
 - Menaged _Redis_ / _Memcached_ (similar offering as [[Amazon RDS]] but for _cache_)
+- cannot use SQL
 - **Cache** = in-memory data store, _sub-millisecond_ latency
 - select _ElastiCache_ instance type (np. cache.m6g.large)
 - code change require!
@@ -10,7 +11,7 @@ Note:
 - backup / snapshot / point in time restore feature
 - managed and scheduled maintenance
 
-**Use case:** key-value store, frequent reads - less writes, cache results for DB queries, store session data for websites, cannot use SQL
+**Use case:** key-value store, frequent reads - less writes, cache results for DB queries, store session data for websites, _cannot use SQL !_
 
 # Redis vs Memcached
 

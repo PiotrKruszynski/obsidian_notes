@@ -4,7 +4,7 @@ Note:
 
 >[!tip]
 > is based on PostgresSQL, but it's not used _OLTP_ (online transaction processing - typ obciążenia)
->  it's _OLAP_ -> online analytical processing (analytics and data warehousing)
+>  it's _OLAP_ -> online _analytical processing_ (analytics and data warehousing)
 > to hurtownia danych zorientowana na _OLAP_
 > - columnar storage of data (not row) & parallel query engine
 > - 10x better performance than other data warehouse, scale to PBs of data
@@ -14,6 +14,7 @@ Note:
 > - two mode: _Provisioned cluster_ and _Serverless cluster_
 > 
 
+Use case: złożone zapytania analityczne, firma agreguje dane z tysięcy sklepów, ładuje dane analizuje wieloterabajtowe zbiory danych
 # Redshift Cluster
 leader node
 compute mode
