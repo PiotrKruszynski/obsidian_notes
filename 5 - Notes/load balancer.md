@@ -7,6 +7,7 @@ Note:
 
 # Defaults
 - load balancer = **entry point** for application traffic
+- łączy się z _private IP_ only
 - spread load & forwards traffic to downstream targets
 - [[high availability]] across multiple AZs
 - separate public from private traffic
@@ -62,6 +63,7 @@ These headers allow backend applications to correctly identify the **real client
 ## NLB - network load balancer
 - Layer 4 (TCP/UDP) transportu
 - protocol TCP/UDP
+- instancja podłaczona pod NLB zna prawdziwe IP klienta, bo NLB nie ingeruje w środek i jest mega szybkie
 - very high throughput, ultra-low latency
 - handle milions of request per sec
 - has **one static IP per AZ**,
