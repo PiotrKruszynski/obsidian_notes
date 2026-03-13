@@ -50,6 +50,9 @@ As an alternative to direct SQS/SNS/Lambda targets, you can send all S3 events t
 
 • **Compliance:** While event notifications provide real-time triggers, **AWS CloudTrail** can be used to record object-level activity (Data Events) for long-term auditing and compliance, though this is not enabled by default due to high volume,.
 
+![[Pasted image 20260313151334.png]]
+
+![[Pasted image 20260313151824.png]]
 
 ___
 Metadata:
