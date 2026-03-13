@@ -6,7 +6,6 @@ Note:
 >definition
 
 Amazon EventBridge to **serverless event bus**, który umożliwia:
-
 - odbieranie zdarzeń (events)
 - filtrowanie ich
 - routowanie do targetów
