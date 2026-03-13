@@ -19,6 +19,23 @@ Dostajesz:
 Storage:
 - SSD
 - HDD
+# Typowe use cases
+✔ HPC simulations  
+✔ ML training datasets  
+✔ Electronic Design Automation (EDA)  
+✔ media rendering / VFX  
+✔ genomics / scientific computing
+
+---
+
+FSx for Lustre to **bardzo szybki współdzielony filesystem** dla klastrów compute.
+
+Cechy:
+- POSIX file system (foldery, ścieżki)
+- montowany na **Linux EC2**
+- **parallel distributed filesystem**
+- bardzo wysoki **throughput**
+- bardzo niskie **latency**
 
 ![[Pasted image 20260218224341.png]]
 
