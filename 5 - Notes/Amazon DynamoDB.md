@@ -190,6 +190,7 @@ Region eu-west-1  ←→  Region us-east-1  ←→  Region ap-southeast-1
 ## DAX — DynamoDB Accelerator
 
 In-memory cache specjalnie dla DynamoDB. Microsecond latency.
+DAX cache'uje DynamoDB API, nie zapytania SQL.
 
 DynamoDB streamuje zmiany w danych w tabeli – takie jak wstawienie, aktualizacja czy usunięcie – do specjalnego strumienia. Funkcja Lambda może zostać przypięta do tego strumienia jako wyzwalacz. Kiedy pojawia się nowy wpis w strumieniu, Lambda jest automatycznie wywoływana i może przetworzyć te zmiany – na przykład zaktualizować coś w innej usłudze, wysłać powiadomienie, czy agregować dane.
 
