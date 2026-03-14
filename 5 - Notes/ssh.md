@@ -53,3 +53,12 @@ Po połączeniu na wejściu najlepiej :
 `[ec2-user@ip-172-31-22-143 ~]$ sudo su`
 `[root@ip-172-31-22-143 ec2-user]# yum update`
 
+konfiguracja:
+`~/.ssh/config` -> do niego dopisać
+```bash
+Host aws
+    HostName 54.147.3.55
+    User ubuntu
+    IdentityFile ~/Downloads/labsuser.pem
+```
+od teraz `ssh aws`
