@@ -114,6 +114,11 @@ Przechowuje dane jako **wektory** — listy liczb reprezentujące znaczenie teks
 # db SQL
 _schema_
 jak jest schema to jest szybsza niż NoSQL
+
+„data is organized into relations (called tables in SQL), where each relation is an unordered collection
+of tuples (rows in SQL).”
+
+
 # db NoSQL
 _schemaless_
 powstały w 2000+ . Internet generuje dużo danych ale każdy zestaw jest inny. Byłoby dużo null.
