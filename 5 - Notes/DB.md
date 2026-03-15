@@ -7,7 +7,9 @@ rel db - MySQL, PostgresSQL, SQLServer, DB2 opieraja sie na tabelach i relacji m
 
 documnet db - MongoDB, - json key value , value moze byc bardziej zlozonym typem danych np json. czym sie rozni json od słownika? boolin data json trzyma timestampy. najwazniejsza super wazna roznica!! w sjon wszystkie klucze muszą być w cudzysłowach, nie moze byc railing comma. SA oparte o dokumenty
 
-key-value db - Redis (do catch, in-memory wiec ultraszybka) - po prostu jest klucz do ktorej jest przypisana wartosc
+key-value db - Redis (do catch, in-memory wiec ultraszybka) - po prostu jest klucz do ktorej jest przypisana wartosc. 
+wada to bardzo ubogi zbiór danych
+
 wide column 
 
 graph db - oparta o dane hierarchiczne. wszystkie słowa świta każdy węzeł to tylko listera. nie musi przeszukiwać wszystkich słów tylko takie wycinki i wagi i dlatego tak niewiarygodnie działa
@@ -128,7 +130,7 @@ _schemaless_
 powstały w 2000+ . Internet generuje dużo danych ale każdy zestaw jest inny. Byłoby dużo null.
 Czemu w SQL `NULL` są problematyczne? Bo bardzo spowolniają DB. 
 
-Kiedyś używało się dysków HDD (największa wada że używa talerzy, które muszą się kręcić, jak się nie przekręci w odpowiednie miejsce to nie odczytasz) teraz SDD(mają sektory).
+Kiedyś używało się dysków HDD (największa wada że używa talerzy, które muszą się kręcić, jak się nie przekręci w odpowiednie miejsce to nie odczytasz) teraz SSD(mają sektory).
 
 Relacyjne bazy danych (PostgreSQL, MySQL, Oracle) powstały w epoce HDD. Cały system był zoptymalizowany pod `HDD latency`
 
@@ -150,3 +152,34 @@ Dlatego Dynamo wprowadziło kilka idei, które później przejęła większość
 | **consistent hashing**         | równomierne rozłożenie danych      |
 
 
+
+
+spójnośc danych
+skalowalność pozioma jest trudniejsza w SQL
+system fail over
+replikacja failing
+
+twierdzenie CAP
+spójność - dostepność do danych ten sam niezależnie od serwera
+dostępność - dane zawsze dostępne
+odporność na partycjonowanie - awaria pojedyńczego wezła nie wpłynie na działanie całego systemu
+
+zamieniamy na płąską strukturę
+trudno zrobic wiele punktów zapisu
+constain - badają relacje miedzy 
+
+operacja seek , jak miedzy serwerami to jeszcze gorzej
+join pomiedzy serwerami jest bardzo kosztowny, w niektórych wręcz nie można ciąć po relacji
+
+odczytywanie fragmentów danych
+
+![[Pasted image 20260315152833.png]]
+
+allegro na nosql szybszy bo kategorie zmieniaja sie zadziej a mamy przyspieszenie na odczycie
+nosql skaluja sie lepiej niz sql
+
+![[Pasted image 20260315153116.png]]
+
+
+
+NoSQL wtedy kiedyd model jest idealnie, albo zaczyna nam brakować w SQL
