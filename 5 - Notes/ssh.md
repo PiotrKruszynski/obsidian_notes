@@ -1,64 +1,108 @@
-#linux 
 
-`man ssh-keygen` -> instrukcja
+ #ssh, #linux
 
-AWS daje tylko private bo public leci od razu na serwer
+> SSH to **zaszyfrowany transport TCP z wbudowaną możliwością uruchamiania zdalnych procesów**
 
-| **Opcja**  | **Co robi**                | **Kiedy używać**            |
-| ---------- | -------------------------- | --------------------------- |
-| -t         | typ klucza                 | tworzenie klucza            |
-| -f         | plik klucza                | _wskazanie pliku_           |
-| -C         | komentarz                  | opis klucza                 |
-| -y         | _public key z private key_ | gdy masz tylko .pem         |
-| -p         | zmiana hasła klucza        | dodanie / zmiana passphrase |
-| -l         | fingerprint klucza         | weryfikacja                 |
-| -R         | usuwa host z known_hosts   | gdy zmienił się serwer      |
-| -t ed25519 | najlepszy typ klucza       | standard today              |
 
-| **Komenda** | **Do czego służy**           | **Przykład**                  |
-| ----------- | ---------------------------- | ----------------------------- |
-| ssh         | logowanie na serwer          | ssh user@server               |
-| scp         | kopiowanie plików            | scp file.txt user@server:/tmp |
-| ssh-keygen  | _tworzenie kluczy_           | ssh-keygen -t ed25519         |
-| ssh-agent   | przechowuje klucze w pamięci | eval "$(ssh-agent -s)"        |
-| ssh-add     | dodaje klucz do agenta       | ssh-add ~/.ssh/id_ed25519     |
+SSH to w praktyce **3 funkcje w jednym protokole**:
 
-generowanie klucza
-`ssh-keygen -t ed25519`
-powstaje:
-	`~/.ssh/id_ed25519`
-	`~/.ssh/id_ed25519.pub`
+1️⃣ **remote shell** → `ssh`  
+2️⃣ **file transfer** → `scp / sftp`  
+3️⃣ **TCP tunnel** → `-L / -R`
+  
+protokół do:  
+- zdalnego logowania  
+- kopiowania plików  
+- tunelowania TCP  
+- działa na port `22`  
+# Jak działa
+1️⃣ klient otwiera połączenie TCP  
+Mac → server:22  
+2️⃣ handshake kryptograficzny  
+- negocjacja algorytmów  
+- wymiana klucza sesji  
+3️⃣ weryfikacja hosta  
+fingerprint zapisuje się w:  
+`~/.ssh/known_hosts`  
+4️⃣ authentication  
+- password  
+- public key  
+5️⃣ powstaje **encrypted session**  
+# Host verification  
+przy pierwszym połączeniu:  
+The authenticity of host can't be established
+SSH zapisuje fingerprint do:  
+`~/.ssh/known_hosts`  
+jeśli serwer się zmieni:  
+REMOTE HOST IDENTIFICATION HAS CHANGED
 
-generowanie klucza z nazwą
-`ssh-keygen -t ed25519 -f mykey -C "aws-key"`
+naprawa:  
+`ssh-keygen -R IP`  
+  
 
-wyciągnięcie public key z private key
-`ssh-keygen -y -f labsuser.pem`
+# SSH Agent  
+problem:  
+hasło do klucza wpisywane wiele razy.  
+rozwiązanie:  
+**ssh-agent**  
+klucze trzymane w pamięci RAM.  
+eval "$(ssh-agent -s)"  
+ssh-add ~/.ssh/id_ed25519
 
-Sprawdzam czy plik istnieje:
-`ls ~/Downloads | grep labsuser`
+# SSH Tunelowanie  
+SSH potrafi przekierować ruch TCP.  
+schemat:  
+LOCAL_PORT → REMOTE_HOST → REMOTE_PORT
+przykład:  
+`ssh -L 8888:localhost:8888 ubuntu@server`
 
-Change mode zmienia uprawnienia  żeby nie za szeroko
-`chmod 400 ~/Downloads/labsuser.pem`
+Mac → localhost:8888    
+↓    
+SSH tunnel    
+↓    
+server localhost:8888  
+# Reverse Tunnel  
+gdy serwer musi połączyć się do twojego komputera.  
+`ssh -R 8080:localhost:3000 server`
+serwer → localhost:8080    
+↓    
+twój komputer localhost:3000  
+ 
+# Bastion Host  
+częsty pattern w AWS.  
+Mac  
+↓  
+bastion  
+↓  
+private server
 
-Tunelowanie . Otwieram TCP connection 
-	Mac → TCP port 22 → EC2
-	Handshake TCP
+  
+połączenie:  
+ssh -J bastion private-server
 
-Tunelowanie, przykład dla jupyther
-`ssh -i LOKALIZACJA KLUCZA ubuntu@PUBLIC_IP -L 8888:127.0.0.1:8888`
-`ssh -i ~/Downloads/labsuser.pem ubuntu@PUBLIC_IP`
+# SSH Multiplexing  
+jedno połączenie SSH używane przez wiele sesji.  
+przyspiesza logowanie.  
+config:  
+ControlMaster auto  
+ControlPath ~/.ssh/control-%r@%h:%p  
+ControlPersist 10m
 
-Po połączeniu na wejściu najlepiej :
-`[ec2-user@ip-172-31-22-143 ~]$ sudo su`
-`[root@ip-172-31-22-143 ec2-user]# yum update`
+  
+# Najważniejsze pliki SSH  
 
-konfiguracja:
-`~/.ssh/config` -> do niego dopisać
-```bash
-Host aws
-    HostName 54.147.3.55
-    User ubuntu
-    IdentityFile ~/Downloads/labsuser.pem
-```
-od teraz `ssh aws`
+| plik | rola |  
+|---|---|  
+| ~/.ssh/id_ed25519 | private key |  
+| ~/.ssh/id_ed25519.pub | public key |  
+| ~/.ssh/authorized_keys | klucze użytkownika |  
+| ~/.ssh/known_hosts | fingerprinty serwerów |  
+| ~/.ssh/config | skróty połączeń |  
+
+# Najważniejsze komendy  
+
+`ssh user@host  `
+`ssh -i key.pem user@host  `
+`scp file user@host:/tmp  `
+`ssh -L 8888:localhost:8888 user@host  `
+`ssh -v user@host`

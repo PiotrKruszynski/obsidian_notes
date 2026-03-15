@@ -1,12 +1,26 @@
 #db 
 
-baza danych to nic innego jak zbiór danych
+>to zbiór danych, który umożliwia
+>- zapis
+>- odczyt
+>- aktualizację
+>- wyszukiwanie
 
-rodzaje DB
+# Rodzaje db
 
-rel db - MySQL, PostgresSQL, SQLServer, DB2 opieraja sie na tabelach i relacji miedzy tabelami. jeden do jeden i jeden do wielu. dlaczego nie wiele do wielu? redundancja danych!  mam tabele imie i tabele adres . jeden uzytkownik wiele akresow i wiele adresow wiele uzytkowikow dopisuje w tabelkach i duplikuje wpisy. duza duplikacja danych. to daje redundancje. jak zrobie tabele pośrednia to tez mam redundancje ale w nowej robie foreign key i dlatego jej sie nei uzywa
+## 1. Relational DB (SQL)
+MySQL  
+PostgreSQL  
+SQL Server  
+Oracle  
+DB2
 
-documnet db - MongoDB, - json key value , hierarchiczne rekordy, value moze byc bardziej zlozonym typem danych np json. czym sie rozni json od słownika? boolin data json trzyma timestampy. najwazniejsza super wazna roznica!! w sjon wszystkie klucze muszą być w cudzysłowach, nie moze byc railing comma. SA oparte o dokumenty
+opieraja sie na tabelach i relacji miedzy tabelami. 
+
+jeden do jeden i jeden do wielu. dlaczego nie wiele do wielu? duplikacja danych!
+mam tabele imię i tabele adres . jeden użytkownik wiele adresów i wiele adresów wiele uzytkowikow dopisuje w tabelkach i duplikuje wpisy. duża duplikacja danych. to daje redundancje. jak zrobie tabele pośrednia to tez mam duplikacje ale w nowej robie foreign key i dlatego jej się nieużywa
+
+document db - MongoDB, - json key value , hierarchiczne rekordy, value moze byc bardziej zlozonym typem danych np json. czym sie rozni json od słownika? boolin data json trzyma timestampy. najwazniejsza super wazna roznica!! w sjon wszystkie klucze muszą być w cudzysłowach, nie moze byc railing comma. SA oparte o dokumenty
 
 
 
