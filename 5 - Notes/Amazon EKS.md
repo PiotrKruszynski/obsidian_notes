@@ -62,12 +62,12 @@ pod - uruchamia aplikację, najmniejsza jednostka wdrożeniowa
 
 EKS wspiera montowanie storage przez **Container Storage Interface (CSI) driver**.
 
-|Storage|Opis|Kiedy|
-|---|---|---|
-|**Amazon EBS**|blokowy dysk, jeden Pod|bazy danych, high IOPS|
-|**Amazon EFS**|współdzielony filesystem|działa z Fargate, dane między Podami|
-|**Amazon FSx for Lustre**|high-performance filesystem|HPC, ML, big data|
-|**Amazon FSx for NetApp ONTAP**|enterprise NAS|migracja z on-prem NetApp|
+| Storage                         | Opis                        | Kiedy                                |
+| ------------------------------- | --------------------------- | ------------------------------------ |
+| **Amazon EBS**                  | blokowy dysk, jeden Pod     | bazy danych, high IOPS               |
+| **Amazon EFS**                  | współdzielony filesystem    | działa z Fargate, dane między Podami |
+| **Amazon FSx for Lustre**       | high-performance filesystem | HPC, ML, big data                    |
+| **Amazon FSx for NetApp ONTAP** | enterprise NAS              | migracja z on-prem NetApp            |
 
 **Fargate + EFS** = serverless + persistent storage. Klasyczny pattern na egzaminie.
 
@@ -124,13 +124,13 @@ Discover & Analyze  →  Extract & Containerize  →  Create Artifacts  →  Dep
 
 ## ECS vs EKS vs App Runner
 
-||ECS|EKS|App Runner|
-|---|---|---|---|
-|Technologia|własna AWS|Kubernetes|managed PaaS|
-|Złożoność|niska|wysoka|najniższa|
-|Kontrola|średnia|pełna|minimalna|
-|Cloud-agnostic|nie|tak|nie|
-|Kiedy|kontenery bez K8s|K8s / migracja|szybki deploy bez infra|
+| ECS            | EKS               | App Runner     |                         |
+| -------------- | ----------------- | -------------- | ----------------------- |
+| Technologia    | własna AWS        | Kubernetes     | managed PaaS            |
+| Złożoność      | niska             | wysoka         | najniższa               |
+| Kontrola       | średnia           | pełna          | minimalna               |
+| Cloud-agnostic | nie               | tak            | nie                     |
+| Kiedy          | kontenery bez K8s | K8s / migracja | szybki deploy bez infra |
 
 ---
 
