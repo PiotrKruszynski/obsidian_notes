@@ -6,7 +6,9 @@ rodzaje DB
 
 rel db - MySQL, PostgresSQL, SQLServer, DB2 opieraja sie na tabelach i relacji miedzy tabelami. jeden do jeden i jeden do wielu. dlaczego nie wiele do wielu? redundancja danych!  mam tabele imie i tabele adres . jeden uzytkownik wiele akresow i wiele adresow wiele uzytkowikow dopisuje w tabelkach i duplikuje wpisy. duza duplikacja danych. to daje redundancje. jak zrobie tabele pośrednia to tez mam redundancje ale w nowej robie foreign key i dlatego jej sie nei uzywa
 
-documnet db - MongoDB, - json key value , value moze byc bardziej zlozonym typem danych np json. czym sie rozni json od słownika? boolin data json trzyma timestampy. najwazniejsza super wazna roznica!! w sjon wszystkie klucze muszą być w cudzysłowach, nie moze byc railing comma. SA oparte o dokumenty
+documnet db - MongoDB, - json key value , hierarchiczne rekordy, value moze byc bardziej zlozonym typem danych np json. czym sie rozni json od słownika? boolin data json trzyma timestampy. najwazniejsza super wazna roznica!! w sjon wszystkie klucze muszą być w cudzysłowach, nie moze byc railing comma. SA oparte o dokumenty
+
+
 
 key-value db - Redis (do catch, in-memory wiec ultraszybka) - po prostu jest klucz do ktorej jest przypisana wartosc. 
 wada to bardzo ubogi zbiór danych
@@ -15,8 +17,16 @@ wide column
 table db - 
 
 graph db - oparta o dane hierarchiczne. wszystkie słowa świta każdy węzeł to tylko listera. nie musi przeszukiwać wszystkich słów tylko takie wycinki i wagi i dlatego tak niewiarygodnie działa
+us army logistyka
+obiegi dokumentów w CISCO z zbliżonym podpowiadaniem
+
+
+
+
 
 Vectondi - istnieja listy z numerkami [1,0,1,0] . ta nauka nazywa się [[NLP]] i jest Vectorizer który robi robote. 
+w tym jest też RAG, bazy RAGowe
+
 
 # Rodzaje baz danych
 ## 1. Relacyjne DB (SQL)
