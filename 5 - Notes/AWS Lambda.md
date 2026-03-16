@@ -15,6 +15,17 @@ Lambda to FaaS — uruchamiasz funkcję w odpowiedzi na event. AWS zarządza wsz
 
 ![[Pasted image 20260224145409.png]]
 
+**AWS Lambda Layer** - mechanizm pozwalający na współdzielenie kodu lub zasobów pomiędzy różnymi funkcjami Lambda. Layer może zawierać biblioteki, zależności, a nawet wspólny kod, który funkcje dołączają do swojego środowiska wykonawczego
+
+**HTTP request is translated into a JSON event** - gdy przychodzi zapytanie HTTP, na przykład przez API Gateway, to jego treść, nagłówki, parametry i inne elementy są „tłumaczone” na strukturę JSON. Taki obiekt JSON zawiera informacje o ciele żądania, ścieżce, metodzie (GET, POST itd.), parametrach zapytania i innych danych. Lambda otrzymuje taki obiekt jako event, co pozwala jej działać bezpośrednio na tych danych. W praktyce oznacza to, że funkcja Lambda nie musi analizować surowego protokołu HTTP
+
+**CloudWatch Alarm** - lambda szybko się skaluje więc ważny jest monitoring
+
+By default, AWS Lambda functions always operate from an AWS-owned VPC
+- Lambda **bez VPC** → ma dostęp do Internetu i publicznych API AWS.
+- Lambda **w VPC** → działa według routingu VPC; aby wyjść do Internetu, potrzebuje **NAT Gateway**.
+
+
 ---
 
 ## Limity (ważne na egzamin)
