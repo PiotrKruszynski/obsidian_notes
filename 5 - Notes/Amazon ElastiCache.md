@@ -10,12 +10,14 @@ Note:
 - security through _IAM_, _Security Groups_, _KMS_, _Redis Auth_
 - backup / snapshot / point in time restore feature
 - managed and scheduled maintenance
+- max Redis item size 512 MB
 
 **Use case:** key-value store, frequent reads - less writes, cache results for DB queries, store session data for user on websites, _cannot use SQL !_
 
 # Redis vs Memcached
 - Nowe projekty → Redis
 - Memcached = prosty, lekki cache bez HA
+- wspiera pub/sub
 
 Redis:
 - wspiera replikacje wiec HA oraz bardziej zaawansowane struktury danych

@@ -6,13 +6,22 @@ Note:
 >- _Amazon Simple Storage Service_ is a key / value store for objects
 >- greate for bigger objects, not so great for many small object
 >- serverless, scales infinitely, max object size is 5TB, versioning capability
->- _Tiers_: _S3 Standard_, _S3 Infrequent Access_, _S3 Intelligent_, _S3 Glacier_ + lifecycle policy
->- features: Versioning, Encryption, Replication, MFA-Delete, Access Log ..
->- security: [[IAM]], _bucket policies_, _ACL_ (stare), _Access Points_, _Object Lambda_, [[CORS cross-origin resource sharing]], _Object/Vault Lock_
->- encription: _SSE-S3_, _SSE-KMS_, _SSE-C_, client-side, [[SSL TLS]] in transit, default encription
->- _batch operations_ on objects using _S3 Batch_, listing files using _S3 Inventory_
->- performance: _Multi-part uploads_, _S3 Transfer Acceleration_, _S3 Select_
->- automation: S3 Event Notifications -> [[Amazon SNS]], [[Amazon SQS]], [[AWS Lambda]], [[Amazon EventBridge]]
+>- **tiers:** _S3 Standard_, _S3 Infrequent Access_, _S3 Intelligent_, _S3 Glacier_ + lifecycle policy
+>- **features:** Versioning, Encryption, Replication, MFA-Delete, Access Log ..
+>- **security:** [[IAM]], _bucket policies_, _ACL_ (stare), _Access Points_, _Object Lambda_, [[CORS cross-origin resource sharing]], _Object/Vault Lock_
+>- **encription:** _SSE-S3_, _SSE-KMS_, _SSE-C_, client-side, [[SSL TLS]] in transit, default encription
+>- **batch operations** on objects using _S3 Batch_, -> if u want to copy or encript not encripted S3
+>- **listing files** using _S3 Inventory_ -> periodycznie generuje raport  z zawartością bucketu
+>- **performance:**
+>	- _Multi-part uploads_ -> parallel uploads of files
+>	- _S3 Transfer Acceleration_, -> transfer faster
+>	- _S3 Select_ -> pozwala wykonać SQL bezpośrednio na obiekcie w S3 i pobrać tylko wybrane dane zamiast całego pliku
+>- **automation:** 
+>	- S3 Event Notifications:
+>		- [[Amazon SNS]], 
+>		- [[Amazon SQS]],
+>		- [[AWS Lambda]],
+>		- [[Amazon EventBridge]]
 
 **Use case:** static files, key value store for big files, website hosting
 

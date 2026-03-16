@@ -3,10 +3,16 @@ ___
 Note:
 
 >[!tip]
->definition
+>similar to _Aurora_ (architektura rozproszona storage + compute) but compatible with  _MongoDB_ API
+**NoSQL database**, document db ->  data format **BSON**, elastyczne zagnieżdżanie struktur
+> fully managed, [[high availability]] with replication across 3 AZ
+> **storage** automatically grows in block of 10GB
+> automatically scales (_read replica_) to workloads with millions of requests per seconds
 
-like Aurora but for MongoDB
-NoSQL database
+[[MongoDB]] is used to store, query and index JSON data
+
+
+
 
 
 

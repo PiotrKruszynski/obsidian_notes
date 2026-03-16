@@ -3,7 +3,7 @@ ___
 Note:
 
 >[! Important]
->- RDBMS with separation of storage and compute
+>- RDBMS with separation of storage and compute (architektura rozproszona)
 >- Compatible API for **MySQL** and **PostgreSQL**
 >- storage: data is storage in 6 replicas, across 3 AZ - [[high availability]], _self-healing_, [[auto scaling]] **10 GB → 256 TB**, automatic **failover (~30s)**
 > - replication happens at **storage level**
