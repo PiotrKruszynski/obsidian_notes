@@ -17,7 +17,7 @@ Integrations with (load TLS certificates on)
 - APIs on API Gateway
 #### Cannot use ACM with EC2 (can’t be extracted)
 
-
+![[Pasted image 20260316142503.png]]
 
 
 

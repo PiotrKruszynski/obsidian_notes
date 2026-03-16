@@ -8,7 +8,6 @@ Note:
 Lambda to FaaS — uruchamiasz funkcję w odpowiedzi na event. AWS zarządza wszystkim: serwerami, skalowaniem, dostępnością.
 
 **Kluczowe cechy:**
-
 - **Serverless** — zero zarządzania infrastrukturą
 - **Automatic scaling** — od 0 do tysięcy równoległych wywołań automatycznie
 - **Pay per use** — płacisz za liczbę wywołań i czas wykonania (ms), nie za idle

@@ -95,17 +95,32 @@ jeszcze S2 one zone
 ---
 # 🔒 3. Security and Access Control
 
-• **User-Based:** **IAM Policies** define which API calls a specific user can make.
+## 3.1  **User-Based:** 
+**IAM Policies** define which API calls a specific user can make.
 
-• **[[resource-based policy]]:**
-    ◦ **Bucket Policies:** JSON-based rules for the entire bucket (often used for public access or cross-account permissions).
-    ◦ **Access Control Lists (ACLs):** Legacy fine-grained control (can be disabled).
-    ◦ **Origin Access Control (OAC):** Used when **CloudFront accesses a private S3 bucket**.
+## 3.2 Resource-Based:
+**[[resource-based policy]]:**
+- **Bucket Policies:** JSON-based rules for the entire bucket (often used for public access or cross-account permissions).
+polityka w bucket policy jest przypięta do zasobu i może powiedzieć
+```JSON
+{
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "arn:aws:iam::123456789012:root"
+  },
+  "Action": "s3:GetObject",
+  "Resource": "arn:aws:s3:::my-bucket/*"
+}
+```
+![[Pasted image 20260316140233.png]]
+-  **Access Control Lists (ACLs):** Legacy fine-grained control (can be disabled).
+-  **Origin Access Control (OAC):** Used when **CloudFront accesses a private S3 bucket**.
  Why OAC?
-- Keeps bucket **private**
-- Prevents direct S3 URL access
-- Enforces secure CloudFront-only access
-- ![[Pasted image 20260225121304.png]]
+-  Keeps bucket **private**
+ - Prevents direct S3 URL access
+ - Enforces secure CloudFront-only access
+ 
+![[Pasted image 20260225121304.png]]
 
 • **Block Public Access:** Settings used to prevent accidental data leaks; can be applied at the account or bucket level.
 • **MFA Delete:** Requires multi-factor authentication to permanently delete a version or suspend versioning.
