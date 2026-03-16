@@ -3,16 +3,10 @@ ___
 Note:
 
 >[! Important]
->- **Managed relational database** in the Amazon RDS family
->- Compatible with **MySQL** and **PostgreSQL**
->### Architecture
->- Storage and compute are separated
-> ### Storage layer
-> - Distributed storage
-> - 6 copies across 3 Availability Zones
-> - **Self-healing**
-> - **Auto-scaling storage:** **10 GB → 256 TB**
-> - Replication happens at **storage level**
+>- RDBMS with separation of storage and compute
+>- Compatible API for **MySQL** and **PostgreSQL**
+>- storage: data is storage in 6 replicas, across 3 AZ - [[high availability]], _self-healing_, [[auto scaling]] **10 GB → 256 TB**, automatic **failover (~30s)**
+> - replication happens at **storage level**
 > ### Compute layer
 > - **Aurora Cluster**
 > - 1 Writer instance
@@ -22,21 +16,25 @@ Note:
 > - **Writer endpoint** → write queries
 > - **Reader endpoint** → load-balances read queries across replicas
 > - **Custom endpoints** possible
-> ### Availability
-> - Built-in Multi-AZ storage
-> - Automatic **failover (~30s)** to another instance
 > ### Performance
 > - Up to 5× faster than MySQL
 > - Up to 3× faster than PostgreSQL
 > - Read scaling via **Aurora Replicas**
 > ### Cost
 > - Typically **~20% more expensive than standard RDS**
+> ### Extra features
+> - **Aurora Serverless** - for unpredicted / intermitten workloads, no capacity planning
+> - **Aurora Global** - up to 16 DM Read Instance in each region, <1sec storage replication
+> - **Aurora Machine Learning** with using [SageMaker & Comprehend] on Aurora
+> - **Aurora Database Cloning** - new cluster from existing one, faster than restoring a snapshot
 
 **Use case:** same as RDS, but with _less maintenance / more flexibility / more performance_
 
+
+
+
 ![[Pasted image 20260211105457.png]]
 
-![[Pasted image 20260312161051.png]]
 #  Backup & Restore
 
 | Cecha              | RDS            | Aurora                                                          |
@@ -46,18 +44,11 @@ Note:
 | Storage            | EBS            | distributed storage                                             |
 | Performance impact | minimalny      | jeszcze mniejszy                                                |
 | PITR               | tak            | tak                                                             |
-|                    |                |                                                                 |
-
-
-![[Pasted image 20260211111005.png]]
-
 
 # Aurora Serverless
-
+- for unpredicted / intermiteen workloads, no capacity planning
 - scales _compute_ automatically
 - Pay per second
-- Ideal for unpredictable workloads
-
 
 ![[Pasted image 20260211111229.png]]
 

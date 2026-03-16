@@ -3,5 +3,6 @@
   "newFileFolderPath": "5 - Notes",
   "attachmentFolderPath": "7 - Assets",
   "alwaysUpdateLinks": true,
-  "promptDelete": false
+  "promptDelete": false,
+  "vimMode": false
 }

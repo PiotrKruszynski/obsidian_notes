@@ -4,15 +4,20 @@ Note:
 
 >[!info]
 >- RDBMS_ystem_ (=SQL _język_  /OLTP online transaction processing - _typ obciążenia_) 
->- RDS i Aurora => greate for _joints_ and _transactions_
+>- greate for _joints_ and _transactions_
 >- managed: _MySQL_, _PostgreSQL_, _MariaDB_, _Oracle_, _Microsoft SQL Server_, _IBM DB2_, _Aurora_ (AWS-native), Custom
 >- provisioned RDS Instance Size (vCPU i RAM) and [[EBS Volume]] Type & Size
->
->**AWS manage:**
 >- support for _read replicas_ and _Multi AZ_
 >- _Auto-Scaling_ capability (vertical and ~horizontal (_read replicas_)
 >	- set max storage threshold (np. 64TB)
 >	- auto modify storage (gdy zapełnienie zbliża się do 90% doda więcej)
+>- security through _IAM, SecurityGroups, KMS, SSL in transit_ 
+>- support for _IAM Authentication_, integration with _Secrets Manager_
+>- [[RDS Custom]] for access to and customizr the underlying instance _Oracle_, _Microsoft SQL Service_
+>- [[RDS Proxy]] - warstwa pośrednia App → RDS Proxy → RDS / Aurora
+>	- utrzymuje connection pool
+>	- reuse istniejące połączenia
+>	- ogranicza liczbę nowych connections. Relacyjne mają limit połączeń
 >
 >**You manage:**
 >	- schema, queries, indexes
@@ -49,7 +54,6 @@ Note:
 
 ![[Pasted image 20260206152157.png]]
 # Read Replicas
-
 - działa _SELECT_ , nie działa INSERT, UPDATE, DELETE
 - up to 15 read replicas
 - use _Asynchronous_ replication
@@ -61,7 +65,7 @@ Note:
 - _RR_ można ustawić na Multi AZ for _Disaster Recovery_
 - można utworzyć encrypted _RR_ form unencrypted db
 - w AWS płaci się za przechodzenie danych z AZ, w _RR_ nie _nawet między regionami_
-- - replikacja jest **binlog-based**
+- - replikacja jest **binlog-based** - śledzi dziennik binarny
 - jest **asynchronous**
 - przy globalnym ruchu pojawia się **replication lag**
 - każda replica ma **własny storage**

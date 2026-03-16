@@ -3,12 +3,12 @@ ___
 Note:
 >[! Important]
 >- AWS native technology
->- managed _serverless NoSQL_ database, 
->- _milisecond_ latency
+>- managed _serverless NoSQL_ database, _milisecond_ latency
 >- capacity (througnput) mode: 
 >	- _provisioned_ capacity with _auto scaling_ option
 >	- _on-demand_ capacity
->- can replace [[Amazon ElastiCache]] as a key/value store (np. storing session data using _TTL_ feature)
+>- data type: _key-value_ and _document_
+>- can replace [[Amazon ElastiCache]] as a key-value store (storing session data using _TTL_ feature)
 >- _Highly Available_ , _Multi AZ_ by default, Read and Writes are decupled
 >- transaction capability
 >- DAX cluster for read cache, _microsecond_ read latency
