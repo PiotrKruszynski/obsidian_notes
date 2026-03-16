@@ -26,7 +26,6 @@ Logiczna grupa zasobów gdzie działają kontenery. Może zawierać instancje EC
 ### Task Definition
 
 Przepis na kontener — plik JSON opisujący:
-
 - obraz Docker (z [[Amazon ECR]] lub Docker Hub)
 - CPU i RAM
 - zmienne środowiskowe
@@ -52,11 +51,9 @@ Przepis na kontener — plik JSON opisujący:
 ```
 
 ### Task
-
 Jeden lub więcej kontenerów działających razem (jak Pod w Kubernetes).
 
 ### Service
-
 Zapewnia że określona liczba Tasków zawsze działa. Ogarnia restart po awarii, integrację z Load Balancerem, Auto Scaling.
 
 ```
@@ -231,7 +228,7 @@ json
 
 ## ECS vs EKS vs Lambda
 
-||ECS|EKS|Lambda|
+|ECS|EKS|Lambda|
 |---|---|---|---|
 |Technologia|własna AWS|Kubernetes|funkcje|
 |Złożoność|niska|wysoka|najniższa|
