@@ -3,33 +3,34 @@ ___
 Note:
 >[! Important]
 >- AWS native technology
+>- data type: _key-value_ and _document_, ma możliwość _transakcji_
 >- managed _serverless NoSQL_ database, _milisecond_ latency
+>- odczyt zużywa RCU, zapis zużywa WCU
 >- capacity (througnput) mode: 
->	- _provisioned_ capacity with _auto scaling_ option
->	- _on-demand_ capacity
->- data type: _key-value_ and _document_
+>	- **provisioned capacity** with _auto scaling_ option
+>	- **on-demand_ capacity**
 >- can replace [[Amazon ElastiCache]] as a key-value store (storing session data using _TTL_ feature)
 >- _Highly Available_ , _Multi AZ_ by default, Read and Writes are decupled
 >- transaction capability
->- DAX cluster for read cache, _microsecond_ read latency
+>- **DAX** key-value cluster for read cache, _microsecond_ read latency
 >- security, authentication and authorization is done throuht [[IAM]]
 >- event processing: _DynamDB Stream_ to integrate with [[AWS Lambda]], or [[Kinesis Data Streams]]
 >- _Global Table_ feature: active-active setup
->- auto backups up to 35 day with _PITR_ window, import from S3 without using WCU
+>- auto backups:  _PITR_ window (up to 35 day), on-demand backups 
+>- można masowo przenosić dane do S3 bez zużywania jednostek RCU/WCU
 >- **greate to rapidly evolve schemas**
 >- max _item_ size 400 KB
 
-**Use case:** serverless applications development (small docks 100s KB), distributed serverless cache
+**Use case:** serverless applications development (small docks 100s KB), distributed serverless cache, **greate for rapidly evolve schemas**
 
 
 ---
 
 ## Model danych
 
-DynamoDB to baza klucz-wartość + dokument. Schemat elastyczny — każdy item może mieć inne atrybuty.
+DynamoDB to baza klucz-wartość + zagnieżdżenia (jak dokumentowe db). 
 
-### Tabela
-Zbiór itemów. Nie ma relacji między tabelami (NoSQL).
+[Tabela] to zbiór itemów. Nie ma relacji między tabelami (NoSQL).
 
 ### Item
 Odpowiednik wiersza w SQL. Max 400 KB. Może zawierać zagnieżdżone atrybuty (JSON-like).
