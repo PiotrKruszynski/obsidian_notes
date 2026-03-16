@@ -1,4 +1,4 @@
-Created: {{date:YYYY-MM-DD}}  {{time:HH:mm}}
+Created: 2026-03-16  10:12
 ___
 Note:
 
