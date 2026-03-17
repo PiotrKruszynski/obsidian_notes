@@ -11,10 +11,12 @@ Note:
 >- **security:** [[IAM]], _bucket policies_, _ACL_ (stare), _Access Points_, _Object Lambda_, [[CORS cross-origin resource sharing]], _Object/Vault Lock_
 >- **encription:** _SSE-S3_, _SSE-KMS_, _SSE-C_, client-side, [[SSL TLS]] in transit, default encription
 >- **batch operations** on objects using _S3 Batch_, -> if u want to copy or encript not encripted S3
+>	- batch replication - kopiuj stare dane, ogromne dane przez AWS
+>	- można też polecenie `aws s3 sync` -> ty decydujesz, szybkie
 >- **listing files** using _S3 Inventory_ -> periodycznie generuje raport  z zawartością bucketu
 >- **performance:**
 >	- _Multi-part uploads_ -> parallel uploads of files
->	- _S3 Transfer Acceleration_, -> transfer faster
+>	- _S3 Transfer Acceleration_, -> transfer faster, nie działa S3 -> S3 tylko dla klient -> S3
 >	- _S3 Select_ -> pozwala wykonać SQL bezpośrednio na obiekcie w S3 i pobrać tylko wybrane dane zamiast całego pliku
 >- **automation:** 
 >	- S3 Event Notifications:
