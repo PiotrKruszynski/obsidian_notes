@@ -180,8 +180,8 @@ a jak wymusić encription in transit? DAJĄC **bucket policy** z SecureTransport
 # ⚡ 6. Performance & Automation
 
 • **Acceleration:**
-    ◦ **Multi-part upload:** Recommended for files > 100MB; parallelizes the upload.
-    ◦ **Transfer Acceleration:** Uses **AWS Edge Locations** to speed up long-distance transfers into S3.
+    ◦ **Multi-part upload:** Recommended for files > 100MB; parallelizes the upload. Nie działa w locie. 
+    ◦ **Transfer Acceleration:** Uses **AWS Edge Locations** to speed up long-distance transfers into S3. Nie dla S3->S3
     ◦ **Byte-Range Fetches:** Parallelizes downloads by requesting specific parts of a file.
 • **Event Notifications:** S3 can trigger **Lambda, SQS, or SNS** when objects are created or removed.
 • **S3 Batch Operations:** Perform bulk actions (like encrypting or copying) on millions of objects with one request.
