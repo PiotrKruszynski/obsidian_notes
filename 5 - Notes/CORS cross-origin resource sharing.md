@@ -5,7 +5,7 @@ Note:
 >[!tip]
 >**CORS** is a web browser-based mechanism that allows a web application running at one origin to access resources from a different origin. To understand this, we must first define what an **Origin** is.
 
-**Use case:** machenizm CORS spotkasz w usługach, które udostępniają zasoby przez przeglądarkę np. S3. Pozwala określić które domeny mogą korzystać. 
+**Use case:** machenizm przeglądarki CORS  spotkasz w usługach, które udostępniają zasoby przez przeglądarkę np. S3. Pozwala określić które domeny mogą korzystać. 
  
 An origin is the combination of three elements: **Scheme (protocol) + Host (domain) + Port**.
 
