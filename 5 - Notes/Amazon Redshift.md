@@ -23,9 +23,9 @@ in provision mode: choose instance type
 
 # Loading data into Redshift
 
-Amazon Kinesis Data Firehose - w przypadku strumieniowania Firehose dostarcza bezpośrednio poleceniem COPY 
+_Amazon Kinesis Data Firehose_ - w przypadku strumieniowania Firehose dostarcza bezpośrednio poleceniem COPY 
 COPY z S3 - najczęściej, wydajna
-Spectrum - można analizować bezpośrednio w S3 , a następnie zapisać wyniki do tabel Redshift - to tzw. external tables
+_Spectrum_ - można analizować bezpośrednio w S3 , a następnie zapisać wyniki do tabel Redshift - to tzw. external tables
 Federated Query / Data API - pozwala na ładowanie danych z zewnętrznych baz (np. RDS poprzez zapytania SQL)
 INSERT z innego źródła - klasyczne zapytania INSERT
 
