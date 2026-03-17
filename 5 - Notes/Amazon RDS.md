@@ -13,7 +13,7 @@ Note:
 >	- auto modify storage (gdy zapełnienie zbliża się do 90% doda więcej)
 >- security through _IAM, SecurityGroups, KMS, SSL in transit_ 
 >- support for _IAM Authentication_, integration with _Secrets Manager_
->- [[RDS Custom]] for access to and customizr the underlying instance _Oracle_, _Microsoft SQL Service_
+>- [[RDS Custom]] for access to and customize the underlying instance _Oracle_, _Microsoft SQL Service_
 >- [[RDS Proxy]] - warstwa pośrednia App → RDS Proxy → RDS / Aurora
 >	- utrzymuje connection pool
 >	- reuse istniejące połączenia
