@@ -22,6 +22,10 @@ Spoko dla Batch processing, BigData(Spark, Hadoop), ML training, renderingm stat
 **Dedicated Instances** - no other customer will share your hardware. Tu mamy izolacje instancji ale nie ma kontroli nad fizycznym serwerem.
 **Capacity Reservations** - reserve capacity in a specific AZ for any duration. Gwarancja dostępności
 
+Częsty pattern
+`Auto Scaling Group + Launch Template + MixedInstancesPolicy`
+
+
 ___
 Metadata:
 
