@@ -11,6 +11,7 @@ Note:
 
 [[MongoDB]] is used to store, query and index JSON data
 
+DocumentDB (Mongodb) is not serverless! and is not Global
 
 
 

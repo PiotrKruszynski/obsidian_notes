@@ -176,6 +176,6 @@ type: tool    # concept | service | comparison
 language: aws
 ---
 ```
-[[EBS Volume]]
+[[Amazon EBS Volume]]
 Status: #pending
 Tags: #aws

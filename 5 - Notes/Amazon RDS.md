@@ -6,7 +6,7 @@ Note:
 >- RDBMS_ystem_ (=SQL _język_  /OLTP online transaction processing - _typ obciążenia_) 
 >- greate for _joints_ and _transactions_
 >- managed: _MySQL_, _PostgreSQL_, _MariaDB_, _Oracle_, _Microsoft SQL Server_, _IBM DB2_, _Aurora_ (AWS-native), Custom
->- provisioned RDS Instance Size (vCPU i RAM) and [[EBS Volume]] Type & Size
+>- provisioned RDS Instance Size (vCPU i RAM) and [[Amazon EBS Volume]] Type & Size
 >- support for _read replicas_ and _Multi AZ_
 >- _Auto-Scaling_ capability (vertical and ~horizontal (_read replicas_)
 >	- set max storage threshold (np. 64TB)
