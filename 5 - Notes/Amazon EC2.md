@@ -13,7 +13,7 @@ high-performance hardware disk
 
 # EC2 purchasing options
 **On-Demand Instances** - płacisz za dokładny czas działania, bez zobowiązań, najdroższa w długim użyciu
-**Reserced Instance** - rezerwujesz instancję na 1 lub 3 lata, zniżka do70%
+**Reserved Instance** - rezerwujesz instancję na 1 lub 3 lata, zniżka do70%
 **Convertible Reserved Instances** - masz opcje zmiany typu instancji
 **Savings Plans** - możesz zmienić typ instancji, nawet usługę (np. na lambda) zobowiązanie na 1 lub 3 lata
 **Spot Instance** - masz spota na niewykorzystanej mocy obliczeniową ale AWS może przerwać działanie instancję, jeżeli ktoś zapłaci więcej. 
