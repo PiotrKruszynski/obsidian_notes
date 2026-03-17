@@ -6,6 +6,7 @@ Note:
 >managed extract, transform, load _ETL_ service
 >fully serverless
 >automatyzacja procesów _ETL_ (wyciąga dane, zmienia, filtruje, ładuje )
+>**nie do migracji DB** (brak CDC / transactional consistency)
 
 natomiast [[Amazon EMR]] - daje elastyczne klastry z Hadoop, Spark (przetwarzanie, analizy, transformacje, budować modele, przekształcać dane w wiedze) 
 

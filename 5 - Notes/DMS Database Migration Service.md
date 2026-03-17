@@ -13,10 +13,13 @@ jak chce multi-az deployment robi sie repliki _Replica_
 
 ![[Pasted image 20260310131451.png]]
 
-# AWS schema conversion tool
+# AWS Schema Conversion Tool
 jak db source u target nie maja tego samego silnika
 najlepiej jak mamy serwer aws sct installed u siebie (on-premises)
+odpowiada za strukture i logikę
 
+**SCT = structure + logic**  
+**DMS = data movement**
 
 ![[Pasted image 20260310132036.png]]
 
