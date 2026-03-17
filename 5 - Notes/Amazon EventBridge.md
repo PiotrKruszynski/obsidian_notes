@@ -3,7 +3,10 @@ ___
 Note:
 
 >[!tip]
->definition
+>centralny router zdarzeń **event bus**, który działa w modelu **push + filtering + routing**
+>schedule: Cron jobs (scheduled scripts)
+>**push**
+>
 
 Amazon EventBridge to **serverless event bus**, który umożliwia:
 - odbieranie zdarzeń (events)
@@ -12,6 +15,8 @@ Amazon EventBridge to **serverless event bus**, który umożliwia:
 - budowę architektury event-driven
 
 To jest warstwa **event routing**, nie messaging queue.
+
+![[Pasted image 20260317152337.png]]
 
 ---
 

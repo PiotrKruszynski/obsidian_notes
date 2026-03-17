@@ -68,7 +68,9 @@ _Unified Aget_:
 	- send notification to [[Amazon SNS]] from which you can do anything!
 - _Composite Alarm_
 	- action of combine with AND , OR conditions
-## CloudWatch Alarms - EC2 Instance Recovery
+
+#### do EC2, EC2 Auto Scaling, Amazon SNS
+## CloudWatch Alarms - EC2 Instance Action
 - Status Check:
 	- Instance status = check the EC2 VM
 	- System status = check the underlying hardware
