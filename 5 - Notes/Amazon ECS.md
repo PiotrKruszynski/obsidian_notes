@@ -186,7 +186,7 @@ docker push 123456.dkr.ecr.eu-west-1.amazonaws.com/my-app:latest
 
 ## Integracje
 
-**[[SQS]] + ECS** — klasyczny pattern:
+**[[Amazon SQS]] + ECS** — klasyczny pattern:
 
 ```
 SQS Queue  →  ECS Tasks (konsumenci)  →  Auto Scaling na podstawie długości kolejki
@@ -194,7 +194,7 @@ SQS Queue  →  ECS Tasks (konsumenci)  →  Auto Scaling na podstawie długośc
 
 Wiele Tasków czyta z kolejki równolegle. ASG skaluje Taski gdy kolejka rośnie.
 
-**[[SNS]] + ECS** — event-driven:
+**[[Amazon SNS]] + ECS** — event-driven:
 
 ```
 SNS Topic  →  SQS  →  ECS Tasks
