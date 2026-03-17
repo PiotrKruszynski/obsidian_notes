@@ -25,6 +25,14 @@ Spoko dla Batch processing, BigData(Spark, Hadoop), ML training, renderingm stat
 Częsty pattern
 `Auto Scaling Group + Launch Template + MixedInstancesPolicy`
 
+**EC2 User Data**
+bootstrap our instance using an EC2 User data script, only once at the instance first start
+can automate boot tasks such as:
+ - installing updates
+ - installing software
+ - downloading common files from internet
+ _run with root user_ nie trzeba `sudo`
+ 
 
 ___
 Metadata:

@@ -5,6 +5,7 @@ Note:
 >[!tip]
 >**AWS Global Accelerator** is a networking service (usługa sieciowa) optymalizująca routing sieciowy (TCP/UDP) do wielu regionów, poprawiając stabilność i redukując opóźnienia.
 >Używa **anycast ip** to work
+>no DNS cache issue (chcemy przełączyć a TTL trzyma)
 
 Global accelerator - optymalizator ruchu do aplikacji globalnych
 natomiast
