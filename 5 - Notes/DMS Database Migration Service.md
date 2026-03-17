@@ -9,7 +9,7 @@ quick and securely migtrate databases to AWS
 
 ![[Pasted image 20260310131434.png]]
 
-jak chce multi-azdeployment robi sie repliki _Replica_
+jak chce multi-az deployment robi sie repliki _Replica_
 
 ![[Pasted image 20260310131451.png]]
 
