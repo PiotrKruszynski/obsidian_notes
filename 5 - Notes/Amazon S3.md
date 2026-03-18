@@ -3,8 +3,8 @@ ___
 Note:
 
 >[! Important]
->- _Amazon Simple Storage Service_ is a key / value store for objects
->- greate for bigger objects, not so great for many small object
+>Amazon S3 is an object storage service that stores data as objects within buckets. An _object_ is a file and any metadata that describes the file. A _bucket_ is a container for objects.
+>- _ key / value store for objects, greate for bigger objects, not so great for many small object
 >- serverless, scales infinitely, max object size is 5TB, versioning capability
 >- **tiers:** _S3 Standard_, _S3 Infrequent Access_, _S3 Intelligent_, _S3 Glacier_ + lifecycle policy
 >- **features:** Versioning, Encryption, Replication, MFA-Delete, Access Log ..
@@ -26,6 +26,8 @@ Note:
 >		- [[Amazon EventBridge]]
 
 **Use case:** static files, key value store for big files, website hosting
+
+![[Pasted image 20260318185233.png]]
 
 usecase:
 - backup and storage
