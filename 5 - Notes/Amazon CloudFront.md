@@ -84,6 +84,128 @@ Many modern applications execute logic at the edge to minimize latency. CloudFro
 CloudFront can make an existing application **scalable and cheaper**. By caching static software update files or website assets at the edge, it reduces the load on your EC2 Auto Scaling Group (ASG), saving on compute and network bandwidth costs.
 
 
+# Amazon CloudFront — minimum pod SAA
+
+>[!important]
+>- CloudFront = **CDN (Content Delivery Network)**
+>- cache’uje content **blisko użytkownika (edge locations)**
+>- zmniejsza latency i load na origin
+>- wspiera: **S3, EC2, ALB, custom origins**
+>- używany do: **static + dynamic content delivery**
+
+---
+
+### Mental model
+CloudFront = **cache przed Twoim backendem**
+
+👉 user:
+- trafia do najbliższego edge location  
+
+👉 jeśli cache HIT:
+- dostaje odpowiedź od razu  
+
+👉 jeśli MISS:
+- CloudFront idzie do **origin**
+
+---
+
+### Core elements
+
+#### Origin
+źródło danych:
+- **S3 bucket**
+- **ALB / EC2**
+- custom HTTP server
+#### Edge locations
+- globalna sieć AWS
+- trzymają cache
+#### Cache behavior
+definiuje:
+- co cache’ować
+- TTL (Time To Live)
+- routing (path-based)
+
+---
+
+### Jak działa cache
+- **Cache Hit** → szybka odpowiedź  
+- **Cache Miss** → fetch z origin  
+
+👉 TTL decyduje:
+- jak długo trzymać dane w cache
+
+---
+
+### Kiedy używać
+- strony statyczne (S3 + CloudFront)
+- API acceleration
+- globalne aplikacje
+- streaming
+
+---
+### Security
+- HTTPS (SSL/TLS)
+- **AWS Shield** (DDoS)
+- **WAF** (Web Application Firewall)
+- Signed URLs / Cookies
+
+>[!exam]
+>secure content delivery → CloudFront + WAF  
+
+---
+
+### CloudFront + S3
+- S3 jako origin
+- można:
+  - zablokować public access
+  - używać **OAC/OAI**
+
+👉 tylko CloudFront ma dostęp
+
+>[!exam]
+>private S3 + public access → CloudFront  
+
+---
+### Performance
+- caching
+- compression
+- HTTP/2, HTTP/3
+- global routing
+
+---
+### Trade-offs
+- koszt (cache + transfer)
+- invalidation (może kosztować)
+- cache consistency (TTL delay)
+
+---
+
+### CloudFront vs S3 static hosting
+
+| Feature | CloudFront | S3 |
+|--------|-----------|----|
+| CDN | ✅ | ❌ |
+| global cache | ✅ | ❌ |
+| security (WAF) | ✅ | ❌ |
+
+---
+
+### Exam traps
+- global content → CloudFront, nie ALB  
+- private S3 → CloudFront (OAC/OAI)  
+- low latency worldwide → CloudFront  
+
+- CloudFront ≠ API Gateway  
+- CloudFront ≠ S3  
+
+---
+
+### TL;DR
+- CDN → CloudFront  
+- cache → edge locations  
+- origin → S3 / ALB / EC2  
+- security → WAF + Shield  
+
 ___
 Metadata:
 
