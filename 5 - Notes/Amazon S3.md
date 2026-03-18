@@ -1,227 +1,342 @@
-Created: 2026-02-16  11:05
-___
-Note:
 
->[! Important]
->Amazon S3 is an object storage service that stores data as objects within buckets. An _object_ is a file and any metadata that describes the file. A _bucket_ is a container for objects.
->- _ key / value store for objects, greate for bigger objects, not so great for many small object
->- serverless, scales infinitely, max object size is 5TB, versioning capability
->- **tiers:** _S3 Standard_, _S3 Infrequent Access_, _S3 Intelligent_, _S3 Glacier_ + lifecycle policy
->- **features:** Versioning, Encryption, Replication, MFA-Delete, Access Log ..
->- **security:** [[IAM]], _bucket policies_, _ACL_ (stare), _Access Points_, _Object Lambda_, [[CORS cross-origin resource sharing]], _Object/Vault Lock_
->- **encription:** _SSE-S3_, _SSE-KMS_, _SSE-C_, client-side, [[SSL TLS]] in transit, default encription
->- **batch operations** on objects using _S3 Batch_, -> if u want to copy or encript not encripted S3
->	- batch replication - kopiuj stare dane, ogromne dane przez AWS
->	- można też polecenie `aws s3 sync` -> ty decydujesz, szybkie
->- **listing files** using _S3 Inventory_ -> periodycznie generuje raport  z zawartością bucketu
->- **performance:**
->	- _Multi-part uploads_ -> parallel uploads of files
->	- _S3 Transfer Acceleration_, -> transfer faster, nie działa S3 -> S3 tylko dla klient -> S3
->	- _S3 Select_ -> pozwala wykonać SQL bezpośrednio na obiekcie w S3 i pobrać tylko wybrane dane zamiast całego pliku
->- **automation:** 
->	- S3 Event Notifications:
->		- [[Amazon SNS]], 
->		- [[Amazon SQS]],
->		- [[AWS Lambda]],
->		- [[Amazon EventBridge]]
+Created: 2026-02-16 11:05
 
-**Use case:** static files, key value store for big files, website hosting
+istnieją block storage / file storage / object storage
 
-![[Pasted image 20260318185233.png]]
-
-usecase:
-- backup and storage
-- disaster recovery
-- archive
-- hybrid cloud storage
-- app hosting
-- media hosting
-- data lakes & big data analytics
-- software delivery
-- static website
+>[!important]
+>**Amazon S3 = object storage**
+>- przechowuje dane jako **objects** w **buckets**
+>- bucket = kontener, object = dane + metadata + key
+>- **max object size = 5 TB**
+>- praktycznie nieograniczona skala
+>- świetne dla: static files, backup, archive, data lake, media, DR, static website
+>- **nie jest file systemem** i nie jest block storage
 
 ---
-# 📋 1. Core Concepts: Buckets & Objects
 
-• **Buckets:**
-    ◦ **Naming** Bucket names must be **globally unique** across all AWS accounts and regions. Must be 3–63 characters, no uppercase, no underscores, and must start with a lowercase letter or number.
-    ◦ **Regional Service:** While the namespace is global, buckets are created in a specific **AWS Region**.
-![[Pasted image 20260216111457.png]]
+# 1. Mental model / feature map
 
-• **Objects (Files):**
-    ◦ **Key:** The full path (e.g., `s3://my-bucket/folder/file.txt`). There is no true concept of "directories," only long keys with slashes.
-    ◦ **Size Limits:** Max object size is **5 TB**. Single uploads are limited to 5 GB; for anything larger, you **must use Multi-part upload**.
-    ◦ **Metadata & Tags:** Objects can have system/user metadata (key-value pairs) and up to 10 Unicode tags (useful for security and lifecycle rules).
-    
-![[Pasted image 20260216111511.png]]
+### Cost / storage classes
+- **S3 Standard**
+- **S3 Intelligent-Tiering**
+- **S3 Standard-IA**
+- **S3 One Zone-IA**
+- **S3 Glacier Instant Retrieval**
+- **S3 Glacier Flexible Retrieval**
+- **S3 Glacier Deep Archive**
+- **S3 Express One Zone**
 
---------------------------------------------------------------------------------
+### Security
+- **IAM policies**
+- **Bucket policies**
+- **ACL** (legacy)
+- **Block Public Access**
+- **Access Points**
+- **Object Lock**
+- **Encryption at rest + in transit**
 
-# 💰 2. Storage Classes & Cost Optimization
+### Data protection
+- **Versioning**
+- **Replication (CRR / SRR / Batch Replication)**
+- **Multi-Region Access Points**
+- **AWS Backup**
 
-AWS offers various storage tiers depending on access frequency and cost requirements:
+### Performance / transfer
+- **Multipart Upload**
+- **Byte-Range Fetches**
+- **Transfer Acceleration**
+
+### Automation / processing
+- **Event Notifications**
+- **EventBridge**
+- **S3 Batch Operations**
+- **S3 Inventory**
+- **S3 Object Lambda**
+- **S3 Select**
+
+---
+# 2. Core facts
+
+- bucket names są **globally unique**
+- bucket tworzysz w konkretnym **Region**
+- obiekt identyfikuje **key**
+- "foldery" w S3 to tylko **prefixes**
+- obiekt = **data + metadata + tags**
+- metadata user-defined po uploadzie nie edytujesz bezpośrednio → zwykle **copy object z nową metadata**
 
 >[!tip]
->**retrieval** - pobranie danych ( odczyt) ze storage
->odczyt obiektu z bucketu
-
-![[Pasted image 20260217115002.png]]
-
-| Storage Class                        | Availability | Characteristics & Use Cases                                                                                                                                                  |                         |
-| ------------------------------------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| **S3 Standard**                      | 99.99%       | General purpose; high throughput, low latency; for frequently accessed data. ==big data, mobile, gaming app, content distribution==                                          | netflix                 |
-| **S3 Intelligent-Tiering**           | 99.9%        | Automatically moves data between tiers based on usage; **no retrieval fees**.                                                                                                |                         |
-| **Standard-IA**. (Infrequent Access) | 99.9%        | for data that is **less frequent accessed**, but requires rapid access; lower storage cost but has a **retrieval fee**; for backups/DR.                                      | backups                 |
-| **One Zone-IA** (Infrequent Access)  | 99.5%        | for data that is **less frequent accessed**, but requires rapid access.  Stored in a **single AZ**; 20% cheaper than Standard-IA; data lost if AZ is destroyed. No analytics |                         |
-| **S3 Glacier Instant**               | 99.9%        | Millisecond retrieval; for data accessed once a quarter. No analytics                                                                                                        | archiwizacja dokumentów |
-| **S3 Glacier Flexible**              | 99.99%       | Retrieval times: Expedited (1-5 min), Standard (3-5 hrs), Bulk ( 5-12 hrs). No analytics                                                                                     |                         |
-| **S3 Glacier Deep Archive**          | 99.99%       | Long-term storage (years); retrieval in 12–48 hours; cheapest tier. No analytics                                                                                             |                         |
-| **S3 Express One Zone**              | 99.95%       | **Highest performance**; single-digit millisecond latency; for AI/ML and HPC. No analytics                                                                                   |                         |
-![[Pasted image 20260217115022.png]]
-
-![[Pasted image 20260217115035.png]]
-
-• **Lifecycle Rules:** Automate the:
-- **transition between classes** (e.g., move to Glacier after 60 days) or 
-- **expire (delete)**  objects.
-
-![[Pasted image 20260217125401.png]]
-
-![[Pasted image 20260217124612.png]]
-
-• **S3 Analytics:** Provides recommendations on when to transition objects to IA.
-
-![[Pasted image 20260217115111.png]]
-
-jeszcze S2 one zone
-![[Pasted image 20260217122500.png]]
+>Myśl o S3 jak o:
+>- ogromnym **key-value store dla obiektów**
+>- gdzie key = pełna ścieżka logiczna
+>- ale bez prawdziwej hierarchii katalogów
 
 ---
-# 🔒 3. Security and Access Control
 
-## 3.1  **User-Based:** 
-**IAM Policies** define which API calls a specific user can make.
+# 3. Bucket types
 
-## 3.2 Resource-Based:
-**[[resource-based policy]]:**
-- **Bucket Policies:** JSON-based rules for the entire bucket (often used for public access or cross-account permissions).
-polityka w bucket policy jest przypięta do zasobu i może powiedzieć
-```JSON
-{
-  "Effect": "Allow",
-  "Principal": {
-    "AWS": "arn:aws:iam::123456789012:root"
-  },
-  "Action": "s3:GetObject",
-  "Resource": "arn:aws:s3:::my-bucket/*"
-}
-```
-![[Pasted image 20260316140233.png]]
--  **Access Control Lists (ACLs):** Legacy fine-grained control (can be disabled).
--  **Origin Access Control (OAC):** Used when **CloudFront accesses a private S3 bucket**.
- Why OAC?
--  Keeps bucket **private**
- - Prevents direct S3 URL access
- - Enforces secure CloudFront-only access
- 
-![[Pasted image 20260225121304.png]]
+## General purpose bucket
+- domyślny i najczęstszy typ
+- do prawie wszystkich use case’ów
+- obsługuje prawie wszystkie storage classes
+## Directory bucket
+- używany z **S3 Express One Zone**
+- pod bardzo niską latencję i wysoką wydajność
+- **single AZ**
+## Table bucket
+- pod analitykę i dane tabelaryczne
+- powiązany z **S3 Tables**
+- bardziej niszowy niż klasyczny bucket
 
-• **Block Public Access:** Settings used to prevent accidental data leaks; can be applied at the account or bucket level.
-• **MFA Delete:** Requires multi-factor authentication to permanently delete a version or suspend versioning.
-• **[access points]:** Simplify managing data access for shared datasets by creating unique hostnames for different applications.
-- izoluje ruch
-- prostsze skalowanie dostępu
-- specyficzne zasady dla konkretnego kontekstu
-![[Pasted image 20260217235637.png]]
+---
+# 4. Storage classes — co wybrać
 
-access point - [[VPC origin]]
-![[Pasted image 20260217235655.png]]
+>**retrieval** - pobranie danych ( odczyt) ze storage
+>odczyt obiektu z bucketu
+## S3 Standard
+- hot data
+- niski latency, wysoka dostępność
+- najczęstszy default
+## S3 Intelligent-Tiering
+- gdy nie znasz patternu dostępu
+- automatycznie przenosi dane między tierami
+## Standard-IA 
+- infrequent access
+- dane rzadziej używane, ale potrzebny szybki dostęp
+- tańszy storage, ale opłata za retrieval
+## One Zone-IA
+- jak IA, ale w **jednej AZ**
+- tańszy, ale mniejsza odporność
+## Glacier Instant Retrieval
+- archive, ale dostęp w milisekundach
+## Glacier Flexible Retrieval
+- archive z wolniejszym retrieval
+	- expedited(1-5min)
+	- standard(3-5h)
+	- bulk(5-12)
+## Glacier Deep Archive
+- najtańszy, bardzo wolny retrieval (12-48h)
+## S3 Express One Zone
+- najwyższa wydajność
+- single-digit millisecond latency
+- **single AZ**
 
---------------------
-# 🔑 4. Data Encryption
+>[!exam]
+>- **unknown access pattern** → Intelligent-Tiering
+>- **rare access but fast retrieval** → Standard-IA
+>- **archive** → Glacier
+>- **ultra low latency** → Express One Zone
 
-• **Encryption at Rest:**
-    ◦ **SSE-S3 (==Default==):** Handled and managed by AWS using AES-256. **You Must set header
-    ![[Pasted image 20260217142048.png]]
-    ◦ **SSE-KMS:** Uses AWS Key Management Service; provides audit trails and user control. **Must set header**
-    nowe **DSSE-KMS is just "double encryption based on KMS".** 
-    ![[Pasted image 20260217142100.png]]
-    ![[Pasted image 20260217142308.png]]
-    ◦ **SSE-C:** Customer manages the keys; AWS handles encryption/decryption. **HTTPS must be used** 
-    ![[Pasted image 20260217142403.png]]
-    ◦ **Client-Side Encryption:** Customer encrypts data _before_ uploading to S3.
-    ![[Pasted image 20260217142438.png]]
+---
+# 5. Upload / download / integrity
 
-• **Encryption in Transit:** Uses **SSL/TLS**. Use bucket policies with `aws:SecureTransport: false` to **deny HTTP** requests.
-![[Pasted image 20260217142533.png]]
+## Upload
+- wymaga uprawnień do zapisu
+- jeśli **versioning ON** i wrzucisz ten sam key → nowa wersja
+- nowe obiekty są domyślnie szyfrowane **SSE-S3**
+## Multipart Upload
+- zalecany dla obiektów **>= 100 MB**
+- plik dzielisz na części
+- części można wysyłać równolegle
+- retry tylko nieudanego parta
+- proces:
+	  1. initiate
+	  2. upload parts
+	  3. complete
+- jeśli nie kończysz uploadu → warto **abort**, bo części kosztują
 
-a jak wymusić encription in transit? DAJĄC **bucket policy** z SecureTransport
-![[Pasted image 20260217143357.png]]
+## Checksums / integrity
+- S3 wspiera checksumy do walidacji integralności
+- można też użyć **Content-MD5**
+- przy multipart **ETag nie musi być MD5 całego pliku**
 
---------------------------------------------------------------------------------
+## Byte-Range Fetches
+- pobierasz tylko fragment obiektu
+- dobre do równoległego downloadu dużych plików
 
-# 🔄 5. Durability, Versioning, and Replication
+---
+# 6. Security / access control
 
-• **Durability:** All storage classes (except One Zone) provide **11 9's (99.999999999%)** durability.
-• **Versioning:** Protects against accidental deletes or overwrites by keeping previous versions of an object.
+## IAM
+- user-based permissions
+- kontrola kto może zrobić `GetObject`, `PutObject`, itd.
+## Bucket Policy
+- resource-based
+- bardzo częste w cross-account i public/private access
+## ACL
+- legacy
+- egzaminowo: **prefer IAM + Bucket Policy**
+## Block Public Access
+- ochrona przed przypadkowym upublicznieniem
+## Access Points
+- osobne endpointy i polityki dostępu do jednego bucketu
+- dobre dla wielu aplikacji / zespołów / data lake
+## Object Lambda
+- modyfikuje wynik **GET / HEAD / LIST** przez Lambda
+- np. redakcja danych, resize obrazów, custom view
+## Presigned URL
+- tymczasowy dostęp do GET/PUT bez nadawania userowi AWS credentials
+- upload przez presigned URL może nadpisać istniejący obiekt z tym samym key
 
-![[Pasted image 20260217122920.png]]
+---
+# 7. Encryption
 
-• **Replication:** ! versioning must be enable
-- **CRR ([Cross Region Replication]):** For compliance, lower latency, or cross-account needs.
-- **SRR:** For log aggregation or live replication between test/prod.
-![[Pasted image 20260218130244.png]]
+## At rest
+- **SSE-S3** — default
+- **SSE-KMS** — więcej kontroli, audit, KMS permissions
+- **DSSE-KMS** — podwójna warstwa szyfrowania
+- **SSE-C** — klucz dostarcza klient
+- **Client-side encryption** — szyfrujesz przed wysłaniem do S3
+## In transit
+- **SSL/TLS**
+- wymuszanie HTTPS zwykle przez bucket policy z warunkiem `aws:SecureTransport`
 
+>[!exam]
+>- default encryption now = **SSE-S3**
+>- jeśli chcesz audit / key control / cross-service KMS → **SSE-KMS**
+>- SSE-KMS może generować dużo requestów do KMS → pomagają **S3 Bucket Keys**
 
-   
-![[Pasted image 20260217111907.png]]
+---
+# 8. Versioning / deletion / immutability
 
-![[Pasted image 20260217112139.png]]
---------------------------------------------------------------------------------
+## Versioning
+- chroni przed accidental overwrite i accidental delete
+- delete zwykle dodaje **delete marker**
+- po włączeniu bucket nie wraca do truly unversioned; można tylko **suspend**
+## MFA Delete
+- dodatkowa ochrona przed usunięciem wersji lub zmianą versioning state
+- temat bardziej egzaminowy niż praktyczny
+## Block Public Access
+- Settings used to prevent accidental data leaks; can be applied at the account or bucket level.
+## Origin Access Control (OAC): 
+- Used when **CloudFront accesses a private S3 bucket**.
+- keep buckets **private**
+- enforce secure CloudFront only access
+## Object Lock
+- model **WORM**
+- działa na wersjach obiektów
+- wymaga **versioning**
+- tryby:
+  - **Governance**
+  - **Compliance**
+- dodatkowo **Legal Hold**
 
-# ⚡ 6. Performance & Automation
+>[!exam]
+>- compliance = nawet root nie może usunąć przed końcem retention
+>- governance = wybrani użytkownicy mogą obejść zasady
 
-• **Acceleration:**
-    ◦ **Multi-part upload:** Recommended for files > 100MB; parallelizes the upload. Nie działa w locie. 
-    ◦ **Transfer Acceleration:** Uses **AWS Edge Locations** to speed up long-distance transfers into S3. Nie dla S3->S3
-    ◦ **Byte-Range Fetches:** Parallelizes downloads by requesting specific parts of a file.
-• **Event Notifications:** S3 can trigger **Lambda, SQS, or SNS** when objects are created or removed.
-• **S3 Batch Operations:** Perform bulk actions (like encrypting or copying) on millions of objects with one request.
+---
+# 9. Replication / DR
 
-multi-part upload -> dla dużych plików
-s3 transfer acceleration -> globalna szybkość przesyłu 
-![[Pasted image 20260217135055.png]]
+## Live replication
+- automatyczna, asynchroniczna
+- dla nowych / zmienionych obiektów
+## CRR
+- **Cross-Region Replication**
+- compliance, niższa latencja dla innych regionów, DR
+## SRR
+- **Same-Region Replication**
+- np. log aggregation, kopiowanie między kontami w tym samym regionie
+## Batch Replication
+- do istniejących obiektów
+- on-demand
+## Multi-Region Access Points
+- global endpoint dla wielu bucketów w różnych regionach
+- ruch idzie do najbliższego aktywnego regionu
+- przydatne w multi-region apps i failover
 
-![[Pasted image 20260217135108.png]]
+>[!exam]
+>- live replication nie służy do kopiowania historycznych danych
+>- do starych obiektów → **Batch Replication**
+>- replication jest **asynchroniczna**
 
-byte-range fetches
-![[Pasted image 20260217135125.png]]
+---
+# 10. Automation / analytics / operations
 
-batch operations
-![[Pasted image 20260217135139.png]]
+## Event Notifications
+- zdarzenia do:
+  - **SNS**
+  - **SQS**
+  - **Lambda**
+- model dostarczenia: **at least once**
+- możliwe duplikaty i out-of-order events
+## EventBridge
+- alternatywna integracja eventowa dla szerszych scenariuszy routingu
+## S3 Batch Operations
+- masowe operacje na dużej liczbie obiektów
+- np. copy, tagging, restore, invoke Lambda
+- bazuje na **manifest**
+## S3 Inventory
+- periodyczny raport o obiektach
+- lepsze do audytu niż ręczne listowanie przez List API
+## S3 Select
+- pobierasz tylko część danych z jednego obiektu
+- SQL-like query na obiekcie
+## S3 Object Lambda
+- transformacja odpowiedzi przy odczycie
 
+---
+# 11. Performance
 
+- S3 skaluje się automatycznie
+- można robić bardzo dużo requestów na sekundę
+- dla lepszej wydajności:
+  - wiele równoległych połączeń
+  - multipart upload
+  - byte-range fetches
+  - EC2 i S3 w tym samym Region
+  - retry i timeout tuning
+  - **Transfer Acceleration** dla klientów daleko geograficznie
+## Transfer Acceleration
+- przyspiesza upload/download klient ↔ S3 przez edge locations
+- dobre dla globalnych uploadów
+- **nie do S3→S3 copy**
 
+### CLI / data transfer
+- `aws s3 sync` = diff + copy , kopiuje tylko zmienione,
+- działa rekurencyjnie (foldery)
+- wspiera:  
+	- local → S3  
+	- S3 → local  
+	- S3 → S3  
+- używa parallelizacji → szybkie transfery
 
---------------------------------------------------------------------------------
+>[!exam]  
+>- szybka migracja danych → `aws s3 sync`  
+>- S3 → S3 copy (cross-region) → często `sync` lub replication
 
-# 💡 Solutions Architect Insights
+---
+# 12. Static website / data lake / VPC
 
-• **VPC Endpoints:** Use **Gateway Endpoints** (free, route table based) to access S3 from a private VPC without an IGW. Use **Interface Endpoints** for on-premises access via Direct Connect/VPN.
-• **Static Website Hosting:** S3 can host static websites (HTML/CSS/JS) with a globally accessible URL.
-• **Data Lake:** S3 is the primary choice for data lakes due to its scalability and integration with analytics tools like **Athena**.
-• **Storage Lens:** Use this for organization-wide visibility into storage usage, cost-optimization, and data protection metrics.
-• **Object Lock:** Implements **WORM** (Write Once Read Many) to prevent deletion/overwrite for a specified period for compliance.
+## Static website hosting
+- S3 może hostować statyczną stronę
+- typowo dla HTML/CSS/JS
+- w praktyce często z **CloudFront**
+- bez CloudFront klasyczny website endpoint ma ograniczenia bezpieczeństwa i HTTPS
+## Data Lake
+- S3 to podstawowy storage dla data lake
+- integruje się z:
+  - Athena
+  - Glue
+  - EMR
+  - Redshift
+## Private access from VPC
+- do prywatnego dostępu do S3 z VPC zwykle:
+  - **Gateway Endpoint for S3**
 
-requester pays
-![[Pasted image 20260217130735.png]]
+---
+# 13. SAA traps
 
-![[Pasted image 20260217152355.png]]
-
-![[Pasted image 20260217152405.png]]
-
-S3 object lambda
-![[Pasted image 20260217235801.png]]
+- S3 **nie jest file systemem**
+- foldery w S3 **nie istnieją naprawdę**
+- multipart upload → **recommended od ~100 MB**
+- versioning chroni przed overwrite/delete, ale nie zastępuje backupu/compliance
+- replication jest **asynchroniczna**
+- stare dane → **Batch Replication**, nie zwykłe CRR/SRR
+- Event Notifications = **at least once**
+- ETag przy multipart **!= zawsze MD5**
+- default encryption = **SSE-S3**
+- **Access Points** upraszczają polityki dla współdzielonych bucketów
+- **Object Lock** wymaga versioning
 
 
 >[!tip]
