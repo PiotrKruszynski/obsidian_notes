@@ -53,7 +53,6 @@ AWS offers two types of endpoints depending on the service you want to access:
     - **Endpoint Policies:** Resource policies can be used to define which users or actions are allowed through the endpoint.
 - **VPC Flow Logs:** Can capture information about traffic going through endpoints to help identify rejected requests or potential attacks.
 
-
 # Alternatywa:
 s2s - lokalna infrastruktura z AWS, jednak ruch jest szyfrowany przez publiczny internet
 direct connect - dedykowana prywatna ścieżka

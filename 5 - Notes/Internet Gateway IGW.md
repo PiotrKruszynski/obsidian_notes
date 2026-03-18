@@ -27,7 +27,102 @@ you must update Route Tables
 ## zestawienie możliwości
 ![[Pasted image 20260310102739.png]]
 
+  
+>[!important]  
+>- IGW = **komponent VPC umożliwiający dostęp do Internetu**  
+>- działa jako **target w route table**  
+>- zapewnia:  
+>  - inbound + outbound Internet  
+>- wymagany dla **public subnets**  
+  
+---  
+  
+### Mental model  
+IGW = **brama między VPC a Internetem**  
+  
+👉 bez IGW:  
+- brak dostępu do Internetu    
+👉 z IGW:  
+- VPC może wysyłać i odbierać ruch publiczny    
+  
+---  
+  
+### Jak to działa  
+  
+1. tworzysz IGW    
+2. attach do VPC    
+3. w route table:  
 
+`0.0.0.0/0 → igw-xxxx`
+
+---
+
+### Warunki dostępu do Internetu
+
+EC2 ma Internet **tylko jeśli spełnia WSZYSTKIE:**
+
+- subnet ma route → IGW
+- instancja ma:
+    - public IP / Elastic IP
+- Security Group pozwala na ruch
+
+> [!exam]  
+> public subnet = route do IGW
+
+---
+### Public vs Private subnet
+
+|Typ|Route|Internet|
+|---|---|---|
+|public|IGW|✅|
+|private|brak IGW|❌|
+
+---
+### IGW vs NAT Gateway
+
+|Feature|IGW|NAT Gateway|
+|---|---|---|
+|inbound|✅|❌|
+|outbound|✅|✅|
+|public IP wymagane|✅|❌ (dla instancji)|
+
+👉 NAT:
+- dla private subnet
+- tylko outbound
+
+---
+
+### High availability
+- IGW jest:
+    - managed
+    - highly available
+    - scalable
+
+---
+
+### Security
+
+- IGW nie filtruje ruchu
+- kontrola przez:
+    - Security Groups
+    - NACL
+
+---
+
+### Exam traps
+
+- IGW ≠ NAT
+- private subnet → nie ma IGW route
+- public IP bez IGW → brak Internetu
+
+---
+
+### TL;DR
+
+- IGW = dostęp do Internetu dla VPC
+- route `0.0.0.0/0 → IGW`
+- public subnet → IGW
+- inbound + outbound
 
 ___
 Metadata:
@@ -37,7 +132,7 @@ Metadata:
 type: tool    # concept | service | comparison
 language: aws
 ---
-```
+
 
 Status: #pending
 Tags: #aws #vpc

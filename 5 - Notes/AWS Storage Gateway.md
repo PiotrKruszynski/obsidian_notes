@@ -14,7 +14,6 @@ Storage Gateway = **proxy/cache między on-prem a AWS**
 
 👉 lokalnie:
 - aplikacja widzi normalny storage (NFS / iSCSI)
-
 👉 w tle:
 - dane lecą do AWS (S3 / EBS / Glacier)
 
