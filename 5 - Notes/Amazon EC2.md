@@ -11,7 +11,83 @@ high-performance hardware disk
 	- risk of data loss -> back up is your responsibility
 	- no snapshot, nie da się odłączyć i podpiąć do innej instancji
 
-# EC2 purchasing options
+
+**EC2 User Data**
+bootstrap our instance using an EC2 User data script, only once at the instance first start
+can automate boot tasks such as:
+ - installing updates
+ - installing software
+ - downloading common files from internet
+ _run with root user_ nie trzeba `sudo`
+**Instance Storage** - physical storage for your EC2 instance (high IOPS)
+
+
+# Amazon EC2 — minimum pod SAA
+
+>[!important]
+>- EC2 = **compute (VM) w AWS**
+>- pełna kontrola nad OS (SSH/RDP)
+>- płacisz za **czas działania + typ instancji**
+>- fundament: **instance type + AMI + storage + networking**
+>- skalowanie przez **Auto Scaling + Load Balancer**
+
+---
+### Mental model
+EC2 = **serwer w chmurze na żądanie**
+
+👉 masz:
+- CPU / RAM / disk / network  
+- pełny dostęp do systemu  
+👉 AWS zapewnia:
+- infrastrukturę  
+- provisioning  
+
+---
+### Core elements
+#### Instance type
+- określa: CPU, RAM, network
+- rodziny:
+  - **t / t3 / t4g** → burst (tanie)
+  - **m** → general purpose
+  - **c** → compute optimized
+  - **r** → memory optimized
+  - **p / g** → GPU
+#### AMI (Amazon Machine Image)
+- template systemu (OS + config)
+- np.:
+  - Amazon Linux
+  - Ubuntu
+  - Windows
+#### Storage
+- **EBS**
+  - persistent
+  - block storage
+- **Instance Store**
+  - ephemeral (ginie po stopie)
+
+>[!exam]
+>trwałe dane → EBS  
+>cache/temp → instance store  
+#### Networking
+- działa w **VPC**
+- ma:
+  - private IP (zawsze)
+  - public IP (opcjonalnie)
+- security:
+  - **Security Groups (stateful)**
+  - **NACL (stateless)**
+
+---
+### Scaling
+
+- **Auto Scaling Group (ASG)**
+  - automatyczne dodawanie/usuwanie instancji
+- **Load Balancer (ALB/NLB)**
+  - rozkład ruchu
+
+>[!exam]
+>high availability → ASG + ALB  
+### Pricing models
 **On-Demand Instances** - płacisz za dokładny czas działania, bez zobowiązań, najdroższa w długim użyciu
 **Reserved Instance** - rezerwujesz instancję na 1 lub 3 lata, zniżka do70%
 **Convertible Reserved Instances** - masz opcje zmiany typu instancji
@@ -25,15 +101,50 @@ Spoko dla Batch processing, BigData(Spark, Hadoop), ML training, renderingm stat
 Częsty pattern
 `Auto Scaling Group + Launch Template + MixedInstancesPolicy`
 
-**EC2 User Data**
-bootstrap our instance using an EC2 User data script, only once at the instance first start
-can automate boot tasks such as:
- - installing updates
- - installing software
- - downloading common files from internet
- _run with root user_ nie trzeba `sudo`
- 
+---
 
+### Kiedy używać
+
+- pełna kontrola nad systemem
+- custom software
+- legacy apps
+- gdy Lambda jest za ograniczona
+
+---
+
+### Trade-offs
+
+- wymaga zarządzania (patching, scaling)
+- większy ops niż serverless
+- większa elastyczność vs większa złożoność
+
+---
+
+### EC2 vs Lambda vs ECS
+
+| Service | Typ | Use case |
+|--------|-----|---------|
+| EC2 | VM | full control |
+| Lambda | serverless | event-driven |
+| ECS/Fargate | containers | microservices |
+
+---
+
+### Exam traps
+
+- EC2 ≠ serverless  
+- HA → minimum 2 AZ + ASG  
+- public access → przez ALB lub public IP  
+- EBS jest **AZ-scoped**  
+
+---
+
+### TL;DR
+
+- EC2 = VM w chmurze  
+- kontrola vs ops  
+- ASG + ALB = skalowanie + HA  
+- EBS = trwałe dane  
 ___
 Metadata:
 

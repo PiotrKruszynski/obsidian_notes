@@ -9,6 +9,7 @@ Note:
 >- przenosi dane do: **S3, EFS, FSx**
 >- zoptymalizowany pod **duże migracje i sync**
 >- automatyzuje: copy + verify + retry
+>- nie jest continous jak streaming, ustawiasz jednorazowy / lub schedule
 
 ### Mental model
 DataSync = **managed rsync + parallel transfer + integrity check**
@@ -29,7 +30,6 @@ masz:
   - checksum validation
 ### Obsługiwane źródła
 - NFS  
-- SMB  
 - S3  
 - FSx  
 - EFS  
@@ -47,7 +47,6 @@ masz:
 - data lake ingestion
 
 ---
-
 ### DataSync vs aws s3 sync
 
 | Feature | DataSync | aws s3 sync |
@@ -78,6 +77,7 @@ masz:
 - duże transfery danych → DataSync  
 - on-prem ↔ AWS → DataSync  
 - szybkie, bezpieczne, automatyczne  
+- przy przenoszeniu/kopiowaniu zachowujesz prawa POSIX, tak jak na lokalnym Linux
 
 ___
 Metadata:
