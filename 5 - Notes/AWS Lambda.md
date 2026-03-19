@@ -2,22 +2,66 @@ Created: 2026-02-24  13:57
 ___
 Note:
 
->[!tip]
->Serverless Functions-as-a-Service. Uruchamiasz kod bez zarządzania serwerami — płacisz tylko za czas wykonania.
+# AWS Lambda
 
-Lambda to FaaS — uruchamiasz funkcję w odpowiedzi na event. AWS zarządza wszystkim: serwerami, skalowaniem, dostępnością.
+>[!Definition]
+>- Lambda → **serverless compute (run code without servers)**
+>- event-driven (S3, API Gateway, SQS, EventBridge, etc.)
+>- billing: **per execution (ms + memory)**
+>- auto scaling (per request)
+>- stateless (ephemeral execution)
+>- max execution time: **15 min**
 
-**Kluczowe cechy:**
-- **Serverless** — zero zarządzania infrastrukturą
-- **Automatic scaling** — od 0 do tysięcy równoległych wywołań automatycznie
-- **Pay per use** — płacisz za liczbę wywołań i czas wykonania (ms), nie za idle
-- **Event-driven** — Lambda reaguje na eventy, nie działa ciągle
+# Mental model
+`Event → Lambda function → executes → returns / triggers next step`
+
+- każda invokacja = izolowane execution  
+- brak serwerów, brak capacity planning  
+- state trzymasz poza (S3, DynamoDB)  
+
+**Use case**: API backend, ETL, automation, event processing
+# Core features
+- runtime: Python, Node.js, Java, Go, .NET, custom
+- scaling:
+  - automatyczne (concurrency-based)
+- limits:
+  - timeout: **max 15 min**
+  - memory: **128 MB – 10 GB**
+- triggers:
+  - sync (API Gateway)
+  - async (S3, SNS, EventBridge)
+- integrations:
+  - native AWS ecosystem
+# How it works
+`Event → Lambda → run code → return / push result`
+
+- cold start (first invocation)  
+- stateless execution  
+- optional retries (async sources)  
+
+# Comparison
+
+| Feature | Lambda | EC2 |
+|--------|--------|-----|
+| Servers | none | you manage |
+| Scaling | auto | manual |
+| Billing | per request | per uptime |
+| Use case | short tasks | long-running |
+
+# Exam traps
+- ❌ Lambda = long-running jobs → NIE (15 min max)
+- ❌ persistent state → NIE (stateless)
+- ❌ no scaling limits → NIE (concurrency limits)
+- ❌ no cold start → NIE (istnieje)
+- ❌ always cheaper → NIE (high load → ECS/EC2 lepsze)
+
+# TL;DR
+- Lambda = **event-driven serverless compute**
+- max 15 min, stateless
+- idealne do **short, scalable tasks**
 
 ![[Pasted image 20260224145409.png]]
 
-**AWS Lambda Layer** - mechanizm pozwalający na współdzielenie kodu lub zasobów pomiędzy różnymi funkcjami Lambda. Layer może zawierać biblioteki, zależności, a nawet wspólny kod, który funkcje dołączają do swojego środowiska wykonawczego
-
-**HTTP request is translated into a JSON event** - gdy przychodzi zapytanie HTTP, na przykład przez API Gateway, to jego treść, nagłówki, parametry i inne elementy są „tłumaczone” na strukturę JSON. Taki obiekt JSON zawiera informacje o ciele żądania, ścieżce, metodzie (GET, POST itd.), parametrach zapytania i innych danych. Lambda otrzymuje taki obiekt jako event, co pozwala jej działać bezpośrednio na tych danych. W praktyce oznacza to, że funkcja Lambda nie musi analizować surowego protokołu HTTP
 
 **CloudWatch Alarm** - lambda szybko się skaluje więc ważny jest monitoring
 
@@ -41,17 +85,6 @@ By default, AWS Lambda functions always operate from an AWS-owned VPC
 
 **Na egzaminie:** zadanie trwa dłużej niż 15 minut → Lambda nie nadaje się → użyj [[Amazon ECS]] / [[AWS Fargate]] lub EC2.
 
----
-
-## Języki (Runtimes)
-
-- Node.js, Python, Java, C#, Go, Ruby
-- **Custom Runtime** — dowolny język przez Lambda Layers
-- **Container Image** — obraz Docker do 10 GB z ECR (musi implementować Lambda Runtime API)
-
----
-
-## Triggery (źródła eventów)
 
 Lambda może być wywołana przez:
 
@@ -68,17 +101,6 @@ Lambda może być wywołana przez:
 |**Cognito**|event autoryzacji|
 |**CloudFront (Lambda@Edge)**|request przy edge location|
 
----
-
-## Pricing
-
-- **Requests:** pierwsze 1 mln wywołań/miesiąc — free. Potem $0.20 za 1 mln.
-- **Duration:** pierwsze 400 000 GB-sekund/miesiąc — free. Potem $0.0000166667 za GB-sekundę.
-
-Bardzo tanie przy nieregularnym ruchu. Przy ciągłym wysokim ruchu może być droższe niż EC2.
-
----
-
 ## Lambda + Application Load Balancer
 
 Lambda może odbierać HTTP/HTTPS przez ALB jako target group.
@@ -90,9 +112,6 @@ Client  →  ALB  →  Lambda Function
 - ALB konwertuje HTTP request na JSON event dla Lambdy
 - Lambda odpowiada JSON-em który ALB konwertuje na HTTP response
 - Wspiera Multi-Header Values (jeden klucz, wiele wartości)
-
----
-
 ## Asynchronous vs Synchronous
 
 **Synchronous** — czekasz na odpowiedź:
@@ -195,33 +214,17 @@ Działa jako:
 
 ### Architektura:
 
-Lambda  →  RDS Proxy  →  RDS
+`Lambda  →  RDS Proxy  →  RDS`
 
-# Concurrency i Throttling
-
-**Concurrency** = ile funkcji działa równolegle.
-
-- Domyślny limit: **1000 concurrent executions** per konto/region
-- Gdy limit przekroczony → **throttling** (błąd 429)
-
-**Reserved Concurrency** — gwarantujesz X równoległych wywołań dla konkretnej funkcji. Reszta konta ma limit - X.
-
-**Provisioned Concurrency** — Lambda z góry inicjalizuje N instancji. Eliminuje **cold start**.
-
----
 
 # Cold Start
-
 Przy pierwszym wywołaniu (lub po długiej przerwie) Lambda musi:
-
 1. załadować kod
 2. zainicjalizować runtime
 3. uruchomić handler
 
 To trwa kilkaset ms do kilku sekund — **cold start**.
-
 **Jak unikać:**
-
 - Provisioned Concurrency — Lambda zawsze ciepła
 - mniejszy deployment package — szybszy init
 - unikaj VPC jeśli nie potrzebujesz (VPC + ENI wydłuża cold start)
@@ -243,15 +246,14 @@ Lambda Function
 - zmniejsza rozmiar deployment package
 
 ---
-
 # Storage
 
-|Typ|Zakres|Rozmiar|Kiedy|
-|---|---|---|---|
-|`/tmp`|per invocation (persist między warm wywołaniami)|512 MB – 10 GB|tymczasowe pliki|
-|Lambda Layers|deployment-time|250 MB|biblioteki, dependencies|
-|S3|zewnętrzny|nieograniczony|duże pliki, persistent data|
-|EFS|zewnętrzny, VPC|nieograniczony|shared persistent storage|
+| Typ           | Zakres                                           | Rozmiar        | Kiedy                       |
+| ------------- | ------------------------------------------------ | -------------- | --------------------------- |
+| `/tmp`        | per invocation (persist między warm wywołaniami) | 512 MB – 10 GB | tymczasowe pliki            |
+| Lambda Layers | deployment-time                                  | 250 MB         | biblioteki, dependencies    |
+| S3            | zewnętrzny                                       | nieograniczony | duże pliki, persistent data |
+| EFS           | zewnętrzny, VPC                                  | nieograniczony | shared persistent storage   |
 
 ---
 
@@ -287,76 +289,9 @@ Kinesis / DynamoDB Streams  →  Lambda (batch)
 SNS  →  Lambda  →  błąd  →  SQS DLQ  →  analiza
 ```
 
----
-
-## Lambda vs EC2 vs ECS
-
-|-|Lambda|EC2|ECS/Fargate|
-|---|---|---|---|
-|Max czas|15 min|nieograniczony|nieograniczony|
-|Skalowanie|automatyczne natychmiastowe|wolniejsze (ASG)|szybsze niż EC2|
-|Cold start|tak|nie|nie|
-|Cena|per ms|per godzinę|per vCPU/RAM/s|
-|Kiedy|krótkie zadania event-driven|długie procesy, pełna kontrola|kontenery, długie zadania|
-
-# RDS → Lambda vs RDS Event Notifications
-
-### 1️⃣ Invoke Lambda from RDS i Aurora
-- Dotyczy **zmian danych** (INSERT / UPDATE)
-- Wspierane tylko przez : **RDS PostgreSQL, Aurora MySQL**
-- DB musi mieć:
-  - outbound access (Public / NAT / VPC Endpoint)
-  - IAM permissions (DB + Lambda resource policy)
-- Use case: reagowanie na zapis danych (np. wysyłka maila po zapisie)
-
-➡ Data-level event
-
----
-
-### 2️⃣ RDS Event Notifications
-- Dotyczą stanu **infrastruktury DB**, a nie samych danych. To bardziej operacyjny mechanizm
-- Przykłady:
-  - instance created / stopped / failed
-  - snapshot events
-  - parameter group changes
-- Wysyłane do: **SNS / EventBridge**
-- Opóźnienie: do ~5 minut
-- Nie zawiera informacji o danych
-
-➡ Infrastructure-level event
-
----
-
-### 🔥 Zapamiętaj
-Data change → Invoke Lambda  
-Infra change → Event Notification
 
 
 
-
-
-
----
-
-## Flashcards
-
-**Q: Jaki jest maksymalny timeout Lambdy?** A: 15 minut. Dłuższe zadania → ECS/Fargate lub EC2.
-
-**Q: Co to cold start i jak go unikać?** A: Opóźnienie przy pierwszym wywołaniu gdy Lambda inicjalizuje środowisko. Unikasz przez Provisioned Concurrency lub mniejszy package.
-
-**Q: Jaka jest różnica między Reserved a Provisioned Concurrency?** A: Reserved — gwarantujesz limit dla funkcji (ochrona przed throttlingiem innych). Provisioned — pre-inicjalizujesz instancje (eliminuje cold start).
-
-**Q: Jak Lambda czyta z SQS?** A: Przez Event Source Mapping — Lambda sama polluje SQS i przetwarza wiadomości w batchach.
-
-**Q: Kiedy Lambda potrzebuje VPC?** A: Gdy musi gadać z zasobami prywatnymi — RDS, ElastiCache, zasoby w prywatnych subnetach.
-
-**Q: Co to Lambda Layers?** A: Mechanizm współdzielenia bibliotek i dependencies między funkcjami. Max 5 layers per funkcja.
-
-**Q: Lambda@Edge vs CloudFront Functions — różnica?** A: Lambda@Edge — ciężka logika, auth, do 30s timeout. CloudFront Functions — lekkie transformacje headers/URL, < 1ms.
-
-**Q: Co się dzieje przy błędzie w asynchronicznym wywołaniu Lambdy?** A: Lambda retry 2 razy automatycznie. Po wyczerpaniu prób event trafia do Dead Letter Queue (SQS lub SNS).
-
-**Q: Ile kosztuje Lambda przy zerowym ruchu?** A: Zero — płacisz tylko za wywołania i czas wykonania. Brak idle costs.
 
 
 

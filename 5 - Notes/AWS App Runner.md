@@ -2,12 +2,6 @@ Created: 2026-02-24  12:48
 ___
 Note:
 
->[!tip]
->definition
-
-## AWS App Runner
-
-  
 >[!Definition]  
 >- **App Runner** → fully managed PaaS dla web apps (code / Docker → running service)  
 >- zero infra (no ECS/EKS, no servers)  
@@ -45,7 +39,6 @@ existing app → containerize → deploy target
 | Setup | zero | some |  
 | Scaling | auto | config |  
 | Use case | simple apps | production systems |  
-  
 # Exam traps  
 - ❌ App Runner = ECS → NIE (wyższy poziom abstraction)  
 - ❌ A2C uruchamia aplikację → NIE (tylko przygotowuje)  
