@@ -2,55 +2,66 @@ Created: 2026-02-03  11:57
 ___
 Note:
 
->[! Important]
->- Amazon Machine Image - snapshot-based image of instance state
->- immutable template for customization of  EC2 instance
->- faster boost & consistent configuration
->- build for specific region
+>[!Definition]
+>AMI = **template (image)** używany do uruchamiania EC2  
+>zawiera:
+>- OS
+>- aplikacje
+>- konfigurację
+>- referencję do EBS snapshot
 
-# AMI sources:
-I can launch EC2 instance from
-- public AMI
-- my own AMI
-- AWS Marketplace AMI
+### Mental model
+AMI = **"golden image" serwera**
 
-AMIs are ==build for specific region==. You must copy the AMI to the target AWS Region==
-# What AMI contains
-- EBS snapshot (root + optional data volumes)
-- boot configuration & metadata
-- permissions (private / public / shared)
+👉 launch EC2 = create instance from AMI
+### Co zawiera AMI
+- root volume (snapshot EBS)
+- OS (Linux / Windows)
+- software (np. nginx, app)
+- konfiguracje
+### Properties
+- **immutable** (nie edytujesz → tworzysz nowy)
+- **region-scoped**
+- można kopiować między regionami
+- można udostępniać:
+  - private
+  - public
+  - specific accounts
+### Typy AMI
+- AWS-provided
+- marketplace (płatne)
+- custom (twój image)
+### Jak powstaje AMI
+1. konfigurujesz EC2  
+2. tworzysz AMI  
+3. AWS robi snapshot EBS  
+4. powstaje reusable image  
 
-#### What AMI does not contains
-- running instance itself
-- instance ID
-- elastic IP
-- instance store data (lost)
-# AMI Process from EC2 instance
-1. **Launch EC2 instance**
-    Startujesz instancję EC2 z bazowego AMI.
-2. **Customize the instance**
-    Instalujesz software, konfigurujesz system i aplikację.
-3. **Stop the instance (recommended)**
-    Zapewnia **data integrity** (spójność systemu plików).
-    > Stop ≠ delete (EBS volumes remain).
-4. **Create AMI from the instance**
-    AWS:
-    - creates **EBS snapshots**,
-    - stores **boot & volume metadata**,
-    - does **not remove the original instance**.
-    
-5. **AMI is created (immutable template)**
-    AMI = snapshots + launch configuration.
-6. **Launch new EC2 instances from AMI**
-    Each new instance:
-    - gets **new EBS volumes**,
-    - data is copied **from snapshots**,
-    - is fully **independent**
-### **What happens to the original instance?**
-- Can be **restarted**,
-- can stay **stopped** (pay only for EBS),
-- or can be **terminated manually**.
-    👉 AMI is **not dependent** on it.
+### Use cases
+- autoscaling (identyczne instancje)
+- szybki deploy
+- DR / backup environment
+- pre-configured environments
+### AMI vs Snapshot
+
+| Feature | AMI | Snapshot |
+|--------|-----|---------|
+| cel | uruchamianie EC2 | backup |
+| zawiera OS | ✅ | ❌ |
+| bootowalny | ✅ | ❌ |
+
+---
+### Exam traps
+- AMI = region-specific  
+- snapshot → S3 (pośrednio AMI też)  
+- AMI nie jest modyfikowalne  
+- launch template ≠ AMI  
+### TL;DR
+- AMI = template EC2  
+- built from snapshot EBS  
+- immutable  
+- region-based  
+
 
 ___
 Metadata:

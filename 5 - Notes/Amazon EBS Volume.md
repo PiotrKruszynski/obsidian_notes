@@ -1,60 +1,111 @@
 Created: 2026-02-03  10:20
 ___
 
->[!Definition] 
->elastic block store
-network USB stick
 
-- network drive
-- bound to specific AZ
-- persist data after termination
-- to one instance at a time
-- detach & attach quickly
-- delete on termination
+>[!Definition]
+>EBS = **block storage (pamięć blokowa)** dla EC2  
+>działa jak **network-attached disk (USB przez sieć)**
 
-snapshot - kopia punktu w czasie
+---
+### Mental model
+- EBS = **dysk dla EC2**
+- EC2 = compute  
+- EBS = storage  
+👉 separation of compute & storage
+### Core properties
+- block storage (raw blocks)
+- attach do EC2
+- **bound to AZ**
+- persistent (dane nie znikają po stop instance)
+- **1 volume → 1 instance (default)**  
+- można:
+  - detach
+  - attach do innej instancji w tej samej AZ
+### Delete on termination
+- root volume:
+  - default → **deleted**
+- additional volumes:
+  - default → **NOT deleted**
+### Snapshot
 
-![[Pasted image 20260203123812.png]]
+>[!Definition]
+>snapshot = **backup punktowy EBS (do S3)**
 
-gp2 / gp3 -> cost effective storage, low-latency
+- incremental backup
+- używany do:
+  - backup
+  - restore
+  - kopiowania między AZ/Region
 
-io1, io2 -> Provisioned IOPS SSD -> critical business app, greate for databases workloads
+>[!exam]
+>snapshot = stored in S3 (nie w EBS)
 
-HDD (st1, sc1):
-- **cannot be boot volume**
-- lowest cost 
-- for data infrequently accessed
-- big data, data warehouses, log processing, backup, cookie
-- NIE do systemów operacyjnych i DB
+---
+### Volume types
 
-## Multi-attach
-- attach the same EBS volume to multiple EC2 instance in the same AZ
-- each instance has full read & write permissions to the high-performance volume
-- up to 16 EC2 instances at a time
-- must use file system that's cluster-aware
+#### SSD
+- **gp2 / gp3**
+  - general purpose
+  - low latency
+  - cost-effective
+- **io1 / io2**
+  - provisioned IOPS
+  - high performance
+  - DB, critical apps
+#### HDD
+- **st1 (throughput optimized)**
+- **sc1 (cold HDD)**
+- lowest cost
+- for:
+  - big data
+  - logs
+  - backup
 
-## Encrypted EBS
-- data at rest is encrypted inside the volume
-- szyfrowanie obejmuje cały cykl życia danych:
-	- at rest - dane zapisane na wolumenie
-	- in transition - dane miedzy EC2 a EBS
-	- snapshots - migawki EBS and volumes created from snapshot
+>[!exam]
+>HDD = ❌ cannot be boot volume  
+>HDD = ❌ not for DB
 
-Jak działa?
-- algorytm AES-256
-- klucze zarządzane przez AWS Key Management Service (KMS)
-- szyfrowanie na poziomie infrastruktury AWS, niewidoczne dla instancji EC2
+---
+### Multi-Attach
+- tylko dla **io1 / io2**
+- attach do wielu EC2
+- **same AZ**
+- do 16 instancji
+- full read/write
 
-Aby zaszyfrować niezaszyfrowane EBS volume
-- create an EBS snapshit of the volume
-- encrypt the EBS snapshot (using copy)
-- create new EBS volume from snapshot
+>[!important]
+>wymaga **cluster-aware filesystem**
+### Encryption
+- encryption by default możliwe
+- obejmuje:
+  - at rest
+  - in transit (EC2 ↔ EBS)
+  - snapshots
+- AES-256
+- KMS (key management)
+### Jak zaszyfrować istniejący volume
+1. snapshot
+2. copy snapshot + encrypt
+3. create new volume
+### Backup notes
+- snapshot = point-in-time
+- można robić na działającym volume  
+  👉 ale:
+  - **lepiej detach (consistency)**
 
-###### backup of your EBS at a point in time
-##### recommended to detach volume to do snapshot
-#### can copy snapshot across AZ 
+---
+### Limitations / traps
+- AZ-bound → nie cross-AZ attach
+- trzeba zrobić snapshot żeby przenieść
+- EBS ≠ shared filesystem (to nie EFS)
+### TL;DR
+- EBS = block storage dla EC2  
+- AZ-scoped  
+- snapshot → S3  
+- SSD = DB  
+- HDD = big data  
+- Multi-attach tylko io1/io2  
 
-also use to encrypt ebs which are not encrypted !
 
 ![[Pasted image 20260203104908.png]]
 
