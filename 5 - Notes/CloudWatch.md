@@ -89,27 +89,6 @@ aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --stat
 - no agents required
 - tests _ICMP_  `protokół warstwy sieci` or _TCP_  `protokół warstwy transportu` traffic to IPv4 on-premises destinations through _Direct Connect_ or _S2S VPN_
 
-# Amazon EventBridge
-- Schedule: Cron jobs (scheduled scripts)
-- Event Pattern: Event rules to react to a service doing something
-- Trigger Lambda functions, send SQS/SNS messages…
-
-## Amazon EventBridge Rules
-
-![[Pasted image 20260228193244.png]]
-
-## Amazon EventBridge
-- Event buses can be accessed by other AWS accounts using Resource-based Policies
-- You can archive events (all/filter) sent to an event bus (indefinitely or set period)
-- Ability to replay archived events
-## Amazon EventBridge – Schema Registry
-- EventBridge can analyze the events in your bus and infer the schema
-- The Schema Registry allows you to generate code for your application, that will know in advance how data is structured in the event bus
-- Schema can be versioned
-## Amazon EventBridge – Resource-based Policy
-- Manage permissions for a specific Event Bus
-- Example: allow/deny events from another AWS account or AWS region
-- Use case: aggregate all events from your AWS Organization in a single AWS account or AWS region
 ## CloudWatch Container Insights
 - Collect, aggregate, summarize metrics and logs from containers
 - Available for containers on…
