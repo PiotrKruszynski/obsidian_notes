@@ -12,10 +12,7 @@ istnieją block storage / file storage / object storage
 >- świetne dla: static files, backup, archive, data lake, media, DR, static website
 >- **nie jest file systemem** i nie jest block storage
 
----
-
 # 1. Mental model / feature map
-
 ### Cost / storage classes
 - **S3 Standard**
 - **S3 Intelligent-Tiering**
@@ -25,7 +22,6 @@ istnieją block storage / file storage / object storage
 - **S3 Glacier Flexible Retrieval**
 - **S3 Glacier Deep Archive**
 - **S3 Express One Zone**
-
 ### Security
 - **IAM policies**
 - **Bucket policies**
@@ -34,18 +30,15 @@ istnieją block storage / file storage / object storage
 - **Access Points**
 - **Object Lock**
 - **Encryption at rest + in transit**
-
 ### Data protection
 - **Versioning**
 - **Replication (CRR / SRR / Batch Replication)**
 - **Multi-Region Access Points**
 - **AWS Backup**
-
 ### Performance / transfer
 - **Multipart Upload**
 - **Byte-Range Fetches**
 - **Transfer Acceleration**
-
 ### Automation / processing
 - **Event Notifications**
 - **EventBridge**
@@ -53,10 +46,7 @@ istnieją block storage / file storage / object storage
 - **S3 Inventory**
 - **S3 Object Lambda**
 - **S3 Select**
-
----
 # 2. Core facts
-
 - bucket names są **globally unique**
 - bucket tworzysz w konkretnym **Region**
 - obiekt identyfikuje **key**
@@ -69,11 +59,7 @@ istnieją block storage / file storage / object storage
 >- ogromnym **key-value store dla obiektów**
 >- gdzie key = pełna ścieżka logiczna
 >- ale bez prawdziwej hierarchii katalogów
-
----
-
 # 3. Bucket types
-
 ## General purpose bucket
 - domyślny i najczęstszy typ
 - do prawie wszystkich use case’ów
@@ -255,13 +241,18 @@ S3 wspiera checksumy do walidacji integralności
 
 ## Event Notifications
 - zdarzenia do:
-  - **SNS**
-  - **SQS**
-  - **Lambda**
+  - [[Amazon SQS]]
+  - [[Amazon SNS]]
+  - [[AWS Lambda]]
 - model dostarczenia: **at least once**
 - możliwe duplikaty i out-of-order events
+
+![[Pasted image 20260217133035.png]]
 ## EventBridge
 - alternatywna integracja eventowa dla szerszych scenariuszy routingu
+
+![[Pasted image 20260217133731.png]]
+
 ## S3 Batch Operations
 - masowe operacje na dużej liczbie obiektów
 - np. copy, tagging, restore, invoke Lambda

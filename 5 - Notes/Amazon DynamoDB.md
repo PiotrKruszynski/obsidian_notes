@@ -258,7 +258,7 @@ App  →  DAX (cache)  →  DynamoDB
 
 **Na egzaminie:** "serverless", "miliony requestów/sekundę", "flexible schema" → **DynamoDB**.
 
-DocumentDB (Mongodb) is not serverless! and is not Global
+ 
 
 ---
 
