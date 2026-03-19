@@ -2,7 +2,7 @@ Created: 2026-02-03  19:22
 ___
 Note:
 
-
+kontrola dostępu do AWS resourvces
 ## 👤 IAM Users
 
 - 1 **physical person = 1 IAM user**

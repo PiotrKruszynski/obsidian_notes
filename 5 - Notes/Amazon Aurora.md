@@ -2,26 +2,16 @@ Created: 2026-02-11  10:41
 ___
 Note:
 
->[! Important]
->- RDBMS with separation of storage and compute (architektura rozproszona)
->- Compatible API for **MySQL** and **PostgreSQL**
->- storage: data is storage in 6 replicas, across 3 AZ - [[high availability]], _self-healing_, [[auto scaling]] **10 GB → 256 TB**, automatic **failover (~30s)**
-> - replication happens at **storage level**
-> ### Compute layer
-> - **Aurora Cluster**
-> - 1 Writer instance
-> - 0–15 Aurora Read Replicas
-> - Read replicas share the **same storage**
-> ### Endpoints
-> - **Writer endpoint** → write queries
-> - **Reader endpoint** → load-balances read queries across replicas
-> - **Custom endpoints** possible
-> ### Performance
-> - Up to 5× faster than MySQL
-> - Up to 3× faster than PostgreSQL
-> - Read scaling via **Aurora Replicas**
-> ### Cost
-> - Typically **~20% more expensive than standard RDS**
+>[!Definition]  
+>Aurora = **AWS-native relational DB (MySQL/PostgreSQL compatible)**  
+>oddziela **compute od storage**
+>Aurora = **RDS++ (lepsza wydajność + storage distributed)**  
+>
+>👉 compute:  
+>- instances (writer + replicas)
+>
+>👉 storage:
+>- shared, distributed, auto-scaling
 > ### Extra features
 > - **Aurora Serverless** - for unpredicted / intermitten workloads, no capacity planning
 > - **Aurora Global** - up to 16 DM Read Instance in each region, <1sec storage replication
@@ -29,48 +19,139 @@ Note:
 > - **Aurora Database Cloning** - new cluster from existing one, faster than restoring a snapshot
 
 **Use case:** same as RDS, but with _less maintenance / more flexibility / more performance_
+# Architecture  
+### Storage layer  
+- **6 replicas (3 AZ × 2)**  
+- quorum-based writes  
+- self-healing  
+- auto scaling:  
+- **10 GB → 256 TB**  
+- replication:  
+- **na poziomie storage (nie DB engine)**  
+  
+>[!exam]  
+>Aurora = replication at storage layer  
+  
+### Compute layer (Cluster)  
+- **1 Writer**  
+- **0–15 Read Replicas**  
+- wszystkie instancje:  
+- używają **tego samego storage**  
+👉 brak kopiowania danych między RR  
+  
+# Endpoints   
+- **Writer endpoint**  
+- write (INSERT/UPDATE)  
+- **Reader endpoint**  
+- load balancing read queries  
+- **Custom endpoint**  
+- wybór konkretnych instancji  
+  
+>[!exam]  
+>Reader endpoint = load balancing reads  
+  
+# Performance  
+- ~5× MySQL  
+- ~3× PostgreSQL  
+- szybkie failover (~30s)  
+👉 bo:  
+- brak replikacji engine-level  
+- shared storage  
+# Scaling  
+  
+### Read scaling  
+- do 15 replicas  
+- natychmiastowe (shared storage)  
+### Storage  
+- automatyczne  
+  
+>[!exam]  
+>Aurora = lepsze scaling niż RDS  
+  
+# High Availability  
+- built-in (storage layer)  
+- failover:  
+- automatic  
+- fast (~30s)  
 
+👉 Multi-AZ = **default behavior**  
+  
+# Backup  
+- continuous backup (S3)  
+- PITR  
+- **cluster-level backup**  
+- zero impact na performance  
+  
+>[!exam]  
+>Aurora backup ≠ instance-level (jak RDS)  
+  
+# Cost  
+- ~20% droższy niż RDS  
+- ale:  
+- mniej ops  
+- lepsza wydajność  
+----
+#### Aurora Serverless  
+- auto scale compute  
+- pay per second  
+- use case:  
+- unpredictable workload  
+  
+#### Aurora Global DB  
+- cross-region replication  
+- **< 1 sec lag (typowo)**  
+- DR / global read  
+  
+>[!exam]  
+>global low-latency reads → Aurora Global  
+  
+#### Aurora ML  
+- integracja:  
+- SageMaker  
+- Comprehend  
+---
+# Aurora Cloning  
+- szybkie kopiowanie cluster  
+- copy-on-write  
+- dużo szybsze niż snapshot restore  
+  
+# Aurora vs RDS (klucz)  
 
+| Feature | RDS | Aurora |  
+|--------|-----|--------|  
+| storage | EBS | distributed |  
+| replication | engine | storage |  
+| scaling | ograniczone | bardzo dobre |  
+| HA | Multi-AZ opcjonalne | built-in |  
+| performance | standard | high |  
+
+---
+# Exam traps  
+- Aurora ≠ Multi-AZ (ma HA wbudowane)  
+- Aurora RR ≠ RDS RR (shared storage!)  
+- backup = cluster-level  
+- Global DB ≠ zwykłe RR  
+  
+# TL;DR  
+- Aurora = RDS na sterydach  
+- shared storage  
+- szybkie scaling  
+- HA built-in  
+- najlepsze dla high-performance SQL
 
 
 ![[Pasted image 20260211105457.png]]
 
-#  Backup & Restore
 
-| Cecha              | RDS            | Aurora                                                          |
-| ------------------ | -------------- | --------------------------------------------------------------- |
-| Backup             | instance-level | cluster-level, automatic, ze _storage_ nie wpływa na _compute_, |
-| automatic failover | Multi-AZ       | tak                                                             |
-| Storage            | EBS            | distributed storage                                             |
-| Performance impact | minimalny      | jeszcze mniejszy                                                |
-| PITR               | tak            | tak                                                             |
-
-# Aurora Serverless
-- for unpredicted / intermiteen workloads, no capacity planning
-- scales _compute_ automatically
-- Pay per second
 
 ![[Pasted image 20260211111229.png]]
 
----
-
-# Aurora Global Database
-
-- Cross-region replication
-- < 1 second replication lag
-- Disaster recovery solution
 
 ![[Pasted image 20260211111359.png]]
 
-# Custom endpoint
 
 ![[Pasted image 20260211111158.png]]
 
-Aurora Machine Learning
-perform ML using _SageMaker AI_ & _Comprehend_ on Aurora
-
-# Aurora Database Cloning
-new _cluster_ from existing, faster than _snapshot_
 
 ___
 Metadata:

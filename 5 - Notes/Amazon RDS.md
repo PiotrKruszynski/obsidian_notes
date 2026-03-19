@@ -25,50 +25,142 @@ Note:
 
 **Use case:** store relational datasets (_RDBMS / OLTP_), perform _SQL queries_ and _transactions_.
 
+# RDS (Relational Database Service)
+
+>[!Definition]
+>RDS = **managed relational database** (**SQL**, **OLTP** - online transaction processing - _typ obciążenia_)
+### Mental model
+RDS = **DB server bez zarządzania infrastrukturą**
+👉 AWS:
+- provisioning
+- patching
+- backup
+👉 Ty:
+- schema
+- queries
+- indexes
+### Supported engines
+- MySQL
+- PostgreSQL
+- MariaDB
+- Oracle
+- SQL Server
+- **Aurora (AWS-native)**
+### Core properties
+- relational (joins, transactions)
+- OLTP workload
+- provisioned:
+  - instance (CPU/RAM)
+  - storage (EBS)
+### Scaling
+#### Vertical
+- zmiana instance size (CPU/RAM)
+#### Storage auto-scaling
+- ustawiasz max (np. 64 TB)
+- automatyczne zwiększanie storage
+#### Horizontal
+- **Read Replicas (tylko read scaling)**
+
+>[!exam]
+>Multi-AZ ≠ scaling  
+>Read Replicas = scaling
 # Security
-- Deployed inside **VPC**
-- Controlled by **Security Groups** _firewall (porty i IP) na poziomie sieciowym_
-- IAM authentication ( _kto i jak_ )
-- Encryption:
-    - At rest ( _KMS_ )
-    - In transit [[SSL TLS]]
+- inside **VPC**
+- **Security Groups**
+- IAM auth (opcjonalnie)
+- encryption:
+  - at rest (KMS)
+  - in transit (SSL/TLS)
+
+- integracje:
+  - _Secrets Manager_
+
+>[!exam]
+>RDS = no SSH access
 
 # Backups & Snapshots
-- Automated Backup with _Point-In-Time Restore_ feature (_up to 35 days_)
-- for _long-term recovery_ manual _snapshots_ 
-	- snapshot restore cheaper then stop
-	- persist after db deletion
+### Automated backups
+- Point-In-Time Restore
+- do 35 dni
+### Snapshots (manual)
+- long-term backup
+- persist after deletion
+- używane do:
+  - migration
+  - encryption
 
-# Deployment Models
- **Single-AZ**
-- One DB instancs
-- Lower cost    
- - From single-AZ to Multi-AZ **zero downtime** operation, no need to stop 
- 
- **Multi-AZ** (Disaster Recovery):
- - Used for **High Avalibility**, not scaling
-- Synchronous replication
-- Standby instance in another AZ
-- Automatic failover
-- Same endpoint (DNS), keep the same connection string regardless of which db is up
+>[!exam]
+>snapshot = manual, persistent
+# Deployment models
 
-![[Pasted image 20260206152157.png]]
+## Single-AZ
+- 1 instance
+- niższy koszt
+- brak HA
+## Multi-AZ (HA / DR)
+- synchronous replication
+- standby w innej AZ
+- automatic failover
+- **same DNS endpoint**
+
+>[!exam]
+>Multi-AZ = high availability, NIE performance
+
+---
+
 # Read Replicas
-- działa _SELECT_ , nie działa INSERT, UPDATE, DELETE
-- up to 15 read replicas
-- use _Asynchronous_ replication
-- Used for _Read_
-- zapisy muszą iść na master
-- Separate DB instance with its own endpoint
-- Can be in same AZ / cross-AZ / cross-region ==`$$$`==
-- _RR_ można awansować do samodzielnej db
-- _RR_ można ustawić na Multi AZ for _Disaster Recovery_
-- można utworzyć encrypted _RR_ form unencrypted db
-- w AWS płaci się za przechodzenie danych z AZ, w _RR_ nie _nawet między regionami_
-- - replikacja jest **binlog-based** - śledzi dziennik binarny
-- jest **asynchronous**
-- przy globalnym ruchu pojawia się **replication lag**
-- każda replica ma **własny storage**
+- do 15
+- **asynchronous replication**
+- tylko:
+  - SELECT
+- osobny endpoint
+- może być:
+  - same AZ
+  - cross-AZ
+  - cross-region
+- można:
+  - promote do standalone DB
+- ❌ "no cost for cross-AZ" cross-region kosztuje
+
+- replication:
+  - engine-based (np. binlog dla MySQL)
+  - async → możliwy lag
+
+>[!exam]
+>global read scaling → Read Replicas  
+>HA → Multi-AZ  
+
+---
+# RDS Proxy
+- connection pooling
+- reuse connections
+- zmniejsza load na DB
+- pattern:
+  App → Proxy → RDS
+
+>[!exam]
+>dużo connection → RDS Proxy
+# RDS Custom
+
+>[! Important]
+>**Amazon RDS Custom** to wyspecjalizowana usługa bazodanowa przeznaczona dla silników:
+>- **Oracle** 
+>- **Microsoft SQL Server**, 
+>która łączy zalety zarządzanej usługi RDS z dostępem do OS
+
+---
+# Limitations / traps
+- brak SSH (poza RDS Custom)
+- storage = EBS (AZ-bound)
+- Multi-AZ ≠ read scaling
+- Read Replica ≠ HA (brak sync)
+# TL;DR
+- RDS = managed SQL DB  
+- Multi-AZ = HA  
+- Read Replicas = scaling  
+- backups = auto + snapshot  
+- Proxy = connection pooling  
+
 
 
 
