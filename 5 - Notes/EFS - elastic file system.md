@@ -2,11 +2,9 @@ Created: 2026-02-03  13:10
 ___
 Note:
 
-	highly available, scalable, expensive (3x more then gp2 volume), pay per use
-
 
 >[!Definition]
->EFS = **file storage (system plików)** dostępny przez NFS  
+>EFS = **POSIX file storage (system plików NFS)**  for Linux instanecs 
 >shared storage dla wielu EC2 jednocześnie
 >highly available, scalable, expensive (3x more then gp2 volume), pay per use
 ### Mental model
@@ -28,6 +26,7 @@ EFS = **network shared drive (jak NAS)**
 - kontrola:
   - Security Groups
   - POSIX permissions
+  
 >[!exam]
 >każda AZ ma swój mount target
 ### Performance modes

@@ -41,7 +41,7 @@ EC2 = **serwer w chmurze na żądanie**
 - **EBS**
   - persistent
   - block storage
-- **Instance Store**
+- **Instance Store**  - physical storage (high IOPS)
   - ephemeral (ginie po stopie)
 
 >[!exam]
@@ -88,9 +88,7 @@ can automate boot tasks such as:
  - installing software
  - downloading common files from internet
  _run with root user_ nie trzeba `sudo`
-**Instance Storage** - physical storage for your EC2 instance (high IOPS)
-
-
+ 
 ---
 
 ### Kiedy używać
