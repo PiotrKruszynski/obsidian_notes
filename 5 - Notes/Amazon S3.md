@@ -96,6 +96,7 @@ istnieją block storage / file storage / object storage
 - hot data
 - niski latency, wysoka dostępność
 - najczęstszy default
+- **The minimum storage duration is 30 days** before you can transition objects from Amazon S3 Standard
 ## S3 Intelligent-Tiering
 - gdy nie znasz patternu dostępu
 - automatycznie przenosi dane między tierami
