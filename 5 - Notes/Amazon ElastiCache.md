@@ -61,8 +61,7 @@ Note:
   - at rest (KMS)
   - in transit (TLS)
 - Redis:
-  - AUTH (password)
-
+  - AUTH (password) - może też używać IAM Authentication for Redis
 
 
 ---
@@ -91,7 +90,7 @@ Client → App → ElastiCache → DB
 
 ```
 
-
+![[Pasted image 20260319130159.png]]
 
 ___
 Metadata:
