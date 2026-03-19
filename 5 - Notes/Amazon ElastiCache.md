@@ -16,6 +16,7 @@ Note:
 > max Redis item size **512 MB**
 
 **Use case:** key-value store, frequent reads - less writes, cache results for DB queries, store session data for user on websites, _cannot use SQL !_
+Redis: _gaming leaderboards_ bo gwarantuje uniqueness and element ordering
 
 ### Core properties
 - key-value store (no SQL)
@@ -89,6 +90,37 @@ Client → App → ElastiCache → DB
              cache hit
 
 ```
+
+# Caching patterns (KLUCZOWE)  
+## Lazy Loading (cache-aside)  
+- aplikacja:  
+1. sprawdza cache  
+2. jeśli MISS → pobiera z DB  
+3. zapisuje do cache
+`App → Cache → (MISS) → DB → Cache → App`
+### cechy
+- tylko odczyty są cache’owane
+- możliwe **stale data**  -> _jak stale bread_ no longer fresh
+
+> [!exam]  
+> najczęstszy pattern
+## Write Through
+- zapis:
+    - jednocześnie do cache i DB
+`App → Cache + DB`
+### cechy
+- brak stale data
+- większa latencja zapisu
+
+> [!exam]  
+> consistent data, ale wolniejsze write
+## Session Store
+- przechowywanie:
+    - session usera
+- TTL (automatic expiration)
+### use case
+- login sessions
+- shopping carts
 
 ![[Pasted image 20260319130159.png]]
 

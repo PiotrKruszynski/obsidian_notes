@@ -3,9 +3,9 @@ ___
 Note:
  
 >[!important]
->- Storage Gateway = **hybrid storage (on-prem ↔ AWS)**
->- daje lokalny dostęp + backend w AWS
->- 3 typy: **File / Volume / Tape**
+>- Storage Gateway = **hybrid _ONLY_ storage (on-prem ↔ AWS)**
+>- lokalny dostęp + wszystko finalnie ląduje w **S3** (pośrednio lub bezpośrednio)
+>- 3 typy integracji on-prem / AWS: **File / Volume / Tape**
 >- używany do: backup, migration, hybrid apps
 
 ---
@@ -22,18 +22,15 @@ Storage Gateway = **proxy/cache między on-prem a AWS**
 
 #### S3 File Gateway
 - protokół: **NFS / SMB**
-- backend: **S3**
+- backend: pliki są przechowywane jako obiekty w **S3** (1:1 mapping)
 
 👉 use case:
-- lift & shift file apps
-- backup do S3
-- data lake ingestion
-
->[!exam]
->File → S3
+	- lift & shift file apps
+	- backup do S3
+	- data lake ingestion
 #### Volume Gateway
 - protokół: **iSCSI (block)**
-- backend: **EBS snapshots**
+- backend: dane do **S3**, restore **EBS snapshots**
 
 2 tryby:
 **Stored volumes**
@@ -42,19 +39,13 @@ Storage Gateway = **proxy/cache między on-prem a AWS**
 **Cached volumes**
 - dane w AWS + cache lokalny  
 👉 oszczędność storage on-prem
-
->[!exam]
->block storage → Volume Gateway
 #### Tape Gateway
-- symuluje **taśmę (VTL)**
+- symuluje **taśmę (Virtual Tape Library)**
 - backend: **S3 Glacier**
 
 👉 use case:
 - backup systems (legacy)
 - replace physical tapes
-
->[!exam]
->backup na taśmy → Tape Gateway
 
 ---
 ### Kiedy używać
@@ -62,10 +53,11 @@ Storage Gateway = **proxy/cache między on-prem a AWS**
 - backup do chmury
 - migracja danych
 - hybrid architecture
+- disaster recovery (on-prem backup → AWS)
 
 ---
 ### Trade-offs
-- latency (bo network)
+- latency (bo network lub Direct Connect)
 - wymaga gateway appliance (VM)
 - bardziej złożone niż pure S3/EFS
 
@@ -80,10 +72,12 @@ Storage Gateway = **proxy/cache między on-prem a AWS**
 
 ---
 ### TL;DR
-- hybrid storage → Storage Gateway  
-- file → S3  
-- block → EBS snapshots  
-- tape → Glacier  
+- hybrid (on-prem + AWS) → Storage Gateway  
+- file (NFS/SMB) → S3  
+- block (iSCSI) → S3 + EBS snapshots  
+- tape (VTL) → Glacier  
+
+
 
 ___
 Metadata:

@@ -135,7 +135,7 @@ istnieją block storage / file storage / object storage
 - jeśli **versioning ON** i wrzucisz ten sam key → nowa wersja
 - nowe obiekty są domyślnie szyfrowane **SSE-S3**
 ## Multipart Upload
-- zalecany dla obiektów **>= 100 MB**
+- recommended **>= 100 MB**, require **> 5GB**
 - plik dzielisz na części
 - części można wysyłać równolegle
 - retry tylko nieudanego parta
@@ -143,12 +143,12 @@ istnieją block storage / file storage / object storage
 	  1. initiate
 	  2. upload parts
 	  3. complete
-- jeśli nie kończysz uploadu → warto **abort**, bo części kosztują
+- jeśli nie kończysz upload → warto **abort**, bo części kosztują
 
 ## Checksums / integrity
-- S3 wspiera checksumy do walidacji integralności
-- można też użyć **Content-MD5**
-- przy multipart **ETag nie musi być MD5 całego pliku**
+S3 wspiera checksumy do walidacji integralności
+- single upload → ETag = MD5
+- przy multipart ❌ nie gwarantuje MD5
 
 ## Byte-Range Fetches
 - pobierasz tylko fragment obiektu
@@ -291,7 +291,6 @@ istnieją block storage / file storage / object storage
 - przyspiesza upload/download klient ↔ S3 przez edge locations
 - dobre dla globalnych uploadów
 - **nie do S3→S3 copy**
-
 ### CLI / data transfer
 - `aws s3 sync` = diff + copy , kopiuje tylko zmienione,
 - działa rekurencyjnie (foldery)
@@ -333,10 +332,10 @@ istnieją block storage / file storage / object storage
 - versioning chroni przed overwrite/delete, ale nie zastępuje backupu/compliance
 - replication jest **asynchroniczna**
 - stare dane → **Batch Replication**, nie zwykłe CRR/SRR
-- Event Notifications = **at least once**
+- Event Notifications = **at least once**, brak gwarancji kolejności
 - ETag przy multipart **!= zawsze MD5**
 - default encryption = **SSE-S3**
-- **Access Points** upraszczają polityki dla współdzielonych bucketów
+- **Access Points** = osobny "entrypoint + policy" do jednego bucketu
 - **Object Lock** wymaga versioning
 
 
