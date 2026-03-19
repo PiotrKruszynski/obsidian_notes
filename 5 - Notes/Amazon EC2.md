@@ -2,27 +2,6 @@ Created: 2026-02-03  12:27
 ___
 Note:
 
-Elastic Compute Cloud
-
-high-performance hardware disk
-	- better I/O performance
-	- ephemeral -> lose their storage if stopped
-	- good for buffer / cache/ scratch data / temporary content
-	- risk of data loss -> back up is your responsibility
-	- no snapshot, nie da się odłączyć i podpiąć do innej instancji
-
-
-**EC2 User Data**
-bootstrap our instance using an EC2 User data script, only once at the instance first start
-can automate boot tasks such as:
- - installing updates
- - installing software
- - downloading common files from internet
- _run with root user_ nie trzeba `sudo`
-**Instance Storage** - physical storage for your EC2 instance (high IOPS)
-
-
-# Amazon EC2 — minimum pod SAA
 
 >[!important]
 >- EC2 = **compute (VM) w AWS**
@@ -101,10 +80,20 @@ Spoko dla Batch processing, BigData(Spark, Hadoop), ML training, renderingm stat
 Częsty pattern
 `Auto Scaling Group + Launch Template + MixedInstancesPolicy`
 
+
+**EC2 User Data**
+bootstrap our instance using an EC2 User data script, only once at the instance first start
+can automate boot tasks such as:
+ - installing updates
+ - installing software
+ - downloading common files from internet
+ _run with root user_ nie trzeba `sudo`
+**Instance Storage** - physical storage for your EC2 instance (high IOPS)
+
+
 ---
 
 ### Kiedy używać
-
 - pełna kontrola nad systemem
 - custom software
 - legacy apps
@@ -113,7 +102,6 @@ Częsty pattern
 ---
 
 ### Trade-offs
-
 - wymaga zarządzania (patching, scaling)
 - większy ops niż serverless
 - większa elastyczność vs większa złożoność
@@ -131,7 +119,6 @@ Częsty pattern
 ---
 
 ### Exam traps
-
 - EC2 ≠ serverless  
 - HA → minimum 2 AZ + ASG  
 - public access → przez ALB lub public IP  
@@ -140,7 +127,6 @@ Częsty pattern
 ---
 
 ### TL;DR
-
 - EC2 = VM w chmurze  
 - kontrola vs ops  
 - ASG + ALB = skalowanie + HA  
