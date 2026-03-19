@@ -74,25 +74,6 @@ Service:
 
 
 
-___
-## Kluczowe pojęcia
-
-### Cluster
-Logiczna grupa zasobów gdzie działają kontenery. Może zawierać instancje EC2 lub być pusty (Fargate).
-
-### Task Definition
-Przepis na kontener — plik JSON opisujący:
-- obraz Docker (z [[Amazon ECR]] lub Docker Hub)
-- CPU i RAM
-- zmienne środowiskowe
-- port mappings
-- IAM role
-- volumes
-### Task
-Jeden lub więcej kontenerów działających razem (jak Pod w Kubernetes).
-### Service
-Zapewnia że określona liczba Tasków zawsze działa. Ogarnia restart po awarii, integrację z Load Balancerem, Auto Scaling.
-
 ```
 Cluster
 └── Service (chcę 3 taski)
