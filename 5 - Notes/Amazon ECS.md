@@ -2,29 +2,82 @@ Created: 2026-02-04  20:50
 ___
 Note:
 
->[! Important]
->Managed container orchestration service. 
->Uruchamiasz kontenery Docker bez zarządzania klastrem Kubernetes.
 
-Powiązane: [[Amazon ECR]] | [[Amazon SQS]] | [[Amaon Fargate]] | [[Amazon EC2]] | ALB[[load balancer]] | [[IAM]] | [[CloudWatch]] | [[Amazon SNS]] | [[Amazon SQS]] | [[Auto Scaling]]
-## Co to jest?
+>[!Definition]
+>- ECS → **managed container orchestration (Docker)** bez Kubernetes
+>- 2 launch types: _Fargate_ (serverless)** vs **EC2 (self-managed nodes)**
+>- uruchamiasz **Task / Service** → AWS zarządza schedulingiem
+>- integracje: **ALB/NLB, ECR, CloudWatch, IAM**
+>- networking: **awsvpc (ENI per Task)**
+>- scaling: **Service Auto Scaling + (EC2) Capacity Providers**
+>- use when: **containers without Kubernetes**
+# Mental model
+Definiujesz Task → ECS uruchamia go na Fargate lub EC2 → Service utrzymuje desired count + LB routing.
 
-ECS to serwis do uruchamiania kontenerów Docker na AWS. Ty definiujesz **co** ma działać — AWS ogarnia **gdzie** i **jak**.
+- Task = jednostka uruchomienia (jak Pod)  
+- Service = desired state + HA + scaling  
+- Fargate = brak serwerów, EC2 = kontrola/koszt  
+**Use case**: microservices, APIs, workers (SQS), batch jobs
 
-Dwa tryby uruchomienia (Launch Type):
+# Core features
+- Launch types:
+  - **Fargate** → serverless, per-task billing
+  - **EC2** → pełna kontrola, niższy koszt przy skali
+- Task Definition (JSON):
+  - image (ECR), CPU/RAM, ports, env, **IAM roles**
+- Networking:
+  - **awsvpc (required for Fargate)** → ENI + SG per Task
+- Load Balancing:
+  - **ALB (HTTP)**, **NLB (TCP)**, dynamic port mapping
+- Auto Scaling:
+  - Service (CPU/Mem/ALB req/SQS depth)
+  - **Capacity Provider (EC2 only)** → skaluje instancje
+- Storage:
+  - **EFS (Fargate + EC2)**, EBS/bind (EC2 only)
+- Logging:
+  - CloudWatch Logs (`awslogs`)
 
-- **Fargate** — serverless, AWS zarządza serwerami
-- **EC2** — Ty zarządzasz instancjami EC2 w klastrze
+# How it works
+Task Definition → ECS schedules:
+- Fargate: AWS uruchamia Task w VPC (ENI)
+- EC2: Task na instancji z cluster ASG
+
+Service:
+- utrzymuje N tasków  
+- health check + restart  
+- integracja z ALB/NLB  
+# Comparison
+
+| Feature | Fargate | EC2 |
+|--------|--------|-----|
+| Servers | AWS | You |
+| Scaling | instant | depends on EC2 |
+| Cost | higher/unit | cheaper at scale |
+| Control | low | high (GPU, AMI) |
+| Use case | default | custom infra |
+# Exam traps
+- ❌ ECS = Kubernetes → NIE (to EKS)
+- ❌ Fargate daje dostęp SSH → NIE
+- ❌ brak `awsvpc` w Fargate → NIE (required)
+- ❌ Task Role = pull image → NIE (to Execution Role)
+- ❌ Service = jednorazowe joby → NIE (Task do batch)
+- ❌ EBS w Fargate → NIE (tylko EFS)
+
+# TL;DR
+- ECS = **containers bez K8s**
+- Fargate → serverless (default exam choice)
+- EC2 → control + cost optimization
+- Task = run, Service = maintain + scale
+
+
 
 ___
 ## Kluczowe pojęcia
 
 ### Cluster
-
 Logiczna grupa zasobów gdzie działają kontenery. Może zawierać instancje EC2 lub być pusty (Fargate).
 
 ### Task Definition
-
 Przepis na kontener — plik JSON opisujący:
 - obraz Docker (z [[Amazon ECR]] lub Docker Hub)
 - CPU i RAM
@@ -32,27 +85,8 @@ Przepis na kontener — plik JSON opisujący:
 - port mappings
 - IAM role
 - volumes
-
-```json
-{
-  "family": "my-app",
-  "containerDefinitions": [{
-    "name": "web",
-    "image": "123456.dkr.ecr.eu-west-1.amazonaws.com/my-app:latest",
-    "cpu": 256,
-    "memory": 512,
-    "portMappings": [{ "containerPort": 80 }]
-  }],
-  "requiresCompatibilities": ["FARGATE"],
-  "networkMode": "awsvpc",
-  "cpu": "256",
-  "memory": "512"
-}
-```
-
 ### Task
 Jeden lub więcej kontenerów działających razem (jak Pod w Kubernetes).
-
 ### Service
 Zapewnia że określona liczba Tasków zawsze działa. Ogarnia restart po awarii, integrację z Load Balancerem, Auto Scaling.
 

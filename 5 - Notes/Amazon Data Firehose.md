@@ -7,71 +7,83 @@ Note:
 >- automatic scaling, serverless, pay for use
 >- **near real-time** with buffering capability based on size / time ( zapisuje co jakiś czas paczkami)
 
-Nie trzeba zarządzać infrastrukturą — AWS ogarnia skalowanie, replikację i dostępność.
+# AWS Kinesis Data Firehose
 
-Firehose **NIE jest kolejką** — wiadomości nie czekają na Consumer. To potok z buforem.
+>[!Definition]
+>- Firehose → **fully managed delivery stream** (stream → storage/analytics)
+>- **serverless, auto-scaling, no shards**
+>- **near real-time (buffered, mini-batch)**
+>- brak retention → dane **od razu dostarczane do destination**
+>- built-in: **buffering + batching + retries + compression**
+>- optional **Lambda transform**
+>- NIE służy do konsumowania danych (to nie stream jak KDS)
 
-ma wbudowane **buffering + retries + batching + compression**
+# Mental model
+`Producer wysyła dane → Firehose buforuje → opcjonalnie transformuje → zapisuje batch do destination.`
+- brak kontroli nad offsetem (to nie log jak KDS)  
+- Firehose = **delivery pipeline, nie processing engine**  
+- push model → automatyczny delivery  
 
----
+**Use case**: logi, analytics data lake, ingest do S3/Redshift/OpenSearch
 
-## Jak działa?
+# Core features
+- buffering:
+  - size: **1–128 MB**
+  - interval: **60–900 s**
+- destinations:
+  - **S3 (default)**, Redshift (via S3), OpenSearch, Splunk, HTTP
+- transform:
+  - AWS Lambda (per record)
+- format conversion:
+  - JSON → **Parquet / ORC**
+- compression:
+  - GZIP, Snappy, ZIP
+- security:
+  - HTTPS + KMS (SSE)
+- scaling:
+  - **automatic (no shards, no capacity planning)**
 
-```
-Producer  ->  Firehose  ->  [bufor]  ->  transformacja (opcja)  ->  S3 / Redshift / OpenSearch
-```
+# How it works
+Producer → Firehose → buffer (size/time) → optional Lambda → batch write to destination
 
-Firehose zbiera dane, buforuje je, opcjonalnie przetwarza i zapisuje w batchach.
+- zapis wyzwala: size OR time (co pierwsze)  
+- Redshift → zawsze przez S3 staging  
+- S3 → automatyczne prefixy (time-based partitioning)
+# Comparison
+
+| Feature | KDS | Firehose |
+|--------|-----|---------|
+| Model | stream (log) | delivery pipeline |
+| Retention | do 365 dni | ❌ brak |
+| Consumers | many | ❌ brak |
+| Processing | custom | limited (Lambda) |
+| Scaling | shards | auto |
+| Latency | real-time | near real-time (buffer) |
+
+# Exam traps
+- ❌ Firehose = real-time processing → NIE (buffering)
+- ❌ można replay dane → NIE (brak retention)
+- ❌ Firehose replaces KDS → NIE (inne use case)
+- ❌ Redshift direct ingest → NIE (zawsze przez S3)
+- ❌ trzeba zarządzać shardami → NIE (serverless)
+- ❌ multiple consumers → NIE (to nie pub/sub)
+
+# TL;DR
+- Firehose = **managed delivery → S3/Redshift/OpenSearch**
+- auto scaling, zero ops, buffering (mini-batch)
+- brak replay i consumerów → nie zastępuje KDS
+- wybór: **store data → Firehose, process stream → KDS**
+
+
+
+
+
+
+
+
+
 
 ![[Pasted image 20260223210523.png]]
-
-## Miejsca docelowe (Destinations)
-
-- **S3** — najczęstszy, pliki w batchach
-- **Amazon Redshift** — przez S3 jako staging
-- **Amazon OpenSearch** — logi, analityka
-- **Splunk** — zewnętrzny SIEM
-- **HTTP endpoint** — dowolny webhook
-
----
-
-## Buforowanie
-
-Firehose nie wysyła każdej wiadomości osobno — czeka aż zbierze porcję.
-
-|Parametr|Wartość|Opis|
-|---|---|---|
-|Buffer size|1 MB – 128 MB|wyślij gdy rozmiar osiągnięty|
-|Buffer interval|60s – 900s|wyślij po czasie nawet jeśli mały|
-
-Który warunek spełniony pierwszy — taki wyzwala zapis.
-
----
-
-## Transformacja przez Lambda
-
-Opcjonalnie można podłączyć funkcję Lambda która przetworzy każdy rekord przed zapisem.
-
-```
-Producer  ->  Firehose  ->  Lambda (transform)  ->  S3
-```
-
-Przykłady użycia:
-
-- konwersja formatu (JSON -> Parquet, CSV -> JSON)
-- filtrowanie rekordów
-- wzbogacanie danych (enrich)
-- maskowanie wrażliwych pól
-
----
-
-## Format i kompresja
-
-- **Kompresja:** GZIP, Snappy, ZIP, Hadoop-compatible GZIP
-- **Konwersja:** JSON -> Apache Parquet lub ORC (lepsze do analityki w Athena/Redshift)
-- **Partycjonowanie S3:** automatyczne foldery `rok/miesiąc/dzień/godzina`
-
----
 
 # [[Amazon SQS]] vs [[Kinesis Data Streams]] vs [[Amazon Data Firehose]]
 
@@ -85,9 +97,6 @@ Przykłady użycia:
 | Zarządzanie | managed           | shardy (ręczne skalowanie)   | w pełni managed                   |
 
 ![[Pasted image 20260223210549.png]]
-
----
-
 ## Typowe patterny
 
 **Fan-out z SNS:**
@@ -102,28 +111,7 @@ Aplikacja  ->  SNS  ->  Firehose  ->  S3  ->  Athena / Redshift
 EC2 (CloudWatch Logs)  ->  Firehose  ->  S3 (partycjonowane)
 ```
 
----
 
-## Bezpieczeństwo
-
-- Szyfrowanie w tranzycie: HTTPS zawsze
-- Szyfrowanie w spoczynku: SSE przez AWS KMS
-- IAM: kontrola kto może wysyłać dane do delivery stream
-- VPC Endpoint: ruch nie wychodzi do internetu
-
----
-
-## Kiedy używać?
-
-✅ Chcesz zapisywać dane strumieniowe do S3/Redshift bez pisania kodu konsumenta  
-✅ Potrzebujesz automatycznej kompresji i partycjonowania  
-✅ Dane do analityki (Athena, Redshift Spectrum)  
-✅ Logi aplikacji, clickstream, IoT
-
-❌ NIE używaj gdy potrzebujesz real-time processing z wieloma niezależnymi konsumentami — wtedy **Kinesis Data Streams**
-
-
-![[Pasted image 20260223214019.png]]
 
 ___
 Metadata:
