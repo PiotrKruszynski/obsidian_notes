@@ -14,6 +14,7 @@ Note:
 - expose **single DNS name
 - handle failures of downstream instances
 - perform health checks
+	- może być skonfigurowany na zły port lub ścieżkę np LB pyta GET /health -> 404
 - can terminate SSL/TSL (HTTPS -> HTTP)
 - **sticky sessions (session affinity)**
 	- keeps users bound to same target
