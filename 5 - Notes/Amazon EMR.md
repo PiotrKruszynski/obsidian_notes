@@ -2,28 +2,65 @@ Created: 2026-02-28  14:20
 ___
 Note:
 
->[!tip]
->elastic MapReduce do przetwarzania dużych zbiorów danych
->helps create [Hadoop] cluster [Big Data] to analyze and process vast amount of data
->- the clusters can be made of hundreds of EC2 instances
->- EMR comes bundled with Apache Spark, HBase, Presto, Flink itd a EMR take care of all configuration 
->- auto scaling
->- 
 
-**Use case:** data processing, machine learning, web indexing, big data
+>[!Definition]
+>- EMR → **managed big data platform (Hadoop/Spark ecosystem)**
+>- uruchamiasz frameworki: **Apache Spark, Hadoop, Hive, HBase, Presto**
+>- przetwarzanie dużych datasetów (ETL, batch analytics)
+>- działa na **EC2 cluster** lub **serverless (EMR Serverless)**
+>- integracja z **S3 (data lake)** zamiast HDFS
+>- use case: **ETL, big data processing, ML pipelines**
 
-# Node types
+# Mental model
+`Data w S3 → EMR cluster (Spark/Hadoop) → distributed processing → wynik do S3`
+- cluster = wiele EC2 (master + core + task nodes)  
+- job dzielony na części → parallel processing  
+- S3 jako storage → compute decoupled  
 
-EMR is made of cluster of EC2 instances
-Master Node - manage cluster
-Core Node - run taks and store data
-Task Node - just to run tasks
+**Use case**: ETL pipelines, large-scale transformations, batch processing
 
-On demand / Reserved(min 1 year)
-Spot Instances: cheaper, can be terminated
-can have long running cluster
+# Core features
+- frameworks:
+  - **Spark (default)**, Hadoop, Hive
+- deployment:
+  - **EMR on EC2**
+  - **EMR Serverless**
+  - EMR on EKS
+- storage:
+  - **S3 (EMRFS)** zamiast HDFS
+- scaling:
+  - auto scaling nodes
+- pricing:
+  - EC2 + EMR fee / serverless per job
+- Spot Instances:
+  - tańsze przetwarzanie batch
 
+# How it works
+`S3 → EMR (Spark job) → distributed compute → output to S3`
+- master node → zarządza job  
+- workers → wykonują tasks  
+- Spark → in-memory processing (fast)  
 
+# Comparison
+
+| Feature | EMR | Athena |
+|--------|-----|--------|
+| Model | processing engine | query engine |
+| Use | ETL, transform | query |
+| Control | high | low |
+| Infra | cluster/serverless | none |
+
+# Exam traps
+- ❌ EMR = database → NIE (processing engine)
+- ❌ zawsze serverless → NIE (EC2 default)
+- ❌ dane w EMR → NIE (S3 preferred)
+- ❌ lepsze do simple queries → NIE (Athena lepsza)
+- ❌ brak Spark → NIE (core use case)
+
+# TL;DR
+- EMR = **big data processing (Spark/Hadoop)**
+- S3 = storage, EMR = compute
+- wybór: **ETL/transform → EMR, SQL query → Athena**
 
 
 ___

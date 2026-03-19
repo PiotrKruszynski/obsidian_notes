@@ -2,29 +2,53 @@ Created: 2026-02-28  12:37
 ___
 Note:
 
->[!tip]
->_serverless_ query service to analyze daata stored in [[Amazon S3]]
->use standard SQL language to query files (built on _Presto_)
->support csv, json, orc, avro, parquet
->kosztuje 5$ / TB przeskanowanych danych
->commonly use with [[Amazon Quicksight]] for reporting
+
+>[!Definition]
+>- Athena → **serverless query engine (SQL on S3)**
+>- zapytania SQL bez infrastruktury (no clusters)
+>- działa bezpośrednio na danych w **S3 (data lake)**
+>- billing: **per TB scanned**
+>- wspiera formaty: CSV, JSON, **Parquet, ORC (columnar)**
+>- integracja z Glue Data Catalog (metadata)
 >- use column data for cost-savings (less scan)
->	- Apache Parquet or ORC is recommended
->	- huge performence improvement
->	- use [[Amazon Glue]] to conver your data to Parquet or ORC
->- compress daa for smaller _retrievals_ (bzip2, gzip, lz4, snappy, zlip ..)
->- partition datasets in S3 for easy querying on virtual columns, a każdy / w ścieżce to osobna kolumna
 >- prefere bigger files (>128 MB) to minimize _overhead_
+>- commonly use with [[Amazon Quicksight]] for reporting
 
 
 **Use case:** Business Inteligence / analitics / reporting
 when you want to analyze data in S3 using serverless SQL -> Athena
 
-# Federated Query
+# Mental model
+`Dane leżą w S3 → Athena czyta pliki → wykonuje SQL → zwraca wynik`
+- brak ETL / load → query-in-place  
+- koszt zależy od **ilości zeskanowanych danych**  
+- schema-on-read (definiujesz przy query)  
+**Use case**: log analysis, ad-hoc queries, data lake analytics
+# How it works
+`S3 data → Athena query → scan files → return result → save output to S3`
+- brak indeksów → full scan (chyba że partitioned)  
+- schema definiowana w Glue  
+- optymalizacja = format + partitioning  
 
-domyślnie Athena can query z S3, a jak chce z innych:
-- **Data Source Connectors** that run on [[AWS Lambda]] to run _Federated Queries_ (np. CloudWatch Logs, DynamoDB, RDS)
+# Comparison
 
+| Feature | Athena | Redshift |
+|--------|--------|----------|
+| Model | query on S3 | data warehouse |
+| Infra | none | cluster |
+| Performance | lower | higher |
+| Use case | ad-hoc | heavy analytics |
+# Exam traps
+- ❌ Athena = database → NIE (query engine)
+- ❌ dane muszą być załadowane → NIE (query in place)
+- ❌ koszt zależy od czasu → NIE (data scanned)
+- ❌ CSV = optymalny format → NIE (Parquet lepszy)
+- ❌ brak optymalizacji → NIE (partitioning kluczowe)
+
+# TL;DR
+- Athena = **SQL na S3 bez infra**
+- koszt = **data scanned**
+- optymalizacja: **Parquet + partitioning**
 
 
 ___
