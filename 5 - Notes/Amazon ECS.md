@@ -37,6 +37,9 @@ Definiujesz Task → ECS uruchamia go na Fargate lub EC2 → Service utrzymuje d
 - Logging:
   - CloudWatch Logs (`awslogs`)
 
+
+![[Pasted image 20260224115308.png]]
+
 # How it works
 Task Definition → ECS schedules:
 - Fargate: AWS uruchamia Task w VPC (ENI)
@@ -199,24 +202,8 @@ docker push 123456.dkr.ecr.eu-west-1.amazonaws.com/my-app:latest
 - replikacja między regionami
 - integracja z ECS, EKS, Lambda
 
----
-
-## Data Volumes — Storage
-
-**Opcje montowania storage w ECS:**
-
-| Typ                       | Opis                                       | Kiedy                             |
-| ------------------------- | ------------------------------------------ | --------------------------------- |
-| EFS (Elastic File System) | współdzielony filesystem, działa z Fargate | dane współdzielone między Taskami |
-| EBS                       | blokowy dysk, tylko EC2 launch type        | jeden Task, wysokie IOPS          |
-| Bind Mount                | lokalny folder hosta, EC2                  | tymczasowe dane, logi             |
-| S3                        | x                                          | x                                 |
-
-**Fargate + EFS** = serverless + persistent storage. Popularny pattern na egzaminie.
 
 ![[Pasted image 20260224115308.png]]
-
----
 
 ## Integracje
 
@@ -236,29 +223,6 @@ SNS Topic  →  SQS  →  ECS Tasks
 
 **CloudWatch Logs** — każdy kontener wysyła logi przez log driver `awslogs`:
 
-json
-
-```json
-"logConfiguration": {
-  "logDriver": "awslogs",
-  "options": {
-    "awslogs-group": "/ecs/my-app",
-    "awslogs-region": "eu-west-1",
-    "awslogs-stream-prefix": "ecs"
-  }
-}
-```
-
----
-
-## Security
-
-- **Security Groups** — przypisane do Taska (awsvpc) lub instancji EC2
-- **VPC** — Tasks działają w prywatnych subnetach, dostęp przez ALB
-- **Secrets Manager / SSM Parameter Store** — zmienne środowiskowe z sekretami, nigdy hardcode w Task Definition
-- **ECR Image Scanning** — automatyczne skanowanie CVE przy push
-
----
 
 ## ECS vs EKS vs Lambda
 
@@ -301,28 +265,6 @@ SQS  →  ECS Service  →  CloudWatch Alarm (QueueDepth)  →  Scale Out/In
 ```
 
 ![[Pasted image 20260224122332.png]]
-
----
-
-## Flashcards
-
-**Q: Jaka jest różnica między Task a Service w ECS?** A: Task to jednorazowe uruchomienie kontenera. Service zapewnia że określona liczba Tasków zawsze działa i restartuje je po awarii.
-
-**Q: Kiedy wybrać Fargate zamiast EC2 launch type?** A: Gdy nie chcesz zarządzać serwerami. Fargate = serverless containers. EC2 gdy potrzebujesz GPU, niższych kosztów przy dużej skali lub pełnej kontroli.
-
-**Q: Do czego służy Task Role, a do czego Task Execution Role?** A: Task Role — uprawnienia dla kodu w kontenerze (S3, DynamoDB). Task Execution Role — uprawnienia dla agenta ECS (pull obrazu z ECR, logi do CloudWatch).
-
-**Q: Jaki network mode jest wymagany dla Fargate?** A: `awsvpc` — każdy Task dostaje własny ENI i prywatny IP w VPC.
-
-**Q: Jak podłączyć persistent storage do Fargate?** A: EFS (Elastic File System) — jedyna opcja shared storage dla Fargate.
-
-**Q: Jak skalować ECS na podstawie kolejki SQS?** A: CloudWatch Alarm na metrykę `ApproximateNumberOfMessagesVisible` → Service Auto Scaling.
-
-**Q: Gdzie przechowywać sekrety (hasła, klucze API) dla kontenerów ECS?** A: AWS Secrets Manager lub SSM Parameter Store. Nigdy hardcode w Task Definition.
-
-**Q: ECS czy EKS — co wybrać?** A: ECS — prostszy, własna technologia AWS. EKS — gdy potrzebujesz Kubernetes. Na egzaminie "bez K8s" = ECS.
-
-
 
 ___
 Metadata:
