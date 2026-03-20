@@ -14,7 +14,7 @@ Note:
 >- _Highly Available_ , _Multi AZ by default_, Read and Writes are decupled
 >- **transaction** (ACID) do 100 itemów
 >- **DAX** key-value cluster for read cache, _microsecond_ read latency
->- [[IAM]] nase security
+>- [[IAM]] base security
 >- event processing: _DynamDB Stream_ to integrate with [[AWS Lambda]], or [[Kinesis Data Streams]]
 >- _Global Table_ feature: active-active setup
 >- auto backups:  _PITR_ window (up to 35 day), on-demand backups 
@@ -114,7 +114,8 @@ DynamoDB → Stream → Lambda / Kinesis
 - cache
 - logs
 ## Global Tables
-- multi-region active-active
+replikuje dane między wieloma regionami AWS w czasie rzeczywistym
+- multi-region active-active (read write bez konfliktów)
 - replication < 1s
 - write/read lokalnie
 
@@ -130,7 +131,6 @@ DynamoDB → Stream → Lambda / Kinesis
 
 ⚠️:
 - nie wspiera strongly consistent reads
-    
 ---
 
 ## Backup & Recovery

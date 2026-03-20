@@ -9,11 +9,11 @@ Note:
 >- nagrywa zmiany (timeline) → **kto/co/kiedy zmienił resource**
 >- **Config Rules** → sprawdzają zgodność (compliance)
 >- snapshot + history konfiguracji
->- integracja: SNS, Lambda (remediation)
+>- integracja: _SNS_, _Lambda_ (remediation)
 >- use case: **audit, governance, compliance**
 
 # Mental model
-Resource zmienia stan → Config zapisuje zmianę → rule ocenia → compliant / non-compliant
+`Resource zmienia stan → Config zapisuje zmianę → rule ocenia → compliant / non-compliant`
 
 - działa ciągle (continuous monitoring)  
 - historia zmian (configuration timeline)  

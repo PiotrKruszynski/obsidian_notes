@@ -15,7 +15,7 @@ Integrations with (load TLS certificates on)
 - Elastic Load Balancers (CLB, ALB, NLB) 
 - CloudFront Distributions 
 - APIs on API Gateway
-#### Cannot use ACM with EC2 (can’t be extracted)
+#### Cannot use ACM with EC2 directly (can’t be extracted)
 
 ![[Pasted image 20260316142503.png]]
 
