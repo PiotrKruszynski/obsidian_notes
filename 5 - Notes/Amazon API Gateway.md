@@ -2,6 +2,7 @@ Created: 2026-02-24  08:42
 ___
 Note:
 
+![[Pasted image 20260320112651.png|100]]
 
 >[!important]
 >- API Gateway = **managed service do tworzenia API (HTTP/REST/WebSocket)**

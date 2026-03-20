@@ -64,7 +64,7 @@ Request → IAM evaluates:
 - Lambda invoke z innego accounta
 ## Exam traps (bardzo ważne)
 
-- ❌ IAM Role wystarczy do cross-account → NIE (potrzebny trust / resource policy)
+- ❌ IAM Role wystarczy do cross-account → NIE (**przy different account: IAM role + bucket policy**)
 - ❌ resource policy zastępuje IAM → NIE (uzupełnia)
 - ❌ zawsze trzeba assume role → NIE (resource policy może wystarczyć)
 - ❌ działa tylko dla S3 → NIE (SQS, SNS, Lambda też)
