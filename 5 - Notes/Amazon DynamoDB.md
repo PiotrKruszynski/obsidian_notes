@@ -49,9 +49,6 @@ Atrybut = kolumna (JSON-like)
 Odpowiednik wiersza w SQL. Max 400 KB. Może zawierać zagnieżdżone atrybuty (JSON-like).
 ### Atrybut
 Odpowiednik kolumny. Typy: String, Number, Binary, Boolean, Null, List, Map, Set.
-### 
-
-  
 ## Capacity modes  
 ### On-Demand  
 - auto scaling  
@@ -98,14 +95,13 @@ Odpowiednik kolumny. Typy: String, Number, Binary, Boolean, Null, List, Map, Set
 - retention: 24h  
 - ordered per partition key  
   
-DynamoDB → Stream → Lambda / Kinesis
+`DynamoDB → Stream → Lambda / Kinesis`
 👉 use cases:
 - event-driven apps
 - audit
 - replication
 
 ## TTL
-
 - auto delete itemów
 - ustawiasz timestamp (Unix time)
 
@@ -128,7 +124,6 @@ replikuje dane między wieloma regionami AWS w czasie rzeczywistym
 - in-memory cache
 - microsecond latency
 - read-heavy workloads
-
 ⚠️:
 - nie wspiera strongly consistent reads
 ---
@@ -214,8 +209,6 @@ Users (US)  →  DynamoDB Global Table (us-east-1)
 ```
 App  →  DAX  →  DynamoDB
 ```
-
-
 
 
 ___

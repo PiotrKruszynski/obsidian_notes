@@ -2,22 +2,25 @@ Created: 2026-03-17  11:08
 ___
 Note:
 
->[! ]
->intelligent threat discovery to protect your AWS Account
->uses ML algorithms
->input data includes:
->- CloudTrail Events Logs
->- VPC Flow Logs
->- DNS Logs
->- Optional Features:
->	- EKS Audit Log
->	- RDS & Aurora
->	- EBS
->	- Lambda
->	- S3 Data Events
->- can setup EventBridge rules to be notified in case of findings
->- EventBridge rules can target Lambda or SNS
->Can protect against **CryptoCurrency attacks**
+### Co robi GuardDuty
+
+`logi + ML + threat intel → wykrywanie zagrożeń`
+Analizuje:
+- CloudTrail (API activity)
+- VPC Flow Logs (ruch sieciowy)
+- DNS logs
+
+👉 wykrywa:
+- podejrzane IP (np. botnet)
+- crypto mining
+- anomalie w IAM (np. nietypowe użycie kluczy)
+
+### Use case (egzamin)
+`"detect suspicious activity / threats" → GuardDuty`
+### Różnica vs Macie (to musisz umieć)
+GuardDuty → zagrożenia / zachowanie  
+Macie → dane w S3 (PII)
+
 
 ![[Pasted image 20260317111256.png]]
 

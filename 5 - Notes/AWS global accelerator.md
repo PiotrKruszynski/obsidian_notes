@@ -10,6 +10,8 @@ Note:
 >Global Accelerator = **network layer optimizer (TCP/UDP)**  
 >zapewnia **stałe IP + szybki routing globalny**
 >brak DNS cache problem
+>dla **non-HTTP** np. gry , VoIP, IoT
+>
 
 ### Mental model
 Global Accelerator = **„szybsza droga do Twojej aplikacji” (bez cache)**
@@ -57,13 +59,14 @@ user → GA → region B ✅
 
 ---
 # Use cases
-- global apps (multi-region)
-- **non-HTTP** (UDP/TCP):
+global apps (multi-region)
+**non-HTTP** (UDP/TCP):
   - gaming
   - VoIP
   - IoT
-- gdy potrzebujesz:
+gdy potrzebujesz:
   - **static IP**
+Global Accelerator ≠ S3 service
 
 ---
 

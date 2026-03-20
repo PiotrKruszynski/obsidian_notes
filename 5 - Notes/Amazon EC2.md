@@ -66,6 +66,26 @@ EC2 = **serwer w chmurze na żądanie**
 
 >[!exam]
 >high availability → ASG + ALB  
+
+# Placement groups
+### Spread Placement Group  = maksymalna izolacja
+>[!important]  
+>- maksymalna izolacja instancji (HA)  
+>- każda instancja na osobnym racku (power + network)  
+>- **max 7 instances per AZ**
+### Cluster Placement Group = blisko siebie
+>[!important]  
+>- **high performance (low latency, high throughput)**  
+>- instancje bardzo blisko siebie  
+>- 1 AZ
+
+### Partition Placement Group  
+>[!important]  
+>- dla **dużych systemów rozproszonych**  
+>- instancje podzielone na **partitions (grupy racków)**  
+>- **Use case**: _Hadoop_, _Kafka_
+
+---
 ### Pricing models
 **On-Demand Instances** - płacisz za dokładny czas działania, bez zobowiązań, najdroższa w długim użyciu
 **Reserved Instance** - rezerwujesz instancję na 1 lub 3 lata, zniżka do70%
@@ -91,22 +111,20 @@ can automate boot tasks such as:
  _run with root user_ nie trzeba `sudo`
  
 ---
-
 ### Kiedy używać
 - pełna kontrola nad systemem
 - custom software
 - legacy apps
 - gdy Lambda jest za ograniczona
+	- np. lambda świetna do krótkich, max 15min
 
 ---
-
 ### Trade-offs
 - wymaga zarządzania (patching, scaling)
 - większy ops niż serverless
 - większa elastyczność vs większa złożoność
 
 ---
-
 ### EC2 vs Lambda vs ECS
 
 | Service | Typ | Use case |

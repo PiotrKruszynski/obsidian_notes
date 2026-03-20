@@ -6,6 +6,7 @@ Note:
 >Aurora = **AWS-native relational DB (MySQL/PostgreSQL compatible)**  
 >oddziela **compute od storage**
 >Aurora = **RDS++ (lepsza wydajność + storage distributed)**  
+>jak potrzeba można ustawić więcej RR i przekierować endpoint na read
 >
 >👉 compute:  
 >- instances (writer + replicas)
@@ -14,7 +15,7 @@ Note:
 >- shared, distributed, auto-scaling
 > ### Extra features
 > - **Aurora Serverless** - for unpredicted / intermitten workloads, no capacity planning
-> - **Aurora Global** - up to 16 DM Read Instance in each region, <1sec storage replication
+> - **Aurora Global** - up to 16 Read Instance in each region, <1sec storage replication
 > - **Aurora Machine Learning** with using [SageMaker & Comprehend] on Aurora
 > - **Aurora Database Cloning** - new cluster from existing one, faster than restoring a snapshot
 
@@ -41,10 +42,10 @@ Note:
   
 # Endpoints   
 - **Writer endpoint**  
-- write (INSERT/UPDATE)  
-- **Reader endpoint**  
+	- write (INSERT/UPDATE)  
+- **Reader endpoint**  - rozkłada ruch na RR
 - load balancing read queries  
-- **Custom endpoint**  
+- **Custom endpoint**  - możesz precyzyjniev kontrolować gdzie trafia dany ruch
 - wybór konkretnych instancji  
   
 >[!exam]  
@@ -58,7 +59,6 @@ Note:
 - brak replikacji engine-level  
 - shared storage  
 # Scaling  
-  
 ### Read scaling  
 - do 15 replicas  
 - natychmiastowe (shared storage)  
@@ -73,9 +73,7 @@ Note:
 - failover:  
 - automatic  
 - fast (~30s)  
-
 👉 Multi-AZ = **default behavior**  
-  
 # Backup  
 - continuous backup (S3)  
 - PITR  
@@ -96,7 +94,6 @@ Note:
 - pay per second  
 - use case:  
 - unpredictable workload  
-  
 #### Aurora Global DB  
 - cross-region replication  
 - **< 1 sec lag (typowo)**  
