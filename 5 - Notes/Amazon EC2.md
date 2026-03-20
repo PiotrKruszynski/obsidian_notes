@@ -80,6 +80,7 @@ Spoko dla Batch processing, BigData(Spark, Hadoop), ML training, renderingm stat
 Częsty pattern
 `Auto Scaling Group + Launch Template + MixedInstancesPolicy`
 
+**Launch Template** to „versioned, composable config”, który pozwala budować warianty instancji bez duplikacji
 
 **EC2 User Data**
 bootstrap our instance using an EC2 User data script, only once at the instance first start

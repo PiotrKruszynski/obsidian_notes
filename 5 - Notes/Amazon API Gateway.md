@@ -13,6 +13,9 @@ Note:
 
 ### Mental model
 API Gateway = **reverse proxy + API management layer**
+
+reverse proxy - serwerowy pośrednik przyjmuje żądania od klientów i przekazujący do serwerów backendowych
+
 👉 klient:
 - wysyła request HTTP  
 👉 API Gateway:
@@ -26,7 +29,6 @@ API Gateway = **reverse proxy + API management layer**
   - więcej feature’ów (np. API keys, usage plans)
 - **WebSocket API**
   - real-time (bidirectional)
-
 ### Integracje (backend)
 - **Lambda** (najczęściej)
 - **ALB / EC2**
@@ -37,24 +39,19 @@ API Gateway = **reverse proxy + API management layer**
 
 ---
 ### Kluczowe funkcje
-
 - **Authentication**
   - IAM
   - Cognito
   - Lambda authorizer
-
 - **Throttling**
   - limit requestów (rate limiting)
-
 - **Caching**
   - response cache (REST API)
-
 - **Monitoring**
   - CloudWatch logs
 
 ---
 ### Endpoint types
-
 - **Edge-optimized**
   - global (CloudFront pod spodem)
 - **Regional**
