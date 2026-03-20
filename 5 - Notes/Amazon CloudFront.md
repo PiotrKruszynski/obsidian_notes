@@ -40,10 +40,10 @@ CloudFront = **cache przed Twoim backendem**
 
 ---
 ### Security
-- HTTPS (SSL/TLS)
-- **AWS Shield** (DDoS)
-- **WAF** (Web Application Firewall)
-- Signed URLs / Cookies
+- HTTPS (SSL/TLS) -> encryption in transit
+- **AWS Shield** (DDoS protection) -> (L3/L4)
+- **WAF** (Web Application Firewall)-> filtruje ruch HTTPS (L7), SQL injection, Cross-Site Scripting złośliwy kod JavaScript wstrzykiwany do strony, IP blocking
+- Signed URLs / Signed  Cookies
 
 >[!exam]
 >secure content delivery → CloudFront + WAF  

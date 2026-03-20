@@ -32,20 +32,18 @@ FSx = „**gotowy, zarządzany system plików** w AWS”
 #### FSx for Lustre 🔥 (najważniejszy na egzamin)
 - **high-performance file system**
 - POSIX
-- setki GB/s throughput
+- setki GB/s ultra high throughput
+- integracja z **S3**
+	  - import/export danych
+- 2 typy:
+	  - **Scratch** → szybki, ale dane mogą zniknąć
+	  - **Persistent** → trwały
 
 👉 use case:
 - HPC
 - ML training
 - big data
 - rendering
-
-👉 kluczowe:
-- integracja z **S3**
-  - import/export danych
-- 2 typy:
-  - **Scratch** → szybki, ale dane mogą zniknąć
-  - **Persistent** → trwały
 
 >[!exam]
 >- HPC / ML → FSx for Lustre  

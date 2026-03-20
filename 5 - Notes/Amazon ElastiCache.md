@@ -16,6 +16,7 @@ Note:
 > max Redis item size **512 MB**
 
 **Use case:** key-value store, frequent reads - less writes, cache results for DB queries, store session data for user on websites, _cannot use SQL !_
+
 Redis: _gaming leaderboards_ bo gwarantuje uniqueness and element ordering
 
 ### Core properties
