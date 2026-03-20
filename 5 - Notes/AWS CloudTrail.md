@@ -1,31 +1,176 @@
 Created: 2026-03-17  22:10
 ___
 Note:
+  
+>[!important]  
+>- CloudTrail = **audit + logging**  wykonanej akcji, kliknięcia (API calls) w AWS  
+>- zapisuje: **kto zrobił co, kiedy, skąd**  
+>- **enabled by default**  
+>- kluczowy do: **security, compliance, troubleshooting**  
+  
+---  
+  
+## Mental model  
+  
+CloudTrail = **historia wszystkich działań w AWS**  
+`User / Service → API call → CloudTrail → log`
 
->[! ]
->- provides governance, compiliance and audit for your AWS Account
->- enabled by default
->- get history of events / API calls made within your AWS Account by:
->	- console, SDk, CLI , AWS Services
->- can put logs from CloudTrauk unti CloudWatch Logs
+👉 każde kliknięcie w konsoli = API call
 
-#### If a resource is deleted in AWS, investigate CloudTrail first!
+---
 
-# Rodzaje eventów:
-- managenet events
-- data events -> by default are not logged because of high volume operations
-- CloudTrail Insights Events -> for unusual patterns
+## Co loguje
 
-# Integration with EventBridge
+- AWS Console
+    
+- CLI
+    
+- SDK
+    
+- AWS Services
+    
 
-jak cos na DB to podłączamy CloudTrail -> EventBridge -> SNS do powiadomienia
+👉 wszystko co robi zmiany w AWS
 
-jak user przyjmuje role IAM -> CloudTrail -> EventBridge -> SNS
+---
 
-podobnie EC2
+## Gdzie trafiają logi
+
+- domyślnie:
+    
+    - Event History (90 dni)
+        
+- opcjonalnie:
+    
+    - **S3 (long-term storage)**
+        
+    - **CloudWatch Logs (monitoring + alerty)**
+        
+
+---
+
+## Typy eventów (ważne!)
+
+### Management Events (default)
+
+- operacje na zasobach:
+    
+    - create / delete / modify
+        
+- np:
+    
+    - uruchomienie EC2
+        
+    - zmiana IAM policy
+        
+
+👉 **włączone domyślnie**
+
+---
+
+### Data Events
+
+- operacje na danych:
+    
+    - S3 (GetObject, PutObject)
+        
+    - Lambda invoke
+        
+
+👉 **wyłączone domyślnie (duży koszt!)**
+
+---
+
+### CloudTrail Insights
+
+- wykrywa **nietypowe zachowania**
+    
+- np:
+    
+    - nagły spike API calls
+        
+
+---
+
+## 🔥 Najważniejsze use case
+
+resource deleted → sprawdź CloudTrail
+
+👉 kto usunął, kiedy, z jakiego IP
+
+---
+
+## Integracja z EventBridge
+
+CloudTrail może wysyłać eventy do EventBridge:
+
+CloudTrail → EventBridge → SNS / Lambda
+
+👉 przykłady:
+
+- ktoś przyjął rolę IAM
+    
+- ktoś usunął DB
+    
+- ktoś zmienił security group
+    
+
+👉 możesz:
+
+- wysłać alert (SNS)
+    
+- uruchomić Lambda
+    
+
+---
+
+## Security
+
+- integracja z:
+    
+    - IAM
+        
+    - CloudWatch
+        
+    - EventBridge
+        
+- logi można:
+    
+    - szyfrować (KMS)
+        
+    - archiwizować (S3)
+        
+
+---
+
+## Exam traps
+
+- CloudTrail ≠ monitoring (to audit log)
+    
+- nie loguje metryk (to CloudWatch)
+    
+- Data Events są wyłączone domyślnie
+    
+- Event History = tylko 90 dni
+    
+
+---
+
+## TL;DR
+
+CloudTrail = kto zrobił co w AWS  
+  
+Management → default  
+Data → optional  
+Insights → anomaly detection  
+  
+debug/security → CloudTrail first
+
+![[Pasted image 20260320224923.png]]
 
 
 
+---
 
 
 ___
