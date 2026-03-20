@@ -41,7 +41,7 @@ Final decision: Allow / Deny
 - **Resource-based** → attached to resource (S3, SQS, SNS, Lambda)  
 ## Boundaries / guards that limit permissions  
 - permission boundary  
-- SCP (AWS Organizations)  
+- ServiceControlPolicy (AWS Organizations)  
 - session policy  
 - explicit deny
 ## STS  Security Token Service

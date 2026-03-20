@@ -1,4 +1,6 @@
-zamiasat wielu połączeń typu VPC peering
+![[Pasted image 20260320213511.png|100]]
+
+zamiast wielu połączeń typu VPC peering
 
 peering -> bezpośrednie połączenie między dwoma sieciami które wymieniają ze sobą ruch, prywatnie bez pośredników
 
@@ -10,3 +12,5 @@ jak szprychy w rowerze
 
 equal cost multi path routing
 to routing strategy to allow forward a packet over multiple best path
+
+![[Pasted image 20260320213449.png]]
