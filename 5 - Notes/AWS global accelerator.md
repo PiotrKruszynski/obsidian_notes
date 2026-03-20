@@ -9,6 +9,7 @@ Note:
 >[!Definition]
 >Global Accelerator = **network layer optimizer (TCP/UDP)**  
 >zapewnia **stałe IP + szybki routing globalny**
+>brak DNS cache problem
 
 ### Mental model
 Global Accelerator = **„szybsza droga do Twojej aplikacji” (bez cache)**
