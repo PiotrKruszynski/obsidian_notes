@@ -5,6 +5,7 @@ Note:
   
 >[!important]  
 >- VPN = **encrypted tunnel over Internet**  
+>- łączy on-premises z VPC ale nadal w internet
 >- szybki setup (minuty)  
 >- używany do: **hybrid connection / secure access**  
 >- mniej stabilny niż Direct Connect  
