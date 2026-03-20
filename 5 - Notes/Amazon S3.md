@@ -11,6 +11,7 @@ istnieją block storage / file storage / object storage
 >- praktycznie nieograniczona skala
 >- świetne dla: static files, backup, archive, data lake, media, DR, static website
 >- **nie jest file systemem** i nie jest block storage
+>- strong read-after-write consistency
 
 # 1. Mental model / feature map
 ### Cost / storage classes
