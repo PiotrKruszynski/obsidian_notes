@@ -147,8 +147,7 @@ Przechowuje dane jako **wektory** — listy liczb reprezentujące znaczenie teks
 _schema_
 jak jest schema to jest szybsza niż NoSQL
 
-„data is organized into relations (called tables in SQL), where each relation is an unordered collection
-of tuples (rows in SQL).”
+„data is organized into relations (called tables in SQL), where each relation is an unordered collection of tuples (rows in SQL).”
 
 
 # db NoSQL
@@ -176,9 +175,6 @@ Dlatego Dynamo wprowadziło kilka idei, które później przejęła większość
 | **eventual consistency**       | szybkość zamiast ścisłej spójności |
 | **partitioning + replication** | skalowanie na setki maszyn         |
 | **consistent hashing**         | równomierne rozłożenie danych      |
-
-
-
 
 spójnośc danych
 skalowalność pozioma jest trudniejsza w SQL
