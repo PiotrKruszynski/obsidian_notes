@@ -8,7 +8,7 @@ Note:
 >- kolumnowa baza danych (**columnar storage**) → szybkie analizy
 >- zapytania SQL na dużych datasetach (PB scale)
 >- **MPP (Massively Parallel Processing)**
->- integracja z S3 (COPY / UNLOAD, Redshift Spectrum)
+>- integracja z S3 (COPY / UNLOAD, Redshift Spectrum) ale można z DynamoDB,Kinesis, DataLake i innymi bazami
 >- use case: **BI, analytics, reporting**
 
 **Use case**: dashboards, reporting, complex aggregations
