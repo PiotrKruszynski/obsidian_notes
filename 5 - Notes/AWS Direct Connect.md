@@ -1,15 +1,13 @@
 Created: 2026-02-14  15:07
 ___
 Note:
+![[Pasted image 20260321012503.png|100]]
 
-  
 >[!important]  
 >- Direct Connect = **dedicated private connection (on-prem → AWS)**  
 >- NIE używa internetu    
 >- stabilna latency + przewidywalny throughput    
 >- do: **hybrid architecture / data transfer / enterprise workloads**  
-  
----  
   
 ## Mental model  
 `Data center → Direct Connect → AWS VPC`
