@@ -17,7 +17,7 @@ Note:
 
 - działa ciągle (continuous monitoring)  
 - historia zmian (configuration timeline)  
-- automatyczna ocena compliance  
+- automatyczna ocena compliance  (zgodność)
 
 **Use case**: security audits, drift detection, policy enforcement
 
