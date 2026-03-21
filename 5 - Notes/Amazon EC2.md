@@ -105,7 +105,7 @@ Częsty pattern
 **EC2 User Data**
 bootstrap our instance using an EC2 User data script, only once at the instance first start
 can automate boot tasks such as:
- - installing updates
+ - installing updates and dynamic part
  - installing software
  - downloading common files from internet
  _run with root user_ nie trzeba `sudo`

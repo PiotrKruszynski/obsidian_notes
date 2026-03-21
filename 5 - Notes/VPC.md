@@ -51,7 +51,69 @@ Note:
     - `.3`: Reserved for future use.
     - `.255`: Network Broadcast Address (broadcast is not supported in VPC).
 - **Exam Tip:** If you need 29 addresses, a `/27` (32 IPs) is not enough because `32 - 5 = 27`, which is less than 29. You would need a `/26`.
+# VPC – Peering vs Sharing  
+  
+> [!tip]  
+> **Mental model:**  
+> Peering = "połącz  2sieci VPC“  
+> Sharing = "współdziel jedną sieć"  
+  
+---  
+  
+## 🔁 VPC Peering (connectivity)  
+  
+- połączenie **2 VPC**  
+- ruch prywatny (AWS network)  
+- wymaga:  
+- non-overlapping CIDR  
+- route tables update  
+  
+### ❗ Ograniczenia  
+- ❌ brak transitive routing (A↔B, B↔C ≠ A↔C)  
+- ❌ słabo się skaluje (mesh problem)  
+  
+> [!exam]  
+> Peering = point-to-point network link  
+  
+---  
 
+## 🏢 VPC Sharing (AWS RAM)
+- **You do NOT share the entire VPC**
+- **You share selected SUBNETS from the VPC**
+- Other AWS accounts (in the same AWS Organization) can deploy resources into these subnets
+
+> [!tip]
+> VPC = owned by one account  
+> Subnets = shared with other accounts  
+
+> [!exam]
+> VPC Sharing = sharing subnets, not the VPC itself
+
+---  
+  
+## ⚖️ Kluczowe różnice  
+  
+| Feature | VPC Peering | VPC Sharing |  
+|--------|-------------|------------|  
+| Model | 2 VPC | 1 VPC |  
+| Cel | komunikacja | współdzielenie |  
+| Routing | wymagany | nie |  
+| Skalowanie | słabe | dobre (org) |  
+  
+---  
+  
+## 🔥 Decision rules  
+  
+- masz **2 istniejące VPC i chcesz komunikację** → **Peering**  
+- masz **multi-account i chcesz jedną sieć** → **Sharing**  
+  
+---  
+  
+## 🧠 Minimal context (dlaczego to działa)  
+  
+- VPC = boundary routingu  
+- Peering → łączy **dwa boundary**  
+- Sharing → usuwa problem, bo jest **jedno boundary**
 
 ___
 Metadata:
