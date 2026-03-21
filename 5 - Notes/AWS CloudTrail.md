@@ -22,14 +22,9 @@ CloudTrail = **historia wszystkich działań w AWS**
 ## Co loguje
 
 - AWS Console
-    
 - CLI
-    
 - SDK
-    
 - AWS Services
-    
-
 👉 wszystko co robi zmiany w AWS
 
 ---

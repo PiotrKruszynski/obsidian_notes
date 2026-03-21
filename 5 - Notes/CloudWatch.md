@@ -17,9 +17,9 @@ Note:
 
 # Mental model (KLUCZ)
 
-- **Metrics** → "co się dzieje, czy działa?" (CPU, latency)
-- **Logs** → "dlaczego nie działa?" (debug, errors)
-- **Events** → "kiedy coś się zmieniło?"
+- **Metrics** → "ile? jak bardzo?” (CPU, latency)
+- **Logs** → "dlaczego nie działa? co się stało?“ (debug, errors)
+- **Events** → "co się właśnie wydarzyło?”
 - dashboard - wizualizuj
 - EventBridge - automatyzuj
 
