@@ -11,6 +11,7 @@ Note:
 >- **SCP (Service Control Policies)** → ograniczają co accounty MOGĄ zrobić
 >- automatyczne tworzenie kont + zarządzanie dostępem + można się dzielić Safe Plan
 >- use case: **multi-account strategy, governance, security boundaries**
+>- Shared reserved instances and Savings Plans discounts across accounts
 
 # Mental model
 `Organization → OU → accounts → SCP definiuje maksymalne uprawnienia`
