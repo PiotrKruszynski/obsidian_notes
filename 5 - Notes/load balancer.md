@@ -4,10 +4,14 @@ Note:
 
 >[!Important]
 >Load Balancer = **managed service, który rozdziela ruch na wiele backendów (targets)**
+>Load Balancers always route traffic using private IPs
 >- ALB → HTTP / microservices
 >- NLB → performance / TCP / static IP
 >- GWLB → firewall / network
 
+## ⚠️ Dlaczego to jest ważne
+- public IP = tylko do wejścia z Internetu
+- **wewnątrz AWS zawsze leci private networking**
 # Load Balancer — core
 ### Mental model
 Load Balancer = **entry point (single DNS) → rozdziela ruch → targets**
