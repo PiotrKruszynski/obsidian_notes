@@ -13,7 +13,7 @@ Amazon EventBridge to **serverless event bus**, który umożliwia:
 - filtrowanie (advance filtering option with JSON rules metadata, obj size, name..)
 - routowanie do targetów
 - budowę architektury event-driven
-- EventBridge Capabilities - Archive, Replay Events, Reliable delivery
+- EventBridge Capabilities - Archive, Replay Events, Reliable deliveryo
 
 To jest warstwa **event routing**, nie messaging queue.
 
