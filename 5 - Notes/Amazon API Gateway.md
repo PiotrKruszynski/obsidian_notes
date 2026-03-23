@@ -11,6 +11,10 @@ Note:
 >- serverless → brak zarządzania infrastrukturą
 >- oferuje: **auth, throttling, caching, monitoring**
 
+API Gateway = policy + control + transformation na wejściu do systemu
+👉 klasyczny pattern:
+- CRUD API
+- backend dla mobile/web
 ### Mental model
 API Gateway = **reverse proxy + API management layer**
 
