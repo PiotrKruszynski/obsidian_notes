@@ -21,6 +21,7 @@ CloudFront = **cache przed Twoim backendem**
 - **S3**
 - **ALB** / **EC2**
 - custom **HTTP server**
+- on-prem!
 
 ---
 ### Jak działa cache

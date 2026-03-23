@@ -35,16 +35,15 @@ Zwraca kilka zdrowych, ale nie zastępuje LB
 ❗ NIE zastępuje ELB
 
 ---
-
 # Route 53 Resolver
 
 👉 DNS w VPC
 - resolves:
   - EC2 names
   - private hosted zones
+![[Pasted image 20260323123000.png]]
 
 ---
-
 # Hybrid DNS
 
 ## Inbound endpoint
@@ -55,6 +54,8 @@ Zwraca kilka zdrowych, ale nie zastępuje LB
 >[!exam]
 >hybrid DNS → inbound/outbound endpoints
 
+![[Pasted image 20260323123020.png]]
+![[Pasted image 20260323123030.png]]
 ---
 # Najważniejsze rozróżnienia
 

@@ -42,7 +42,7 @@ EC2 = **serwer w chmurze na żądanie**
   - persistent
   - block storage
 - **Instance Store**  - physical storage (high IOPS)
-  - ephemeral (ginie po stopie)
+  - ephemeral (ginie przy stop)
 
 >[!exam]
 >trwałe dane → EBS  
