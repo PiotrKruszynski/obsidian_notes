@@ -201,17 +201,31 @@ S3 wspiera checksumy do walidacji integralności
 - enforce secure CloudFront only access
 ## Object Lock
 - model **WORM**
-- działa na wersjach obiektów
+- działa na **object version (nie bucket!)**
 - wymaga **versioning**
-- tryby:
-  - **Governance**
-  - **Compliance**
-- dodatkowo **Legal Hold**
+### Retention (klucz do egzaminu)
+- można ustawić:
+    - **Retain Until Date** (explicit na object version)
+    - **retention period** (np. 30 dni — bucket default)
+- **bucket default** działa tylko gdy brak explicit na obiekcie
+- **explicit retention > bucket default**
+### Version behavior
+- każda **wersja obiektu ma własny retention**
+- różne wersje → różne retention / mode
+### Tryby
+- **Governance**
+- **Compliance**
 
->[!exam]
->- compliance = nawet root nie może usunąć przed końcem retention
->- governance = wybrani użytkownicy mogą obejść zasady
+### Legal Hold
 
+- niezależne od retention (blokuje delete bez daty końcowej)
+
+> [!exam]
+> 
+> - compliance = nawet root nie może usunąć przed końcem retention
+> - governance = można obejść (z odpowiednimi uprawnieniami)
+> - **default = period, explicit = Retain Until Date**
+> - **Object Lock działa per version (nie per object)**
 ---
 # 9. Replication / DR
 
