@@ -10,9 +10,10 @@ Note:
 
 Amazon EventBridge to **serverless event bus**, który umożliwia:
 - odbieranie zdarzeń (events)
-- filtrowanie ich
+- filtrowanie (advance filtering option with JSON rules metadata, obj size, name..)
 - routowanie do targetów
 - budowę architektury event-driven
+- EventBridge Capabilities - Archive, Replay Events, Reliable delivery
 
 To jest warstwa **event routing**, nie messaging queue.
 
@@ -27,7 +28,6 @@ To jest warstwa **event routing**, nie messaging queue.
 Logiczny kanał, przez który przechodzą eventy.
 
 Typy:
-
 - Default Event Bus (AWS services)
 - Custom Event Bus (aplikacje)
 - Partner Event Bus (SaaS integrations)
@@ -37,7 +37,6 @@ Typy:
 ### 🔹 Event
 
 JSON payload zawierający:
-
 {  
   "source": "my.app",  
   "detail-type": "order.created",  
@@ -46,26 +45,19 @@ JSON payload zawierający:
     "amount": 500  
   }  
 }
-
 Event jest immutable.
 
 ---
-
 ### 🔹 Rule
-
 Reguła zawierająca:
-
 - pattern (filter)
 - target
-
 Event → match pattern → trigger target
 
 ---
 
 ### 🔹 Target
-
 Może być:
-
 - Lambda
 - SQS
 - SNS
@@ -73,14 +65,11 @@ Może być:
 - ECS Task
 - API Destination
 - Kinesis
-    
 
 ---
 
 ## 3️⃣ Jak działa przepływ
-
 Producer → Event Bus → Rule → Target
-
 Nie ma pollingu.  
 EventBridge pushuje event do targetu.
 
@@ -131,13 +120,9 @@ EventBridge:
 ## 7️⃣ Delivery semantics
 
 - At-least-once delivery
-    
 - Best effort ordering
-    
 - Retry with exponential backoff
-    
 - DLQ supported (SQS)
-    
 
 ---
 
@@ -152,25 +137,18 @@ EventBridge:
     }]  
   }  
 }
-
 Zaawansowane filtrowanie po polach JSON.
 
 ---
 
 ## 9️⃣ Architektura backendowa
-
 Typowy pattern:
-
-API → write to DB → emit domain event → EventBridge → downstream services
+`API → write to DB → emit domain event → EventBridge → downstream services`
 
 To pozwala:
-
 - decoupling
-    
 - async processing
-    
 - scalable event-driven system
-    
 
 ---
 
@@ -183,28 +161,22 @@ To pozwala:
 ---
 
 ## 🔥 Egzamin AWS – czego się spodziewać
-
-Scenariusze typu:
-
-„You need loosely coupled event-driven architecture across accounts with filtering and SaaS integration.”
+>„You need loosely coupled event-driven architecture across accounts with filtering and SaaS integration.”
 
 Odpowiedź: EventBridge
 
-Jeśli:
-
-„You need durable buffering and consumer control.”
+>„You need durable buffering and consumer control.”
 
 Odpowiedź: SQS
 
 ---
 
-## 11️⃣ Mental model
+## 1️⃣1️⃣ Mental model
 
 EventBridge = router zdarzeń  
 SQS = bufor  
 SNS = broadcast  
 Kinesis = streaming
-
 
 ___
 Metadata:
