@@ -32,21 +32,21 @@ Note:
     - routing przez **BGP**
 
 ---
-
 ## Typy VIF (ważne!)
-
+zależy z czym się łączysz. Jak S3 lub inne publicze to Public VIF
 ### Private VIF
 on-prem → VPC (private resources)
 - dostęp do private IP (EC2, RDS)
 
 ---
-
 ### Public VIF
 on-prem → AWS public services
 - dostęp do:
     - S3
     - DynamoDB
 - nadal NIE przez internet (AWS backbone)
+
+![[Pasted image 20260324140036.png]]
 
 ---
 
