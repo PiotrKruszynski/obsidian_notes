@@ -25,7 +25,6 @@ Note:
 ### Site-to-Site VPN
 
 on-prem → AWS VPC
-
 - łączy całą sieć (nie usera)
 - używa:
     - **Customer Gateway (on-prem)**
