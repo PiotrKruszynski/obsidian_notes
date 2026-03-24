@@ -21,24 +21,13 @@ Note:
 
 **Use case**: ETL pipelines, przygotowanie danych pod Athena/Redshift
 # Core features
-Glue Data Catalog:
-  - central metadata store (tables, partitions)
-Crawlers:
-  - auto schema detection
-ETL Jobs:
-  - Spark-based, serverless
-Glue Studio:
-  - visual ETL builder
-- integration:
-  - Athena, Redshift, EMR
-- pricing:
-  - per job runtime (DPU)
 
-Glue data catalog: run Glue data clowlers
-_Glue JobBookmarks_: prevent re-processing old data
-_Glue DataBrew_: clean and normalize data using pre-built transformation
-_Glue Studio_: new GUI to create, run and monitor ETL jobs in Glue
-_Glue Streaming ETL_: build on Apache Spark Streaming: compatible with Kinesis Data Streaming, Kafka, MSK
+_Glue data catalog_: jest wspólną warstwą, która opisuje, gdzie i w jakiej strukturze znajdują się Twoje dane. Przechowuje informacje o schematach danych z różnych źródeł. Umożliwia łatwe odnajdywanie i klasyfikowanie danych
+_Glue Job_: to zadanie ETL, które przetwarza dane wsadowo
+_Glue Bookmarks_: zapamiętuje, gdzie ostatnio Glue zakończył przetwarzanie, by kontynuować od tej pozycji. Prevent re-processing old data.
+_Glue DataBrew_: to narzędzie wizualne, które pozwala na interaktywne przygotowywanie danych, bez kodowania
+_Glue Studio_: new GUI, środowisko no-code do zarządzania i tworzenia Glue jobów.
+_Glue Streaming ETL_: umożliwia przetwarzanie danych w czasie rzeczywistym, czyli Glue przetwarza strumienie danych na bieżąco, a nie w partiach. build on **Apache Spark Streaming**: compatible with _Kinesis Data Streaming_, _Kafka_, _MSK_
 # How it works
 `S3 → crawler → schema in catalog → Glue job → transform → output`
 - schema-on-read  
