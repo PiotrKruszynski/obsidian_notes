@@ -35,6 +35,7 @@ FSx = „**gotowy, zarządzany system plików** w AWS”
 - setki GB/s ultra high throughput
 - integracja z **S3**
 	  - import/export danych
+	  - cold data w S3, hot data w FSx
 - 2 typy:
 	  - **Scratch** → szybki, ale dane mogą zniknąć
 	  - **Persistent** → trwały

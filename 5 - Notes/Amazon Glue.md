@@ -11,6 +11,7 @@ Note:
 >- oparty o **Apache Spark**
 >- automatyczne wykrywanie schematu (**crawlers**)
 >- use case: **data lake ETL, schema management**
+>- nie w czasie rzeczywistym, nie dla HPC
 
 # Mental model
 `Dane w S3 → Glue crawler tworzy schema → Glue job (Spark) przetwarza → zapis do S3/Redshift`
