@@ -53,9 +53,7 @@ on-prem router → IPSec tunnel → VGW → VPC
 ## Routing
 
 - static routes
-    
 - albo dynamiczne:
-    
 
 BGP
 
