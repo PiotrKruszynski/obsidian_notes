@@ -60,7 +60,6 @@ IGW = **brama między VPC a Internetem**
 ### Warunki dostępu do Internetu
 
 EC2 ma Internet **tylko jeśli spełnia WSZYSTKIE:**
-
 - subnet ma route → IGW
 - instancja ma:
     - public IP / Elastic IP
