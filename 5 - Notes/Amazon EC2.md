@@ -58,7 +58,6 @@ EC2 = **serwer w chmurze na żądanie**
 
 ---
 ### Scaling
-
 - **Auto Scaling Group (ASG)**
   - automatyczne dodawanie/usuwanie instancji
 - **Load Balancer (ALB/NLB)**
