@@ -17,7 +17,7 @@ Note:
 
 ---
 
-## Typy endpointów (CRITICAL)
+# Types of endpoint (CRITICAL)
 jest wiele ale
 ### 1. Gateway Endpoint
 `Route Table → AWS service`
@@ -33,6 +33,7 @@ jest wiele ale
 > S3 / DynamoDB → zawsze Gateway Endpoint
 
 ### 2. Interface Endpoint (PrivateLink)
+![[Pasted image 20260324115941.png|100]]
 EC2 → ENI (private IP) → service
 - działa przez:
     - **ENI w subnet**

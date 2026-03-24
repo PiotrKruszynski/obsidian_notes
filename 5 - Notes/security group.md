@@ -9,6 +9,7 @@ Note:
 >- kontroluje **inbound + outbound traffic**
 >- **stateful** → response traffic automatycznie dozwolony
 >- działa na poziomie **ENI (Elastic Network Interface)**
+>- only **ALLOW rules** (no deny)
 
 ---
 
