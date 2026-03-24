@@ -1,6 +1,7 @@
 Created: 2026-03-09  21:24
 ___
 Note:
+  ![[Pasted image 20260324115941.png|100]]
   
 >[!important]  
 >- VPC Endpoint = **private access to AWS services** (bez Internetu, to nie tunel)
@@ -33,7 +34,7 @@ jest wiele ale
 > S3 / DynamoDB → zawsze Gateway Endpoint
 
 ### 2. Interface Endpoint (PrivateLink)
-![[Pasted image 20260324115941.png|100]]
+
 EC2 → ENI (private IP) → service
 - działa przez stworzony:
     - **ENI w subnet**
