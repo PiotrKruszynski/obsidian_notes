@@ -1,0 +1,160 @@
+Created: 2026-02-05  21:25
+___
+Note:
+
+>[! Important]
+>**scale out** to increase
+>**scale in** to decreas
+>**ensure min and max
+>** **auto register** new instance to load balancer                        *superpower*
+>**re-create** instance in case a previous is terminated           *superpower*
+>
+
+![[Pasted image 20260205212848.png]]
+
+![[Pasted image 20260205212904.png]]
+
+![[Pasted image 20260205212920.png]]
+
+## Information to Launch Template
+
+![[Pasted image 20260205212931.png]]
+
+## Scaling Policies
+- dynamic scaling
+	- target tracking scaling
+		- simple to setup
+		- example: I want average ASG CPU to stay at 40%
+	- simple / step scaling
+		- when a CloudWatch alarm is triggered (example CPU > 70%) then add 2 units
+- scheduled scaling
+	- anticipate a scaling based on known usage patterns
+	- example: increase the min capacity to 10 at 5pm Fridays
+- predictive scaling:
+	- continuously forcast load and schedule scaling ahead
+
+
+>[!important]
+>**scale out** → increase instances  
+>**scale in** → decrease instances  
+>**desired capacity** → target liczba instancji  
+>**min / max** → bounds  
+>**self-healing** → replace unhealthy  
+>**auto register/deregister** → z Load Balancer  
+
+---
+
+## 🧠 Mental model
+ASG = **self-healing + auto-scaling orchestrator**
+- utrzymuje **desired capacity**
+- automatycznie **replace dead instances**
+- skaluje się na podstawie **metrics**
+- integruje się z **Load Balancer**
+## ⚙️ Core behavior
+- **health checks**
+  - EC2 status + ELB health check
+  - unhealthy → terminate + replace
+- **desired / min / max**
+  - desired = target
+  - ASG zawsze dąży do desired
+## 🚀 Launch Template
+- AMI, instance type
+- security groups
+- key pair
+- user data
+- EBS config
+👉 ASG używa LT do tworzenia instancji
+
+## 📈 Scaling Policies
+### dynamic scaling
+- **target tracking**
+  - utrzymuje np. CPU = 40%
+- **step / simple scaling**
+  - np. CPU > 70% → +2 instances
+### scheduled scaling
+- scaling wg czasu (np. peak hours)
+### predictive scaling
+- forecast + scaling ahead
+## 📊 Metrics (kluczowe)
+- **CPUUtilization**
+- **RequestCountPerTarget (ALB)** ⭐
+- **Network In/Out**
+- **custom (CloudWatch)** ⭐ (np. SQS queue depth)
+👉 CPU nie zawsze najlepszy
+
+## 🔥 Warmup / Cooldown
+- **instance warmup**
+  - nowa instancja nie wpływa od razu na metryki
+  - zapobiega over-scaling
+- **cooldown (legacy)**
+  - pause między scaling
+## 🧠 Lifecycle Hooks
+- pause przy:
+  - launch
+  - terminate
+- use cases:
+  - install software (launch)
+  - snapshot / drain (terminate)
+#### 👉 ASG = jedyne miejsce gdzie możesz zatrzymać lifecycle
+
+---
+
+## 🔄 Instance Refresh
+- rolling update instancji
+- używa nowej wersji Launch Template
+👉 use case:
+- update AMI
+- patching
+
+---
+
+## ⚡ Mixed Instances Policy
+- mix:
+  - On-Demand + Spot
+  - multiple instance types
+👉 cost ↓ / resilience ↑
+
+---
+
+## 🔗 Load Balancer integration
+- auto register do ALB/NLB
+- auto deregister przy terminate
+- **connection draining (deregistration delay)**
+👉 brak traffic do terminating instance
+
+## 🧪 Common Patterns (SAA)
+- **ALB + ASG**
+  - scale na RequestCountPerTarget
+- **SQS + ASG**
+  - scale na queue depth
+
+---
+
+## ⚠️ Pułapki
+- brak warmup → over-scaling
+- CPU jako metric dla I/O app → błąd
+- brak ELB health check → traffic do dead instance
+- brak lifecycle hook → utrata danych
+- brak deregistration delay → dropped requests
+
+---
+
+## 🔥 Exam Takeaways
+- ASG = **self-healing + scaling**
+- lifecycle hook = **pause lifecycle**
+- best metric = **RequestCountPerTarget / SQS depth**
+- warmup = **stabilizacja scalingu**
+- instance refresh = **rolling update**
+
+___
+Metadata:
+
+```yaml
+---
+type: tool    # concept | service | comparison
+language: aws
+---
+```
+
+Status: #pending
+Tags: #aws

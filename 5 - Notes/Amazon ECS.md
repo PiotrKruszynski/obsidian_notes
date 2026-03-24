@@ -138,9 +138,9 @@ Target Scaling
 Step Scaling
 Scheduled Scaling
 
-**Auto Scaling Group Scaling** to nie to smo co EC2 [[Auto Scaling]]
+**Auto Scaling Group Scaling** to nie to smo co EC2 [[auto scaling group]]
 
-**2. ECS Cluster Capacity Provider** (tylko EC2 launch type) — skaluje liczbę instancji EC2 w klastrze przez [[Auto Scaling]] Group + Capacity Provider.
+**2. ECS Cluster Capacity Provider** (tylko EC2 launch type) — skaluje liczbę instancji EC2 w klastrze przez [[auto scaling group]] Group + Capacity Provider.
 
 **Fargate** — tylko Service Auto Scaling, EC2 nie dotyczy.
 
