@@ -48,37 +48,30 @@ AWS zarządza control plane (API server, etcd) → Ty dostarczasz compute (nodes
 | Portability | multi-cloud | AWS only |
 | Control | full | medium |
 | Default exam choice | when K8s required | otherwise |
-
 # Exam traps
 - ❌ EKS = serverless → NIE (chyba że Fargate)
 - ❌ AWS zarządza worker nodes → NIE (chyba że managed group/Fargate)
 - ❌ łatwiejszy niż ECS → NIE (bardziej złożony)
 - ❌ brak Kubernetes API → NIE (pełny K8s)
 - ❌ EKS zawsze najlepszy → NIE (overkill bez potrzeby K8s)
-
 # TL;DR
 - EKS = **Kubernetes na AWS**
 - używaj gdy **K8s / portability wymagane**
 - ECS prostszy → default bez K8s
 
-
-
 ![[Pasted image 20260224091137.png]]
 
 ## Node Types — 3 opcje
-
 ### Managed Node Groups
 - AWS tworzy i zarządza instancjami EC2 za Ciebie
 - Nodes są częścią ASG zarządzanej przez EKS
 - Wspiera On-Demand i Spot Instances
-
 ### Self-Managed Nodes
 - Ty tworzysz instancje EC2 i rejestrujesz do klastra
 - Zarządzane przez własną ASG
 - Możesz użyć gotowego AMI — **Amazon EKS Optimized AMI**
 - Wspiera On-Demand i Spot Instances
 - Pełna kontrola (custom AMI, GPU, specjalne wymagania)
-
 ### AWS Fargate
 - Serverless — zero zarządzania nodami
 - Brak maintenance
@@ -96,7 +89,6 @@ AWS zarządza control plane (API server, etcd) → Ty dostarczasz compute (nodes
 ![[Pasted image 20260224091149.png]]
 
 ## Data Volumes
-
 EKS wspiera montowanie storage przez **Container Storage Interface (CSI) driver**.
 
 **Fargate + EFS** = serverless + persistent storage. Klasyczny pattern na egzaminie.
