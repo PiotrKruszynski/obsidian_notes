@@ -5,7 +5,7 @@ Note:
 ![[Pasted image 20260206121052.png]]
 
 >[!IMPORTANT]
->- Security Group = **instance-level firewall (L4)**
+>- Security Group = **statefull, instance-level firewall (L4)** with **only ALLOW** rule
 >- kontroluje **inbound + outbound traffic**
 >- **stateful** → if request allow, response traffic auto allow (wraca)
 >- działa na poziomie **ENI (Elastic Network Interface)**
