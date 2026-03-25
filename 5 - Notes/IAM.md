@@ -11,7 +11,7 @@ Note:
 >- **roles → temporary credentials (STS)**, brak long-term keys
 >- **least privilege** = kluczowa zasada
 >- global service (nie per region)
->- use case: **secure access control, cross-service & cross-account access**
+>Use case: **secure access control, cross-service & cross-account access**
 
 # Mental model
 ```

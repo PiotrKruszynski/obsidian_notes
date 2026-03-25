@@ -51,7 +51,7 @@ istnieją block storage / file storage / object storage
 - bucket names są **globally unique**
 - bucket tworzysz w konkretnym **Region**
 - obiekt identyfikuje **key**
-- "foldery" w S3 to tylko **prefixes**
+- "foldery" w S3 to tylko **prefixes** _prefixy rozpraszają request load_
 - obiekt = **data + metadata + tags**
 - metadata user-defined po uploadzie nie edytujesz bezpośrednio → zwykle **copy object z nową metadata**
 
@@ -214,10 +214,8 @@ S3 wspiera checksumy do walidacji integralności
 - różne wersje → różne retention / mode
 ### Tryby
 - **Governance**
-- **Compliance**
-
+- **Compliance** /zgodność/
 ### Legal Hold
-
 - niezależne od retention (blokuje delete bez daty końcowej)
 
 > [!exam]
