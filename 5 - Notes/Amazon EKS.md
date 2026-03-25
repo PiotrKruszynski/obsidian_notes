@@ -39,40 +39,20 @@ Note:
 
 ## 🔐 Security (KLUCZ)
 
-- **RBAC → Kubernetes API**
-- **IAM → AWS services**
+- **RBAC** (Role Base Acccess Control) → **Kubernetes API** kontrola dostępu na poziomie Kubernetes -> które akcje mogą być wykonywane w klastrze
+- **IAM → AWS services** jakie zasoby AWS mogą być używane i przez kogo
 
 ---
 
-## 🔥 IRSA (najważniejsze)
-
-👉 **Service Account → IAM Role**
-
-- per-Pod permissions
-- enables **least privilege**
+## 🔥 IRSA (IAM Role for Service Account)
+pozwala podob używać ról IAM
+konkretne kontenery mają precyzyjne uprawnienia
 
 ---
 
 ## ❌ Anti-pattern
-
 👉 IAM na **node (EC2 role)**  
-→ wszystkie Pody mają te same uprawnienia
-
----
-
-## 🧠 One-liner
-
-👉 **RBAC = cluster access**  
-👉 **IAM = AWS access**  
-👉 **IRSA = per-Pod IAM**
-
----
-
-## [!exam]
-
-- **least privilege w EKS → IRSA**
-- **node IAM = shared → zły**
-- **EKS wybieraj tylko gdy potrzebujesz Kubernetes**
+→ wtedy wszystkie Pody mają te same uprawnienia !
 
 ---
 
