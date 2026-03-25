@@ -31,12 +31,10 @@ Route 53 zwraca IP według ustalonej polityki:
 Zwraca kilka zdrowych, ale nie zastępuje LB
 - do 8 healthy IP
 - prosty load balancing
-
 ❗ NIE zastępuje ELB
 
 ---
 # Route 53 Resolver
-
 👉 DNS w VPC
 - resolves:
   - EC2 names
@@ -45,11 +43,21 @@ Zwraca kilka zdrowych, ale nie zastępuje LB
 
 ---
 # Hybrid DNS
-
+Inbound → ON-PREM → AWS (Route 53)  
+Outbound → AWS → ON-PREM DNS
 ## Inbound endpoint
-- on-prem → AWS DNS
+- zapytania **z on-prem → do VPC**
+- używasz gdy:
+    - masz DNS on-prem
+    - chcesz rozwiązać nazwy z Private Hosted Zone
+👉 przykład:
+`on-prem → query: db.internal → AWS PHZ → IP`
 ## Outbound endpoint
-- AWS → on-prem DNS
+- zapytania **z VPC → do on-prem DNS**
+- używasz gdy:
+    - masz własne DNS poza AWS
+👉 przykład:
+`EC2 → query: corp.local → on-prem DNS`
 
 >[!exam]
 >hybrid DNS → inbound/outbound endpoints

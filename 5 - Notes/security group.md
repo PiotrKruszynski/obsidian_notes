@@ -7,12 +7,11 @@ Note:
 >[!IMPORTANT]
 >- Security Group = **instance-level firewall (L4)**
 >- kontroluje **inbound + outbound traffic**
->- **stateful** → response traffic automatycznie dozwolony
+>- **stateful** → if request allow, response traffic auto allow (wraca)
 >- działa na poziomie **ENI (Elastic Network Interface)**
 >- only **ALLOW rules** (no deny)
 
 ---
-
 # Mental model
 ```
 EC2 (ENI)
@@ -23,7 +22,6 @@ Allow / Drop
 
 👉 jeśli ruch zablokowany → EC2 **nigdy go nie widzi**
 ```
-
 # Kluczowe cechy
 - only **ALLOW rules** (no deny)
 - default:
