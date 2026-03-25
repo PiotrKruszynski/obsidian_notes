@@ -2,37 +2,6 @@ Created: 2026-02-05  21:25
 ___
 Note:
 
->[! Important]
->**scale out** to increase
->**scale in** to decreas
->**ensure min and max
->** **auto register** new instance to load balancer                        *superpower*
->**re-create** instance in case a previous is terminated           *superpower*
->
-
-![[Pasted image 20260205212848.png]]
-
-![[Pasted image 20260205212904.png]]
-
-![[Pasted image 20260205212920.png]]
-
-## Information to Launch Template
-
-![[Pasted image 20260205212931.png]]
-
-## Scaling Policies
-- dynamic scaling
-	- target tracking scaling
-		- simple to setup
-		- example: I want average ASG CPU to stay at 40%
-	- simple / step scaling
-		- when a CloudWatch alarm is triggered (example CPU > 70%) then add 2 units
-- scheduled scaling
-	- anticipate a scaling based on known usage patterns
-	- example: increase the min capacity to 10 at 5pm Fridays
-- predictive scaling:
-	- continuously forcast load and schedule scaling ahead
-
 
 >[!important]
 >**scale out** → increase instances  
@@ -41,8 +10,6 @@ Note:
 >**min / max** → bounds  
 >**self-healing** → replace unhealthy  
 >**auto register/deregister** → z Load Balancer  
-
----
 
 ## 🧠 Mental model
 ASG = **self-healing + auto-scaling orchestrator**
@@ -145,6 +112,19 @@ ASG = **self-healing + auto-scaling orchestrator**
 - best metric = **RequestCountPerTarget / SQS depth**
 - warmup = **stabilizacja scalingu**
 - instance refresh = **rolling update**
+
+
+
+
+![[Pasted image 20260205212848.png]]
+
+![[Pasted image 20260205212904.png]]
+
+![[Pasted image 20260205212920.png]]
+
+## Information to Launch Template
+
+![[Pasted image 20260205212931.png]]
 
 ___
 Metadata:
