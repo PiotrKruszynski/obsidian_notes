@@ -15,14 +15,22 @@ istnieją block storage / file storage / object storage
 
 # 1. Mental model / feature map
 ### Cost / storage classes
-- **S3 Standard**
-- **S3 Intelligent-Tiering**
-- **S3 Standard-IA**
-- **S3 One Zone-IA**
-- **S3 Glacier Instant Retrieval**
-- **S3 Glacier Flexible Retrieval**
-- **S3 Glacier Deep Archive**
-- **S3 Express One Zone**
+- **S3 Standard**  
+    → hot data, low latency, high durability, frequent access
+- **S3 Intelligent-Tiering**  
+    → auto tiering, unknown access pattern, cost optimized
+- **S3 Standard-IA**  
+    → infrequent access, cheap storage, retrieval cost, 30 days min
+- **S3 One Zone-IA**  
+    → 1 AZ only, cheaper, no HA, infrequent access
+- **S3 Glacier Instant Retrieval**  
+    → archive + ms access, rare but instant, higher storage
+- **S3 Glacier Flexible Retrieval**  
+    → archive, minutes–hours retrieval, cheaper
+- **S3 Glacier Deep Archive**  
+    → cheapest, hours retrieval (12h), long-term archive
+- **S3 Express One Zone**  
+    → ultra low latency, high throughput, single AZ, real-time
 ### Security
 - **IAM policies**
 - **Bucket policies**
@@ -83,7 +91,7 @@ istnieją block storage / file storage / object storage
 - hot data
 - niski latency, wysoka dostępność
 - najczęstszy default
-- **The minimum storage duration is 30 days** before you can transition objects from Amazon S3 Standard
+S3 Standard
 ## S3 Intelligent-Tiering
 - gdy nie znasz patternu dostępu
 - automatycznie przenosi dane między tierami
@@ -107,6 +115,8 @@ istnieją block storage / file storage / object storage
 - najwyższa wydajność
 - single-digit millisecond latency
 - **single AZ**
+
+# podsumowanie:
 
 >[!exam]
 >- **unknown access pattern** → Intelligent-Tiering

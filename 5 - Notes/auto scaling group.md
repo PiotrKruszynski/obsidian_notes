@@ -19,11 +19,18 @@ ASG = **self-healing + auto-scaling orchestrator**
 - integruje się z **Load Balancer**
 ## ⚙️ Core behavior
 - **health checks**
-  - EC2 status + ELB health check
-  - unhealthy → 1. replace -> 2 terminate
+    - EC2 status + ELB health check
+    - unhealthy:
+        - **1.terminate →2.launch replacement**
 - **desired / min / max**
-  - desired = target
-  - ASG zawsze dąży do desired
+    - **desired = target liczby instancji**
+    - ASG **zawsze dąży do desired**
+### 🧠 Mental model (do pytania)
+- **problem = unhealthy → usuń najpierw**
+- **problem = imbalance → dołóż najpierw**
+### 🔥 Ultra skrót
+- unhealthy → **terminate → launch**
+- rebalance → **launch → terminate**
 ## 🚀 Launch Template
 - AMI, instance type
 - security groups
