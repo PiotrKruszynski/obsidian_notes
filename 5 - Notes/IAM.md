@@ -64,21 +64,6 @@ Final decision: Allow / Deny
 - **Resource policy**  
 → kontrola dostępu do konkretnego resource  
   
----  
-# Mental model (IMPORTANT)  
-  
-- **IAM policy** → co możesz zrobić  
-- **Permissions Boundary** → ile maksymalnie możesz dostać  
-- **SCP** → ile konto może zrobić  
-  
----  
-# How IAM evaluates request  
-  
-1. explicit deny?  
-2. explicit allow?  
-3. else → deny  
-  
-→ wszystkie policies są evaluowane razem  
   
 ---  
 # Comparison  
@@ -105,11 +90,11 @@ Final decision: Allow / Deny
 # Exam traps (VERY IMPORTANT)  
 
 ## Cross-account  
-- ❌ IAM Role wystarczy → NIE  
-→ ✅ **IAM role + resource policy (np. S3 bucket policy)**  
-  
+potrzeba zaufania między kontami
+- ❌ IAM Role wystarczy → NIE !
+→ ✅ **IAM role**(jedno konto) + **assume role**(drugie konto) + **resource policy** (np. S3 bucket policy) 
 - ❌ resource policy zastępuje IAM → NIE (uzupełnia)  
-- ❌ zawsze trzeba assume role → NIE  
+
 ## General  
 - ❌ IAM = regional → NIE (global)  
 - ❌ allow > deny → NIE (deny wins)  
