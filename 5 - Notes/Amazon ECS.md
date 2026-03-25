@@ -14,7 +14,7 @@ Note:
 # Mental model
 `Definiujesz Task → ECS uruchamia go na Fargate lub EC2 → Service utrzymuje desired count + LB routing.`
 
-- Task (odpowiednik pods) = jednostka uruchomienia (jak Pod)  
+- Task = jednostka uruchomienia (jak Pod)  
 - Service = desired state + HA + scaling  
 - Fargate = brak serwerów, EC2 = kontrola/koszt  
 
@@ -22,21 +22,21 @@ Note:
 
 # Core features
 - Launch types:
-  - **Fargate** → serverless, per-task billing
-  - **EC2** → pełna kontrola, niższy koszt przy skali
+	  - **Fargate** → serverless, per-task billing
+	  - **EC2** → pełna kontrola, niższy koszt przy skali
 - Task Definition (JSON):
-  - image (ECR), CPU/RAM, ports, env, **IAM roles**
+	  - image (ECR), CPU/RAM, ports, env, **IAM roles**
 - Networking:
-  - **awsvpc (required for Fargate)** → ENI + SG per Task
+	  - **awsvpc (required for Fargate)** → _ENI_ (wpinany w subnet) i w nim _SG_ per **Task**
 - Load Balancing:
-  - **ALB (HTTP)**, **NLB (TCP)**, dynamic port mapping
+	  - **ALB (HTTP)**, **NLB (TCP)**, dynamic port mapping
 - Auto Scaling:
-  - Service (CPU/Mem/ALB req/SQS depth)
-  - **Capacity Provider (EC2 only)** → skaluje instancje
+	  - Service (CPU/Mem/ALB req/SQS depth)
+	  - **Capacity Provider (EC2 only)** → skaluje instancje
 - Storage:
-  - **EFS (Fargate + EC2)**, EBS/bind (EC2 only)
+	  - **EFS (Fargate + EC2)**, EBS/bind (EC2 only)
 - Logging:
-  - CloudWatch Logs (`awslogs`)
+	  - CloudWatch Logs (`awslogs`)
 
 
 ![[Pasted image 20260224115308.png]]

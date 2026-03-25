@@ -15,7 +15,7 @@ Note:
 
 👉 AWS zarządza **control plane** → Ty zarządzasz **compute**  (zasoby obliczeniowe, np. grupa węzłów EC2 lub Fargate)
 
-👉 **Pod**(kontener) → **Node** (EC2 v Fargate) → **VPC** (izoluje klaster) **networking** (pozwala na komunikację między podami)
+👉 **Pod**(kontener/y) → **Node** (EC2 v Fargate) → **VPC** (izoluje klaster) **networking** (pozwala na komunikację między podami)
 
 
 ---
