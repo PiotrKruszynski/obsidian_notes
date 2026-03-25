@@ -20,7 +20,7 @@ ASG = **self-healing + auto-scaling orchestrator**
 ## ⚙️ Core behavior
 - **health checks**
   - EC2 status + ELB health check
-  - unhealthy → terminate + replace
+  - unhealthy → 1. replace -> 2 terminate
 - **desired / min / max**
   - desired = target
   - ASG zawsze dąży do desired
