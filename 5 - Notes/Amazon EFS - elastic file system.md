@@ -7,6 +7,7 @@ Note:
 >EFS = **POSIX file storage (system plików NFS)**  for Linux instanecs 
 >shared storage dla wielu EC2 jednocześnie
 >highly available, scalable, expensive (3x more then gp2 volume), pay per use
+>regionalny filesystem (multi-AZ, ale nie multi-region)
 ### Mental model
 EFS = **network shared drive (jak NAS)**
 👉 wiele EC2 → jeden filesystem

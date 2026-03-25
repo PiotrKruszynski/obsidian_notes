@@ -42,6 +42,14 @@ ASG = **self-healing + auto-scaling orchestrator**
 - scaling wg czasu (np. peak hours)
 ### predictive scaling
 - forecast + scaling ahead
+
+### 🚨 Pułapka egzaminacyjna
+- AWS lubi sprawdzać czy:
+    - wybierzesz **lifecycle control (Standby / Suspend)**
+    - zamiast przebudowy architektury (AMI, nowe ASG)
+👉 zasada:  
+**jeśli problem = zachowanie ASG → rozwiązanie = zmiana zachowania ASG, nie infrastruktury**
+
 ## 📊 Metrics (kluczowe)
 - **CPUUtilization**
 - **RequestCountPerTarget (ALB)** ⭐

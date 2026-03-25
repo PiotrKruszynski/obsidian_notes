@@ -3,7 +3,7 @@ ___
 Note:
 
 >[! Important]
->> **wejście do [[EFS - elastic file system]] w danej AZ**
+>> **wejście do [[Amazon EFS - elastic file system]] w danej AZ**
 >EFS to usługa magazynowania, aby się podłączyć potrzebujesz Mount Target = most między EC2 a EFS
 
 

@@ -13,8 +13,8 @@ Note:
 >	- auto modify storage (gdy zapełnienie zbliża się do 90% doda więcej)
 >- security through _IAM, SecurityGroups, KMS, SSL in transit_ 
 >- support for _IAM Authentication_, integration with _Secrets Manager_
->- [[RDS Custom]] for access to and customize the underlying instance _Oracle_, _Microsoft SQL Service_
->- [[RDS Proxy]] - warstwa pośrednia App → RDS Proxy → RDS / Aurora
+>- [[Amazon RDS Custom]] for access to and customize the underlying instance _Oracle_, _Microsoft SQL Service_
+>- _RDS Proxy_ - warstwa pośrednia App → RDS Proxy → RDS / Aurora
 >	- utrzymuje connection pool
 >	- reuse istniejące połączenia
 >	- ogranicza liczbę nowych connections. Relacyjne mają limit połączeń
@@ -136,11 +136,12 @@ RDS = **DB server bez zarządzania infrastrukturą**
 - reuse connections
 - zmniejsza load na DB
 - pattern:
-  App → Proxy → RDS
+  `App → Proxy → RDS`
 
 >[!exam]
 >dużo connection → RDS Proxy
 # RDS Custom
+[[Amazon RDS Custom]]
 
 >[! Important]
 >**Amazon RDS Custom** to wyspecjalizowana usługa bazodanowa przeznaczona dla silników:
