@@ -10,6 +10,8 @@ Note:
 >- **MPP (Massively Parallel Processing)**
 >- integracja z S3 (COPY / UNLOAD, Redshift Spectrum) ale można z DynamoDB,Kinesis, DataLake i innymi bazami
 >- use case: **BI, analytics, reporting**
+>- _Redshift Serverless_ 
+>- _Redshift ML_ to build and train ML models
 
 **Use case**: dashboards, reporting, complex aggregations
 # Mental model
