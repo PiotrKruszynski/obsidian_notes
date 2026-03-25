@@ -12,11 +12,12 @@ Note:
 >- scaling: **Service Auto Scaling + (EC2) Capacity Providers**
 >- use when: **containers without Kubernetes**
 # Mental model
-Definiujesz Task → ECS uruchamia go na Fargate lub EC2 → Service utrzymuje desired count + LB routing.
+`Definiujesz Task → ECS uruchamia go na Fargate lub EC2 → Service utrzymuje desired count + LB routing.`
 
-- Task = jednostka uruchomienia (jak Pod)  
+- Task (odpowiednik pods) = jednostka uruchomienia (jak Pod)  
 - Service = desired state + HA + scaling  
 - Fargate = brak serwerów, EC2 = kontrola/koszt  
+
 **Use case**: microservices, APIs, workers (SQS), batch jobs
 
 # Core features
@@ -71,7 +72,6 @@ Service:
 - Fargate → serverless (default exam choice)
 - EC2 → control + cost optimization
 - Task = run, Service = maintain + scale
-
 
 
 ```
