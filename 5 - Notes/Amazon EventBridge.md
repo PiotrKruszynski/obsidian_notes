@@ -69,7 +69,7 @@ Może być:
 ---
 
 ## 3️⃣ Jak działa przepływ
-Producer → Event Bus → Rule → Target
+`Producer → Event Bus → Rule → Target`
 Nie ma pollingu.  
 EventBridge pushuje event do targetu.
 
