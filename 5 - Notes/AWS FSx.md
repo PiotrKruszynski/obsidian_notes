@@ -27,6 +27,7 @@ FSx = „**gotowy, zarządzany system plików** w AWS”
 👉 use case:
 - lift & shift Windows apps
 - file shares dla użytkowników
+- for Distributed File System Replication (DFSR)
 
 ---
 #### FSx for Lustre 🔥 (najważniejszy na egzamin)
