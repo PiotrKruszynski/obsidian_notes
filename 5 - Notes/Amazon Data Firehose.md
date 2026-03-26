@@ -1,15 +1,10 @@
 Created: 2026-02-23  19:09
 ___
 Note:
-
->[!tip]
->Managed delivery pipeline — zarządzany potok dostarczania danych strumieniowych do miejsc docelowych.
->- automatic scaling, serverless, pay for use
->- **near real-time** with buffering capability based on size / time ( zapisuje co jakiś czas paczkami)
-
 # AWS Kinesis Data Firehose
 
 >[!Definition]
+>- zarządzany potok dostarczania danych strumieniowych do miejsc docelowych.
 >- Firehose → **fully managed delivery stream** (stream → storage/analytics)
 >- **serverless, auto-scaling, no shards**
 >- **near real-time (buffered, mini-batch)**
@@ -17,6 +12,7 @@ Note:
 >- built-in: **buffering + batching + retries + compression**
 >- optional **Lambda transform**
 >- NIE służy do konsumowania danych (to nie stream jak KDS)
+>- **near real-time** with buffering capability based on size / time ( zapisuje co jakiś czas paczkami)
 
 # Mental model
 `Producer wysyła dane → Firehose buforuje → opcjonalnie transformuje → zapisuje batch do destination.`
