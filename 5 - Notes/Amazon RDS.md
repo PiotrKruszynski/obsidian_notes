@@ -18,6 +18,7 @@ Note:
 >	- utrzymuje connection pool
 >	- reuse istniejące połączenia
 >	- ogranicza liczbę nowych connections. Relacyjne mają limit połączeń
+>	- rozwiązuje problem zbyt wielu połączeń do bazy
 >
 >**You manage:**
 >	- schema, queries, indexes
