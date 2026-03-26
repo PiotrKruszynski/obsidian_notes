@@ -10,7 +10,7 @@ Note:
 >- generuje: Dockerfile + CFN + deploy do ECS/EKS/App Runner  
   
 # Mental model  
-App Runner: push code/image → AWS buduje → deploy → autoscale → endpoint HTTPS  
+App Runner: `push code/image → AWS buduje → deploy → autoscale → endpoint HTTPS`  
 A2C: bierze starą app → tworzy container → deploy do AWS  
   
 - App Runner = **simplest path to run app**  
@@ -27,7 +27,7 @@ A2C: bierze starą app → tworzy container → deploy do AWS
 - deploy: ECS / EKS / App Runner  
 # How it works  
 App Runner:  
-code/image → build → run service → public endpoint  
+`code/image → build → run service → public endpoint  `
   
 A2C:  
 existing app → containerize → deploy target  
