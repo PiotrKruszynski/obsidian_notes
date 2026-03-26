@@ -83,7 +83,7 @@ By default, AWS Lambda functions always operate from an AWS-owned VPC
 |/tmp storage|512 MB – 10 GB|
 |Concurrency|1000 (domyślnie, można zwiększyć)|
 
-**Na egzaminie:** zadanie trwa dłużej niż 15 minut → Lambda nie nadaje się → użyj [[Amazon ECS]] / [[AWS Fargate]] lub EC2.
+**Na egzaminie:** zadanie trwa dłużej niż 15 minut → Lambda nie nadaje się → użyj [[Amazon ECS]] / _AWS Fargate_ lub EC2.
 
 
 Lambda może być wywołana przez:
