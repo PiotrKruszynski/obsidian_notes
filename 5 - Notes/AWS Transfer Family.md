@@ -3,7 +3,7 @@ ___
 Note:
 
 >[!important]
->- Transfer Family = usługa **managed file transfer do AWS**
+>- Transfer Family = usługa **managed file transfer in/out of S3 or EFS using FTP protocol**
 >- obsługuje: **SFTP / FTPS / FTP**
 >- backend: **S3 lub EFS**
 >- używany gdy musisz obsłużyć **legacy protokoły transferu plików**
