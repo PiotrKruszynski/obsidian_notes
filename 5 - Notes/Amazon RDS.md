@@ -103,6 +103,7 @@ RDS = **DB server bez zarządzania infrastrukturą**
 - standby w innej AZ
 - automatic failover
 - **same DNS endpoint**
+- **≠ zero downtime dla wszystkiego** AWS upgraduje primary i standby jednocześnie np.upgrade engine
 
 >[!exam]
 >Multi-AZ = high availability, NIE performance
