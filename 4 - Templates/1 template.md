@@ -2,7 +2,7 @@ Created: {{date:YYYY-MM-DD}}  {{time:HH:mm}}
 ___
 Note:
 
->[! ]
+>[! Definition ]
 >definition
 
 
@@ -13,10 +13,9 @@ Metadata:
 
 ```yaml
 ---
-type: tool    # concept | service | comparison
-language: aws
+language: bigdata
 ---
 ```
 
 Status: #pending
-Tags: #aws
+Tags: #bigdata 
