@@ -5,3 +5,4 @@ urządzenie z przypisanym adresem IP, którego zadaniem jest odbieranie i wysył
 
 
 #sieci_komputerowe
+#network
