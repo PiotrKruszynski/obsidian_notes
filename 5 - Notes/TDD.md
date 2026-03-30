@@ -14,6 +14,10 @@ test case zbieramy w **test suite** (zestaw testów) - w [[pytest]] używa się 
 🟢 zaimplementuj minimum
 🔵 refactor
 
+![[Pasted image 20260330155220.png]]
+
+#development_methodologies
+
 ___
 Metadata:
 
