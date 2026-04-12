@@ -170,6 +170,96 @@ Odpowiedź: EventBridge
 Odpowiedź: SQS
 
 ---
+## 🔐 Resource-based policy (EventBridge)
+
+Pozwala zarządzać **kto może wysyłać eventy do konkretnego Event Bus** (nie kto je odbiera).
+
+### 🔹 Co to znaczy w praktyce
+
+- kontrolujesz dostęp na poziomie **Event Bus (resource)**
+- dopuszczasz **inne konta AWS / regiony**
+- umożliwiasz **cross-account event ingestion**
+
+---
+
+### 🔹 Kluczowa akcja
+
+- `events:PutEvents` → pozwala wysyłać eventy do busa
+
+---
+
+### 🔹 Przykład (cross-account)
+
+{  
+  "Version": "2012-10-17",  
+  "Statement": [  
+    {  
+      "Effect": "Allow",  
+      "Action": "events:PutEvents",  
+      "Principal": { "AWS": "111122223333" },  
+      "Resource": "arn:aws:events:us-east-1:123456789012:event-bus/central-event-bus"  
+    }  
+  ]  
+}
+
+👉 Konto `111122223333` może pushować eventy do `central-event-bus`
+
+---
+
+### 🔹 Mental model (ważne na egzamin)
+
+- IAM policy → **co JA mogę zrobić**
+- Resource policy → **kto może używać MOJEGO zasobu**
+
+EventBridge używa resource policy, bo:  
+➡️ event bus jest **shared ingress point**
+
+---
+
+### 🔹 Typowy use case (organizacje)
+
+Multiple accounts → central Event Bus → rules → targets
+
+✔ centralizacja eventów  
+✔ governance / auditing  
+✔ prostsze routing rules
+
+---
+
+### 🔹 Dlaczego to działa
+
+EventBridge to **push system**, więc:
+
+- producer musi mieć **permission do target busa**
+- brak tego → event jest odrzucony (no implicit trust)
+
+To jest odwrotność SQS pull modelu, gdzie consumer kontroluje dostęp.
+
+---
+
+### 🔹 Trade-offs
+
+**Zalety**
+
+- prosty cross-account routing (bez SNS + SQS glue)
+- central event hub (org-wide architecture)
+
+**Wady**
+
+- dodatkowa warstwa IAM complexity
+- brak izolacji jeśli policy jest zbyt szeroka (`Principal: "*"`)
+- trudniejsze debugowanie (permission vs rule mismatch)
+
+---
+
+### 🔥 Egzaminowy trigger
+
+> „Allow events from another AWS account / aggregate events centrally”
+
+➡️ **EventBridge + resource-based policy (`events:PutEvents`)**
+
+
+---
 
 ## 1️⃣1️⃣ Mental model
 
