@@ -63,17 +63,24 @@ Final decision: Allow / Deny
   
 - **Resource policy**  
 → kontrola dostępu do konkretnego resource  
-  
+
   
 ---  
-# Comparison  
-  
-| Feature | IAM Role | IAM User |  
-|------------|--------------|------------------|  
-| Credentials | temporary | long-term |  
-| Security | higher | lower |  
-| Use case | apps/services | humans (limited) |  
-  
+# IAM Conditions
+
+`aws:SourceIp` -> ogranicza do określonych IP
+`aws:RequestedRegion` -> restrict the region the API calls are made to
+`ec2:ResourceTag` -> restrict based on tags
+`aws:MultiFactorAuthPresent` -> to force MFA
+for S3:
+`s3:ListBucket` -> na poziomie bucketu, pozwala uzyskać spis zawartości
+`s3:GetObject/PutObject/DeleteObject` -> operacje na poziomie obiektu, 
+									musi być arn:aws:s3:::bucket1/_*_
+resource policies & aws:PrincipalOrgID
+`aws:PrincipalOrgID` -> ogranicza resource policies to only acconuts that awe a member of AWS Organization
+
+
+
 ---   
 # Typowe use case  
 
