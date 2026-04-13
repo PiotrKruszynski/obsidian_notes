@@ -161,7 +161,7 @@ S3 wspiera checksumy do walidacji integralności
 - resource-based
 - bardzo częste w cross-account i public/private access
 ## ACL
-- legacy
+- legacy Access Control List
 - egzaminowo: **prefer IAM + Bucket Policy**
 ## Block Public Access
 - ochrona przed przypadkowym upublicznieniem
