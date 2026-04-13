@@ -80,7 +80,6 @@ resource policies & aws:PrincipalOrgID
 `aws:PrincipalOrgID` -> ogranicza resource policies to only acconuts that awe a member of AWS Organization
 
 
-
 ---   
 # Typowe use case  
 
@@ -92,7 +91,8 @@ resource policies & aws:PrincipalOrgID
 - S3 bucket sharing (cross-account)  
 - SNS → SQS  
 - Lambda invoke (cross-account)  
-  
+- EventBridge
+EventBridge może mieć też IAM Role lda Kinesis, EC2 Auto Scaling, ECS tasks
 ---  
 # Exam traps (VERY IMPORTANT)  
 
