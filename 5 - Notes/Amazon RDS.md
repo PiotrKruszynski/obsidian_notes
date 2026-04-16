@@ -26,33 +26,19 @@ Note:
 
 **Use case:** store relational datasets (_RDBMS / OLTP_), perform _SQL queries_ and _transactions_.
 
-# RDS (Relational Database Service)
-
->[!Definition]
->RDS = **managed relational database** (**SQL**, **OLTP** - online transaction processing - _typ obciążenia_)
 ### Mental model
 RDS = **DB server bez zarządzania infrastrukturą**
+
 👉 AWS:
 - provisioning
 - patching
 - backup
+
 👉 Ty:
 - schema
 - queries
 - indexes
-### Supported engines
-- MySQL
-- PostgreSQL
-- MariaDB
-- Oracle
-- SQL Server
-- **Aurora (AWS-native)**
-### Core properties
-- relational (joins, transactions)
-- OLTP workload
-- provisioned:
-  - instance (CPU/RAM)
-  - storage (EBS)
+
 ### Scaling
 #### Vertical
 - zmiana instance size (CPU/RAM)
