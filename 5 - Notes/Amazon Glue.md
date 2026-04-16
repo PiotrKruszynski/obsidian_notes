@@ -5,7 +5,7 @@ Note:
 # AWS Glue
 
 >[!Definition]
->- Glue → **serverless ETL service + Data Catalog**
+>- Glue → **serverless batch ETL service + Data Catalog**
 >- przetwarza dane (extract → transform → load) bez zarządzania infra
 >- centralny **Data Catalog (metadata)** dla S3 (Athena, Redshift, EMR)
 >- oparty o **Apache Spark**
@@ -20,12 +20,14 @@ Note:
 - crawler = discovery schema  
 
 **Use case**: ETL pipelines, przygotowanie danych pod Athena/Redshift
+
+![[Pasted image 20260416134250.png]]
 # Core features
 
-_Glue data catalog_: jest wspólną warstwą, która opisuje, gdzie i w jakiej strukturze znajdują się Twoje dane. Przechowuje informacje o schematach danych z różnych źródeł. Umożliwia łatwe odnajdywanie i klasyfikowanie danych
+_Glue data catalog_: jest wspólną warstwą, która opisuje, gdzie i w jakiej strukturze znajdują się Twoje dane. Przechowuje informacje o schematach danych z różnych źródeł. Umożliwia łatwe odnajdywanie i klasyfikowanie danych.
 _Glue Job_: to zadanie ETL, które przetwarza dane wsadowo
 _Glue Bookmarks_: zapamiętuje, gdzie ostatnio Glue zakończył przetwarzanie, by kontynuować od tej pozycji. Prevent re-processing old data.
-_Glue DataBrew_: to narzędzie wizualne, które pozwala na interaktywne przygotowywanie danych, bez kodowania
+_Glue DataBrew_: to narzędzie wizualne, które pozwala na interaktywne przygotowywanie danych, **bez kodowania**
 _Glue Studio_: new GUI, środowisko no-code do zarządzania i tworzenia Glue jobów.
 _Glue Streaming ETL_: umożliwia przetwarzanie danych w czasie rzeczywistym, czyli Glue przetwarza strumienie danych na bieżąco, a nie w partiach. build on **Apache Spark Streaming**: compatible with _Kinesis Data Streaming_, _Kafka_, _MSK_
 # How it works
