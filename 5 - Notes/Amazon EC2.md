@@ -2,129 +2,224 @@ Created: 2026-02-03  12:27
 ___
 Note:
 
-
 >[!important]
->- EC2 = **compute (VM) w AWS**
->- pełna kontrola nad OS (SSH/RDP)
->- płacisz za **czas działania + typ instancji**
->- fundament: **instance type + AMI + storage + networking**
->- skalowanie przez **Auto Scaling + Load Balancer**
+- EC2 = **compute (VM) w AWS**
+- pełna kontrola nad OS (SSH/RDP)
+- płacisz za **czas działania + instance type**
+- fundament: **instance type + AMI + storage + networking**
+- skalowanie przez **Auto Scaling + Load Balancer**
 
 ---
-### Mental model
-EC2 = **serwer w chmurze na żądanie**
 
-👉 masz:
-- CPU / RAM / disk / network  
-- pełny dostęp do systemu  
-👉 AWS zapewnia:
-- infrastrukturę  
-- provisioning  
+## Mental model
+EC2 = **compute node + attached resources (ENI + EBS)**
+
+👉 compute (CPU/RAM) jest oddzielony od:
+- network (ENI)
+- storage (EBS)
+
+👉 EC2 jest **stateless by design**  
+→ state powinien być poza instancją (EBS / S3 / DB)
 
 ---
-### Core elements
-#### Instance type
-- określa: CPU, RAM, network
+
+## Core elements
+
+### Instance type
+- określa: CPU, RAM, network, I/O limits
 - rodziny:
-  - **t / t3 / t4g** → burst (tanie)
+  - **t (t3/t4g)** → burstable (CPU credits)
   - **m** → general purpose
   - **c** → compute optimized
   - **r** → memory optimized
   - **p / g** → GPU
-#### AMI (Amazon Machine Image)
-- template systemu (OS + config)
-- np.:
-  - Amazon Linux
-  - Ubuntu
-  - Windows
-#### Storage
-- **EBS**
-  - persistent
-  - block storage
-- **Instance Store**  - physical storage (high IOPS)
-  - ephemeral (ginie przy stop), może być boost storage
 
->[!exam]
->trwałe dane → EBS  
->cache/temp → instance store  
-#### Networking
-- działa w **VPC**
-- ma:
+> [!exam]
+> sustained CPU → nie używaj t-class
+
+---
+
+### AMI (Amazon Machine Image)
+- template instancji:
+  - OS + software + config
+- immutable pattern:
+  - zamiast zmieniać → tworzysz nową AMI
+
+---
+
+### Storage
+
+#### EBS
+- block storage
+- persistent
+- AZ-scoped
+- snapshot → backup (S3 under the hood)
+
+---
+
+#### Instance Store
+- lokalny dysk (NVMe)
+- bardzo szybki (low latency)
+- **ephemeral (ginie przy stop/terminate)**
+
+> [!exam]
+> trwałe dane → EBS  
+> cache / scratch → instance store  
+
+---
+
+### Networking
+
+- EC2 używa **ENI**
+- posiada:
   - private IP (zawsze)
-  - public IP (opcjonalnie)
+  - public IP (opcjonalnie, ephemeral)
+
+- routing:
+  - przez route table subnetu
+
 - security:
-  - **Security Groups (stateful)**
-  - **NACL (stateless)**
+  - **Security Groups (stateful, na ENI)**
+  - **NACL (stateless, na subnet)**
+
+> [!exam]
+> SG → allow only  
+> NACL → allow + deny  
 
 ---
-### Scaling
-- **Auto Scaling Group (ASG)**
-  - automatyczne dodawanie/usuwanie instancji
-- **Load Balancer (ALB/NLB)**
-  - rozkład ruchu
 
->[!exam]
->high availability → ASG + ALB  
+## Lifecycle
 
-# Placement groups
-### Spread Placement Group  = maksymalna izolacja
->[!important]  
->- maksymalna izolacja instancji (HA)  
->- każda instancja na osobnym racku (power + network)  
->- **max 7 instances per AZ**
-### Cluster Placement Group = blisko siebie
->[!important]  
->- **high performance (low latency, high throughput)**  
->- instancje bardzo blisko siebie  
->- 1 AZ
+- launch → running → stop → start → terminate
 
-### Partition Placement Group  
->[!important]  
->- dla **dużych systemów rozproszonych**  
->- instancje podzielone na **partitions (grupy racków)**  
->- **Use case**: _Hadoop_, _Kafka_
+- stop:
+  - compute wyłączony
+  - EBS zostaje
+  - **public IP się zmienia**
+
+- terminate:
+  - instance usunięta
+  - EBS usuwany jeśli `deleteOnTermination=true`
 
 ---
-### Pricing models
-**On-Demand Instances** - płacisz za dokładny czas działania, bez zobowiązań, najdroższa w długim użyciu
-**Reserved Instance** - rezerwujesz instancję na 1 lub 3 lata, zniżka do70%
-**Convertible Reserved Instances** - masz opcje zmiany typu instancji
-**Savings Plans** - możesz zmienić typ instancji, nawet usługę (np. na lambda) zobowiązanie na 1 lub 3 lata
-**Spot Instance** - masz spota na niewykorzystanej mocy obliczeniową ale AWS może przerwać działanie instancję, jeżeli ktoś zapłaci więcej. 
-Spoko dla Batch processing, BigData(Spark, Hadoop), ML training, renderingm stateless microservices
-**Dedicated Hosts** - book an entire physical server, control instance placement.
-**Dedicated Instances** - no other customer will share your hardware. Tu mamy izolacje instancji ale nie ma kontroli nad fizycznym serwerem.
-**Capacity Reservations** - reserve capacity in a specific AZ for any duration. Gwarancja dostępności
 
-Częsty pattern
-`Auto Scaling Group + Launch Template + MixedInstancesPolicy`
+## Scaling
 
-**Launch Template** to „versioned, composable config”, który pozwala budować warianty instancji bez duplikacji
+### Auto Scaling Group (ASG)
+- dynamiczne skalowanie (CPU, SQS, custom metrics)
+- health checks (EC2 / ELB)
+- multi-AZ
 
-**EC2 User Data**
-bootstrap our instance using an EC2 User data script, only once at the instance first start
-can automate boot tasks such as:
- - installing updates and dynamic part
- - installing software
- - downloading common files from internet
- _run with root user_ nie trzeba `sudo`
- 
 ---
-### Kiedy używać
-- pełna kontrola nad systemem
-- custom software
+
+### Load Balancer
+- ALB (HTTP)
+- NLB (TCP/low latency)
+
+> [!exam]
+> HA → ASG + multi-AZ + LB  
+
+---
+
+## Placement groups
+
+### Spread
+- max izolacja (HA)
+- różne racki
+- **max 7 instances per AZ**
+
+---
+
+### Cluster
+- low latency + high throughput
+- jedna AZ
+- HPC / big data
+
+---
+
+### Partition
+- podział na grupy (partitions)
+- brak współdzielenia racków między partycjami
+- use case:
+  - Hadoop
+  - Kafka
+
+---
+
+## Pricing models
+
+- On-Demand
+  - elastyczne, najdroższe long-term
+
+- Reserved Instances
+  - 1/3 lata
+  - zniżka do ~70%
+
+- Savings Plans
+  - bardziej elastyczne niż RI
+  - obejmuje różne instance typy / usługi
+
+- Spot Instances
+  - bardzo tanie (do ~90%)
+  - **mogą zostać przerwane (2 min notice)**
+  - use case:
+    - batch
+    - big data
+    - stateless workloads
+
+- Dedicated Hosts
+  - pełna kontrola nad fizycznym serwerem
+
+- Dedicated Instances
+  - izolacja hardware (bez kontroli placement)
+
+- Capacity Reservations
+  - gwarancja capacity w AZ
+
+---
+
+## Launch Template
+
+- versioned config:
+  - AMI
+  - instance type
+  - network
+  - storage
+- używany przez ASG
+
+---
+
+## EC2 User Data
+
+- skrypt wykonywany przy **pierwszym starcie**
+- działa jako root
+- use case:
+  - install software
+  - bootstrap config
+
+⚠️ nie uruchamia się przy każdym starcie (chyba że wymusisz)
+
+---
+
+## Use cases
+
+- custom backend
 - legacy apps
-- gdy Lambda jest za ograniczona
-	- np. lambda świetna do krótkich, max 15min
+- pełna kontrola OS
+- workloads >15 min (Lambda limit)
 
 ---
-### Trade-offs
-- wymaga zarządzania (patching, scaling)
-- większy ops niż serverless
-- większa elastyczność vs większa złożoność
+
+## Trade-offs
+
+- + pełna kontrola
+- + elastyczność
+- - ops overhead (patching, scaling)
+- - nie serverless
 
 ---
-### EC2 vs Lambda vs ECS
+
+## EC2 vs Lambda vs ECS
 
 | Service | Typ | Use case |
 |--------|-----|---------|
@@ -134,19 +229,28 @@ can automate boot tasks such as:
 
 ---
 
-### Exam traps
+## Exam traps
+
 - EC2 ≠ serverless  
-- HA → minimum 2 AZ + ASG  
-- public access → przez ALB lub public IP  
-- EBS jest **AZ-scoped**  
+- HA → min. 2 AZ + ASG  
+- public IP zmienia się po stop/start  
+- EBS = AZ-scoped  
+- SG przypisane do ENI  
+- Spot → może zostać przerwany  
+- t-class → CPU credits  
 
 ---
 
-### TL;DR
-- EC2 = VM w chmurze  
-- kontrola vs ops  
-- ASG + ALB = skalowanie + HA  
-- EBS = trwałe dane  
+## TL;DR
+
+- EC2 = **VM + attached resources**
+- compute oddzielony od storage/network
+- EBS = trwałe dane, instance store = ephemeral
+- HA = ASG + multi-AZ + LB
+- więcej kontroli = więcej responsibility
+
+
+
 ___
 Metadata:
 
