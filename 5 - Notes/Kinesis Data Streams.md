@@ -3,10 +3,11 @@ ___
 Note:
 
 >[!Definition]
->- KDS → **real-time streaming platform (ordered, replayable event log)**
+>- KDS → **real-time streaming platform (ordered, replay able event log)**
 >- dane napływają jako **continuous stream (append-only log)** podzielony na _shards_
 >- wielu konsumentów czyta **te same dane niezależnie (fan-out)**
 >- dane **nie znikają po odczycie** (retention + replay)
+>- używa wyłącznie HTTPS(TLS)
 >- integracje:
   >	- Kinesis Data Analytics (SQL / Apache Flink)
   >	- Lambda, Firehose, custom consumers
