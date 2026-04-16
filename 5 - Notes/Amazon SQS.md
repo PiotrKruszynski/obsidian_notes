@@ -3,7 +3,7 @@ ___
 Note:
 
 >[!important]  
->- SQS = **managed message queue** do **decoupling**  
+>- SQS = **managed message queue** (decoupling layer między komponentami)
 >- producer wrzuca wiadomość, consumer odbiera ją asynchronicznie  
 >- 2 typy kolejek:  
 >  - **Standard** → skala  

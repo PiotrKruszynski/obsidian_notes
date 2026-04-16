@@ -11,48 +11,90 @@ Note:
 >- serverless → brak zarządzania infrastrukturą
 >- oferuje: **auth, throttling, caching, monitoring**
 
-API Gateway = policy + control + transformation na wejściu do systemu
-👉 klasyczny pattern:
-- CRUD API
-- backend dla mobile/web
-### Mental model
-API Gateway = **reverse proxy + API management layer**
+API Gateway = **reverse proxy + API management layer**  
+  
+- reverse proxy:  
+  - przyjmuje request od klienta (HTTP/WebSocket)  
+  - routuje do backendu (Lambda, ECS, EC2, ALB, AWS services)  
+  - ukrywa backend (brak direct access, single entry point)  
+  - decoupling: klient nie zna struktury systemu  
+  
+- API management layer:  
+  - authentication / authorization  
+    - IAM, Cognito, JWT, Lambda authorizer  
+    - centralne egzekwowanie dostępu (backend nie musi)  
+    
+  - throttling / rate limiting / quotas  
+    - kontrola ruchu (RPS, burst, limity miesięczne)  
+    - ochrona backendu + kontrola kosztów  
+    
+  - API keys  
+    - identyfikacja klienta (usage plans)  
+    - nie security, tylko control + metering  
+    
+  - request / response transformation  
+    - mapping payloadów (client ↔ backend contract)  
+    - enables versioning i compatibility bez zmiany backendu  
+    
+  - monitoring  
+    - CloudWatch metrics (latency, errors, count)  
+    - central observability dla całego API  
+    
+  - caching  
+    - response cache (TTL)  
+    - redukcja latency i load na backendzie  
+    
+  - versioning  
+    - /v1, /v2 lub stages  
+    - izolacja zmian breaking  
+    
+  - custom domains  
+    - własne domeny + TLS  
+    - spójny publiczny endpoint  
 
-reverse proxy - serwerowy pośrednik przyjmuje żądania od klientów i przekazujący do serwerów backendowych
+#### Typy API  
+_HTTP API  
+- low-cost, low-latency  
+- wspiera JWT / IAM auth  
+- ograniczone feature’y (brak usage plans, API keys w pełnej formie)  
+👉 default wybór (większość przypadków)  
+  
+_REST API  
+- pełny feature set:  
+- API keys  
+- usage plans (limity per client)  
+- advanced transformations (mapping templates)  
+- caching  
+- wyższy koszt i latency  
+👉 gdy potrzebujesz granularnej kontroli i zarządzania klientami  
+  
+_WebSocket API  
+- stateful, bidirectional communication  
+- server push (real-time)  
+👉 use case: chat, live updates, streaming events
 
-👉 klient:
-- wysyła request HTTP  
-👉 API Gateway:
-- autoryzuje  
-- throttluje  
-- routuje do backendu  
-### Typy API
-- **HTTP API**
-  - tańsze, prostsze
-- **REST API**
-  - więcej feature’ów (np. API keys, usage plans)
-- **WebSocket API**
-  - real-time (bidirectional)
-### Integracje (backend)
-- **Lambda** (najczęściej)
-- **ALB / EC2**
-- **AWS services (np. S3, DynamoDB)**
 
->[!exam]
->serverless API → API Gateway + Lambda  
+Mental model:  
+API Gateway ≠ tylko proxy    
+API Gateway = **policy enforcement layer przed backendem**  
+  
+Flow:  
+client → API Gateway (auth + limits + transform) → backend → response  
+  
+Use case:  
+- publiczne API  
+- backend dla mobile/web  
+- serverless (API Gateway + Lambda)  
+  
+Trade-offs:  
+- + centralna kontrola (security, limits, monitoring)  
+- + brak zarządzania infra (serverless)  
+- - większy latency niż ALB  
+- - koszt przy dużym ruchu  
+- - złożoność (mapping, konfiguracja)
 
----
-### Kluczowe funkcje
-- **Authentication**
-  - IAM
-  - Cognito
-  - Lambda authorizer
-- **Throttling**
-  - limit requestów (rate limiting)
-- **Caching**
-  - response cache (REST API)
-- **Monitoring**
-  - CloudWatch logs
+
+
 
 ---
 ### Endpoint types
@@ -64,31 +106,6 @@ reverse proxy - serwerowy pośrednik przyjmuje żądania od klientów i przekazu
   - tylko w VPC (PrivateLink)
 
 ---
-### API Gateway vs ALB
-
-| Feature | API Gateway | ALB |
-|--------|------------|-----|
-| typ | API mgmt | load balancer |
-| auth | zaawansowane | podstawowe |
-| serverless | ✅ | ❌ |
-| WebSocket | ✅ | ❌ |
-
----
-
-### Kiedy używać
-- serverless backend (Lambda)
-- publiczne API
-- kontrola ruchu i auth
-
----
-
-### Trade-offs
-- koszt przy dużym ruchu
-- latency > ALB
-- bardziej złożony config
-
----
-
 ### Exam traps
 
 - Lambda + HTTP → API Gateway  
@@ -97,15 +114,6 @@ reverse proxy - serwerowy pośrednik przyjmuje żądania od klientów i przekazu
 
 - API Gateway ≠ Load Balancer  
 - API Gateway ≠ CloudFront (choć może używać CF)
-
----
-
-### TL;DR
-
-- API Gateway = front door dla API  
-- Lambda integration = klasyk  
-- auth + throttling + monitoring  
-- serverless API → API Gateway  
 
 ___
 Metadata:
