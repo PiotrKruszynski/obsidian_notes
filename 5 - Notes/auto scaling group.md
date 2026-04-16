@@ -39,16 +39,23 @@ ASG = **self-healing + auto-scaling orchestrator**
 - EBS config
 👉 ASG używa LT do tworzenia instancji
 
-## 📈 Scaling Policies
-### dynamic scaling
-- **target tracking**
-  - utrzymuje np. CPU = 40%
-- **step / simple scaling**
-  - np. CPU > 70% → +2 instances
-### scheduled scaling
-- scaling wg czasu (np. peak hours)
-### predictive scaling
-- forecast + scaling ahead
+## 📈 Scaling Policies — ASG
+
+### Dynamic Scaling
+
+Reaguje na **bieżące** metryki.
+
+- **Target Tracking** — utrzymuje metrykę na stałym poziomie (np. CPU = 40%). ASG sam dodaje/usuwa instancje żeby to osiągnąć. Najprostsze w konfiguracji.
+- **Step Scaling** — progi z krokami: CPU > 70% → +2 instancje, CPU > 90% → +4 instancje. Masz pełną kontrolę.
+- **Simple Scaling** — jak step ale tylko jeden próg, jeden krok. Starsza wersja step scaling, raczej nie używaj.
+### Scheduled Scaling
+
+Skalujesz **z góry wg harmonogramu** — np. codziennie o 8:00 dodaj 5 instancji, o 22:00 usuń. Używasz gdy ruch jest przewidywalny (peak hours, koniec miesiąca).
+### Predictive Scaling
+
+ASG analizuje **historyczny ruch** i sam przewiduje kiedy będzie potrzeba więcej instancji — skaluje **zanim** ruch wzrośnie. Wymaga minimum 24h historii danych.
+
+> **Praktyczna zasada:** Target Tracking jako baza, Scheduled jeśli znasz wzorce ruchu, Predictive jeśli masz dużo historycznych danych.
 
 ### 🚨 Pułapka egzaminacyjna
 - AWS lubi sprawdzać czy:
