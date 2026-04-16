@@ -24,12 +24,24 @@ Note:
 ![[Pasted image 20260416134250.png]]
 # Core features
 
-_Glue data catalog_: jest wspólną warstwą, która opisuje, gdzie i w jakiej strukturze znajdują się Twoje dane. Przechowuje informacje o schematach danych z różnych źródeł. Umożliwia łatwe odnajdywanie i klasyfikowanie danych.
-_Glue Job_: to zadanie ETL, które przetwarza dane wsadowo
-_Glue Bookmarks_: zapamiętuje, gdzie ostatnio Glue zakończył przetwarzanie, by kontynuować od tej pozycji. Prevent re-processing old data.
-_Glue DataBrew_: to narzędzie wizualne, które pozwala na interaktywne przygotowywanie danych, **bez kodowania**
-_Glue Studio_: new GUI, środowisko no-code do zarządzania i tworzenia Glue jobów.
-_Glue Streaming ETL_: umożliwia przetwarzanie danych w czasie rzeczywistym, czyli Glue przetwarza strumienie danych na bieżąco, a nie w partiach. build on **Apache Spark Streaming**: compatible with _Kinesis Data Streaming_, _Kafka_, _MSK_
+### Glue Data Catalog
+Wspólna warstwa metadanych — opisuje gdzie i w jakiej strukturze znajdują się twoje dane. Przechowuje schematy z różnych źródeł (S3, RDS, Redshift) i umożliwia łatwe odnajdywanie danych. Używany przez Athena, EMR i Redshift Spectrum.
+
+### Glue Job
+Zadanie ETL przetwarzające dane **wsadowo** (batch). Piszesz skrypt Python/Spark, Glue go wykonuje na zarządzanym klastrze.
+
+### Glue Bookmarks
+Zapamiętuje gdzie ostatnio Glue skończył przetwarzanie — przy kolejnym uruchomieniu kontynuuje od tego miejsca. Zapobiega ponownemu przetwarzaniu starych danych.
+
+### Glue DataBrew
+Wizualne narzędzie do przygotowywania danych **bez kodowania** — drag-and-drop. Transformacje zapisywane jako **recipes** (przepisy) — wielokrotnego użytku, wersjonowane, współdzielone z zespołem. Wbudowany **data profiling** — statystyki kolumn, wartości null, rozkłady, wykrywanie anomalii. Idealne dla analityków i biznesu, nie tylko inżynierów.
+![[Pasted image 20260416141018.png|800]]
+### Glue Studio
+Graficzny interfejs (GUI) do tworzenia i zarządzania Glue jobami **bez pisania kodu**. Generuje pod spodem skrypty Spark — skierowany do data engineerów.
+### Glue Streaming ETL
+Przetwarzanie danych **w czasie rzeczywistym** zamiast w partiach. Zbudowany na **Apache Spark Streaming**. Kompatybilny z Kinesis Data Streams, Kafka i MSK.
+
+
 # How it works
 `S3 → crawler → schema in catalog → Glue job → transform → output`
 - schema-on-read  
