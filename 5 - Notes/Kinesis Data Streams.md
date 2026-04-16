@@ -3,77 +3,141 @@ ___
 Note:
 
 >[!Definition]
->- KDS → **real-time streaming platform** for continuous data ingestion
->- dane napływają jako **stream** (nie batch) i są dzielone na _shards_
->- wielu konsumentów czyta **te same dane niezależnie**
+>- KDS → **real-time streaming platform (ordered, replayable event log)**
+>- dane napływają jako **continuous stream (append-only log)** podzielony na _shards_
+>- wielu konsumentów czyta **te same dane niezależnie (fan-out)**
 >- dane **nie znikają po odczycie** (retention + replay)
->- _Kinesis Data Analitic_
+>- integracje:
+  >	- Kinesis Data Analytics (SQL / Apache Flink)
+  >	- Lambda, Firehose, custom consumers
 
-**Use case**: logi, clickstream, IoT, real-time analytics
-
-### Mental model
-`Producer → Kinesis Stream (shards) → Consumer(s)`
-- dane NIE znikają po odczycie  
-- każdy consumer ma swój offset  
-- można replay danych  
-### Core features
-- retention:
-  - default: 24h
-  - max: 365 dni
-- replay / reprocessing
-- ordering:
-  - gwarantowane per **Partition Key**
-- max record size: 1 MB
-- encryption:
-  - KMS (at rest)
-  - HTTPS (in transit)
-### Shards
-Shard = jednostka throughput
-- 1 shard:
-  - write: 1 MB/s lub 1000 records/s
-  - read: 2 MB/s
-- więcej shardów = większa przepustowość
-
->[!exam]
->throughput problem → increase shards
-### Capacity modes
-#### Provisioned
-- ręcznie ustawiasz liczbę shardów
-#### On-Demand
-- auto scaling
-
->[!exam]
->unknown traffic → on-demand
-### KDS vs SQS
-SQS → queue (task processing)  
-KDS → stream (real-time data pipeline)
-
-| Cecha | SQS | KDS |
-|------|-----|-----|
-| model | queue | stream |
-| retention | do 14 dni | do 365 dni |
-| replay | ❌ | ✅ |
-| wielu konsumentów | ❌ | ✅ |
-### Jak działa
-```
-Producer → shard → data stored  
-Consumer 1 → czyta od początku  
-Consumer 2 → czyta od swojego miejsca  
-```
-
-- każdy consumer niezależny  
-- dane nie są usuwane po odczycie  
+**Use case**: logi, clickstream, IoT, monitoring, real-time analytics
 
 ---
 
-## TL;DR
+## Mental model
+`Producer → Kinesis Stream (shards) → Consumer(s)`
 
-```
-SQS  →  kolejka, wiadomość znika po przetworzeniu
-KDS  →  stream, dane zostają (domyślnie 24h, max 365 dni)
-        wielu konsumentów czyta niezależnie, każdy od swojego miejsca
-```
+- dane są zapisywane jako **append-only log**
+- każdy consumer ma swój **offset (sequence number)**
+- możliwy **replay danych w oknie retencji**
+- wielu consumerów może czytać równolegle (nie blokują się)
 
+---
+
+## Core features
+
+- retention:
+  - default: 24h
+  - max: 365 dni
+
+- replay / reprocessing
+  - consumer może czytać od dowolnego miejsca (offset)
+
+- ordering:
+  - gwarantowane **per shard (czyli per partition key mapping)**
+
+- max record size:
+  - **1 MB**
+
+- encryption:
+  - KMS (at rest)
+  - HTTPS (in transit)
+
+---
+
+## Shards
+
+Shard = **unit of throughput + ordering**
+
+- 1 shard:
+  - write: **1 MB/s lub 1000 records/s**
+  - read:
+    - standard: **2 MB/s shared**
+    - EFO: **2 MB/s per consumer**
+
+- partition key:
+  - decyduje do którego shardu trafia rekord (hash)
+  - ⇒ ordering tylko w obrębie shardu
+
+👉 więcej shardów:
+- + większy throughput
+- + większy parallelism
+- - słabszy global ordering
+
+> [!exam]
+> throughput problem → increase shards  
+> hot partition → zmień partition key
+
+---
+
+## Capacity modes
+
+### Provisioned
+- ręcznie ustawiasz liczbę shardów
+- pełna kontrola + niższy koszt przy stabilnym ruchu
+
+### On-Demand
+- auto scaling shardów
+- lepsze dla nieprzewidywalnego trafficu
+
+> [!exam]
+> unknown / spiky traffic → on-demand
+
+---
+## Consumers
+
+### Standard consumer
+- pull model
+- współdzielony throughput (2 MB/s per shard)
+
+---
+### Enhanced Fan-Out (EFO)
+- dedykowany throughput per consumer
+- ~2 MB/s per shard **per consumer**
+- niższy latency (~70 ms)
+
+👉 gdy masz wielu niezależnych consumerów
+
+---
+## Offset / Checkpointing
+
+- consumer zarządza offsetem (sequence number)
+- checkpoint zwykle w:
+  - DynamoDB
+  - KCL (Kinesis Client Library)
+
+👉 pozwala na:
+- resume
+- replay
+- fault recovery
+
+---
+## Scaling
+
+- manual:
+  - split / merge shards
+
+- on-demand:
+  - AWS skaluje automatycznie
+
+---
+## KDS vs SQS
+
+SQS → queue (task processing)  
+KDS → stream (event pipeline)
+
+| Cecha | SQS | KDS |
+|------|-----|-----|
+| model | queue | append-only log |
+| retention | do 14 dni | do 365 dni |
+| replay | ❌ | ✅ |
+| wielu konsumentów | ❌ (1 msg → 1 consumer) | ✅ |
+| ordering | FIFO tylko | per shard |
+
+---
+
+## Jak działa (dokładniej)
 
 
 

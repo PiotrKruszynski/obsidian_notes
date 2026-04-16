@@ -3,117 +3,263 @@ ___
 Note:
 
 >[!important]  
->- SQS = **managed message queue** (decoupling layer między komponentami)
+>- SQS = **managed durable message queue** (asynchronous decoupling layer między komponentami)
 
-
-**Decoupling** → services communicate asynchronously to improve scalability and fault isolation. You can decoupling app using:
-	• [[Amazon SQS]]: queue model 
-	• [[Amazon SNS]]: pub/sub model 
-	• [[Amazon Data Firehose]]: real-time streaming model
+SQS = **managed, durable message queue (asynchronous decoupling layer)**
 
 ---
-### Mental model  
-SQS = **bufor między warstwami aplikacji**   
+
+## Mental model  
+SQS = **buffer + failure isolation + backpressure control**  
 `Producer → Queue → Consumer`
-👉 aplikacje nie muszą gadać synchronicznie  
-👉 awaria consumerów nie zatrzymuje producerów
-### Standard Queue
-- prawie nieograniczony throughput
-- **at-least-once delivery**
-- **best-effort ordering**
+
+👉 producer nie czeka na wynik (async)  
+👉 consumer może paść → queue dalej przyjmuje dane  
+👉 queue amortyzuje spike’i (burst traffic)
+
+---
+
+## Standard Queue
+- nearly unlimited throughput
+- **at-least-once delivery** (duplikaty możliwe)
+- **best-effort ordering** (brak gwarancji)
 - retention:
-    - default 4 days
-    - max 14 days
+  - default: 4 days
+  - max: 14 days
 - max message size:
-    - **1 MiB**
+  - **1 MiB**
 
 > [!exam]  
-> Standard = skala, ale licz się z:
-> - duplikatami
-> - brakiem gwarancji kolejności
->     
+> Standard = skala + odporność  
+> musisz obsłużyć:
+> - idempotency (duplikaty)
+> - brak ordering
 
-### FIFO Queue
-- nazwa musi kończyć się na `.fifo`
-- gwarantuje kolejność **w ramach Message Group ID**
-- wspiera **exactly-once processing**
-- klasycznie:
-    - 300 API calls/s per method bez batchingu
-- z batchingiem:
-    - 3000 API calls/s 
-- istnieje też **high throughput FIFO**
+---
+
+## FIFO Queue
+- nazwa musi kończyć się `.fifo`
+- **ordering per MessageGroupId**
+- **exactly-once (deduplication window ~5 min)**
+- throughput:
+  - ~300 req/s (bez batch)
+  - ~3000 req/s (batch)
+- dostępny **high throughput FIFO**
 
 > [!exam]  
-> FIFO = ordering + deduplication  
-> nie wybierasz FIFO „bo lepsze”, tylko gdy naprawdę potrzebujesz kolejności
+> FIFO ≠ global ordering  
+> 👉 ordering tylko w obrębie **MessageGroupId**
+
+---
+
+## Core mechanika
+
+### Message
+- payload + attributes
+- max: 1 MiB
+- można użyć **S3 (SQS Extended Client)** dla większych payloadów
+
+---
 
 ### Visibility Timeout
-- po odebraniu wiadomość staje się niewidoczna dla innych consumerów
-- default: **30 s**
-- jeśli consumer nie usunie wiadomości przed timeoutem:
-    - wraca do kolejki
+- default: **30s**
+- message znika z kolejki po `ReceiveMessage`
+- wraca jeśli:
+  - brak `DeleteMessage`
+  - timeout minął
+
+👉 **retry mechanism + lock semantyka**
 
 > [!exam]  
-> visibility timeout ustaw dłuższy niż czas przetwarzania
-### Long Polling
-- consumer czeka na wiadomości zamiast pytać non-stop
-- max: **20 s**
-- mniej pustych odpowiedzi
-- niższy koszt
-### Batching
-- wysyłanie/odbieranie wielu wiadomości na raz
-- poprawia throughput
-- zmniejsza liczbę wywołań API
-### Security
-- **IAM** → kto może używać kolejki
-- **Queue Policy** → co z zewnątrz może wysyłać / czytać
-- **SSE / KMS** → szyfrowanie at rest
-- **HTTPS** → szyfrowanie in transit
-- **VPC Endpoint** → prywatny dostęp bez Internetu
-
-### Access Control (SQS)  
-#### IAM Policy (identity-based)  
-- przypisana do usera / roli  
-- definiuje:  
-- kto może:  
-- SendMessage  
-- ReceiveMessage  
-- DeleteMessage  
-👉 używane wewnątrz AWS  
-#### Queue Policy (resource-based)  
-- przypisana do **SQS queue**  
-- definiuje:  
-- kto (zewnętrznie) może wysyłać / czytać  
-👉 używane dla:  
-- SNS → SQS  
-- cross-account access  
-- inne AWS services  
-  
->[!exam]  
->jeśli SQS ma odbierać z SNS → potrzebujesz **Queue Policy**
+> visibility timeout > processing time
 
 ---
-### Typical use cases
+
+### Receive / Delete pattern
+- SQS nie usuwa wiadomości automatycznie  
+- flow:
+  1. receive
+  2. process
+  3. delete
+
+👉 brak delete = ponowne przetwarzanie
+
+---
+
+## Delivery semantics
+
+- **at-least-once** (Standard)
+- **exactly-once (practical)** (FIFO + deduplication)
+
+👉 system musi być **idempotentny**
+
+---
+
+## Scaling model
+
+- pull-based (polling)
+- horizontal scaling consumerów
+- batch processing
+
+👉 queue działa jako **buffer między szybkością producerów i consumerów**
+
+---
+
+## Long Polling
+- max: **20s**
+- zmniejsza empty responses
+- niższy koszt + mniejsze CPU
+
+---
+
+## Batching
+- do 10 messages / request
+- zwiększa throughput
+- zmniejsza API cost
+
+---
+
+## Reliability patterns
+
+### Dead Letter Queue (DLQ)
+- message trafia po X retry
+- ustawiane przez **redrive policy**
+
+👉 izolacja błędów + debug
+
+---
+
+### Delay Queue
+- opóźnienie dostarczenia message (0–15 min)
+👉 use case: retry z opóźnieniem
+
+---
+
+### Message Timer
+- per-message delay (override queue delay)
+
+---
+## Security
+
+- **IAM (identity-based)**
+  - kto może używać kolejki
+
+- **Queue Policy (resource-based)**
+  - kto może wysyłać/odbierać (np. SNS, cross-account)
+
+- **SSE (KMS)**
+  - encryption at rest
+
+- **HTTPS**
+  - encryption in transit
+
+- **VPC Endpoint (PrivateLink)**
+  - dostęp bez Internetu
+
+---
+## Access Control
+
+### IAM Policy
+- przypisana do usera/role
+- kontroluje:
+  - SendMessage
+  - ReceiveMessage
+  - DeleteMessage
+
+👉 standardowy access w AWS
+
+---
+### Queue Policy
+- przypisana do SQS
+- kontroluje external access:
+  - SNS → SQS
+  - cross-account
+  - inne AWS services
+
+> [!exam]  
+> SNS → SQS = potrzebna **Queue Policy**
+
+---
+## Integracje
+
+- Lambda (event source mapping)
+  - automatyczny scaling consumerów
+- EC2 / ECS workers
+- SNS → SQS (fan-out pattern)
+- Step Functions
+
+---
+## Ordering & Parallelism
+
+- Standard → brak ordering, max parallelism  
+- FIFO:
+  - ordering per group
+  - parallelism = liczba MessageGroupId
+
+👉 więcej grup = więcej równoległości
+
+---
+## Use cases
+
 - decoupling app tiers
-- async processing
+- async processing (np. image/video)
 - buffering spikes
-- background jobs
-### Exam traps
+- background jobs / workers
+- event-driven pipelines
+
+---
+
+## Trade-offs
+
+- + durability i odporność
+- + prosty model async
+- + skalowalność
+- - polling (brak natywnego push)
+- - duplikaty (Standard)
+- - latency (nie real-time)
+
+---
+
+## SQS vs SNS
+
+- SQS
+  - queue
+  - pull
+  - 1 consumer per message
+  - retry + durability
+
+- SNS
+  - pub/sub
+  - push
+  - fan-out
+  - brak persistence (bez SQS)
+
+👉 pattern:
+SNS → SQS → consumers
+
+---
+## Exam traps
+
 - Standard ≠ ordering
-- FIFO ≠ nieskończony throughput
-- FIFO ordering działa **per Message Group ID**
-- wiadomość usuwa się dopiero po successful processing
-- jeśli nie zrobisz `DeleteMessage`, wiadomość może wrócić
+- FIFO ≠ infinite throughput
+- FIFO ordering = **per MessageGroupId**
+- brak `DeleteMessage` → retry
+- visibility timeout ≠ retention
+- SQS = polling (nie push)
+- duplikaty → zawsze możliwe (Standard)
 
-### TL;DR
-- **Standard** → skala
-- **FIFO** → kolejność
-- **Visibility Timeout** → ochrona przed równoczesnym przetwarzaniem
-- **Long Polling** → mniej pustych odczytów
-- **IAM + Queue Policy + KMS** → security
+---
+## TL;DR
+
+- SQS = **async buffer + decoupling layer**
+- Standard → skalowalność
+- FIFO → ordering + deduplication
+- Visibility Timeout → retry control
+- DLQ → failure isolation
+- IAM + Queue Policy + KMS → security
 
 
-![[Pasted image 20260223110148.png]]
+
 
 **SDK** = Software Development Kit = biblioteka którą instalujesz w kodzie żeby gadać z AWS bez pisania HTTP requestów ręcznie.
 
