@@ -4,10 +4,7 @@ Note:
 
 >[!important]  
 >- SQS = **managed message queue** (decoupling layer między komponentami)
->- producer wrzuca wiadomość, consumer odbiera ją asynchronicznie  
->- 2 typy kolejek:  
->  - **Standard** → skala  
->  - **FIFO** → kolejność + deduplikacja  
+
 
 **Decoupling** → services communicate asynchronously to improve scalability and fault isolation. You can decoupling app using:
 	• [[Amazon SQS]]: queue model 
