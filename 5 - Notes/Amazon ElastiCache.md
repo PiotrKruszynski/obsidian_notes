@@ -15,7 +15,8 @@ Note:
 > **code change require**
 > max Redis item size **512 MB**
 
-**Use case:** key-value store, frequent reads - less writes, cache results for DB queries, store session data for user on websites, _cannot use SQL !_
+**Use case:** caching DB queries, session store, frequent reads, real-time data  
+⚠️ cache ≠ source of truth
 
 Redis: _gaming leaderboards_ bo gwarantuje uniqueness and element ordering
 
@@ -23,107 +24,190 @@ Redis: _gaming leaderboards_ bo gwarantuje uniqueness and element ordering
 - key-value store (no SQL)
 - in-memory → **sub-millisecond latency**
 - managed (jak RDS, ale dla cache)
-- wymaga **zmiany kodu aplikacji**
+- działa w **VPC (brak public access)**
 
 >[!exam]
->cache = aplikacja musi z niego korzystać (nie działa automatycznie)
-### Engines
-- **Redis**
-- **Memcached**
-----
-## Redis
-- wspiera:
-  - replication
-  - HA (failover)
-  - persistence (backup)
-- advanced data structures:
-  - list, set, sorted set
-- pub/sub
-- **preferred (default wybór)**
-## Memcached
-- prosty key-value
-- brak:
-  - replication
-  - persistence
-- brak HA
-- multi-threaded (bardzo szybki)
+>cache nie działa automatycznie → aplikacja musi go używać
+## Engines  
+  
+### Redis (default)  
+- replication (primary + read replicas)  
+- HA (Multi-AZ failover)  
+- persistence (RDB / AOF)  
+- advanced data structures:  
+	- list, set, sorted set, hash  
+- pub/sub  
+- TTL per key  
+  
+👉 use case:  
+	- session store  
+	- leaderboard (ordering + uniqueness)  
+	- real-time apps  
+### Memcached  
+- prosty key-value  
+- brak:  
+	- replication  !
+	- persistence  !
+	- failover  !
+- multi-threaded (bardzo szybki)  
+  
+👉 use case:  
+- simple cache (stateless)
 
 >[!exam]
->HA / backup → Redis  
->simple cache → Memcached  
+>HA / failover / backup → Redis
+>simple, ultra-fast cache → Memcached
 
+## Caching patterns (KLUCZOWE)  
+### Cache-aside (lazy loading)  
 
-![[Pasted image 20260211120814.png]]
+`App → Cache → (MISS) → DB → i do Cache → App`
+👉 najczęstszy pattern  
 
+⚠️ możliwe **stale data** -> _jak stale bread_ no longer fresh
+### Write-through  
+- zapis:  
+  - `App → cache + DB `   
+  
+👉 zawsze spójne    
+⚠️ większa latencja zapisu  
+  
+---  
+### Write-back (write-behind)  
+- zapis:  
+  - `App → cache → async DB `   
+  
+👉 szybkie write    
+⚠️ ryzyko utraty danych  
+  
+---  
+## Redis architecture  
+### Replication  
+- primary → replicas (async)  
+- read scaling  
+  
+---  
+### Multi-AZ  
+- automatic failover  
+- replica → primary  
+  
+---  
+### Cluster mode  
+- sharding (partitioning danych)  
+- scaling write throughput  
+  
+👉 dane podzielone na **hash slots**  
+  
+---  
+## Eviction policies (WAŻNE)  
+  
+gdy brak pamięci:  
+- LRU (least recently used)  
+- LFU (least frequently used)  
+- TTL-based  
+  
+👉 cache może usuwać dane automatycznie  
+  
+---  
+## Persistence (Redis only)  
+  
+- RDB:  
+  - snapshot co X czasu  
+  
+- AOF:  
+  - log operacji  
+  
+👉 opcjonalne → kosztem performance  
+  
+> [!exam]  
+> Memcached = brak persistence    
+  
+---  
+## Security  
+  
+- VPC only (no public access)  
+- Security Groups  
+- encryption:  
+  - at rest (KMS)  
+  - in transit (TLS)  
+- Redis:  
+  - AUTH (password)  
+  - IAM authentication (nowsze)  
+  
+---  
+## Scaling  
+  
+- vertical:  
+  - większe node’y  
+  
+- horizontal:  
+  - Redis Cluster (sharding)  
+  - read replicas  
+  
+---  
+## Use cases  
+  
+- cache DB queries  
+- session store (TTL)  
+- real-time analytics  
+- leaderboards / counters  
+- rate limiting  
+  
+---  
+## ElastiCache vs RDS  
+  
+- ElastiCache:  
+  - RAM  
+  - µs latency  
+  - cache layer  
+  
+- RDS:  
+  - persistent  
+  - source of truth  
+  
+👉 pattern:  
+`App → Cache → DB  `
+  
+---  
+## ElastiCache vs DynamoDB DAX  
+  
+- ElastiCache:  
+  - general-purpose cache  
+  - app-managed  
+  
+- DAX:  
+  - cache dla DynamoDB  
+  - transparentny (no code change)  
+---  
+## Trade-offs  
+  
+- + bardzo szybki  
+- + odciąża DB  
+- - cache invalidation problem  
+- - brak durability (domyślnie)  
+- - dodatkowa warstwa    
+---  
+## Exam traps  
+  
+- cache ≠ source of truth    
+- Redis → persistence opcjonalna    
+- Memcached → brak HA    
+- Multi-AZ → tylko Redis    
+- eviction → dane mogą zniknąć    
+- DAX → tylko dla DynamoDB    
+- ElastiCache → zawsze w VPC    
+  
+---  
+## TL;DR  
+  
+- ElastiCache = **RAM cache layer**  
+- Redis → advanced + HA + persistence    
+- Memcached → prosty cache    
+- cache-aside = default pattern    
+- cel: latency ↓ + DB load ↓
 
----
-# Security
-- **Security Groups**
-- encryption:
-  - at rest (KMS)
-  - in transit (TLS)
-- Redis:
-  - AUTH (password) - może też używać IAM Authentication for Redis
-
-
----
-# Persistence (Redis only)
-- snapshot (RDB)
-- optional persistence
-- backup/restore
-
->[!exam]
->Memcached = brak backup  
-
----
-# Use cases
-- cache DB queries
-- session store
-- real-time analytics
-- leaderboard / counters
-
----
-# Architecture
-
-```text
-Client → App → ElastiCache → DB
-                ↑
-             cache hit
-
-```
-
-# Caching patterns (KLUCZOWE)  
-## Lazy Loading (cache-aside)  
-- aplikacja:  
-1. sprawdza cache  
-2. jeśli MISS → pobiera z DB  
-3. zapisuje do cache
 `App → Cache → (MISS) → DB → Cache → App`
-### cechy
-- tylko odczyty są cache’owane
-- możliwe **stale data**  -> _jak stale bread_ no longer fresh
 
-> [!exam]  
-> najczęstszy pattern
-## Write Through
-- zapis:
-    - jednocześnie do cache i DB
-`App → Cache + DB`
-### cechy
-- brak stale data
-- większa latencja zapisu
-
-> [!exam]  
-> consistent data, ale wolniejsze write
-## Session Store
-- przechowywanie:
-    - session usera
-- TTL (automatic expiration)
-### use case
-- login sessions
-- shopping carts
-
-![[Pasted image 20260319130159.png]]
 
 ___
 Metadata:
