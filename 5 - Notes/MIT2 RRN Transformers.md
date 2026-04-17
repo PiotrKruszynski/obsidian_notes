@@ -11,205 +11,276 @@ Czyli:
 - łączysz je
 - tworzysz nowy stan
 To tworzy „łańcuch” w czasie.
+![[Pasted image 20260417145344.png]]
 
+neuron
+![[Pasted image 20260417145400.png]]
 
+![[Pasted image 20260417145503.png]]
+
+![[Pasted image 20260417145521.png]]
+
+![[Pasted image 20260417145649.png]]
 
 ![[Pasted image 20260415215412.png]]
+
+![[Pasted image 20260417145631.png]]
 
 > **Gradient mówi sieci neuronowej, w którą stronę i jak mocno powinna zmienić swoje wagi, żeby zmniejszyć błąd.**
 
 ![[Pasted image 20260417133151.png]]
 
-## 🧠 2. Gradient w sieciach neuronowych
-
-W sieciach neuronowych gradient mówi:
-
-- jak zmienić **wagę** (parametr),
-    
-- żeby **zmniejszyć funkcję straty** (błąd).
-    
-
-Uczenie polega na:
-
-wnowe=wstare−η⋅gradient
-
-gdzie:
-
-- w – waga
-    
-- η – learning rate
-    
-- gradient – kierunek i siła zmiany
-    
-
-## 🔄 3. Gradient a backpropagation
-
-Gradient jest obliczany metodą **wstecznej propagacji błędu** (backpropagation):
-
-1. Sieć robi predykcję
-    
-2. Liczymy błąd
-    
-3. Liczymy gradient błędu względem każdej wagi
-    
-4. Aktualizujemy wagi
-    
-
-Bez gradientu sieć nie mogłaby się uczyć.
-
-## ⚠️ 4. Zanikający i eksplodujący gradient
-
-To właśnie gradient powoduje problemy w zwykłych RNN:
-
-- **zanikający gradient** → gradient robi się bliski 0 → sieć „zapomina”
-    
-- **eksplodujący gradient** → gradient robi się ogromny → uczenie się rozjeżdża
-    
-
-Dlatego powstały **LSTM i GRU**, które mają bramki regulujące przepływ gradientu.
-
-> **LSTM to komórka pamięci z bramkami, które decydują, co zapamiętać, co zapomnieć i co wypuścić dalej.**
-
-## 🧠 Dlaczego powstało LSTM?
-
-Zwykłe RNN mają problem:
-
-- gradient szybko znika → sieć „zapomina” informacje sprzed kilku kroków
-    
-- nie potrafią uczyć się długich zależności (np. w zdaniach, muzyce, time series)
-    
-
-LSTM rozwiązuje to, dodając **mechanizm pamięci długoterminowej**.
-
-## 🔐 Jak działa LSTM? (intuicyjnie)
-
-W środku LSTM są **trzy bramki**:
-
-### 1) **Forget gate** – co zapomnieć
-
-Decyduje, które informacje ze starego stanu pamięci wyrzucić.
-
-### 2) **Input gate** – co zapisać
-
-Decyduje, które nowe informacje dodać do pamięci.
-
-### 3) **Output gate** – co wypuścić na wyjście
-
-Decyduje, jaka część pamięci ma wpływać na kolejne kroki.
-
-Wszystkie bramki używają sigmoida (0–1), więc działają jak krany:
-
-- 0 → nic nie przepuszcza
-    
-- 1 → przepuszcza wszystko
-    
-
-## 📦 Co jest w środku komórki LSTM?
-
-LSTM przechowuje dwa rodzaje informacji:
-
-- **stan komórki (cell state)** – długoterminowa pamięć
-    
-- **stan ukryty (hidden state)** – krótkoterminowa informacja przekazywana dalej
-    
-
-Cell state płynie przez sieć prawie niezmieniony, dlatego gradient się nie rozpada.
-
-## 🔄 Dlaczego LSTM działa tak dobrze?
-
-- potrafi pamiętać informacje przez **setki kroków czasowych**
-    
-- świetnie radzi sobie z sekwencjami: tekst, audio, time series
-    
-- jest stabilny podczas uczenia
-    
-- nie ma problemu z zanikającym gradientem
-
 ![[Pasted image 20260417133506.png]]
 
-## ⚠️ Ograniczenia zwykłych RNN (to, co masz wypisane z boku)
-
-### 1) **Encoding bottleneck**
-
-RNN musi „upchnąć” całą przeszłą informację w jednym wektorze ht. To jak próba streszczenia całej książki w jednym zdaniu.
-
-### 2) **Slow, no parallelization**
-
-RNN przetwarza dane **sekwencyjnie**, krok po kroku. Nie da się równolegle policzyć h5 zanim policzysz h4.
-
-### 3) **Not long memory**
-
-Największy problem: **zanikający gradient**. Im dalej w czasie, tym trudniej przekazać informację. RNN pamięta tylko krótkie zależności.
-
-To właśnie ten punkt doprowadził do powstania LSTM.
-## 🧠 Jak LSTM rozwiązuje te problemy?
-
-LSTM dodaje:
-
-- **cell state** – kanał pamięci, który płynie przez sieć prawie bez zmian
-    
-- **bramki** – mechanizmy kontrolujące przepływ informacji
-    
-
-Dzięki temu:
-
-- gradient nie zanika tak szybko
-    
-- sieć może pamiętać **długie zależności**
-    
-- nie ma „encoding bottleneck”, bo pamięć jest aktualizowana selektywnie
-    
-- nadal jest sekwencyjna, ale dużo bardziej stabilna
+![[Pasted image 20260417145751.png]]
 
 ![[Pasted image 20260417140702.png]]
 
-Transformery **nie czytają sekwencji krok po kroku** jak RNN. Zamiast tego:
-
-> **Wszystkie słowa są przetwarzane jednocześnie (równolegle).**
-
-To daje ogromną szybkość, ale ma jedną konsekwencję:
-
-### 🔥 Model nie wie, które słowo jest pierwsze, drugie, trzecie…
-
-## 1) **Dodanie informacji o pozycji (positional encoding)**
-
-Każde słowo ma:
-- **embedding słowa** (co oznacza)
-- **embedding pozycji** (gdzie leży w zdaniu)
-
-Te dwa wektory są **dodawane**:
-
-$inputt=xt+pt$
-
-### 1. **Encode position**
-
-Dodajemy pozycję do embeddingów.
-
-### 2. **Query, Key, Value**
-
-Każde słowo tworzy trzy wektory:
-- Query → czego szukam
-- Key → co oferuję
-- Value → jaka informacja ma być przekazana
-
-### 3. **Attention weighting**
-
-Model liczy, które słowa są ważne dla siebie nawzajem.
-
-### 4. **Weighted sum**
-
-Każde słowo „zbiera” informacje z innych słów, ważone uwagą.
-
-# 🎯 Co jest kluczowe?
 
 > **Transformer nie potrzebuje pamięci jak LSTM.** **Zamiast tego każde słowo patrzy na wszystkie inne naraz.**
 
-To jest powód, dla którego Transformery wygrały z LSTM:
+![[Pasted image 20260417145829.png]]
 
-- równoległość
-    
-- długie zależności
-    
-- skalowalność
-    
-- stabilność uczenia
+encoding position information
+![[Pasted image 20260417150328.png]]
+extract query, key, value for search
+![[Pasted image 20260417150403.png]]
+compute attention weighting
+![[Pasted image 20260417150449.png]]
+![[Pasted image 20260417151459.png]]
+extract features with high attention
+![[Pasted image 20260417151524.png]]
+
+![[Pasted image 20260417151931.png]]
+attention head -> Pojedynczy blok self-attention operujący na Q, K, V.
+![[Pasted image 20260417151955.png]]
+ten pipeline (Q, K, V → attention → weighted sum) to **jeden moduł zwany _self-attention head_**, który jest **budulcem większej sieci (Transformera)**.
+![[Pasted image 20260417152609.png]]
+
+![[Pasted image 20260417152900.png]]
+# 🧠 Sequence Models – definicje
+
+## 🔹 RNN (Recurrent Neural Network)
+Model sekwencyjny przetwarzający dane krok po kroku w czasie.
+
+h_t = tanh(W_h h_{t-1} + W_x x_t + b)
+y_t = W_y h_t + b_y
+
+---
+
+## 🔹 Hidden state (h_t)
+Stan ukryty reprezentujący informację z poprzednich kroków.
+
+---
+
+## 🔹 Input (x_t)
+Wejście w kroku czasowym t.
+
+---
+
+## 🔹 Output (y_t)
+Wyjście modelu w kroku czasowym t.
+
+---
+
+## 🔹 Sequence modeling
+Modelowanie zależności w danych uporządkowanych w czasie.
+
+---
+
+## 🔹 Gradient
+Pochodna funkcji straty względem parametrów.
+
+∇_w L
+
+---
+
+## 🔹 Gradient descent
+Algorytm optymalizacji minimalizujący funkcję straty.
+
+w_new = w_old - η ∇_w L
+
+---
+
+## 🔹 Learning rate (η)
+Współczynnik skali aktualizacji wag.
+
+---
+
+## 🔹 Loss function (L)
+Funkcja mierząca błąd predykcji modelu.
+
+---
+
+## 🔹 Backpropagation
+Algorytm obliczania gradientów przez propagację wsteczną.
+
+---
+
+## 🔹 Backpropagation Through Time (BPTT)
+Backpropagation rozwinięty wzdłuż osi czasu w RNN.
+
+---
+
+## 🔹 Vanishing gradient
+Zanik gradientu przy propagacji przez wiele kroków.
+
+---
+
+## 🔹 Exploding gradient
+Eksplozja gradientu do bardzo dużych wartości.
+
+---
+
+## 🔹 Encoding bottleneck
+Kompresja całej informacji sekwencji w jednym wektorze h_t.
+
+---
+
+## 🔹 LSTM (Long Short-Term Memory)
+RNN z mechanizmem pamięci i bramkami.
+
+---
+
+## 🔹 Cell state (c_t)
+Stan pamięci długoterminowej.
+
+---
+
+## 🔹 Hidden state (h_t) – LSTM
+Stan krótkoterminowy przekazywany dalej.
+
+---
+
+## 🔹 Forget gate
+Bramka kontrolująca usuwanie informacji.
+
+f_t = σ(W_f [h_{t-1}, x_t] + b_f)
+
+---
+
+## 🔹 Input gate
+Bramka kontrolująca zapisywanie informacji.
+
+i_t = σ(W_i [h_{t-1}, x_t] + b_i)
+
+---
+
+## 🔹 Candidate state
+Nowa kandydatowa informacja do zapisania.
+
+c̃_t = tanh(W_c [h_{t-1}, x_t] + b_c)
+
+---
+
+## 🔹 Cell state update
+Aktualizacja pamięci.
+
+c_t = f_t ⊙ c_{t-1} + i_t ⊙ c̃_t
+
+---
+
+## 🔹 Output gate
+Bramka kontrolująca wyjście.
+
+o_t = σ(W_o [h_{t-1}, x_t] + b_o)
+
+---
+
+## 🔹 Hidden state update (LSTM)
+h_t = o_t ⊙ tanh(c_t)
+
+---
+
+## 🔹 GRU (Gated Recurrent Unit)
+Uproszczona wersja LSTM z mniejszą liczbą bramek.
+
+---
+
+## 🔹 Sequential processing
+Przetwarzanie krok po kroku bez równoległości.
+
+---
+
+## 🔹 Transformer
+Model sekwencyjny oparty na mechanizmie attention.
+
+---
+
+## 🔹 Embedding
+Reprezentacja tokena jako wektor w przestrzeni ciągłej.
+
+x ∈ ℝ^d
+
+---
+
+## 🔹 Positional encoding
+Reprezentacja pozycji elementu w sekwencji.
+
+input_t = x_t + p_t
+
+---
+
+## 🔹 Query (Q)
+Wektor zapytania.
+
+Q = X W_Q
+
+---
+
+## 🔹 Key (K)
+Wektor klucza.
+
+K = X W_K
+
+---
+
+## 🔹 Value (V)
+Wektor wartości.
+
+V = X W_V
+
+---
+
+## 🔹 Scaled dot-product attention
+Mechanizm uwagi oparty na iloczynie skalarnym.
+
+Attention(Q, K, V) = softmax(Q K^T / √d_k) V
+
+---
+
+## 🔹 Attention weights
+Wagi określające istotność elementów sekwencji.
+
+---
+
+## 🔹 Self-attention
+Mechanizm, w którym elementy sekwencji odnoszą się do siebie nawzajem.
+
+---
+
+## 🔹 Multi-head attention
+Wiele równoległych mechanizmów attention.
+
+---
+
+## 🔹 Parallelization
+Możliwość przetwarzania wszystkich elementów jednocześnie.
+
+---
+
+## 🔹 Long-range dependencies
+Zależności między odległymi elementami sekwencji.
+
+---
+
+## 🔹 Token
+Podstawowa jednostka wejściowa modelu.
+
+---
+
+## 🔹 Context
+Informacja z innych tokenów używana do interpretacji danego tokena.
+
+
+
