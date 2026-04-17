@@ -4,24 +4,29 @@ Note:
 
 >[!Important]
 >Load Balancer = **managed service, który rozdziela ruch na wiele backendów (targets)**
->Load Balancers always route traffic using private IPs
->- ALB → HTTP / microservices
->- NLB → performance / TCP / static IP
->- GWLB → firewall / network
+>ruch przychodzący:  
+>`client → LB (public DNS / IP)  `
+>ruch wewnętrzny:  
+>`LB → targets przez **private IP**`
+>👉 **LB zawsze używa private networking do komunikacji z backendem**  
+  
+- **ALB** → HTTP / microservices / L7 routing  
+- **NLB** → performance / TCP / static IP / preserve source IP  
+- **GWLB** → firewall / network appliances
 
-## ⚠️ Dlaczego to jest ważne
-- public IP = tylko do wejścia z Internetu
-- **wewnątrz AWS zawsze leci private networking**
+## ⚠️ Dlaczego to jest ważne   
+- public IP = tylko **entry point**  
+- backendy są **private (brak direct access)**  
+- security + isolation
 # Load Balancer — core
 ### Mental model
-Load Balancer = **entry point (single DNS) → rozdziela ruch → targets**
+Load Balancer = **single entry (DNS) → routing → healthy targets**
 ### Core features
 - entry point dla aplikacji (DNS name)
-- forward traffic do downstream targets
+- routing do target groups
 - high availability (**multi-AZ**)
-- **łączy się do targets przez private IP**
 - health checks (L7/L4 zależnie od LB)
-- handle failures (unhealthy targets → out)
+- automatic failover (unhealthy → out)
 - SSL termination (HTTPS → HTTP)
 - separates public ↔ private traffic
 
@@ -29,15 +34,18 @@ Load Balancer = **entry point (single DNS) → rozdziela ruch → targets**
 >Client → LB (public) → targets (private)
 
 ---
-### Sticky sessions (session affinity)
-- user trafia zawsze do tego samego targetu
-- implementacja: cookies
-- supported by:
-  - CLB
-  - ALB
-  - NLB (**only source IP based**, nie cookies)
-- downside:
-  - load imbalance
+### Sticky sessions (session affinity)  
+- user trafia do tego samego targetu  
+- implementacja:  
+- ALB / CLB → cookie-based  
+- NLB → **source IP based**  
+  
+⚠️ trade-off:  
+- uneven load distribution  
+- utrudnia scaling  
+  
+👉 cloud pattern:  
+- prefer **stateless + external session store (Redis)**
 # ELB types
 
 ## CLB — Classic Load Balancer
