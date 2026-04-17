@@ -10,9 +10,9 @@ Note:
 >`LB → targets przez **private IP**`
 >👉 **LB zawsze używa private networking do komunikacji z backendem**  
   
-- **ALB** → HTTP / microservices / L7 routing  
-- **NLB** → performance / TCP / static IP / preserve source IP  
-- **GWLB** → firewall / network appliances
+- **ALB** → HTTP / microservices / -> smart L7 routing  
+- **NLB** → performance / TCP / static IP / preserve  IP  -> fast routing (L4)
+- **GWLB** → firewall / network appliances -> inspection layer
 
 ## ⚠️ Dlaczego to jest ważne   
 - public IP = tylko **entry point**  
@@ -37,8 +37,8 @@ Load Balancer = **single entry (DNS) → routing → healthy targets**
 ### Sticky sessions (session affinity)  
 - user trafia do tego samego targetu  
 - implementacja:  
-- ALB / CLB → cookie-based  
-- NLB → **source IP based**  
+	- ALB / CLB → cookie-based  
+	- NLB → **source IP based**  
   
 ⚠️ trade-off:  
 - uneven load distribution  
@@ -46,88 +46,99 @@ Load Balancer = **single entry (DNS) → routing → healthy targets**
   
 👉 cloud pattern:  
 - prefer **stateless + external session store (Redis)**
-# ELB types
-
-## CLB — Classic Load Balancer
-- legacy (stary)
-- Layer 4 + Layer 7 (basic)
-- HTTP, HTTPS, TCP
-- **no advanced routing**
-- cross-zone:
-  - ❌ disabled by default
+# ELB types  
+## CLB — Classic Load Balancer (legacy)  
+- Layer 4 + basic Layer 7  
+- HTTP, HTTPS, TCP  
+- brak:  
+- advanced routing  
+- host/path rules  
+- cross-zone:  
+- ❌ disabled by default  
+  
+👉 praktycznie **deprecated (egzaminowo jeszcze istnieje)**
 
 ## ALB — Application Load Balancer
-- Layer 7 (HTTP)
-- HTTP, HTTPS, WebSocket
+- Layer 7 (HTTP/HTTPS)
+- wspiera HTTP, HTTPS, WebSocket
 - routing:
   - path-based `/users`
   - host-based `api.example.com`
   - headers / query params
-- works with:
-  - **target groups**
-  - ECS / EKS / containers
-  - multiple apps per instance
+- target groups:  
+	- EC2  
+	- ECS / EKS (containers)  
+	- Lambda
 - features:
   - dynamic port mapping (containers)
+  - multiple apps per instance
   - **microservices ready
   - adds headers:
     - X-Forwarded-For (client IP)
     - X-Forwarded-Port
     - X-Forwarded-Proto
+👉 **ALB = reverse proxy (terminates connection)**  
+👉 client IP nie jest bezpośrednio widoczny (trzeba czytać header)
 - cross-zone:
   - ✅ enabled by default (no extra cost)
 
 >[!exam]
->ALB = microservices + HTTP routing
+>ALB = HTTP routing + microservices + Lambda
 
-![[Pasted image 20260205094026.png]]
+![[Pasted image 20260205094026.png|500]]
 
-## NLB — Network Load Balancer
-- Layer 4 (TCP/UDP)
-- ultra high performance
-- **preserves client IP (no proxy)**
-- millions req/sec
-- ultra low latency
+## NLB — Network Load Balancer  
+- Layer 4 (TCP/UDP)  
+- **nie jest proxy (pass-through)**  
+- preserves **source IP (client IP)**  
+- performance:  
+	- ultra low latency  
+	- millions req/sec  
+  
+- static IP:  
+	- 1 per AZ  
+	- supports Elastic IP  
+  
+- targets:  
+	- EC2  
+	- private IP  
+	- ALB (pattern: NLB → ALB)  
+  
+- health checks:  
+	- TCP / HTTP / HTTPS  
+  
+- cross-zone:  
+	- ❌ disabled by default  
+	- inter-AZ traffic = cost  
+  
+> [!exam]  
+> NLB = static IP + preserve client IP + high performance  
+  
+---  
+  
+## GWLB — Gateway Load Balancer  
+  
+- Layer 3/4 (IP level)  
+- use case:  
+- firewall  
+- IDS / IPS  
+- deep packet inspection  
+  
+- działa jako:  
+- transparent proxy (inline inspection)  
+  
+- protocol:  
+- **GENEVE (6081)**  
+  
+- targets:  
+- EC2 appliances  
+  
+- cross-zone:  
+- ❌ disabled by default  
+  
+> [!exam]  
+> GWLB = network security appliances
 
-- static IP:
-  - 1 per AZ
-  - supports Elastic IP
-
-- targets:
-  - EC2
-  - private IP
-  - ALB (hybrid pattern)
-
-- health checks:
-  - TCP / HTTP / HTTPS
-
-- cross-zone:
-  - ❌ disabled by default
-  - inter-AZ traffic = $ $ 
-
->[!exam]
->NLB = performance + static IP + preserve client IP
-
-## GWLB — Gateway Load Balancer
-- Layer 3 (IP)
-- use case:
-  - firewall
-  - IDS / IPS
-  - network appliances
-- features:
-  - transparent traffic inspection
-  - single entry/exit point
-  - scale 3rd party appliances
-- protocol:
-  - **GENEVE (port 6081)**
-- targets:
-  - EC2 / private IP
-- cross-zone:
-  - ❌ disabled
-  - inter-AZ traffic = $ $
-
->[!exam]
->GWLB = security appliances (network layer)
 # Architecture
 
 ```bash
