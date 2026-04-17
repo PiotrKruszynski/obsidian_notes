@@ -160,3 +160,56 @@ Dzięki temu:
 - nie ma „encoding bottleneck”, bo pamięć jest aktualizowana selektywnie
     
 - nadal jest sekwencyjna, ale dużo bardziej stabilna
+
+![[Pasted image 20260417140702.png]]
+
+Transformery **nie czytają sekwencji krok po kroku** jak RNN. Zamiast tego:
+
+> **Wszystkie słowa są przetwarzane jednocześnie (równolegle).**
+
+To daje ogromną szybkość, ale ma jedną konsekwencję:
+
+### 🔥 Model nie wie, które słowo jest pierwsze, drugie, trzecie…
+
+## 1) **Dodanie informacji o pozycji (positional encoding)**
+
+Każde słowo ma:
+- **embedding słowa** (co oznacza)
+- **embedding pozycji** (gdzie leży w zdaniu)
+
+Te dwa wektory są **dodawane**:
+
+$inputt=xt+pt$
+
+### 1. **Encode position**
+
+Dodajemy pozycję do embeddingów.
+
+### 2. **Query, Key, Value**
+
+Każde słowo tworzy trzy wektory:
+- Query → czego szukam
+- Key → co oferuję
+- Value → jaka informacja ma być przekazana
+
+### 3. **Attention weighting**
+
+Model liczy, które słowa są ważne dla siebie nawzajem.
+
+### 4. **Weighted sum**
+
+Każde słowo „zbiera” informacje z innych słów, ważone uwagą.
+
+# 🎯 Co jest kluczowe?
+
+> **Transformer nie potrzebuje pamięci jak LSTM.** **Zamiast tego każde słowo patrzy na wszystkie inne naraz.**
+
+To jest powód, dla którego Transformery wygrały z LSTM:
+
+- równoległość
+    
+- długie zależności
+    
+- skalowalność
+    
+- stabilność uczenia
