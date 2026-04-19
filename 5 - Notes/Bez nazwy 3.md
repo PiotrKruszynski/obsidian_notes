@@ -32,7 +32,7 @@ $5.00 per TB of data scanned
 
 ## How to Save up to 90%
 
-- Compression
+- Compression -> na przykład przez format Parquet
 - Partitioning
 - Converting data to columnar formats (e.g. Parquet)
 
