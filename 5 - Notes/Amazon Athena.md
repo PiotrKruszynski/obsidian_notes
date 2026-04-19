@@ -51,8 +51,30 @@ when you want to analyze data in S3 using serverless SQL -> Athena
 - optymalizacja: **Parquet + partitioning**
 
 
-Nauka
+#bigdata 
 każde zapytanie w Athena to osobny request
+
+#### **4. Convert to columnar (ETL step)** -> techniki na tańsze query
+- compressing → Apache Parquet
+- partitioning
+- converting your data into columnar formats → Apache Parquet
+
+👉 pełny pattern:
+- raw data (JSON/CSV) → S3
+- Glue / EMR → **transform → Parquet + partitioning**
+- Athena → query
+
+### **Anti-patterns**
+
+❌ query na:
+- CSV / JSON bez partitioning
+    → full scan → $$$
+
+❌ brak WHERE po partition key
+→ Athena czyta wszystko
+
+❌ małe pliki (small files problem)
+→ overhead + wolniej
 
 
 ___
