@@ -24,3 +24,26 @@ teraz Google MapReduce już nie istnieje, a warstwa Compute wygląda teraz tak:
 Presto -> 
 Trin - open source fork Presto 
 Athena -> hybryda połączenia Presto z Trino
+
+w ATHENA
+## Query Cost
+
+$5.00 per TB of data scanned
+
+## How to Save up to 90%
+
+- Compression
+- Partitioning
+- Converting data to columnar formats (e.g. Parquet)
+
+## Practical Tip
+
+Always filter on the partition column:
+
+sql
+
+```sql
+WHERE date >= '2024-01-01'
+```
+
+Without this, BigQuery scans the **entire table** and you pay for all of it.
