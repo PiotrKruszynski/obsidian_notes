@@ -24,8 +24,9 @@ Note:
 ![[Pasted image 20260416134250.png]]
 # Core features
 
-### Glue Data Catalog
+### Glue Data Catalog -> - **control plane dla danych**
 Wspólna warstwa metadanych — opisuje gdzie i w jakiej strukturze znajdują się twoje dane. Przechowuje schematy z różnych źródeł (S3, RDS, Redshift) i umożliwia łatwe odnajdywanie danych. Używany przez Athena, EMR i Redshift Spectrum.
+Credential Vending -> to mechanizm, w którym system (np. Athena / EMR) **dynamicznie dostarcza tymczasowe credentials (IAM)** do dostępu do danych.
 
 ### Glue Job
 Zadanie ETL przetwarzające dane **wsadowo** (batch). Piszesz skrypt Python/Spark, Glue go wykonuje na zarządzanym klastrze.

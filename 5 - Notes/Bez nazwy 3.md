@@ -47,3 +47,11 @@ WHERE date >= '2024-01-01'
 ```
 
 Without this, BigQuery scans the **entire table** and you pay for all of it.
+
+
+![[Pasted image 20260419143809.png]]
+
+
+
+
+![[Pasted image 20260419144943.png]]
