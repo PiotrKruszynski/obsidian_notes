@@ -10,6 +10,7 @@ Note:
 >- działa na **EC2 cluster** lub **serverless (EMR Serverless)**
 >- integracja z **S3 (data lake)** zamiast HDFS
 >- use case: **ETL, big data processing, ML pipelines**
+>- serverless
 
 # Mental model
 `Data w S3 → EMR cluster (Spark/Hadoop) → distributed processing → wynik do S3`

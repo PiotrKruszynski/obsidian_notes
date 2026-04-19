@@ -51,6 +51,10 @@ when you want to analyze data in S3 using serverless SQL -> Athena
 - optymalizacja: **Parquet + partitioning**
 
 
+Nauka
+każde zapytanie w Athena to osobny request
+
+
 ___
 Metadata:
 

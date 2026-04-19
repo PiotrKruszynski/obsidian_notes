@@ -17,3 +17,10 @@ google miał problem z dwh, bo to startup i za drogo. wymyślili system rozprosz
 Następca Colossus
 https://cloud.google.com/blog/products/storage-data-transfer/a-peek-behind-colossus-googles-file-system
 ![[Pasted image 20260419095940.png]]
+teraz Google MapReduce już nie istnieje, a warstwa Compute wygląda teraz tak:
+
+![[Pasted image 20260419114922.png]]
+
+Presto -> 
+Trin - open source fork Presto 
+Athena -> hybryda połączenia Presto z Trino
