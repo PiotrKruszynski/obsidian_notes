@@ -70,6 +70,22 @@ t.detach()           # odłącz od grafu obliczeń
 ```
 
 ## Budowanie modelu
+PyTorch pozwala definiować sieci neuronowe poprzez `torch.nn.Module`, który jest klasą bazową dla wszystkich modeli.
+Dzięki temu masz standardowy framework do:
+
+- budowy modelu
+- trenowania (forward + backward)
+
+Przykład:
+> prosty perceptron z jedną warstwą gęstą (fully-connected / linear):  
+> **y = σ(Wx + b)**
+
+gdzie:
+- **W** → macierz wag
+- **b** → bias (przesunięcie)
+- **x** → wejście
+- **σ (sigmoid)** → funkcja aktywacji
+- **y** → wyjście modelu
 
 ```python
 import torch.nn as nn
