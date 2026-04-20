@@ -211,3 +211,4 @@ model.named_parameters()         # wagi + nazwy
 
 sum(p.numel() for p in model.parameters())   # liczba parametrów
 ```
+
