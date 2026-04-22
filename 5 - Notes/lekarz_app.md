@@ -31,19 +31,7 @@ role użytkowników
 - konfiguracja słowników i integracji
 - audyt i bezpieczeństwo
 
-**encje domenowe**
-- **Lekarz**
-- **Specjalizacja / kompetencje / uprawnienia**
-- **Jednostka organizacyjna** (oddział, poradnia, szpital, lokalizacja)
-- **Zmiana / dyżur**
-- **Grafik**
-- **Dostępność / niedostępność**
-- **Nieobecność** (urlop, L4, szkolenie, konferencja)
-- **Reguła obsady**
-- **Wniosek o zamianę**
-- **Akceptacja / workflow**
-- **Rozliczenie czasu pracy**
-- **Powiadomienie**
-- **Historia zmian / audit log**
 
-Wy
+
+update timezone od razu po uruchomieniu
+![[Pasted image 20260422130643.png]]
