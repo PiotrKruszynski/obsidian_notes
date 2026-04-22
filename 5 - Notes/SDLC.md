@@ -1,6 +1,6 @@
 
 ## software development lifecycle
-
+ 
 |   |   |   |
 |---|---|---|
 |**Phase**|**Key activities**|**Deliverables**|
