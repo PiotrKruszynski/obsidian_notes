@@ -1,11 +1,11 @@
 ### 1
-Potrzebuję stworzyć aplikację ułatwiającą zarządzanie dyżurami, dla lekarzy. Przeanalizuj najlepsze aplikacje tego typu na rynku. Zwróć mi porównania, jakie funkcjonalności mają znaczenie.
+Potrzebuję stworzyć aplikację ___ułatwiającą zarządzanie dyżurami w przychodni, dla lekarzy___. Przeanalizuj najlepsze aplikacje tego typu na rynku. Zwróć mi porównania, jakie funkcjonalności mają znaczenie.
 - nie wnikam technicznie
 - research -> kradnę z enterprice
 
-#### problem:
+#### zaobserwowane problemy:
 za szeroko
-musze wymusic synteze problemu
+
 ### 2
 Daj mi listę 5 rzeczy które jako senior PO powinienem wiedzieć o tym reasearchu
 
