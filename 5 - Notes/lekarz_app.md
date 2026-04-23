@@ -69,7 +69,7 @@ zaproś dyżurnego
 widok wybranego miesiąca
 ![[Pasted image 20260422143837.png]]
 
-
+chętnie, niechętnie, nie mogę, urlop
 ![[Pasted image 20260422144004.png]]
 
 ![[Pasted image 20260422144104.png]]
