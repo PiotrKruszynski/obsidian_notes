@@ -2,6 +2,27 @@
 
 research - business / ux / technical
 
+`projects_assumptions.md` - single source of truth
+```
+## Roles  
+## Core Workflow  
+## Domain Concepts  
+## Hard Constraints  
+## Soft Constraints  
+## Schedule Lifecycle (statusy)  
+## MVP Scope
+```
+
+na jego podstawie równolegle:
+- user flow (Mermaid)
+- domain model (lista encji)
+- ui_spec (interfejs dla Figma)
+
+dopiero potem:
+- ER diagram (z domain)
+- OpenAPI (z UI + flow)
+- 
+
 domain_model.md
 rules.md
 workflow.md
