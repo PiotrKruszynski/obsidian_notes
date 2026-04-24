@@ -21,16 +21,8 @@ na jego podstawie równolegle:
 dopiero potem:
 - ER diagram (z domain)
 - OpenAPI (z UI + flow)
-- 
 
-domain_model.md
-rules.md
-workflow.md
-
-mermaind do user flow, er diagram do db, openapi do rest api kontrakt
-
-
-
+Narzędzia:
 Figma Make narzędzie do **projektowania interfejsów** (UI/UX)
 
 
