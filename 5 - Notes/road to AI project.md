@@ -1,6 +1,7 @@
 #ai 
 
-research - business / agentic / ux / technical
+research - business / ux / technical
+Figma Make projektowanie aplikacji 
 
 
 
