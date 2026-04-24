@@ -16,10 +16,6 @@ Za szeroko, za dużo wszystkiego -> dużo zależności jak w korpo, których nie
 Po uszczegółowieniu zakresu strona miała mniej niepotrzebnych elementów, ale UI nie wyglądał już tak sprytnie
 
 ## 2
-Daj mi listę 5 rzeczy które jako senior PO powinienem wiedzieć o tym reasearchu
-#### zaobserwowane problemy:
--
-## 3
 Na podstawie reaserch stwórz execution_plan.md, który poinstruuje moich agentów krok po kroku co mają zrobić, aby wygenerować POC dla tej aplikacji. Potrzebuje tylko działający frontend, najnowsze technologie, react + tailwind + vite.
 
 ```
