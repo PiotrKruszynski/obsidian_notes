@@ -67,5 +67,12 @@ Update these tasks as you work through them. Use the _Surprises & Discoveries_ s
 `napisz execution plany dla mojej rodziny agentów, agenta do planowania i orchestracji, który będzie zlecał wykonanie zadań do subagentów, jeden frontend developer, backend developer, ux designer który wybada dobry ux, QA aby weryfikował czy wszystko jest poprawnie używając lighthouse i playwright. Każdy agent ma sobie pracować na swoim branch (użyj worktree). Tworzymy tulko to co jest na obrazku, front react, backend fastapi, baza sqlite `
 
 #### uwagi
-sqlite bo nie che narazie wprowadzać Dockera
+sqlite bo nie che narazie wprowadzać Docker
+
+## 3 Codex tworzy agentów
+- execution_plan.md
+`przeanalizuj dokładnie execution_plan i stwórz sobie subagentów do wykonania całej pracy`
+- ard.md 
+Architectural Decision Record opisuje w jaki sposób podejmować decyzje
+
 
