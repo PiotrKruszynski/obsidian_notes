@@ -1,17 +1,22 @@
-### 1
-Potrzebuję stworzyć aplikację ___ułatwiającą zarządzanie dyżurami w przychodni, dla lekarzy___. Przeanalizuj najlepsze aplikacje tego typu na rynku. Zwróć mi porównania, jakie funkcjonalności mają znaczenie.
+#ai 
+
+
+# POC
+## 1
+Potrzebuję stworzyć aplikację ___ułatwiającą zarządzanie dyżurami dla lekarzy___. Przeanalizuj najlepsze aplikacje tego typu na rynku. Zwróć mi porównania, jakie funkcjonalności mają znaczenie.
 - nie wnikam technicznie
 - research -> kradnę z enterprice
 
 #### zaobserwowane problemy:
-za szeroko
+Za szeroko, za dużo wszystkiego -> dużo zależności jak w korpo, których nie potrzebuje 
+Po uszczegółowieniu zakresu strona miała mniej niepotrzebnych elementów, ale UI nie wyglądał już tak sprytnie
 
-### 2
+## 2
 Daj mi listę 5 rzeczy które jako senior PO powinienem wiedzieć o tym reasearchu
-#### problem:
-przed execution plan trzeba ..
-### 3
-Na podstawie reaserch stwórz execution_plan.md, który poinstruuje moich agentów krok po kroku co mają zrobić, aby wygenerować POC dla tej aplikacji. Potrzebuje tylko działający frontend, najnowsze technologie, react + tailwind + vite
+#### zaobserwowane problemy:
+-
+## 3
+Na podstawie reaserch stwórz execution_plan.md, który poinstruuje moich agentów krok po kroku co mają zrobić, aby wygenerować POC dla tej aplikacji. Potrzebuje tylko działający frontend, najnowsze technologie, react + tailwind + vite.
 
 ```
 ---
@@ -31,5 +36,36 @@ Update these tasks as you work through them. Use the _Surprises & Discoveries_ s
 
 ```
 
-- daje `template execution_plan.md`
-#### problem:
+- załączam `template execution_plan.md`
+#### zaobserwowane problemy:
+
+## 4 Praca z Virtual Studio Code Insiders
+`execution_plan.md` przekazuje do VS Code Insiders - (narzędzie do tworzenia i zarządzania agentami)
+`wykonaj execution plan`
+`odpal bo chce zobaczyć`
+`strona jest brzydka jak noc, użyj design.md i zrób najpiękniejszą na świecie, ux enterprice, ascetyczne teksty, usuń wszystko co nie potrzebne w UI`
+
+
+# MVP
+## 1 Inicjalizacja projektu
+- tworze foldery `API`, `PWA`
+`wygeneruj mi proste readme.md do nowej aplikacji, frontend react, backend fastapi`
+`git init`
+`git remote add origin <SSH>`
+`git push`
+- środowisko (templatki) generuje ręcznie.
+`dodaje templatki: lintter, formatter, type, test, docs, logs, precommit`
+- w enterprice nie da się jedną komendą wygenerować aplikacji. -> trzeba iteracyjnie
+`za pomocą uv stwórz nowego enva w folderze API, python 3.14 odpal, sprawdź czy działa i skommituj`
+
+[[constrains for agentic ai]]
+
+`zainstaluj precommit w API`
+`wgraj na github`
+
+## 2 execution_plan.md 
+`napisz execution plany dla mojej rodziny agentów, agenta do planowania i orchestracji, który będzie zlecał wykonanie zadań do subagentów, jeden frontend developer, backend developer, ux designer który wybada dobry ux, QA aby weryfikował czy wszystko jest poprawnie używając lighthouse i playwright. Każdy agent ma sobie pracować na swoim branch (użyj worktree). Tworzymy tulko to co jest na obrazku, front react, backend fastapi, baza sqlite `
+
+#### uwagi
+sqlite bo nie che narazie wprowadzać Dockera
+

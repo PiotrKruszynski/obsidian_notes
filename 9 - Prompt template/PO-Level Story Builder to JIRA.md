@@ -1,5 +1,6 @@
+#ai #prompt
 
-zmieniam input
+INPUT -> {STORY_DESCRIPTION} -> _edit_
 
 ```
 

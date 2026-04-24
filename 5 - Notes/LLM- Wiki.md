@@ -92,4 +92,5 @@ language: python # python | js | sql | etc.
 ```
 
 Status: #pending
-Tags: #empty
+Tags: #ai
+#RAG
