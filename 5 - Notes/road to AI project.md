@@ -1,7 +1,16 @@
 #ai 
 
 research - business / ux / technical
-Figma Make projektowanie aplikacji 
+
+domain_model.md
+rules.md
+workflow.md
+
+mermaind do user flow, er diagram do db, openapi do rest api kontrakt
+
+
+
+Figma Make narzędzie do **projektowania interfejsów** (UI/UX)
 
 
 
