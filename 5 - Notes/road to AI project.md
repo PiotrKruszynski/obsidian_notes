@@ -1,5 +1,8 @@
 #ai 
 
+research - business / agentic / ux / technical
+
+
 
 # POC
 ## 1
