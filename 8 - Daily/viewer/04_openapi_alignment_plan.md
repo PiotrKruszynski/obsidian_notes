@@ -1,170 +1,197 @@
 # 04 — OpenAPI Alignment Plan
 
 Status: Living Draft  
-Owner: Mock API / Contract Agent  
+Owner: Backend Developer Agent  
+Reviewers: Frontend Developer Agent, Planning & Orchestration Agent  
+Worktree branch: `agent/backend/04-openapi-alignment`  
+Recommended worktree: `../worktrees/shifts-04-openapi-alignment`  
 Depends on: `03_mock_api_plan.md`  
 Next: `05_backend_implementation_plan.md`  
 Last updated: YYYY-MM-DD HH:MMZ
 
-## Cel
+## Objective
 
-Dopasować `openapi.yaml` do faktycznych flow MVP, typów domenowych i frontendowej warstwy `services`, bez implementowania backendu. Po tej fazie `openapi.yaml` jest kontraktem dla backendu FastAPI i integracji frontendu.
+Align `openapi.yaml` with the MVP product scope, domain model, user flow and frontend mock service layer before backend implementation starts. This phase produces a stable API contract for FastAPI implementation and frontend integration.
 
-## Źródła wejściowe
+## Required inputs
 
-Agent musi pracować na aktualnych plikach repozytorium, w szczególności:
+- Completed handoff from phase 03.
+- `docs/reports/mock_api_report.md`.
+- `pwa/src/services/**` and frontend domain types.
+- `project_assumptions.md` or `project_asumptions.md`.
+- `domain_model.md`.
+- `er_diagram.md`.
+- `user_flow.mmd`.
+- Current `openapi.yaml`.
+- Accepted ADRs in `docs/adr/**`, especially SQLite persistence ADR for backend context.
 
-- `project_assumptions.md` / `project_asumptions.md` — źródło prawdy dla zakresu produktu.
-- `domain_model.md` — źródło prawdy dla encji, relacji i decyzji domenowych.
-- `er_diagram.md` — źródło prawdy dla relacji danych.
-- `user_flow.mmd` — źródło prawdy dla przepływu end-to-end.
-- `openapi.yaml` — kontrakt API między `pwa/` i `api/`.
-- `README.md` — instrukcje lokalne, jeżeli zawiera komendy uruchomieniowe.
+## Non-goals
 
-Jeżeli nazwy plików różnią się między repozytorium a dokumentacją, agent ma użyć faktycznie istniejącej nazwy i zapisać niezgodność w `docs/open_questions.md`.
+- Do not implement backend code.
+- Do not modify `api/` except for optional generated contract validation artifacts if the repository already uses them.
+- Do not modify frontend code.
+- Do not add non-MVP endpoints.
+- Do not encode storage-engine details into the public API.
+- Do not replace product assumptions or domain decisions.
 
-
-## Zakres
-
-- Przegląd `openapi.yaml` względem `project_assumptions.md`, `domain_model.md`, `er_diagram.md`, `user_flow.mmd`.
-- Porównanie endpointów z funkcjami `pwa/src/services`.
-- Korekta request/response schemas, enumów i operationId, jeżeli są niespójne.
-- Utworzenie raportu alignmentu.
-- Ograniczenie kontraktu do MVP.
-
-## Poza zakresem
-
-- Implementacja backendu.
-- Zmiana kodu `api/`.
-- Przepisywanie frontendu.
-- Dodawanie non-MVP endpointów.
-- Wybór docelowego hostingu, CI/CD, backupu, produkcyjnego RBAC poza kontraktem MVP.
-
-## Dozwolone ścieżki
+## Allowed paths
 
 - `openapi.yaml`
-- `docs/openapi_alignment_report.md`
+- `docs/reports/openapi_alignment_report.md`
 - `docs/open_questions.md`
 - `docs/execution/04_openapi_alignment_plan.md`
 
-## Zabronione ścieżki
+## Forbidden paths
 
-- `api/**`
-- `pwa/src/**`, poza odczytem.
-- Pliki assumptions/domain jako źródło prawdy nie powinny być zmieniane w tej fazie.
+- `pwa/src/**`, except read-only inspection.
+- `api/src/**`
+- `api/tests/**`
+- `domain_model.md`
+- `er_diagram.md`
+- `project_assumptions.md` / `project_asumptions.md`
+- `user_flow.mmd`
+- `docs/adr/**`, except for recommending ADR updates in the handoff
 
-## Protokół dynamicznej aktualizacji planu
+## Worktree setup
 
-Ten plik jest planem żywym. Agent może go aktualizować w trakcie kodowania, ale tylko w kontrolowany sposób:
+```bash
+git fetch --all --prune
+git worktree add ../worktrees/shifts-04-openapi-alignment -b agent/backend/04-openapi-alignment main
+cd ../worktrees/shifts-04-openapi-alignment
+```
 
-- Aktualizuj `Status`, `Last updated` i `Change log` po istotnej zmianie zakresu lub wyniku.
-- Odhaczaj wykonane zadania dopiero po walidacji.
-- Nie usuwaj wcześniejszych ustaleń; dopisuj korekty jako nowe wpisy.
-- Jeżeli pojawi się luka w wymaganiach, wpisz ją do `docs/open_questions.md`, a nie implementuj założenia „z głowy”.
-- Jeżeli potrzebna jest zmiana architektoniczna, zaproponuj ADR albo aktualizację istniejącego ADR.
+Use the integration branch that contains accepted phase 03 changes.
 
+## Alignment principles
 
-## Endpointy bazowe oczekiwane w kontrakcie
+- `openapi.yaml` is the contract the backend must implement and the frontend must consume.
+- The contract should represent MVP flows, not every future SaaS feature.
+- Request and response schemas must be explicit.
+- Operation IDs should be stable because frontend integration may use them later.
+- Error responses must cover validation errors, authorization failures, not-found cases and hard-rule violations.
+- Storage decisions such as SQLite are internal backend concerns and must not leak into API semantics.
 
-Kontrakt powinien obejmować MVP:
+## Required API coverage
 
-- Auth: `/auth/login`, `/auth/refresh`, `/auth/me`
-- Users / roles: `/users`, `/users/{userId}`, `/users/{userId}/roles`
-- Departments: `/departments`, `/departments/{departmentId}`, `/departments/{departmentId}/coordinator`
-- Doctors / invitations: `/doctor-profiles`, `/doctor-profiles/{doctorProfileId}`, `/doctor-invitations`, `/doctor-invitations/accept`
-- Configuration: `/preference-categories`, `/constraint-rules`
-- Schedules: `/schedules`, `/schedules/{scheduleId}`, participants, shifts, assignments
-- Availability: `/schedules/{scheduleId}/availability`, `/availability/me`, `/availability/{doctorProfileId}`
-- Generation: `/schedules/{scheduleId}/generate`, `/generation-runs/{generationRunId}`, `/conflict-report`
-- Validation: `/schedules/{scheduleId}/validate`
-- Lifecycle: `/publish`, `/archive`
-- Leave requests: schedule-scoped list/create plus approve/reject/cancel
-- Swaps: schedule-scoped list/create plus respond/validate/approve/reject
-- Metrics: `/schedules/{scheduleId}/metrics`
-- Notifications: `/notifications`, mark read
-- Calendar exports: `/calendar-exports`, ICS token URL
-- Audit: `/audit-log`
+Confirm that the contract supports these areas:
 
-## Schematy i enumy krytyczne
+- Auth and current user.
+- Users, roles and Admin-managed accounts.
+- Departments and Coordinator assignment.
+- Doctors, qualifications and invitations.
+- Schedules with statuses `DRAFT`, `GENERATED`, `PUBLISHED`, `ARCHIVED`.
+- Schedule participants.
+- 24-hour shifts.
+- Assignments with source `GENERATED`, `MANUAL`, `SWAP`.
+- Availability declarations, availability days and deadline locking.
+- Preference categories I, II, III.
+- Leave requests.
+- Schedule generation.
+- Conflict reports and validation errors.
+- Publication and archive actions.
+- Swap request lifecycle after publication.
+- Metrics needed by MVP dashboards.
+- Notifications and calendar export if present in MVP UI.
+- Audit log entries.
 
-Zweryfikuj szczególnie:
+## Step-by-step tasks
 
-- `RoleCode`: `ADMIN`, `COORDINATOR`, `DOCTOR`
-- `ScheduleStatus`: `DRAFT`, `GENERATED`, `PUBLISHED`, `ARCHIVED`
-- `ShiftStatus`: `UNASSIGNED`, `ASSIGNED`, `CONFLICTED`
-- `AssignmentStatus`: `PROPOSED`, `CONFIRMED`, `REPLACED`, `CANCELLED`
-- `AssignmentSource`: `GENERATED`, `MANUAL`, `SWAP`
-- `AvailabilityType`: `AVAILABLE`, `UNAVAILABLE`, `PREFERRED`, `NOT_PREFERRED`
-- `LeaveRequestStatus`: `SUBMITTED`, `APPROVED`, `REJECTED`, `CANCELLED`
-- `SwapRequestStatus`, w tym akceptacja lekarzy i decyzja Koordynatora
-- `ValidationResult` i `ConstraintViolation`
-- `ConflictReport` i `ConflictItem`
-- `ScheduleMetricsResponse`
-- `AuditLogEntry`
+### A. Preflight
 
-## Zadania
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm branch/worktree: `agent/backend/04-openapi-alignment`.
+- [ ] (YYYY-MM-DD HH:MMZ) Read phase 03 handoff and mock API report.
+- [ ] (YYYY-MM-DD HH:MMZ) Parse current `openapi.yaml` and list all paths, schemas and operation IDs.
+- [ ] (YYYY-MM-DD HH:MMZ) Identify frontend service functions that have no matching endpoint.
+- [ ] (YYYY-MM-DD HH:MMZ) Identify endpoints that are not required by MVP flows.
 
-- [ ] (YYYY-MM-DD HH:MMZ) Przeczytaj handoff z fazy 03, zwłaszcza mapowanie services → endpointy.
-- [ ] (YYYY-MM-DD HH:MMZ) Sprawdź, czy każda funkcja services ma odpowiadający endpoint lub uzasadniony brak endpointu.
-- [ ] (YYYY-MM-DD HH:MMZ) Sprawdź, czy każdy endpoint z `openapi.yaml` jest potrzebny w MVP albo jest uzasadniony jako przygotowany kontrakt.
-- [ ] (YYYY-MM-DD HH:MMZ) Porównaj enumy OpenAPI z typami frontendowymi i `domain_model.md`.
-- [ ] (YYYY-MM-DD HH:MMZ) Porównaj request/response schemas dla grafiku, dyżurów, przydziałów, dostępności, urlopów, zamian, walidacji i audytu.
-- [ ] (YYYY-MM-DD HH:MMZ) Zweryfikuj, że endpointy lifecycle respektują state machine: `DRAFT -> GENERATED -> PUBLISHED -> ARCHIVED`.
-- [ ] (YYYY-MM-DD HH:MMZ) Zweryfikuj, że `PUBLISHED` nie ma zwykłej edycji assignmentów poza swap flow; jeżeli kontrakt pozwala na niebezpieczne operacje, opisz ograniczenia w schemas/description albo report.
-- [ ] (YYYY-MM-DD HH:MMZ) Zweryfikuj, że twarde naruszenia są reprezentowane przez `ValidationResult` i nie prowadzą do zatwierdzenia.
-- [ ] (YYYY-MM-DD HH:MMZ) Zaktualizuj `openapi.yaml` tylko tam, gdzie wymaga tego MVP albo spójność kontraktu.
-- [ ] (YYYY-MM-DD HH:MMZ) Utwórz `docs/openapi_alignment_report.md`.
-- [ ] (YYYY-MM-DD HH:MMZ) Uruchom walidację OpenAPI.
-- [ ] (YYYY-MM-DD HH:MMZ) Uzupełnij handoff dla Backend Developer Agenta.
+### B. Domain and flow alignment
 
-## Walidacja OpenAPI
+- [ ] (YYYY-MM-DD HH:MMZ) Verify role codes match the product documents.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify schedule state transitions match `domain_model.md` and `user_flow.mmd`.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify published schedules are immutable except through swaps.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify hard-rule validation responses cannot be represented as accepted violations.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify audit log schemas support append-only generation, publication and swap events.
 
-Preferowane komendy, jeśli narzędzia są dostępne:
+### C. Contract updates
+
+- [ ] (YYYY-MM-DD HH:MMZ) Add missing MVP endpoints required by frontend services.
+- [ ] (YYYY-MM-DD HH:MMZ) Remove or mark non-MVP operations only if they create implementation ambiguity.
+- [ ] (YYYY-MM-DD HH:MMZ) Ensure request/response schemas are explicit and typed.
+- [ ] (YYYY-MM-DD HH:MMZ) Ensure list endpoints have pagination or a documented MVP simplification.
+- [ ] (YYYY-MM-DD HH:MMZ) Ensure action endpoints are clear for generation, publication, archive and swap approval.
+- [ ] (YYYY-MM-DD HH:MMZ) Ensure validation error payloads include reason codes and context.
+- [ ] (YYYY-MM-DD HH:MMZ) Ensure auth/authorization expectations are documented without overbuilding production auth.
+
+### D. Frontend service mapping
+
+- [ ] (YYYY-MM-DD HH:MMZ) Create a service-to-operation mapping in `docs/reports/openapi_alignment_report.md`.
+- [ ] (YYYY-MM-DD HH:MMZ) Identify service functions that should be renamed before phase 06.
+- [ ] (YYYY-MM-DD HH:MMZ) Identify endpoints that require backend seed data to support QA flows.
+- [ ] (YYYY-MM-DD HH:MMZ) Record unresolved differences in `docs/open_questions.md`.
+
+## Validation commands
+
+Use available validation tooling. Examples:
+
+```bash
+python - <<'PY'
+import pathlib, yaml
+path = pathlib.Path('openapi.yaml')
+with path.open() as f:
+    yaml.safe_load(f)
+print('openapi.yaml parses')
+PY
+```
+
+If OpenAPI linters are available:
 
 ```bash
 npx @redocly/cli lint openapi.yaml
+```
+
+or:
+
+```bash
 npx swagger-cli validate openapi.yaml
 ```
 
-Jeżeli narzędzi nie ma, użyj dostępnego walidatora albo odnotuj brak w handoffie. Nie instaluj globalnych zależności bez potrzeby.
+Do not install new global tools unless the project already uses them; local temporary tooling is acceptable only if documented.
 
-## Raport alignmentu
+## Acceptance criteria
 
-`docs/openapi_alignment_report.md` powinien zawierać:
+- `openapi.yaml` parses and validates with available tooling.
+- Every MVP frontend service has a clear endpoint mapping or a documented open question.
+- Contract states, roles and payloads align with `domain_model.md`.
+- Contract supports the critical flow from `user_flow.mmd`.
+- No backend implementation was started.
+- No frontend implementation was changed.
+- `docs/reports/openapi_alignment_report.md` exists.
 
-- listę services z mapowaniem do endpointów;
-- listę zmian w `openapi.yaml`;
-- listę świadomie pozostawionych endpointów;
-- listę braków i pytań;
-- decyzję, czy backend może startować.
+## Risks
 
-## Kryteria akceptacji
+- The current OpenAPI file may already include broader future scope; avoid expanding implementation obligations unnecessarily.
+- Frontend service shapes may be UI-convenient but not API-appropriate.
+- Overfitting the API to generated Figma UI may hurt backend clarity.
+- Under-specifying error payloads will make QA and integration harder.
 
-- `openapi.yaml` jest syntaktycznie poprawny.
-- Kontrakt pokrywa kluczowe flow z `user_flow.mmd`.
-- Schematy odzwierciedlają `domain_model.md`.
-- Nie dodano non-MVP endpointów bez uzasadnienia.
-- Backend Developer Agent może implementować API bez zgadywania.
+## Rollback plan
 
-## Ryzyka
-
-- Kontrakt jest zbyt szeroki jak na MVP.
-- Frontend services i OpenAPI mają różne modele błędów.
-- OpenAPI pozwala na operacje, które domenowo powinny być blokowane.
-- Brakuje explicit description dla ograniczeń `PUBLISHED`.
-
-## Rollback
-
-- Cofnij `openapi.yaml` do wersji sprzed fazy.
-- Zachowaj `docs/openapi_alignment_report.md` z listą konfliktów.
-- Zatrzymaj backend implementation do czasu rozwiązania kontraktu.
+- Keep OpenAPI changes in small commits by API area.
+- If alignment becomes too broad, revert non-MVP sections and keep only critical flow operations.
+- If contract disputes arise, stop and request Orchestration Agent review.
 
 ## Handoff
 
+- Branch/worktree:
 - Completed:
 - Validation:
-- OpenAPI ready for backend: yes/no
-- Breaking changes for frontend:
 - Known issues:
 - Open questions:
+- Files changed:
 - Recommended next step:
+
+## Change log
+
+| Timestamp UTC | Agent | Change |
+|---|---|---|
+| YYYY-MM-DD HH:MMZ | Backend Developer Agent | Initial English OpenAPI alignment plan. |

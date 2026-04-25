@@ -2,255 +2,273 @@
 
 Status: Living Draft  
 Owner: Backend Developer Agent  
-Depends on: `04_openapi_alignment_plan.md`  
+Orchestrated by: Planning & Orchestration Agent  
+Worktree branch: `agent/backend/05-backend-implementation`  
+Recommended worktree: `../worktrees/shifts-05-backend-implementation`  
+Depends on: `04_openapi_alignment_plan.md` and `docs/adr/0007-use-sqlite-for-mvp-local-persistence.md`  
 Next: `06_frontend_backend_integration_plan.md`  
 Last updated: YYYY-MM-DD HH:MMZ
 
-## Cel
+## Objective
 
-Zaimplementować backend w `api/` zgodnie z zaakceptowanym `openapi.yaml`, modelem domenowym i flow MVP. Backend ma być wystarczający do integracji z frontendem, testowalny i ograniczony do MVP.
+Implement the FastAPI backend in `api/` strictly from the aligned `openapi.yaml`, using SQLite for MVP local persistence. The backend must provide deterministic seed data, API endpoints, validation logic and tests needed for frontend integration and QA.
 
-## Źródła wejściowe
+## Required inputs
 
-Agent musi pracować na aktualnych plikach repozytorium, w szczególności:
+- Completed handoff from phase 04.
+- Updated `openapi.yaml`.
+- `docs/reports/openapi_alignment_report.md`.
+- `project_assumptions.md` or `project_asumptions.md`.
+- `domain_model.md`.
+- `er_diagram.md`.
+- `user_flow.mmd`.
+- `docs/adr/0007-use-sqlite-for-mvp-local-persistence.md`.
+- Existing `api/` template, including `pyproject.toml`, `uv.lock`, tests and configured tools.
 
-- `project_assumptions.md` / `project_asumptions.md` — źródło prawdy dla zakresu produktu.
-- `domain_model.md` — źródło prawdy dla encji, relacji i decyzji domenowych.
-- `er_diagram.md` — źródło prawdy dla relacji danych.
-- `user_flow.mmd` — źródło prawdy dla przepływu end-to-end.
-- `openapi.yaml` — kontrakt API między `pwa/` i `api/`.
-- `README.md` — instrukcje lokalne, jeżeli zawiera komendy uruchomieniowe.
+## Database decision
 
-Jeżeli nazwy plików różnią się między repozytorium a dokumentacją, agent ma użyć faktycznie istniejącej nazwy i zapisać niezgodność w `docs/open_questions.md`.
+The MVP backend must use SQLite for local persistence unless a newer accepted ADR supersedes `docs/adr/0007-use-sqlite-for-mvp-local-persistence.md`.
 
+Rules:
 
-## Zakres
+- Use SQLite as the default database for local MVP development and QA.
+- Prefer a documented database path such as `api/var/shifts_mvp.sqlite`.
+- Provide a deterministic seed/reset mechanism for integration and Playwright tests.
+- Keep persistence behind a repository/service layer so a future PostgreSQL migration remains feasible.
+- Do not introduce PostgreSQL in this phase unless the ADR is explicitly changed.
+- Do not expose SQLite-specific details in API responses.
 
-- FastAPI backend w `api/`.
-- Pydantic schemas zgodne z `openapi.yaml`.
-- Modele persystencji zgodne z `domain_model.md` i `er_diagram.md`.
-- Endpointy MVP z `openapi.yaml`.
-- Seed data do lokalnego uruchomienia.
-- Deterministyczny generator grafiku MVP.
-- Walidator twardych ograniczeń dla generowania, ręcznych korekt i zamian.
-- Testy endpointów i usług domenowych.
+## Non-goals
 
-## Poza zakresem
+- Do not rewrite frontend.
+- Do not change `openapi.yaml` except for tiny contract bug fixes approved by the Orchestration Agent.
+- Do not add endpoints outside `openapi.yaml`.
+- Do not build production-grade auth, hosting, monitoring or CI/CD unless already present in the template.
+- Do not implement machine learning or nondeterministic optimization.
+- Do not weaken hard legal constraints.
 
-- Przepisywanie frontendu.
-- Modyfikacja `pwa/`, poza ewentualnym odczytem kontraktu integracyjnego.
-- Dodawanie endpointów poza `openapi.yaml`.
-- Produkcyjna integracja SSO.
-- Produkcyjny system e-mail/push; w MVP może być mock/outbox.
-- Integracje HR/płacowe, P1, systemy państwowe.
-- Finalna strategia backupu, CI/CD, hosting produkcyjny.
-- Algorytm ML albo predykcyjny.
-
-## Dozwolone ścieżki
+## Allowed paths
 
 - `api/src/**`
 - `api/tests/**`
-- `api/pyproject.toml`, `api/ruff.toml`, `api/pytest.toml`, `api/tox.toml`, tylko jeśli konieczne.
-- `api/README.md` lub sekcja backendowa README, jeśli istnieje.
+- `api/pyproject.toml`, only when required for dependencies/scripts
+- `api/.env.example`, only for backend configuration
+- `api/var/**`, if used for local SQLite database files or documented placeholders
+- `docs/reports/backend_implementation_report.md`
 - `docs/open_questions.md`
 - `docs/execution/05_backend_implementation_plan.md`
 
-## Zabronione ścieżki
+## Forbidden paths
 
-- `pwa/**`
-- `openapi.yaml`, chyba że implementacja ujawni błąd blokujący; wtedy zatrzymaj i wpisz problem do handoffu.
-- Dokumenty domenowe jako źródło prawdy.
+- `pwa/src/**`
+- `pwa/package.json`
+- `openapi.yaml`, except tiny approved contract corrections
+- `domain_model.md`
+- `er_diagram.md`
+- `project_assumptions.md` / `project_asumptions.md`
+- `user_flow.mmd`
+- `docs/adr/**`, except for proposing ADR updates in the handoff
 
-## Protokół dynamicznej aktualizacji planu
-
-Ten plik jest planem żywym. Agent może go aktualizować w trakcie kodowania, ale tylko w kontrolowany sposób:
-
-- Aktualizuj `Status`, `Last updated` i `Change log` po istotnej zmianie zakresu lub wyniku.
-- Odhaczaj wykonane zadania dopiero po walidacji.
-- Nie usuwaj wcześniejszych ustaleń; dopisuj korekty jako nowe wpisy.
-- Jeżeli pojawi się luka w wymaganiach, wpisz ją do `docs/open_questions.md`, a nie implementuj założenia „z głowy”.
-- Jeżeli potrzebna jest zmiana architektoniczna, zaproponuj ADR albo aktualizację istniejącego ADR.
-
-
-## Kolejność implementacji
-
-### Slice 1 — bootstrap i health
-
-- FastAPI app startuje.
-- Routing i dependency setup.
-- Test klienta API.
-- Health endpoint tylko jeśli template już go przewiduje albo jest potrzebny lokalnie; jeżeli nie ma go w OpenAPI, nie traktuj go jako publiczny kontrakt MVP.
-
-### Slice 2 — auth i seed użytkowników
-
-- Minimalne lokalne auth zgodne z `/auth/login`, `/auth/refresh`, `/auth/me`.
-- Role: `ADMIN`, `COORDINATOR`, `DOCTOR`.
-- Nie implementuj produkcyjnego SSO w tej fazie.
-
-### Slice 3 — podstawowe encje
-
-- Users, roles.
-- Departments.
-- CoordinatorAssignment.
-- DoctorProfile.
-- DoctorInvitation.
-- Qualifications.
-
-### Slice 4 — schedule lifecycle
-
-- Schedule CRUD MVP.
-- Participants.
-- Shifts 24h.
-- Assignments.
-- Status transitions:
-  - `DRAFT -> GENERATED`
-  - `GENERATED -> PUBLISHED`
-  - `PUBLISHED -> ARCHIVED`
-- Blokada zwykłych zmian po `PUBLISHED`.
-
-### Slice 5 — availability, leave, generation
-
-- Availability declarations.
-- Availability days.
-- Leave requests.
-- Preference categories I–III.
-- Deterministyczny generator.
-- Conflict report przy braku zgodnej obsady.
-
-### Slice 6 — validation
-
-Wspólny walidator dla:
-
-- generowania;
-- ręcznej korekty assignmentu;
-- swap request.
-
-Minimalne twarde reguły MVP:
-
-- dyżur 24h;
-- jeden aktywny assignment na shift;
-- brak overlapów dla lekarza;
-- zgodność kwalifikacji, z obsługą statusu `UNKNOWN`;
-- niedostępność/urlop blokuje assignment;
-- minimalny odpoczynek między dyżurami;
-- tygodniowe limity zgodnie z profilem `optOutSigned` i `weeklyHourLimitMinutes`, w uproszczeniu opisanym testami;
-- opublikowany grafik zmieniany tylko przez swap.
-
-### Slice 7 — swap flow
-
-- Create swap after `PUBLISHED`.
-- Candidate response: first accepted candidate wins.
-- Validation before coordinator approval.
-- Coordinator approve/reject.
-- On approve: old assignment `REPLACED`, new assignment source `SWAP`.
-- Audit log entry.
-
-### Slice 8 — metrics, notifications, calendar, audit
-
-- Schedule metrics.
-- Notification outbox/mock.
-- ICS export endpoint.
-- Audit log list.
-- Append-only audit behavior.
-
-## Zadania
-
-- [ ] (YYYY-MM-DD HH:MMZ) Przeczytaj handoff z fazy 04 i potwierdź, że OpenAPI jest gotowe.
-- [ ] (YYYY-MM-DD HH:MMZ) Sprawdź istniejący template `api/`, pyproject, zależności, strukturę `src/` i testów.
-- [ ] (YYYY-MM-DD HH:MMZ) Wybierz implementację zgodną z template; nie wymieniaj stacku bez potrzeby.
-- [ ] (YYYY-MM-DD HH:MMZ) Utwórz/uzupełnij Pydantic schemas zgodne z `openapi.yaml`.
-- [ ] (YYYY-MM-DD HH:MMZ) Utwórz/uzupełnij modele persystencji zgodne z `domain_model.md`.
-- [ ] (YYYY-MM-DD HH:MMZ) Dodaj seed data dla jednego oddziału, koordynatora, lekarzy, grafików i preferencji.
-- [ ] (YYYY-MM-DD HH:MMZ) Implementuj endpointy Auth.
-- [ ] (YYYY-MM-DD HH:MMZ) Implementuj endpointy Users, Departments, Doctors, Invitations.
-- [ ] (YYYY-MM-DD HH:MMZ) Implementuj endpointy Schedules, Participants, Shifts, Assignments.
-- [ ] (YYYY-MM-DD HH:MMZ) Implementuj Availability i Leave Requests.
-- [ ] (YYYY-MM-DD HH:MMZ) Implementuj GenerationRun i ConflictReport.
-- [ ] (YYYY-MM-DD HH:MMZ) Implementuj ValidationResult i ConstraintViolation.
-- [ ] (YYYY-MM-DD HH:MMZ) Implementuj publish/archive z blokadą stanu.
-- [ ] (YYYY-MM-DD HH:MMZ) Implementuj SwapRequest flow.
-- [ ] (YYYY-MM-DD HH:MMZ) Implementuj Metrics, Notifications, CalendarExports i AuditLog.
-- [ ] (YYYY-MM-DD HH:MMZ) Dodaj testy unit dla walidatora.
-- [ ] (YYYY-MM-DD HH:MMZ) Dodaj testy API dla krytycznych endpointów.
-- [ ] (YYYY-MM-DD HH:MMZ) Uruchom walidację backendu.
-- [ ] (YYYY-MM-DD HH:MMZ) Uzupełnij handoff dla Integration Agenta.
-
-## Wymagane testy domenowe
-
-- Utworzenie grafiku w `DRAFT`.
-- Złożenie availability przez lekarza przed deadline.
-- Blokada availability po deadline.
-- Generowanie grafiku sukcesem.
-- Generowanie grafiku z konfliktem.
-- Ręczny assignment blokowany przez twarde naruszenie.
-- Publikacja tylko poprawnego grafiku.
-- Brak zwykłej edycji assignmentów po `PUBLISHED`.
-- Swap odrzucony przy naruszeniu twardej reguły.
-- Swap zatwierdzony tworzy nowy assignment i oznacza stary jako `REPLACED`.
-- AuditLogEntry powstaje przy generowaniu, publikacji i swap approval.
-
-## Wykrywanie komend walidacyjnych
-
-Przed uruchamianiem walidacji agent powinien sprawdzić faktyczne narzędzia projektu:
+## Worktree setup
 
 ```bash
-ls
-find . -maxdepth 3 -name package.json -o -name pyproject.toml -o -name uv.lock -o -name pnpm-lock.yaml -o -name package-lock.json -o -name yarn.lock
+git fetch --all --prune
+git worktree add ../worktrees/shifts-05-backend-implementation -b agent/backend/05-backend-implementation main
+cd ../worktrees/shifts-05-backend-implementation
 ```
 
-Dla `pwa/` użyj menedżera pakietów wynikającego z lockfile. Dla `api/` użyj istniejącego toolingu, w szczególności `uv`, `ruff`, `pytest`, `coverage`, jeżeli są skonfigurowane.
+Use the integration branch that contains the accepted OpenAPI alignment.
 
+## Backend implementation principles
 
-## Komendy walidacyjne
+- Implement the contract; do not make the frontend guess backend behavior.
+- Keep routes thin and put domain behavior in services.
+- Keep persistence logic isolated from route handlers.
+- Use Pydantic schemas for request/response validation.
+- Use existing API template conventions before introducing new structure.
+- Deterministic schedule generation is acceptable for MVP; do not introduce ML.
+- Hard-rule violations must block illegal changes.
+- Audit log writes must be append-only.
 
-Dostosować do faktycznego toolingu `api/`:
+## Suggested backend structure
+
+Respect the existing template. If compatible, converge toward:
+
+```text
+api/src/
+  main.py
+  core/
+    config.py
+    security.py
+  db/
+    session.py
+    models.py
+    seed.py
+    reset.py
+  schemas/
+    *.py
+  repositories/
+    *.py
+  services/
+    schedule_generation.py
+    conflict_detection.py
+    swap_validation.py
+    audit_log.py
+  routes/
+    auth.py
+    users.py
+    departments.py
+    doctors.py
+    schedules.py
+    availability.py
+    generation.py
+    validation.py
+    swaps.py
+    audit.py
+```
+
+If the template already has a different layout, use it and document the mapping in the report.
+
+## Required backend behavior
+
+- Auth/current-user behavior sufficient for MVP role testing.
+- Admin can manage users and assign roles/departments according to OpenAPI.
+- Coordinator can create schedules for a department.
+- Doctors can submit availability and preferences before deadline.
+- Availability edits are blocked after deadline/lock.
+- Coordinator can generate deterministic schedules.
+- Conflict reports are created when staffing is impossible.
+- Coordinator can manually correct generated schedules if hard rules pass.
+- Coordinator can publish schedules.
+- Published schedules are immutable except through approved swaps.
+- Doctors can initiate and respond to post-publication swaps.
+- Swap validation blocks hard-rule violations.
+- Coordinator can approve valid swaps.
+- Assignments and audit logs are updated consistently after approved swaps.
+- Schedule can be archived.
+
+## Step-by-step tasks
+
+### A. Preflight
+
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm branch/worktree: `agent/backend/05-backend-implementation`.
+- [ ] (YYYY-MM-DD HH:MMZ) Inspect existing `api/` template, package tooling and tests.
+- [ ] (YYYY-MM-DD HH:MMZ) Run current backend tests before implementation.
+- [ ] (YYYY-MM-DD HH:MMZ) Read `openapi.yaml` and alignment report.
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm SQLite ADR is accepted and referenced.
+
+### B. SQLite persistence
+
+- [ ] (YYYY-MM-DD HH:MMZ) Add backend configuration for SQLite database path.
+- [ ] (YYYY-MM-DD HH:MMZ) Create or update database session/connection setup.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement persistence models based on `er_diagram.md` and OpenAPI schemas.
+- [ ] (YYYY-MM-DD HH:MMZ) Add deterministic seed data covering critical QA flows.
+- [ ] (YYYY-MM-DD HH:MMZ) Add reset mechanism for tests and Playwright setup.
+- [ ] (YYYY-MM-DD HH:MMZ) Document local database usage in the backend report.
+
+### C. Schemas and routes
+
+- [ ] (YYYY-MM-DD HH:MMZ) Implement Pydantic request/response schemas from `openapi.yaml`.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement Auth and current user endpoints.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement Users, Departments, Doctors and Invitations endpoints.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement Schedules, Participants, Shifts and Assignments endpoints.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement Availability, Preference and Leave Request endpoints.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement Generation and Conflict/Validation endpoints.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement Publication, Archive and Metrics endpoints required by OpenAPI.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement Swap endpoints and state transitions.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement Audit endpoints or audit log retrieval required by OpenAPI.
+
+### D. Domain services
+
+- [ ] (YYYY-MM-DD HH:MMZ) Implement deterministic schedule generation for MVP scenarios.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement hard-rule conflict detection.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement availability deadline locking.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement publication immutability rules.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement swap validation and approval transaction.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement append-only audit log writes.
+
+### E. Tests
+
+- [ ] (YYYY-MM-DD HH:MMZ) Add route tests for all MVP endpoints.
+- [ ] (YYYY-MM-DD HH:MMZ) Add service tests for schedule generation and conflict detection.
+- [ ] (YYYY-MM-DD HH:MMZ) Add tests for deadline locking.
+- [ ] (YYYY-MM-DD HH:MMZ) Add tests for publication immutability.
+- [ ] (YYYY-MM-DD HH:MMZ) Add tests for swap validation and approval.
+- [ ] (YYYY-MM-DD HH:MMZ) Add tests for audit log creation.
+- [ ] (YYYY-MM-DD HH:MMZ) Add tests proving the SQLite seed/reset mechanism is deterministic.
+
+### F. Report and handoff
+
+- [ ] (YYYY-MM-DD HH:MMZ) Create `docs/reports/backend_implementation_report.md`.
+- [ ] (YYYY-MM-DD HH:MMZ) Document implemented endpoints, seed accounts, database path and reset command.
+- [ ] (YYYY-MM-DD HH:MMZ) Document deviations from OpenAPI, if any.
+- [ ] (YYYY-MM-DD HH:MMZ) Document integration instructions for phase 06.
+
+## Validation commands
+
+Use actual backend tooling. Typical commands from the current template may include:
 
 ```bash
 cd api
-uv sync
 uv run ruff check .
 uv run pytest
 uv run coverage run -m pytest
 uv run coverage report
 ```
 
-Jeżeli mypy jest skonfigurowany:
+If mypy is configured:
 
 ```bash
-uv run mypy src tests
+cd api
+uv run mypy .
 ```
 
-## Kryteria akceptacji
+Also verify API startup:
 
-- Backend startuje lokalnie.
-- Endpointy z `openapi.yaml` są zaimplementowane albo jawnie oznaczone jako niezaimplementowane z powodem blokującym MVP.
-- Testy API i testy domenowe przechodzą.
-- Dane seed umożliwiają frontendową integrację.
-- `pwa/` nie zostało zmienione.
-- Brak endpointów poza kontraktem.
-- Handoff zawiera base URL, sposób auth, seed users i znane ograniczenia.
+```bash
+cd api
+uv run uvicorn src.main:app --reload
+```
 
-## Ryzyka
+Adjust module path to the actual template.
 
-- OpenAPI okaże się zbyt szerokie względem MVP.
-- Walidator prawny zostanie nadmiernie uproszczony.
-- Generator będzie niedeterministyczny.
-- Auth produkcyjne zacznie blokować MVP.
-- Modele bazy będą odbiegać od `domain_model.md`.
+## Acceptance criteria
 
-## Rollback
+- FastAPI backend implements the aligned `openapi.yaml` MVP endpoints.
+- SQLite persistence is configured and documented.
+- Seed/reset works deterministically.
+- Backend tests pass.
+- Hard-rule violations block illegal actions.
+- Published schedules cannot be directly edited.
+- Swap approval updates assignments and audit log atomically enough for MVP.
+- No frontend files were rewritten.
+- `docs/reports/backend_implementation_report.md` exists.
 
-- Przywróć `api/src` i `api/tests` do stanu sprzed fazy.
-- Zachowaj raport implementacyjny i błędy kontraktu w handoffie.
-- Jeżeli problem jest w `openapi.yaml`, wróć do fazy 04 zamiast patchować kontrakt po cichu.
+## Risks
+
+- Existing backend template may use a different package structure than expected.
+- Full domain model may be broader than MVP; implement only contract-required scope.
+- Auth may become overbuilt; keep it sufficient for role-based MVP testing.
+- SQLite is not the final production database; keep migration path open.
+
+## Rollback plan
+
+- Keep persistence, routes and service implementation in separable commits.
+- If SQLite setup breaks tests, rollback DB layer and keep schemas/routes stubs.
+- If contract ambiguity blocks implementation, stop and return to phase 04.
 
 ## Handoff
 
+- Branch/worktree:
 - Completed:
 - Validation:
-- API base URL:
-- Auth/seed users:
-- Known limitations:
-- OpenAPI deviations:
+- Known issues:
 - Open questions:
+- Files changed:
 - Recommended next step:
+
+## Change log
+
+| Timestamp UTC | Agent | Change |
+|---|---|---|
+| YYYY-MM-DD HH:MMZ | Backend Developer Agent | Initial English backend implementation plan with SQLite ADR dependency. |

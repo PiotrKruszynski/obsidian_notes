@@ -1,20 +1,23 @@
-# 01 — Figma Make Code Import Plan
+# 01 — Figma Make React Import Plan
 
 Status: Living Draft  
-Owner: Figma Import Agent  
+Owner: Frontend Developer Agent  
+Orchestrated by: Planning & Orchestration Agent  
+Worktree branch: `agent/frontend/01-figma-import`  
+Recommended worktree: `../worktrees/shifts-01-figma-import`  
 Depends on: `master_execution_plan.md`  
 Next: `02_frontend_refactor_plan.md`  
-Last updated: 2026-04-25 16:09Z
+Last updated: YYYY-MM-DD HH:MMZ
 
-## Purpose
+## Objective
 
-Import the React code generated in Figma Make into the repository frontend (`pwa/`) in a controlled, reviewable way.
+Import the actual React code structure generated in Figma Make into the existing `pwa/` project as a controlled frontend snapshot. This phase is about bringing the Figma Make UI into the repository and making it render/build. It is not a refactor phase and it is not a backend phase.
 
-This phase is not a greenfield Figma-to-React implementation. The relevant source is the actual Figma Make code structure that will be imported. The import must preserve the generated UI structure enough for the next agent to refactor it safely.
+## Important context
 
-## Current understanding of the Figma Make code scope
+The Figma Make code is **not yet implemented in the repository**. The visible structure from Figma Make is the source that will be imported.
 
-The Figma Make project already exposes a React/Vite-style code structure similar to:
+Expected Figma Make structure:
 
 ```text
 guidelines/
@@ -47,72 +50,44 @@ postcss.config.mjs
 vite.config.ts
 ```
 
-This structure is the import target shape. Do not replace it with a synthetic `figma-import/` directory unless the orchestrator explicitly requests a temporary staging area.
+The import should preserve this structure inside `pwa/` where possible, but must be merged carefully with any existing `pwa/` files instead of blindly overwriting them.
 
-## Primary inputs
+## Required inputs
 
-The agent must use the current repository files as guardrails:
-
-- `project_assumptions.md` or `project_asumptions.md` — product scope source of truth.
-- `domain_model.md` — domain source of truth.
-- `er_diagram.md` — persistence and relationship context.
-- `user_flow.mmd` — end-to-end flow context.
-- `openapi.yaml` — API contract context only; must not be changed in this phase.
-- Figma Make generated code snapshot — actual source to import.
-- Figma MCP Server — optional verification/intake tool when the code snapshot or selected prototype needs confirmation.
-- `src/imports/ui_spec_figma.md` from Figma Make — UI specification/provenance file to preserve during import.
-
-If file names differ in the local repo, use the actual existing names and record the discrepancy in `docs/open_questions.md`.
-
-## Objective
-
-Bring the generated Figma Make frontend into `pwa/` so that:
-
-- the Figma Make React UI is present under `pwa/src/**`;
-- generated routing and app entry files are present or safely adapted;
-- Figma-generated styles and design assets are available;
-- the app can be built or failure reasons are documented;
-- no backend, OpenAPI, or domain documents are modified.
-
-## Scope
-
-The Figma Import Agent may:
-
-- import generated source code into `pwa/src/**`;
-- import generated styles into `pwa/src/styles/**` or equivalent existing style locations;
-- import Figma-generated `guidelines/`, `ATTRIBUTIONS.md`, and theme files into `pwa/` when present;
-- adapt imports/paths required to make the code compile inside the repo;
-- update `pwa/package.json` only for dependencies required by the imported Figma Make code;
-- update `pwa/vite.config.ts`, `pwa/postcss.config.*`, or Tailwind-related files only when needed for the imported app to run;
-- write open issues to `docs/open_questions.md`;
-- update this plan with import notes, validation results, and handoff information.
+- Figma Make React output, accessible through Figma Make export, Figma MCP Server, or copied local files.
+- `pwa/` current frontend project structure.
+- `project_assumptions.md` or `project_asumptions.md` for MVP scope.
+- `domain_model.md` for role/state terminology.
+- `user_flow.mmd` for flow context.
+- `openapi.yaml` for read-only awareness only.
+- `pwa/package.json`, if it already exists.
+- `pwa/vite.config.ts`, if it already exists.
 
 ## Non-goals
 
-This phase must not:
-
-- implement backend functionality;
-- modify `api/**`;
-- modify `openapi.yaml`;
-- create real HTTP/API calls;
-- redesign the UI;
-- refactor Figma-generated components into final architecture beyond import-time path fixes;
-- implement missing screens not present in the Figma Make code;
-- normalize all mock data into a service layer;
-- add new MVP requirements.
+- Do not implement backend.
+- Do not modify `api/`.
+- Do not modify `openapi.yaml`.
+- Do not create real HTTP calls.
+- Do not build the final mock API/service layer; that is phase 03.
+- Do not deeply refactor Figma Make components; that is phase 02.
+- Do not implement missing screens from imagination.
+- Do not add new product requirements.
+- Do not decide final UX; UX review happens after import/refactor.
 
 ## Allowed paths
 
-- `pwa/src/**`
-- `pwa/guidelines/**`, if generated by Figma Make
-- `pwa/ATTRIBUTIONS.md`, if generated by Figma Make
-- `pwa/default_shadcn_theme.css`, if generated by Figma Make
-- `pwa/package.json`, dependency/script changes only when required
-- `pwa/pnpm-workspace.yaml`, only if the existing frontend actually uses pnpm workspace semantics
-- `pwa/postcss.config.*`, only if required
-- `pwa/vite.config.ts`, only if required
-- `pwa/public/**`, only for generated/static assets required by the UI
+- `pwa/src/app/**`
+- `pwa/src/imports/**`
+- `pwa/src/styles/**`
+- `pwa/guidelines/**`
+- `pwa/public/**`, only for required assets
+- `pwa/ATTRIBUTIONS.md`
+- `pwa/default_shadcn_theme.css`
+- `pwa/package.json`, only for required dependency reconciliation
+- `pwa/pnpm-workspace.yaml`, `pwa/postcss.config.mjs`, `pwa/vite.config.ts`, only if needed for imported UI to run
 - `docs/open_questions.md`
+- `docs/reports/figma_import_inventory.md`
 - `docs/execution/01_figma_import_plan.md`
 
 ## Forbidden paths
@@ -123,143 +98,97 @@ This phase must not:
 - `er_diagram.md`
 - `project_assumptions.md` / `project_asumptions.md`
 - `user_flow.mmd`
-- other execution plans, unless the orchestrator explicitly requests a handoff update
+- `docs/adr/**`, except for recommending ADR needs in the handoff
 
-## Preconditions
+## Worktree setup
 
-- The Figma Make generated code snapshot is available to the agent, either via export, local files, or MCP-backed retrieval.
-- The selected Figma Make project corresponds to the SHIFTS_MVP doctor shift scheduling UI.
-- The repository has a `pwa/` frontend target.
-- The agent can inspect `pwa/package.json` and detect the package manager from lockfiles.
-- If the code snapshot is unavailable, the agent must stop and record the missing source in `docs/open_questions.md`.
+The Orchestration Agent should create the isolated frontend worktree before assigning this plan:
 
-## Import strategy
-
-Use a controlled merge, not a blind overwrite.
-
-1. Inspect the existing `pwa/` project.
-2. Inspect the Figma Make generated project.
-3. Create a source-to-target mapping before copying files.
-4. Import the generated app structure into `pwa/`.
-5. Resolve path/import/build issues with minimal changes.
-6. Preserve Figma provenance files.
-7. Validate build.
-8. Hand off to the Frontend Refactor Agent.
-
-### Source-to-target mapping
-
-Expected mapping:
-
-```text
-Figma Make source                       Repository target
-────────────────────────────────────────────────────────────────
-src/app/App.tsx                         pwa/src/app/App.tsx or pwa/src/App.tsx adapter
-src/app/routes.tsx                      pwa/src/app/routes.tsx or pwa/src/routes.tsx adapter
-src/app/components/**                   pwa/src/app/components/**
-src/imports/ui_spec_figma.md            pwa/src/imports/ui_spec_figma.md
-src/styles/**                           pwa/src/styles/**
-guidelines/**                           pwa/guidelines/**
-ATTRIBUTIONS.md                         pwa/ATTRIBUTIONS.md
-default_shadcn_theme.css                pwa/default_shadcn_theme.css
-package.json                            compare with pwa/package.json; merge dependencies only
-pnpm-workspace.yaml                     import only if compatible with existing repo layout
-postcss.config.mjs                      compare with pwa/postcss config; merge only if needed
-vite.config.ts                          compare with pwa/vite config; merge only if needed
+```bash
+git fetch --all --prune
+git worktree add ../worktrees/shifts-01-figma-import -b agent/frontend/01-figma-import main
+cd ../worktrees/shifts-01-figma-import
 ```
 
-If the existing `pwa/` has a different entrypoint convention, create a thin adapter instead of rewriting the generated app. Example: keep `pwa/src/main.tsx` as the repo entrypoint and import the Figma Make `App` from `pwa/src/app/App.tsx`.
+If the integration branch is not `main`, replace `main` with the actual integration branch.
 
 ## Dynamic update protocol
 
-This file is a living plan. During execution, the agent may update it only in controlled ways:
+This is a living plan. The agent may update it during execution, but only to record facts discovered during work.
 
-- update `Status`, `Last updated`, and `Change log` after significant progress;
-- mark tasks complete only after the related validation step is done;
-- append import findings; do not delete prior assumptions silently;
-- record missing/ambiguous information in `docs/open_questions.md`;
-- do not expand the implementation scope without orchestrator approval.
+- Update `Status`, `Last updated` and `Change log` after material scope changes.
+- Check off tasks only after validation.
+- Do not delete previous conclusions; append corrections.
+- Missing information goes to `docs/open_questions.md`.
+- Architectural decisions go to ADR proposals, not ad hoc implementation.
 
-## Tasks
+## Step-by-step tasks
 
-### A. Intake and verification
+### A. Preflight
 
-- [ ] (YYYY-MM-DD HH:MMZ) Confirm the Figma Make generated code snapshot is available.
-- [ ] (YYYY-MM-DD HH:MMZ) Record the Figma source/prototype name, page/frame if available, export method, and import timestamp.
-- [ ] (YYYY-MM-DD HH:MMZ) Verify whether Figma MCP Server is needed for additional context or only for provenance validation.
-- [ ] (YYYY-MM-DD HH:MMZ) Inspect the generated file tree and confirm it matches the expected structure listed in this plan.
-- [ ] (YYYY-MM-DD HH:MMZ) Inspect existing `pwa/` file tree, package manager, build scripts, and existing app entrypoints.
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm the worktree and branch: `agent/frontend/01-figma-import`.
+- [ ] (YYYY-MM-DD HH:MMZ) Run `git status --short` and confirm the worktree is clean.
+- [ ] (YYYY-MM-DD HH:MMZ) Inspect current `pwa/` structure and package manager lockfiles.
+- [ ] (YYYY-MM-DD HH:MMZ) Identify whether `pwa/` already has `src/app`, routing, styles or Tailwind configuration.
+- [ ] (YYYY-MM-DD HH:MMZ) Record existing frontend scripts from `pwa/package.json`.
 
-### B. Controlled merge plan
+### B. Figma Make source capture
 
-- [ ] (YYYY-MM-DD HH:MMZ) Create a short source-to-target mapping in the `Import findings` section below.
-- [ ] (YYYY-MM-DD HH:MMZ) Identify file conflicts before copying: `App.tsx`, `routes.tsx`, style files, package config, Vite config.
-- [ ] (YYYY-MM-DD HH:MMZ) Decide for each conflict whether to preserve existing repo file, replace it, or create an adapter.
-- [ ] (YYYY-MM-DD HH:MMZ) Record any destructive operation risk before making changes.
+- [ ] (YYYY-MM-DD HH:MMZ) Use Figma MCP Server or Figma Make export to capture the generated React code.
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm the generated structure includes `src/app/App.tsx`, `src/app/routes.tsx`, role folders and styles.
+- [ ] (YYYY-MM-DD HH:MMZ) Copy `src/imports/ui_spec_figma.md` into `pwa/src/imports/ui_spec_figma.md`.
+- [ ] (YYYY-MM-DD HH:MMZ) Copy `guidelines/` into `pwa/guidelines/` if present.
+- [ ] (YYYY-MM-DD HH:MMZ) Copy `ATTRIBUTIONS.md` and asset references if present.
+- [ ] (YYYY-MM-DD HH:MMZ) If Figma MCP/export is unavailable, stop and write the missing access details to `docs/open_questions.md`.
 
-### C. Import generated app code
+### C. Controlled merge into `pwa/`
 
-- [ ] (YYYY-MM-DD HH:MMZ) Import `src/app/components/admin/**` into `pwa/src/app/components/admin/**`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `src/app/components/auth/**` into `pwa/src/app/components/auth/**`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `src/app/components/coordinator/**` into `pwa/src/app/components/coordinator/**`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `src/app/components/doctor/**` into `pwa/src/app/components/doctor/**`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `src/app/components/figma/**` into `pwa/src/app/components/figma/**`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `src/app/components/shared/**` into `pwa/src/app/components/shared/**`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `src/app/components/ui/**` into `pwa/src/app/components/ui/**`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import or adapt `src/app/App.tsx`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import or adapt `src/app/routes.tsx`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `NotFound.tsx` and `TestComponent.tsx` only if they are referenced by routes or useful for generated smoke tests.
+- [ ] (YYYY-MM-DD HH:MMZ) Import Figma `src/app/**` into `pwa/src/app/**`.
+- [ ] (YYYY-MM-DD HH:MMZ) Import Figma `src/styles/**` into `pwa/src/styles/**`.
+- [ ] (YYYY-MM-DD HH:MMZ) Import `default_shadcn_theme.css` if the Figma UI references it.
+- [ ] (YYYY-MM-DD HH:MMZ) Reconcile `package.json` dependencies without blindly replacing existing scripts.
+- [ ] (YYYY-MM-DD HH:MMZ) Reconcile `vite.config.ts`, `postcss.config.mjs` and Tailwind-related files only when required for build/runtime.
+- [ ] (YYYY-MM-DD HH:MMZ) Preserve any existing repository-specific configuration that does not conflict with Figma UI.
+- [ ] (YYYY-MM-DD HH:MMZ) Do not create a separate `pwa/src/figma-import/` dump unless direct merge is impossible; if used, explain why in the handoff.
 
-### D. Import styles and provenance files
+### D. Runtime wiring
 
-- [ ] (YYYY-MM-DD HH:MMZ) Import generated `src/styles/fonts.css`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import generated `src/styles/index.css`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import generated `src/styles/tailwind.css`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import generated `src/styles/theme.css`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `default_shadcn_theme.css` if referenced by generated styles or components.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `src/imports/ui_spec_figma.md` into `pwa/src/imports/ui_spec_figma.md`.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `guidelines/**` into `pwa/guidelines/**` if present.
-- [ ] (YYYY-MM-DD HH:MMZ) Import `ATTRIBUTIONS.md` into `pwa/ATTRIBUTIONS.md` if present.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify `pwa/src/app/App.tsx` is the actual application entry point or is imported by the existing entry point.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify `pwa/src/app/routes.tsx` is wired correctly, if the app uses routing.
+- [ ] (YYYY-MM-DD HH:MMZ) Provide a safe preview route or default route for the imported Figma UI.
+- [ ] (YYYY-MM-DD HH:MMZ) Keep `TestComponent.tsx` only as a temporary preview helper if required; mark it for phase 02 cleanup.
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm the imported UI does not send real network requests.
 
-### E. Package/config reconciliation
+### E. Minimal fixes only
 
-- [ ] (YYYY-MM-DD HH:MMZ) Compare generated `package.json` with existing `pwa/package.json`.
-- [ ] (YYYY-MM-DD HH:MMZ) Add only missing dependencies needed for imported code to compile.
-- [ ] (YYYY-MM-DD HH:MMZ) Preserve existing scripts unless generated scripts are required and compatible.
-- [ ] (YYYY-MM-DD HH:MMZ) Compare generated `vite.config.ts` with existing `pwa/vite.config.ts`; merge only required aliases/plugins.
-- [ ] (YYYY-MM-DD HH:MMZ) Compare generated PostCSS/Tailwind config with existing config; merge only required settings.
-- [ ] (YYYY-MM-DD HH:MMZ) Do not import generated `pnpm-workspace.yaml` if it conflicts with the repository workspace layout.
+- [ ] (YYYY-MM-DD HH:MMZ) Fix import paths created by the move into `pwa/`.
+- [ ] (YYYY-MM-DD HH:MMZ) Fix missing CSS imports required for visual rendering.
+- [ ] (YYYY-MM-DD HH:MMZ) Fix missing package dependencies required by the generated code.
+- [ ] (YYYY-MM-DD HH:MMZ) Do not normalize domain models, service layers or component architecture in this phase.
+- [ ] (YYYY-MM-DD HH:MMZ) Keep generated local data as local/static data unless it prevents build readability.
 
-### F. Minimal compile fixes
+### F. Import inventory
 
-- [ ] (YYYY-MM-DD HH:MMZ) Fix broken relative imports caused by the repository target path.
-- [ ] (YYYY-MM-DD HH:MMZ) Fix missing CSS imports in the repo entrypoint.
-- [ ] (YYYY-MM-DD HH:MMZ) Fix TypeScript path aliases only if required for the generated code.
-- [ ] (YYYY-MM-DD HH:MMZ) Do not refactor component boundaries unless necessary to compile.
-- [ ] (YYYY-MM-DD HH:MMZ) Do not introduce `services/` or API-client abstraction in this phase.
+- [ ] (YYYY-MM-DD HH:MMZ) Create or update `docs/reports/figma_import_inventory.md`.
+- [ ] (YYYY-MM-DD HH:MMZ) Map Figma UI areas to imported files: Auth, Doctor, Coordinator, Admin, Shared, UI, Figma wrappers.
+- [ ] (YYYY-MM-DD HH:MMZ) Mark each item as `imported`, `partial`, `missing from export`, or `blocked`.
+- [ ] (YYYY-MM-DD HH:MMZ) List large generated components that should be split in phase 02.
+- [ ] (YYYY-MM-DD HH:MMZ) List temporary preview files and cleanup candidates.
 
-### G. Validation and handoff
+## Validation commands
 
-- [ ] (YYYY-MM-DD HH:MMZ) Install dependencies using the package manager implied by the lockfile.
-- [ ] (YYYY-MM-DD HH:MMZ) Run frontend build.
-- [ ] (YYYY-MM-DD HH:MMZ) Run lint/typecheck if existing scripts are available.
-- [ ] (YYYY-MM-DD HH:MMZ) Start dev server or run a smoke render check if practical.
-- [ ] (YYYY-MM-DD HH:MMZ) Record validation output in `Validation results`.
-- [ ] (YYYY-MM-DD HH:MMZ) Fill `Handoff to Frontend Refactor Agent`.
-
-## Validation command discovery
-
-Before running validation, inspect actual tooling:
+Detect actual package manager first:
 
 ```bash
 cd pwa
+ls
 cat package.json
-ls -1 pnpm-lock.yaml package-lock.json yarn.lock bun.lockb 2>/dev/null || true
+find .. -maxdepth 2 -name pnpm-lock.yaml -o -name package-lock.json -o -name yarn.lock
 ```
 
-Use the detected package manager:
+Run the commands that exist in `package.json`. Typical examples:
 
 ```bash
-# pnpm example
 cd pwa
 pnpm install
 pnpm run build
@@ -267,87 +196,44 @@ pnpm run lint
 pnpm run typecheck
 ```
 
-If a script does not exist, do not create it in this phase. Record it in the handoff.
+If the repository uses npm instead of pnpm, use `npm install` / `npm run ...`. Do not invent scripts that are not present; record missing scripts in the handoff.
 
 ## Acceptance criteria
 
-- Figma Make generated code is imported into `pwa/` with the generated `src/app/components/**` structure preserved.
-- `pwa/src/imports/ui_spec_figma.md` is present if it exists in the generated source.
-- Figma-generated styles are imported and referenced correctly.
-- Existing repository entrypoints are adapted safely; no destructive overwrite without recorded reason.
-- `api/**`, `openapi.yaml`, and domain/product docs are unchanged.
-- No real API calls are introduced.
-- No missing Figma screens are implemented from imagination.
-- Frontend build passes, or failures are documented with concrete file/error references.
-- Handoff clearly tells the next agent what was imported, what remains messy, and what should be refactored.
-
-## Stop conditions
-
-Stop and write to `docs/open_questions.md` if:
-
-- the Figma Make generated code snapshot is unavailable;
-- the imported project is not the SHIFTS_MVP doctor shift scheduling UI;
-- the generated app requires dependencies that cannot be identified safely;
-- importing would require rewriting unrelated repo structure;
-- the generated code contains product scope that conflicts with `project_assumptions.md` and cannot be safely isolated.
+- Figma Make React code is imported into `pwa/` using the expected `src/app` structure.
+- The imported UI renders through a known route or entry point.
+- `pwa` builds successfully, or failures are documented with exact blocking errors.
+- No backend files were modified.
+- No real API calls were introduced.
+- `docs/reports/figma_import_inventory.md` exists and identifies the imported scope.
+- Handoff gives phase 02 a clear list of refactor targets.
 
 ## Risks
 
-- Generated Figma Make code may use aliases or dependencies missing from `pwa/`.
-- Generated UI may include screens beyond the MVP scope.
-- Generated `package.json`/workspace files may conflict with repository tooling.
-- Generated styles may override existing global styles unexpectedly.
-- Figma Make may generate a visually correct but architecturally noisy component tree.
+- Figma Make may generate a monolithic `App.tsx` or deeply coupled role views.
+- Generated dependencies may conflict with existing `pwa/` tooling.
+- CSS and Tailwind assumptions may differ between Figma Make and the repository.
+- Figma MCP may expose UI context but not a clean project export.
+- Imported mock data may be unrealistic; this is acceptable in phase 01 and will be handled in phases 02–03.
 
-## Rollback
+## Rollback plan
 
-- Revert modified `pwa/src/**` files to the previous commit.
-- Revert changes to `pwa/package.json`, `pwa/vite.config.ts`, and PostCSS/Tailwind config.
-- Remove imported `pwa/guidelines/**`, `pwa/ATTRIBUTIONS.md`, and generated theme files if they caused conflicts.
-- Keep `docs/open_questions.md` entries if they record legitimate unresolved issues.
+- Revert the phase branch if the import corrupts the frontend structure.
+- Keep a list of overwritten files in the handoff.
+- If dependency reconciliation breaks the project, restore the original package/config files and re-import only `src/app`, `src/imports` and `src/styles`.
 
-## Import findings
+## Handoff
 
-To be filled during execution.
-
-```text
-Figma source/prototype:
-Export/import method:
-Imported screens/components:
-Entry point strategy:
-Package manager:
-Conflicts found:
-Decisions made:
-```
-
-## Validation results
-
-To be filled during execution.
-
-```text
-Install:
-Build:
-Lint:
-Typecheck:
-Smoke run:
-Known failures:
-```
-
-## Handoff to Frontend Refactor Agent
-
-To be filled after validation.
-
-```text
-Completed imports:
-Generated files that should be preserved:
-Generated files that should be refactored:
-Known technical debt:
-Mock/data issues:
-Routing issues:
-Styling issues:
-Recommended next step:
-```
+- Branch/worktree:
+- Completed:
+- Validation:
+- Known issues:
+- Open questions:
+- Files changed:
+- Recommended next step:
 
 ## Change log
 
-- 2026-04-25 16:09Z — Corrected plan: Figma Make code is not yet implemented in repo; the shown file tree is the generated Figma Make structure to import, not an existing repository inventory.
+| Timestamp UTC | Agent | Change |
+|---|---|---|
+| YYYY-MM-DD HH:MMZ | Frontend Developer Agent | Initial English Figma Make import plan. |

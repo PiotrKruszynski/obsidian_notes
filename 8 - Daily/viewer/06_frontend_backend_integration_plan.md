@@ -1,192 +1,230 @@
-# 06 — Frontend–Backend Integration Plan
+# 06 — Frontend / Backend Integration Plan
 
 Status: Living Draft  
-Owner: Integration Agent  
+Owner: Frontend Developer Agent  
+Support: Backend Developer Agent  
+Orchestrated by: Planning & Orchestration Agent  
+Worktree branch: `agent/frontend/06-api-integration`  
+Recommended worktree: `../worktrees/shifts-06-api-integration`  
 Depends on: `05_backend_implementation_plan.md`  
 Next: `07_quality_release_plan.md`  
 Last updated: YYYY-MM-DD HH:MMZ
 
-## Cel
+## Objective
 
-Podmienić frontendowe mock services na realne wywołania backendu FastAPI przy zachowaniu nazw funkcji serwisowych i struktury komponentów. Integracja ma potwierdzić, że MVP działa end-to-end.
+Replace frontend mock service implementations with real API calls to the FastAPI backend while preserving service function names, UI behavior and optional mock mode for tests or offline development.
 
-## Źródła wejściowe
+## Required inputs
 
-Agent musi pracować na aktualnych plikach repozytorium, w szczególności:
+- Completed handoff from phase 05.
+- `docs/reports/backend_implementation_report.md`.
+- Updated `openapi.yaml`.
+- `pwa/src/services/**` from phase 03.
+- Backend local run instructions, seed accounts and SQLite reset command.
+- Accepted ADRs in `docs/adr/**`.
 
-- `project_assumptions.md` / `project_asumptions.md` — źródło prawdy dla zakresu produktu.
-- `domain_model.md` — źródło prawdy dla encji, relacji i decyzji domenowych.
-- `er_diagram.md` — źródło prawdy dla relacji danych.
-- `user_flow.mmd` — źródło prawdy dla przepływu end-to-end.
-- `openapi.yaml` — kontrakt API między `pwa/` i `api/`.
-- `README.md` — instrukcje lokalne, jeżeli zawiera komendy uruchomieniowe.
+## Non-goals
 
-Jeżeli nazwy plików różnią się między repozytorium a dokumentacją, agent ma użyć faktycznie istniejącej nazwy i zapisać niezgodność w `docs/open_questions.md`.
+- Do not rewrite backend architecture.
+- Do not rewrite UI components unnecessarily.
+- Do not add new product features.
+- Do not change `openapi.yaml` except through a separate approved contract fix.
+- Do not remove mock mode entirely; keep it available for unit tests or fallback.
+- Do not change the SQLite decision.
 
-
-## Zakres
-
-- Konfiguracja base URL API.
-- Klient HTTP w `pwa`.
-- Obsługa auth tokenów dla lokalnego MVP.
-- Podmiana implementacji `services` z mocków na `fetch`/HTTP client.
-- Zachowanie mocków jako tryb testowy/dev fallback, jeżeli to nie komplikuje architektury.
-- Loading/error states w UI.
-- CORS/proxy config, jeżeli potrzebne.
-- Integracyjne testy krytycznych flow.
-
-## Poza zakresem
-
-- Przepisywanie backendu.
-- Przepisywanie UI od zera.
-- Zmiana `openapi.yaml`, chyba że wykryty błąd blokuje integrację; wtedy zatrzymaj i zgłoś do fazy 04/05.
-- Dodawanie non-MVP funkcji.
-- Produkcyjne SSO, płatności, HR, P1.
-
-## Dozwolone ścieżki
+## Allowed paths
 
 - `pwa/src/services/**`
-- `pwa/src/api/**` lub równoważny katalog klienta HTTP.
-- `pwa/src/features/**`, tylko dla loading/error i integracji.
-- `pwa/.env.example`, `pwa/vite.config.*`, jeśli potrzebne.
-- `api/src/**`, tylko minimalne CORS/config fixes, jeśli backend działa inaczej niż lokalna integracja wymaga.
+- `pwa/src/api/**`, if introduced for shared API client utilities
+- `pwa/src/config/**` or `pwa/.env.example`, if used for API base URL
+- `pwa/src/app/**` and components, only for loading/error integration and small API-driven state fixes
+- `pwa/tests/**` or `pwa/e2e/**`, if integration tests are added
+- `api/src/**`, only for small CORS/config fixes approved by Orchestration Agent
+- `docs/reports/integration_report.md`
 - `docs/open_questions.md`
 - `docs/execution/06_frontend_backend_integration_plan.md`
 
-## Zabronione ścieżki
+## Forbidden paths
 
-- Duże zmiany w `api/` bez powrotu do Backend Developer Agenta.
-- Duże zmiany w UI bez powrotu do Frontend Developer Agenta.
-- Nieuzgodnione zmiany `openapi.yaml`.
+- Large backend rewrites.
+- Large UI rewrites.
+- `domain_model.md`
+- `er_diagram.md`
+- `project_assumptions.md` / `project_asumptions.md`
+- `user_flow.mmd`
+- `docs/adr/**`, except for recommending updates in the handoff
 
-## Protokół dynamicznej aktualizacji planu
-
-Ten plik jest planem żywym. Agent może go aktualizować w trakcie kodowania, ale tylko w kontrolowany sposób:
-
-- Aktualizuj `Status`, `Last updated` i `Change log` po istotnej zmianie zakresu lub wyniku.
-- Odhaczaj wykonane zadania dopiero po walidacji.
-- Nie usuwaj wcześniejszych ustaleń; dopisuj korekty jako nowe wpisy.
-- Jeżeli pojawi się luka w wymaganiach, wpisz ją do `docs/open_questions.md`, a nie implementuj założenia „z głowy”.
-- Jeżeli potrzebna jest zmiana architektoniczna, zaproponuj ADR albo aktualizację istniejącego ADR.
-
-
-## Docelowy przepływ danych
-
-```text
-React components
-  -> pwa/src/services/*
-  -> pwa/src/api/httpClient.ts
-  -> FastAPI endpoints
-  -> persistence / seed data
-```
-
-Komponenty nie powinny bezpośrednio używać `fetch`.
-
-## Zadania
-
-- [ ] (YYYY-MM-DD HH:MMZ) Przeczytaj handoff z fazy 05: base URL, auth, seed users, known limitations.
-- [ ] (YYYY-MM-DD HH:MMZ) Uruchom backend lokalnie.
-- [ ] (YYYY-MM-DD HH:MMZ) Uruchom frontend lokalnie.
-- [ ] (YYYY-MM-DD HH:MMZ) Dodaj `pwa/.env.example` z `VITE_API_BASE_URL`.
-- [ ] (YYYY-MM-DD HH:MMZ) Utwórz `httpClient` z obsługą base URL, JSON, bearer token, błędów i timeoutów.
-- [ ] (YYYY-MM-DD HH:MMZ) Zachowaj dotychczasowe nazwy funkcji w `services`.
-- [ ] (YYYY-MM-DD HH:MMZ) Podmień `authService` na realne endpointy.
-- [ ] (YYYY-MM-DD HH:MMZ) Podmień services dla users/departments/doctors.
-- [ ] (YYYY-MM-DD HH:MMZ) Podmień services dla schedules, participants, shifts, assignments.
-- [ ] (YYYY-MM-DD HH:MMZ) Podmień services dla availability i leave requests.
-- [ ] (YYYY-MM-DD HH:MMZ) Podmień services dla generation, validation i conflict report.
-- [ ] (YYYY-MM-DD HH:MMZ) Podmień services dla swap flow.
-- [ ] (YYYY-MM-DD HH:MMZ) Podmień services dla metrics, notifications, calendar exports, audit log.
-- [ ] (YYYY-MM-DD HH:MMZ) Dodaj loading/error handling tam, gdzie wcześniej mocki były synchronicznie stabilne.
-- [ ] (YYYY-MM-DD HH:MMZ) Zweryfikuj CORS lub Vite proxy.
-- [ ] (YYYY-MM-DD HH:MMZ) Przejdź ręcznie flow krytyczne.
-- [ ] (YYYY-MM-DD HH:MMZ) Uruchom walidacje frontend/backend.
-- [ ] (YYYY-MM-DD HH:MMZ) Uzupełnij handoff dla QA Agenta.
-
-## Krytyczne flow do sprawdzenia ręcznie
-
-- Admin widzi użytkowników/oddziały i role.
-- Koordynator tworzy grafik.
-- Lekarz składa dostępność.
-- Koordynator uruchamia generowanie grafiku.
-- System pokazuje `ConflictReport`, jeżeli obsada jest niemożliwa.
-- Koordynator publikuje poprawny grafik.
-- Lekarz widzi swój opublikowany grafik.
-- Lekarz tworzy wniosek o zamianę.
-- Drugi lekarz odpowiada na zamianę.
-- System waliduje zamianę.
-- Koordynator zatwierdza zamianę.
-- Audit log pokazuje operacje.
-
-## Wykrywanie komend walidacyjnych
-
-Przed uruchamianiem walidacji agent powinien sprawdzić faktyczne narzędzia projektu:
+## Worktree setup
 
 ```bash
-ls
-find . -maxdepth 3 -name package.json -o -name pyproject.toml -o -name uv.lock -o -name pnpm-lock.yaml -o -name package-lock.json -o -name yarn.lock
+git fetch --all --prune
+git worktree add ../worktrees/shifts-06-api-integration -b agent/frontend/06-api-integration main
+cd ../worktrees/shifts-06-api-integration
 ```
 
-Dla `pwa/` użyj menedżera pakietów wynikającego z lockfile. Dla `api/` użyj istniejącego toolingu, w szczególności `uv`, `ruff`, `pytest`, `coverage`, jeżeli są skonfigurowane.
+Use the integration branch that contains accepted backend implementation.
 
+## Integration principles
 
-## Komendy walidacyjne
+- Components should continue to call the same service functions introduced in phase 03.
+- Only service implementations should change from mock data to HTTP calls.
+- API client code should centralize base URL, auth token handling, errors and JSON parsing.
+- Keep mock mode available through configuration, dependency injection or test-specific imports.
+- Errors from backend validation must be visible in the UI, especially hard-rule conflict errors.
+- Backend seed/reset must be used for deterministic integration tests.
+
+## Target API client structure
+
+Use repository conventions, but a good target is:
+
+```text
+pwa/src/api/
+  client.ts
+  errors.ts
+  config.ts
+
+pwa/src/services/
+  scheduleService.ts
+  availabilityService.ts
+  swapRequestService.ts
+  ...
+
+pwa/src/mocks/
+  ... kept for test/mock mode
+```
+
+## Step-by-step tasks
+
+### A. Preflight
+
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm branch/worktree: `agent/frontend/06-api-integration`.
+- [ ] (YYYY-MM-DD HH:MMZ) Read phase 05 handoff and backend implementation report.
+- [ ] (YYYY-MM-DD HH:MMZ) Start backend locally using documented command.
+- [ ] (YYYY-MM-DD HH:MMZ) Reset and seed SQLite database using documented command.
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm backend health/current-user endpoint works.
+- [ ] (YYYY-MM-DD HH:MMZ) Run frontend build before integration to establish baseline.
+
+### B. API client
+
+- [ ] (YYYY-MM-DD HH:MMZ) Add or update API base URL configuration.
+- [ ] (YYYY-MM-DD HH:MMZ) Implement shared HTTP client with JSON parsing and typed errors.
+- [ ] (YYYY-MM-DD HH:MMZ) Add auth token handling if required by backend MVP auth.
+- [ ] (YYYY-MM-DD HH:MMZ) Add consistent handling for `401`, `403`, `404`, `409`, `422` and hard-rule validation errors.
+- [ ] (YYYY-MM-DD HH:MMZ) Configure CORS or proxy only if required and approved.
+
+### C. Replace service implementations
+
+- [ ] (YYYY-MM-DD HH:MMZ) Replace Auth service mock implementation with API calls.
+- [ ] (YYYY-MM-DD HH:MMZ) Replace Users/Departments/Doctors services with API calls.
+- [ ] (YYYY-MM-DD HH:MMZ) Replace Schedules/Shifts/Assignments services with API calls.
+- [ ] (YYYY-MM-DD HH:MMZ) Replace Availability/Leave Request services with API calls.
+- [ ] (YYYY-MM-DD HH:MMZ) Replace Generation/Validation services with API calls.
+- [ ] (YYYY-MM-DD HH:MMZ) Replace Swap service with API calls.
+- [ ] (YYYY-MM-DD HH:MMZ) Replace Audit/Metrics services with API calls if used by UI.
+- [ ] (YYYY-MM-DD HH:MMZ) Preserve public service function names where possible.
+
+### D. UI integration
+
+- [ ] (YYYY-MM-DD HH:MMZ) Verify loading states during API calls.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify error states for backend validation failures.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify conflict panel displays backend conflict reason codes and context.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify published schedule UI remains immutable except swap flow.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify swap approval updates UI after backend response.
+- [ ] (YYYY-MM-DD HH:MMZ) Remove stale hardcoded business data from integrated screens.
+
+### E. Deterministic integration checks
+
+- [ ] (YYYY-MM-DD HH:MMZ) Reset SQLite database before manual integration checks.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify Doctor submits availability.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify Coordinator generates schedule.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify conflict report appears for impossible staffing scenario.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify Coordinator publishes schedule.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify Doctor sees published schedule.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify Doctor swap request flow.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify Coordinator swap approval and audit log update.
+
+### F. Report and UX handoff
+
+- [ ] (YYYY-MM-DD HH:MMZ) Create `docs/reports/integration_report.md`.
+- [ ] (YYYY-MM-DD HH:MMZ) Document API base URL, backend run command and DB reset command.
+- [ ] (YYYY-MM-DD HH:MMZ) Document remaining mock-only screens, if any.
+- [ ] (YYYY-MM-DD HH:MMZ) Prepare UX Gate B handoff notes.
+
+## Validation commands
 
 Backend:
 
 ```bash
 cd api
-uv run ruff check .
 uv run pytest
+uv run uvicorn src.main:app --reload
 ```
 
 Frontend:
 
 ```bash
 cd pwa
-npm run build
-npm run lint
-npm run typecheck
-npm run test
+pnpm run build
+pnpm run typecheck
+pnpm run lint
 ```
 
-E2E, jeśli Playwright jest dostępny:
+If the frontend uses npm or yarn, use the actual package manager.
 
-```bash
-cd pwa
-npx playwright test
+Manual smoke checks should be performed against a seeded SQLite database.
+
+## UX Designer Gate B request
+
+After integration, the Orchestration Agent should create a separate UX worktree/branch, for example:
+
+```text
+branch: agent/ux/ux-gate-b-after-api-integration
+worktree: ../worktrees/shifts-ux-gate-b
 ```
 
-## Kryteria akceptacji
+UX Designer should review:
 
-- Frontend korzysta z backendu dla krytycznych flow.
-- Mock services nie są domyślną ścieżką produkcyjną.
-- Komponenty nie używają bezpośrednio `fetch`.
-- Loading i error states są widoczne.
-- Backend i frontend przechodzą testy.
-- Znane ograniczenia są opisane w handoffie.
+- Whether API-driven loading/error states are understandable.
+- Whether conflict explanations are actionable for Coordinator.
+- Whether Doctor availability and swap flows remain simple on mobile.
+- Whether published schedule immutability is clear.
+- Whether accessibility basics still hold after integration.
 
-## Ryzyka
+## Acceptance criteria
 
-- Backend payloads różnią się od typów frontendowych.
-- Auth i role utrudniają lokalne testy.
-- UI założyło dane dostępne natychmiast z mocków.
-- CORS/proxy blokuje integrację.
-- OpenAPI wymaga korekty.
+- Frontend service layer can call real FastAPI endpoints.
+- Mock mode remains available for tests or local fallback.
+- Backend SQLite seed/reset supports deterministic integration checks.
+- Critical flows work through backend, not static mock data.
+- Loading and error states are visible and useful.
+- Build and available checks pass.
+- `docs/reports/integration_report.md` exists.
 
-## Rollback
+## Risks
 
-- Przywróć mock implementation jako fallback.
-- Cofnij tylko implementacje services, nie komponenty.
-- Jeżeli problem jest kontraktowy, wróć do fazy 04.
-- Jeżeli problem jest backendowy, wróć do fazy 05.
+- Backend response shapes may differ from frontend service assumptions.
+- CORS/proxy configuration may block local integration.
+- Auth may be too production-like for MVP testing or too loose for role checks.
+- Removing mock data too aggressively may break tests.
+
+## Rollback plan
+
+- Keep mock implementations intact until real API integration passes.
+- Use feature flags or service adapters to switch back to mock mode.
+- If a backend contract bug blocks integration, stop and return to phase 04/05 instead of patching around it in UI.
 
 ## Handoff
 
+- Branch/worktree:
 - Completed:
 - Validation:
-- Integrated flows:
-- Failing flows:
 - Known issues:
 - Open questions:
+- Files changed:
 - Recommended next step:
+
+## Change log
+
+| Timestamp UTC | Agent | Change |
+|---|---|---|
+| YYYY-MM-DD HH:MMZ | Frontend Developer Agent | Initial English frontend/backend integration plan. |

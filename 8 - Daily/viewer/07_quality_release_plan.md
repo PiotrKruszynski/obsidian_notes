@@ -1,139 +1,178 @@
-# 07 — Quality & Release Plan
+# 07 — Quality, UX and Release Validation Plan
 
 Status: Living Draft  
 Owner: QA Agent  
-Depends on: `06_frontend_backend_integration_plan.md`  
-Next: release decision / next iteration  
+UX Reviewer: UX Designer Agent  
+Orchestrated by: Planning & Orchestration Agent  
+Worktree branch: `agent/qa/07-quality-release`  
+Recommended worktree: `../worktrees/shifts-07-quality-release`  
+Depends on: `06_frontend_backend_integration_plan.md` and UX Gate B notes  
 Last updated: YYYY-MM-DD HH:MMZ
 
-## Cel
+## Objective
 
-Zweryfikować MVP technicznie i produktowo przed wydaniem iteracji: testy backendu, testy frontendu, Playwright dla flow end-to-end, Lighthouse dla PWA i jakości UI oraz raport defektów.
+Validate the integrated SHIFTS_MVP application with backend tests, frontend checks, Playwright end-to-end tests, Lighthouse audits and UX review. Produce a clear release decision: `GO`, `GO WITH KNOWN ISSUES`, or `NO-GO`.
 
-## Źródła wejściowe
+## Required inputs
 
-Agent musi pracować na aktualnych plikach repozytorium, w szczególności:
+- Completed handoff from phase 06.
+- `docs/reports/integration_report.md`.
+- UX Gate B notes, if available.
+- Backend seed/reset instructions using SQLite.
+- `project_assumptions.md` or `project_asumptions.md`.
+- `domain_model.md`.
+- `user_flow.mmd`.
+- `openapi.yaml`.
+- Accepted ADRs in `docs/adr/**`.
 
-- `project_assumptions.md` / `project_asumptions.md` — źródło prawdy dla zakresu produktu.
-- `domain_model.md` — źródło prawdy dla encji, relacji i decyzji domenowych.
-- `er_diagram.md` — źródło prawdy dla relacji danych.
-- `user_flow.mmd` — źródło prawdy dla przepływu end-to-end.
-- `openapi.yaml` — kontrakt API między `pwa/` i `api/`.
-- `README.md` — instrukcje lokalne, jeżeli zawiera komendy uruchomieniowe.
+## Non-goals
 
-Jeżeli nazwy plików różnią się między repozytorium a dokumentacją, agent ma użyć faktycznie istniejącej nazwy i zapisać niezgodność w `docs/open_questions.md`.
+- Do not add new product features.
+- Do not rewrite UI or backend.
+- Do not change domain rules or API contract without returning to the proper phase.
+- Do not silently fix unrelated implementation issues.
+- Do not accept blocking failures as known issues.
+- Do not attempt production hardening beyond MVP release validation.
 
+## Allowed paths
 
-## Zakres
-
-- Testy backendowe.
-- Testy frontendowe.
-- Playwright E2E dla krytycznych flow.
-- Lighthouse dla PWA / performance / accessibility / best practices.
-- Podstawowa kontrola dostępności i responsywności.
-- Raport jakości i lista defektów.
-- Małe naprawy testów lub konfiguracji, jeżeli są jednoznaczne i mieszczą się w QA scope.
-
-## Poza zakresem
-
-- Dodawanie nowych funkcji.
-- Przepisywanie UI lub backendu.
-- Zmiana domeny lub kontraktu bez powrotu do właściwej fazy.
-- Akceptowanie naruszeń twardych reguł jako „znanych ograniczeń”.
-- Produkcyjny hardening NIS2/RODO poza oceną ryzyk MVP.
-
-## Dozwolone ścieżki
-
-- `pwa/tests/**`, `pwa/e2e/**` albo istniejący katalog testów.
-- `api/tests/**`
+- `pwa/tests/**`, `pwa/e2e/**`, `pwa/playwright.config.*`, if used for QA tests
+- `api/tests/**`, only for QA coverage additions
 - `docs/reports/quality_report.md`
 - `docs/reports/defect_log.md`
+- `docs/reports/ux_review_report.md`
 - `docs/open_questions.md`
-- Minimalne zmiany w kodzie tylko dla jednoznacznych napraw testowych.
+- Minimal code changes only for unambiguous test or configuration fixes approved by the Orchestration Agent
 - `docs/execution/07_quality_release_plan.md`
 
-## Zabronione ścieżki
+## Forbidden paths
 
-- Duże zmiany w `pwa/src/**`.
-- Duże zmiany w `api/src/**`.
-- `openapi.yaml`, chyba że QA tworzy raport błędu kontraktu, nie poprawkę.
-- Zmiana assumptions/domain bez decyzji.
+- Large changes in `pwa/src/**`.
+- Large changes in `api/src/**`.
+- `openapi.yaml`, except to report contract defects.
+- `domain_model.md`.
+- `er_diagram.md`.
+- `project_assumptions.md` / `project_asumptions.md`.
+- `user_flow.mmd`.
+- `docs/adr/**`, except for recommending updates in the handoff.
 
-## Protokół dynamicznej aktualizacji planu
-
-Ten plik jest planem żywym. Agent może go aktualizować w trakcie kodowania, ale tylko w kontrolowany sposób:
-
-- Aktualizuj `Status`, `Last updated` i `Change log` po istotnej zmianie zakresu lub wyniku.
-- Odhaczaj wykonane zadania dopiero po walidacji.
-- Nie usuwaj wcześniejszych ustaleń; dopisuj korekty jako nowe wpisy.
-- Jeżeli pojawi się luka w wymaganiach, wpisz ją do `docs/open_questions.md`, a nie implementuj założenia „z głowy”.
-- Jeżeli potrzebna jest zmiana architektoniczna, zaproponuj ADR albo aktualizację istniejącego ADR.
-
-
-## Krytyczne flow E2E
-
-1. Admin zarządza użytkownikami i przypisuje Koordynatora do oddziału.
-2. Koordynator tworzy nowy grafik miesięczny.
-3. Lekarz składa dostępność, preferencje kategorii I–III i wniosek urlopowy.
-4. System blokuje edycję availability po deadline.
-5. Koordynator generuje grafik.
-6. System pokazuje konflikt przy niemożliwej obsadzie.
-7. Koordynator koryguje grafik bez naruszenia twardych reguł.
-8. Koordynator publikuje grafik.
-9. Lekarz widzi swój opublikowany grafik.
-10. Lekarz inicjuje swap po publikacji.
-11. Drugi lekarz akceptuje albo odrzuca swap.
-12. System waliduje swap względem twardych reguł.
-13. Koordynator zatwierdza zgodny swap.
-14. System aktualizuje assignments i zapisuje audit log.
-15. Koordynator archiwizuje grafik po zakończeniu okresu.
-
-## Kontrole domenowe QA
-
-- `PUBLISHED` schedule nie pozwala na zwykłą edycję assignmentów.
-- Swap nie jest możliwy przed publikacją.
-- Swap nie może być zatwierdzony przy twardym naruszeniu.
-- Shift jest 24h.
-- Każdy shift ma maksymalnie jeden aktywny assignment.
-- `AssignmentSource` przy zamianie to `SWAP`.
-- Stary assignment po zatwierdzonej zamianie ma status `REPLACED`.
-- Audit log zawiera wpisy dla generowania, publikacji i swap approval.
-- Conflict report ma konkretne reason codes i shift context.
-- Lekarz nie widzi pełnych danych innych lekarzy poza wymaganym zakresem flow.
-
-## Zadania
-
-- [ ] (YYYY-MM-DD HH:MMZ) Przeczytaj handoff z fazy 06.
-- [ ] (YYYY-MM-DD HH:MMZ) Uruchom pełny test suite backendu.
-- [ ] (YYYY-MM-DD HH:MMZ) Uruchom pełny test suite frontendu.
-- [ ] (YYYY-MM-DD HH:MMZ) Utwórz albo uzupełnij testy Playwright dla krytycznych flow.
-- [ ] (YYYY-MM-DD HH:MMZ) Uruchom Playwright lokalnie.
-- [ ] (YYYY-MM-DD HH:MMZ) Uruchom Lighthouse na widokach Koordynatora i Lekarza.
-- [ ] (YYYY-MM-DD HH:MMZ) Sprawdź podstawową dostępność: keyboard navigation, labels, contrast, focus states, landmarks.
-- [ ] (YYYY-MM-DD HH:MMZ) Sprawdź responsive layout: desktop-first dla Koordynatora, mobile-first dla Lekarza.
-- [ ] (YYYY-MM-DD HH:MMZ) Zweryfikuj zgodność flow z `user_flow.mmd`.
-- [ ] (YYYY-MM-DD HH:MMZ) Zweryfikuj zgodność encji i statusów z `domain_model.md`.
-- [ ] (YYYY-MM-DD HH:MMZ) Utwórz `docs/reports/defect_log.md`.
-- [ ] (YYYY-MM-DD HH:MMZ) Utwórz `docs/reports/quality_report.md`.
-- [ ] (YYYY-MM-DD HH:MMZ) Oznacz defekty blokujące, wysokie, średnie i niskie.
-- [ ] (YYYY-MM-DD HH:MMZ) Wpisz decyzję release: `GO`, `GO WITH KNOWN ISSUES`, albo `NO-GO`.
-- [ ] (YYYY-MM-DD HH:MMZ) Uzupełnij finalny handoff.
-
-## Wykrywanie komend walidacyjnych
-
-Przed uruchamianiem walidacji agent powinien sprawdzić faktyczne narzędzia projektu:
+## Worktree setup
 
 ```bash
-ls
-find . -maxdepth 3 -name package.json -o -name pyproject.toml -o -name uv.lock -o -name pnpm-lock.yaml -o -name package-lock.json -o -name yarn.lock
+git fetch --all --prune
+git worktree add ../worktrees/shifts-07-quality-release -b agent/qa/07-quality-release main
+cd ../worktrees/shifts-07-quality-release
 ```
 
-Dla `pwa/` użyj menedżera pakietów wynikającego z lockfile. Dla `api/` użyj istniejącego toolingu, w szczególności `uv`, `ruff`, `pytest`, `coverage`, jeżeli są skonfigurowane.
+Use the integration branch that contains accepted phase 06 changes. If UX Designer performs a separate review, the Orchestration Agent should create:
 
+```text
+branch: agent/ux/07-release-ux-review
+worktree: ../worktrees/shifts-07-ux-review
+```
 
-## Komendy walidacyjne
+## Quality principles
 
-Backend:
+- Backend tests must run against a deterministic SQLite seed/reset state.
+- Playwright tests must cover critical product flows, not only page loads.
+- Lighthouse must be run against a production build/preview whenever possible.
+- UX review must check role clarity, mobile/desktop fit and critical decision points.
+- Defects must be explicit, reproducible and assigned to an owner phase.
+
+## Critical E2E flows
+
+1. Admin manages users and assigns a Coordinator to a department.
+2. Coordinator creates a new monthly schedule.
+3. Doctor submits availability, category I–III preferences and a leave request.
+4. System blocks availability editing after the deadline.
+5. Coordinator generates a schedule.
+6. System shows a conflict when coverage is impossible.
+7. Coordinator corrects a schedule without violating hard rules.
+8. Coordinator publishes the schedule.
+9. Doctor sees the published schedule.
+10. Doctor initiates a post-publication shift swap.
+11. Second doctor accepts or rejects the swap.
+12. System validates the swap against hard rules.
+13. Coordinator approves a valid swap.
+14. System updates assignments and writes audit log entries.
+15. Coordinator archives the schedule after the period or after a new schedule is created.
+
+## Domain checks
+
+- `PUBLISHED` schedule does not allow ordinary assignment edits.
+- Swap is not available before publication.
+- Swap approval is blocked by hard-rule violations.
+- Shift length is 24 hours.
+- Each staffed shift has one active assignment.
+- Assignment source after approved swap is `SWAP` for the replacement assignment.
+- Old assignment after approved swap is `REPLACED`.
+- Audit log contains entries for generation, publication and swap approval.
+- Conflict report contains reason codes and shift context.
+- Doctor views do not expose unnecessary data about other doctors.
+
+## Step-by-step tasks
+
+### A. Preflight
+
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm branch/worktree: `agent/qa/07-quality-release`.
+- [ ] (YYYY-MM-DD HH:MMZ) Read phase 06 handoff and integration report.
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm backend SQLite seed/reset command.
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm frontend and backend run commands.
+- [ ] (YYYY-MM-DD HH:MMZ) Confirm Playwright and Lighthouse availability or install local dev tooling if project policy allows.
+
+### B. Backend quality
+
+- [ ] (YYYY-MM-DD HH:MMZ) Reset SQLite database to deterministic seed.
+- [ ] (YYYY-MM-DD HH:MMZ) Run backend lint/static checks.
+- [ ] (YYYY-MM-DD HH:MMZ) Run backend tests.
+- [ ] (YYYY-MM-DD HH:MMZ) Run backend coverage if configured.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify API startup against seeded SQLite state.
+
+### C. Frontend quality
+
+- [ ] (YYYY-MM-DD HH:MMZ) Run frontend build.
+- [ ] (YYYY-MM-DD HH:MMZ) Run frontend typecheck if configured.
+- [ ] (YYYY-MM-DD HH:MMZ) Run frontend lint if configured.
+- [ ] (YYYY-MM-DD HH:MMZ) Run frontend unit/component tests if configured.
+- [ ] (YYYY-MM-DD HH:MMZ) Verify no integrated screen still depends on stale hardcoded business data unless intentionally in mock mode.
+
+### D. Playwright E2E
+
+- [ ] (YYYY-MM-DD HH:MMZ) Create or update Playwright tests for the critical E2E flows.
+- [ ] (YYYY-MM-DD HH:MMZ) Reset SQLite database before Playwright run.
+- [ ] (YYYY-MM-DD HH:MMZ) Start backend and frontend preview/dev server for Playwright.
+- [ ] (YYYY-MM-DD HH:MMZ) Run Playwright tests.
+- [ ] (YYYY-MM-DD HH:MMZ) Save Playwright report path in `quality_report.md`.
+
+### E. Lighthouse
+
+- [ ] (YYYY-MM-DD HH:MMZ) Build frontend for production.
+- [ ] (YYYY-MM-DD HH:MMZ) Start frontend preview server.
+- [ ] (YYYY-MM-DD HH:MMZ) Run Lighthouse for Coordinator dashboard/schedule view.
+- [ ] (YYYY-MM-DD HH:MMZ) Run Lighthouse for Doctor mobile-first schedule/availability view.
+- [ ] (YYYY-MM-DD HH:MMZ) Record Performance, Accessibility, Best Practices and PWA findings.
+
+### F. UX release review
+
+- [ ] (YYYY-MM-DD HH:MMZ) UX Designer reviews Coordinator schedule generation, conflict resolution and publication flow.
+- [ ] (YYYY-MM-DD HH:MMZ) UX Designer reviews Doctor availability, schedule and swap flow on mobile.
+- [ ] (YYYY-MM-DD HH:MMZ) UX Designer reviews Admin account/department setup flow.
+- [ ] (YYYY-MM-DD HH:MMZ) UX Designer checks copy clarity for hard-rule conflicts and swap validation.
+- [ ] (YYYY-MM-DD HH:MMZ) UX Designer checks accessibility basics: focus order, keyboard navigation, labels, contrast and landmarks.
+- [ ] (YYYY-MM-DD HH:MMZ) Create `docs/reports/ux_review_report.md`.
+
+### G. Reports and release decision
+
+- [ ] (YYYY-MM-DD HH:MMZ) Create `docs/reports/defect_log.md`.
+- [ ] (YYYY-MM-DD HH:MMZ) Create `docs/reports/quality_report.md`.
+- [ ] (YYYY-MM-DD HH:MMZ) Classify defects as `blocking`, `high`, `medium`, or `low`.
+- [ ] (YYYY-MM-DD HH:MMZ) Assign each defect to an owner phase or agent.
+- [ ] (YYYY-MM-DD HH:MMZ) Record release decision: `GO`, `GO WITH KNOWN ISSUES`, or `NO-GO`.
+- [ ] (YYYY-MM-DD HH:MMZ) Complete final handoff for Orchestration Agent.
+
+## Validation commands
+
+Backend examples:
 
 ```bash
 cd api
@@ -143,17 +182,17 @@ uv run coverage run -m pytest
 uv run coverage report
 ```
 
-Frontend:
+Frontend examples:
 
 ```bash
 cd pwa
-npm run build
-npm run lint
-npm run typecheck
-npm run test
+pnpm run build
+pnpm run typecheck
+pnpm run lint
+pnpm run test
 ```
 
-Playwright:
+Playwright examples:
 
 ```bash
 cd pwa
@@ -161,41 +200,40 @@ npx playwright test
 npx playwright show-report
 ```
 
-Lighthouse, przykładowo:
+Lighthouse examples:
 
 ```bash
 cd pwa
-npm run build
-npm run preview
+pnpm run build
+pnpm run preview
 npx lighthouse http://localhost:4173 --view
 ```
 
-Jeżeli port albo preview script są inne, użyj faktycznej konfiguracji projektu.
+Use the actual package manager and ports configured in the repository.
 
-## Progi jakości
+## Quality thresholds
 
-Proponowane progi dla MVP, nie production hardening:
+MVP target thresholds:
 
 - Backend tests: 100% pass.
 - Frontend build/typecheck: 100% pass.
 - Playwright critical flows: 100% pass.
-- Lighthouse:
-  - Performance: target >= 80
-  - Accessibility: target >= 90
-  - Best Practices: target >= 90
-  - PWA: brak blokujących problemów
-- Brak defektów blokujących w flow: generate, publish, swap approval, audit log.
+- Lighthouse Performance: target >= 80.
+- Lighthouse Accessibility: target >= 90.
+- Lighthouse Best Practices: target >= 90.
+- PWA: no blocking installability/offline issue if PWA is in MVP scope.
+- No blocking defects in generation, publication, swap approval, hard-rule validation or audit logging.
 
-## Format defect log
+## Defect log format
 
 ```md
 # Defect Log
 
-| ID | Severity | Area | Summary | Repro steps | Expected | Actual | Owner phase |
-|---|---|---|---|---|---|---|---|
+| ID | Severity | Area | Summary | Repro steps | Expected | Actual | Owner phase | Status |
+|---|---|---|---|---|---|---|---|---|
 ```
 
-## Format quality report
+## Quality report format
 
 ```md
 # Quality Report
@@ -208,42 +246,51 @@ Release decision: GO / GO WITH KNOWN ISSUES / NO-GO
 - Frontend:
 - Playwright:
 - Lighthouse:
+- UX review:
 
 ## Critical flows
+## Domain checks
 ## Defects
 ## Risks
 ## Recommended next iteration
 ```
 
-## Kryteria akceptacji
+## Acceptance criteria
 
-- Powstał raport jakości.
-- Powstał defect log.
-- Wszystkie krytyczne flow są zweryfikowane.
-- Lighthouse i Playwright zostały uruchomione albo brak narzędzi jest jasno opisany.
-- Release decision jest jawna.
-- Defekty mają przypisaną fazę właścicielską.
+- Backend, frontend, Playwright and Lighthouse checks were run or explicitly blocked with reasons.
+- SQLite reset/seed was used for deterministic QA runs.
+- Critical E2E flows are covered by Playwright or listed as defects.
+- UX review report exists.
+- Defect log exists.
+- Quality report exists and includes release decision.
+- No blocking defect remains unresolved for a `GO` decision.
 
-## Ryzyka
+## Risks
 
-- QA naprawia zbyt dużo zamiast raportować.
-- Lighthouse wyniki są niestabilne lokalnie.
-- Playwright wymaga seed reset między testami.
-- Testy E2E zależą od kolejności i stanu aplikacji.
-- Brak jasnych danych testowych dla różnych ról.
+- Lighthouse scores may vary by environment; record hardware/browser context.
+- Playwright may reveal backend seed instability; this must be treated as a backend defect.
+- UX issues may require returning to phase 02 or 06 rather than being fixed by QA.
+- Mock mode may hide real API issues; QA should run against the real backend by default.
 
-## Rollback
+## Rollback plan
 
-- Jeżeli testy E2E uszkodziły stan danych, zresetuj seed/backend DB.
-- Cofnij niezamierzone zmiany kodu.
-- Zachowaj raporty nawet przy `NO-GO`.
+- QA should not perform broad fixes. Blocking defects return to the owning phase branch.
+- If release is `NO-GO`, Orchestration Agent opens follow-up phase branches by defect owner.
+- Keep reports even when release fails; they are the basis for the next iteration.
 
 ## Handoff
 
+- Branch/worktree:
 - Completed:
 - Validation:
-- Release decision:
-- Blocking defects:
 - Known issues:
 - Open questions:
+- Files changed:
 - Recommended next step:
+- Release decision:
+
+## Change log
+
+| Timestamp UTC | Agent | Change |
+|---|---|---|
+| YYYY-MM-DD HH:MMZ | QA Agent | Initial English quality, UX and release validation plan. |
