@@ -27,6 +27,8 @@ Figma Make narzędzie do **projektowania interfejsów** (UI/UX)
 
 
 
+
+
 # POC
 ## 1
 Potrzebuję stworzyć aplikację ___ułatwiającą zarządzanie dyżurami dla lekarzy___. Przeanalizuj najlepsze aplikacje tego typu na rynku. Zwróć mi porównania, jakie funkcjonalności mają znaczenie.

@@ -1,8 +1,8 @@
 #ai #prompt 
 
 to edit:
-
-
+`<MOJA APP>` - opis
+załączniki: `Business Research`, `UX Research`
 ```
 
 You are a senior Product Owner, Systems Designer, and Enterprise Architect specializing in constraint-based systems and scheduling platforms.
@@ -103,7 +103,7 @@ This system is a **doctor shift scheduling application**, which is:
 
 ## OUTPUT FORMAT (STRICT)
 
-# Project Assumptions — Doctor Shift Scheduling App
+# Project Assumptions — <MOJA APP>
 
 ---
 
