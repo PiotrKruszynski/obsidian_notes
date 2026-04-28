@@ -56,7 +56,8 @@ Final decision: Allow / Deny
   
 - **Permissions Boundary**  
 → max permissions dla IAM principal  
-→ używane przy delegowaniu uprawnień (dev teams)  
+→ używane przy delegowaniu uprawnień (dev teams)  do non administrators , example create new IAM users, self assign policies while making sure they wont make themself admin.
+-> useful to restrict one specific user, instead of a whole account using Organisation & SCP
   
 - **SCP (Service Control Policy)**  
 → _max permissions_ dla AWS account (Organizations)  
