@@ -227,6 +227,10 @@ EC2 = **compute node + attached resources (ENI + EBS)**
 | Lambda | serverless | event-driven |
 | ECS/Fargate | containers | microservices |
 
+## Elastic Fabric Adapter
+EFA jest specjalnym interfejsem sieciowym dla workloadów **HPC / tightly coupled compute**, gdzie instancje muszą bardzo szybko komunikować się między sobą z niską latencją.
+
+
 ---
 
 ## Exam traps
