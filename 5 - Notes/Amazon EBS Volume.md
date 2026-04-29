@@ -67,9 +67,7 @@ ___
 
 ---
 ### Multi-Attach
-- tylko dla **io1 / io2**
-- attach do wielu EC2
-- **same AZ**
+- enables you to attach a **single Provisioned IOPS SSD (io1 or io2)** volume to multiple instances that are in the **same AZ.**
 - do 16 instancji
 - full read/write
 
