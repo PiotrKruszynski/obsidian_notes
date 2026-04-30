@@ -23,7 +23,7 @@ EFS = **network shared drive (jak NAS)**
 - high availability
 ### Access
 - mount na EC2 (Linux)
-- przez **mount targets (ENI)** w VPC
+- przez **mount targets (ENI)** w VPC -> dla każdej AZ
 - kontrola:
   - Security Groups
   - POSIX permissions
