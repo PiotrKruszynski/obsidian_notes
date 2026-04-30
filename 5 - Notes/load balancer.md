@@ -95,7 +95,7 @@ Load Balancer = **single entry (DNS) → routing → healthy targets**
 	- ultra low latency  
 	- millions req/sec  
   
-- static IP:  
+- *static IP:  -> nie zmienia, tamte jak DNS name ale ich IP moze sie zmienić
 	- 1 per AZ  
 	- supports Elastic IP  
   
