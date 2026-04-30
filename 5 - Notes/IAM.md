@@ -13,6 +13,30 @@ Note:
 >- global service (nie per region)
 >Use case: **secure access control, cross-service & cross-account access**
 
+```
+IAM Policy
+→ dokument JSON z uprawnieniami
+→ mówi: co wolno / czego nie wolno
+→ np. s3:GetObject, dynamodb:PutItem, elasticfilesystem:ClientMount
+```
+
+```
+IAM Role
+→ tożsamość przyjmowana tymczasowo przez zasób, usługę albo użytkownika
+→ np. EC2 role, Lambda execution role, ECS task role
+→ role ma przypięte IAM policies
+```
+
+```
+IAM Identity Center  
+→ centralne zarządzanie dostępem ludzi do wielu kont AWS  
+→ użytkownicy/grupy logują się przez SSO  
+→ dostają permission sets, które pod spodem tworzą role w kontach AWS
+```
+
+
+
+
 # Mental model
 ```
 Identity
