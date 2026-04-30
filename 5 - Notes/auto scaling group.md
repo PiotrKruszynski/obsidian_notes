@@ -10,6 +10,10 @@ Note:
 >**min / max** → bounds  
 >**self-healing** → replace unhealthy  
 >**auto register/deregister** → z Load Balancer  
+>poprawna konserwacja - żeby natychmiast nie zabijało `unhealthy`:
+>- Put the instance into Standby - nadal zyje czasowo nie obsługuje ruchu
+>- `ReplaceUnhealthy` - nie zabijaj mi tej instancji podczas maintenance
+>- shapshot + AMI za wolne
 
 ## 🧠 Mental model
 ASG = **self-healing + auto-scaling orchestrator**
