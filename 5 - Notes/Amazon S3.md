@@ -13,6 +13,7 @@ istnieją block storage / file storage / object storage
 >- **nie jest file systemem** i nie jest block storage
 >- strong read-after-write consistency
 
+>S3 automatycznie skaluje wydajność per prefix — min. ok. 3,500 zapisów/s i 5,500 odczytów/s na prefix — więc przy dużym ruchu najprościej i najtaniej rozproszyć obiekty w jednym bucketcie po wielu prefixach, np. per customer/date/hash.
 # 1. Mental model / feature map
 ### Cost / storage classes
 - **S3 Standard**  
