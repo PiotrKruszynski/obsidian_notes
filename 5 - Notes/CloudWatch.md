@@ -13,6 +13,8 @@ Note:
 >- near real-time monitoring
 >- region-based service
 
+![[Pasted image 20260430120016.png]]
+
 ---
 
 # Mental model (KLUCZ)
