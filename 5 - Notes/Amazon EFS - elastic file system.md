@@ -34,8 +34,8 @@ EFS = **network shared drive (jak NAS)**
 - General Purpose (low latency)
 - Max I/O (high throughput)
 ### Throughput modes
-- Bursting (default)
-- Provisioned
+- Bursting (default) -> 
+- Provisioned -> 
 - Elastic (auto scale throughput)
 ### Storage classes
 - Standard (częsty dostęp)
