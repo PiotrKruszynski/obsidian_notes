@@ -14,12 +14,10 @@ Note:
 - **NLB** → performance / TCP / static IP / preserve  IP  -> fast routing (L4)
 - **GWLB** → firewall / network appliances -> inspection layer
 
-## ⚠️ Dlaczego to jest ważne   
 - public IP = tylko **entry point**  
 - backendy są **private (brak direct access)**  
 - security + isolation
-# Load Balancer — core
-### Mental model
+
 Load Balancer = **single entry (DNS) → routing → healthy targets**
 ### Core features
 - entry point dla aplikacji (DNS name)

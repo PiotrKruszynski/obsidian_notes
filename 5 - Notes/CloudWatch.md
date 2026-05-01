@@ -33,7 +33,6 @@ Note:
 - numeryczne dane czasowe (np. CPUUtilization, RequestCount)
 - default AWS metrics (EC2, RDS, ALB, Lambda)
 - custom metrics (możesz wysyłać własne, 1min / 5 min)
-
 ## 2. Alarms
 - reagują na metryki
 - OK, ALARM, INSUFFICIENT_DATA
@@ -46,7 +45,6 @@ Note:
 👉 **exam: auto reaction → CloudWatch Alarm**
 
 ---
-
 ## 3. Logs
 - surowe logi aplikacji / systemu
 - aplikacje, EC2, Lambda
@@ -56,7 +54,6 @@ Note:
   - log stream
 
 👉 debug / troubleshooting
-
 ## 4. Dashboards
 wizualizacja metryk
 
