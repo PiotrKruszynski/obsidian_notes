@@ -9,6 +9,7 @@ Podstawa programowania proceduralnego.
 
 **Cel:** re-używalność kodu, 
 
+_function that displays the character passed as a parameter
 ```c
 #include <unistd.h> // biblioteka pod write
 
@@ -42,6 +43,67 @@ int main(void)
 ```
 
 
+new line
+```C
+#include <unistd.h>
+
+void ft_put_newline(void)
+{
+	char nl;
+	nl = ‘\n’;
+	write(1, &nl, 1);
+}
+
+int main(void)
+{
+	ft_put_newline();
+	return (0);
+}
+```
+
+Wypisanie całego alfabetu od 'a' do 'z'
+
+```c
+#include <unistd.h>
+
+void ft_alphabet(char c)
+{
+	write(1,&c, 1);
+}
+
+int main(void)
+{
+	char first_letter;
+	first_letter = ‘a’;
+	
+	while (first_letter <= ‘z’) {
+		ft_alphabet(first_letter);
+		first_letter++;
+	}
+	
+	ft_alphabet(‘\n’);
+}
+```
+
+Wypisanie całego alfabetu od 'a' do 'z'
+
+```c
+#include <unistd.h>
+
+void ft_alphabet(void)
+{
+	char *alphabet;
+	alphabet = “abcdefghijklmnopqrstuvwxyz"
+	write(1, alphabet, 26);
+}
+
+int main(void)
+{
+	ft_alphabet();
+	return (0);
+}
+
+```
 
 
 

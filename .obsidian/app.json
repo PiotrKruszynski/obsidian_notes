@@ -4,7 +4,7 @@
   "attachmentFolderPath": "7 - Assets",
   "alwaysUpdateLinks": true,
   "promptDelete": false,
-  "vimMode": false,
+  "vimMode": true,
   "pdfExportSettings": {
     "pageSize": "A4",
     "landscape": false,
