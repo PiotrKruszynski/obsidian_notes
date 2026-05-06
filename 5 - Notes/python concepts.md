@@ -18,7 +18,7 @@ x = "tekst"  # ✅ Działa
   
 3. **Strong typing**  
   
-[[variable]] = nazwana referencja do obiektu w pamięci  
+[[variable python]] = nazwana referencja do obiektu w pamięci  
 
 python nie wykonuje coercion (niejawnej konwersji) między niekompatybilnymi typami.
   
