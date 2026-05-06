@@ -7,50 +7,30 @@ Note:
 Zbiór instrukcji zamknięty pod identyfikatorem. 
 Podstawa programowania proceduralnego.
 
-**Cel:** re-używalność kodu, modularność, abstrakcja.
-
-### Charakterystyka:
-
-- **Silne typowanie:** każda funkcja musi mieć określony typ zwracany (lub `void`).
-- **Brak domyślnego dziedziczenia stanu:** zmienne lokalne są czyszczone po wyjściu z funkcji (chyba że użyto `static`).
-- **Deklaracja vs Definicja:** * _Prototyp (deklaracja):_ informuje kompilator o istnieniu funkcji (zazwyczaj w plikach `.h`).
-    - _Definicja:_ faktyczna implementacja kodu (pliki `.c`).
-        
-
-### Nazwa funkcji:
-- **snake_case** (najczęstszy standard w C, np. w bibliotece standardowej).
-- **Deskryptywna / opisowa.**
-- Litery, cyfry, underscore (`_`), nie może zaczynać się od cyfry.
-- Po angielsku.
-    
-
-### Parametry i Przekazywanie:
-
-W C parametry są **tylko pozycyjne**.
-1. **Pass by Value (przez wartość):** Funkcja otrzymuje kopię zmiennej. Zmiany wewnątrz nie wpływają na oryginał.
-2. **Pass by Reference (symulacja wskaźnikiem):** Przekazujemy adres pamięci (`type *ptr`). Pozwala na modyfikację zmiennej zewnętrznej.
-3. **Tablice jako parametry:** Zawsze przekazywane jako wskaźnik do pierwszego elementu (degradacja tablicy do wskaźnika).
-4. **Variadic Functions (`...`):** Odpowiednik `*args`. Wymaga biblioteki `<stdarg.h>` (np. funkcja `printf`).
-    
-
-### Specyficzne cechy:
-
-- **Brak Named Arguments:** Nie można wywołać funkcji przez `fn(param=value)`.
-- **Brak Default Parameters:** C nie wspiera domyślnych wartości (trzeba tworzyć osobne funkcje lub używać makr).
-- **`void` w argumentach:** Jeśli funkcja nie przyjmuje argumentów, dobrą praktyką jest zapis `int main(void)` zamiast `int main()`.
-- **Modyfikator `static`:** Ogranicza widoczność funkcji tylko do pliku, w którym została zdefiniowana (enkapsulacja na poziomie modułu).
-
-### Przykład składni:
+**Cel:** re-używalność kodu, 
 
 ```c
-// Prototyp
-int add_numbers(int a, int b);
+#include <unistd.h> // biblioteka pod write
 
-// Definicja
-int add_numbers(int a, int b) {
-    return a + b;
+void fr_putchar(char c) // deklaracja
+{
+    write(1, &c, 1);
+}
+
+int main(void) // wywołanie
+{
+    fr_putchar('a');        
+    return (0);      
 }
 ```
+
+
+
+
+
+
+
+
 
 ---
 
