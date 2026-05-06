@@ -25,6 +25,24 @@ int main(void) // wywołanie
 ```
 
 
+```c
+#include <unistd.h>
+
+// Wskaźnik char *str pozwala przyjąć napis w cudzysłowie "ab"
+void ft_put2char(char *znaki)
+{
+    write(1, znaki, 2);
+}
+
+int main(void)
+{
+    ft_put2char("ab"); // Przekazujemy napis
+    return 0;
+}
+```
+
+
+
 
 
 
