@@ -12,14 +12,14 @@ Podstawa programowania proceduralnego.
 ```c
 #include <unistd.h> // biblioteka pod write
 
-void fr_putchar(char c) // deklaracja
+void ft_putchar(char c) // deklaracja
 {
     write(1, &c, 1);
 }
 
 int main(void) // wywołanie
 {
-    fr_putchar('a');        
+    ft_putchar('a');        
     return (0);      
 }
 ```
