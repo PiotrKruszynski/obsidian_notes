@@ -2,7 +2,6 @@
 - cel: re-używalność kodu  
 - automatycznie nie dziedziczy stanu automatycznych wywołań
   
-  
 ### Nazwa funkcji:  
 - sneake case  
 - deskryptywna / opisowa  

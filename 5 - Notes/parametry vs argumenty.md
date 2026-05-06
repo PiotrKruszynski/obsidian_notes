@@ -25,4 +25,4 @@ def add(*,c,d):
 
 print(add(1,2))
 ```
-[[function]]
+[[function python]]

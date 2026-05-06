@@ -2,11 +2,11 @@ Created: 2025-12-27  15:14
 ___
 Note:
 
-		paradygmat
-		o zgodności typu decyduje zachowanie obiektu, a nie jego dziedziczenie 
-		lub deklarowany typ
+paradygmat
+o zgodności typu decyduje zachowanie obiektu, a nie jego dziedziczenie 
+lub deklarowany typ
 		
-		liczy się **interfejs operacyjny** (metody/atrybuty dostępne na obiekcie)
+liczy się **interfejs operacyjny** (metody/atrybuty dostępne na obiekcie)
 		
 	    nie pytaj „czy jesteś kaczką?”, tylko „czy możesz kwakać?”.
 	    “If it walks like a duck and quacks like a duck, it’s a duck.”
