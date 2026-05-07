@@ -25,11 +25,11 @@ int main(void) // wywołanie
 }
 ```
 
-
+_function that displays the character passed as a parameter
 ```c
 #include <unistd.h>
 
-// Wskaźnik char *str pozwala przyjąć napis w cudzysłowie "ab"
+// Wskaźnik char *str pozwala przyjąć "ab"
 void ft_put2char(char *znaki)
 {
     write(1, znaki, 2);
@@ -43,7 +43,7 @@ int main(void)
 ```
 
 
-new line
+_new line
 ```C
 #include <unistd.h>
 
@@ -61,8 +61,7 @@ int main(void)
 }
 ```
 
-Wypisanie całego alfabetu od 'a' do 'z'
-
+_wypisanie całego alfabetu od 'a' do 'z'
 ```c
 #include <unistd.h>
 
@@ -85,8 +84,7 @@ int main(void)
 }
 ```
 
-Wypisanie całego alfabetu od 'a' do 'z'
-
+_Wypisanie całego alfabetu od 'a' do 'z'
 ```c
 #include <unistd.h>
 
