@@ -37,6 +37,8 @@ void ft_put2char(char *znaki)
 
 int main(void)
 {
+*char = “ffffff”; tego stringa nie mozna nadpisac
+char[] = {‘a’, ‘b’, ‘c’, ‘\0’}; to string ktory mozna nadpisac, to faktyczna tabela char
     ft_put2char("ab"); // Przekazujemy napis
     return 0;
 }
