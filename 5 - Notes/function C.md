@@ -97,7 +97,7 @@ void ft_alphabet(void)
 
 int main(void)
 {
-	ft_alphabet();
+	ft_alphabet(void);
 	return (0);
 }
 
