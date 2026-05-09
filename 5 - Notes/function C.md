@@ -1,13 +1,15 @@
+main:  #c
+Status: #pending 
+
 Created: 2026-05-06  10:21
 ___
-Note:
 
-# Funkcje w C
 
-Zbiór instrukcji zamknięty pod identyfikatorem. 
-Podstawa programowania proceduralnego.
-
+> [!NOTE]
+> Zbiór instrukcji zamknięty pod identyfikatorem. 
 **Cel:** re-używalność kodu, 
+
+
 
 _function that displays the character passed as a parameter
 ```c
@@ -131,16 +133,7 @@ int main(void)
 
 
 
-
 ___
 Metadata:
 
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # c
----
-```
-
-Status: #pending
 Tags: #c #functions

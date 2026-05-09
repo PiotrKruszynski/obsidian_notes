@@ -1,7 +1,7 @@
 main:  #c
 Status: #pending 
 
-Created: {{date:YYYY-MM-DD}}  {{time:HH:mm}}
+Created: 2026-05-09  11:00
 ___
 
 > [!NOTE]
