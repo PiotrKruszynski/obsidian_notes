@@ -108,12 +108,6 @@ int main(void)
 ```
 
 
-
-
-
-
-
-
 ---
 
 ### Porównanie z Pythonem :
