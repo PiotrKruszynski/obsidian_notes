@@ -123,6 +123,54 @@ printf("%d\n", ***p3);    // 666 (trzy *)
 printf("%d\n", n);  // wydrukuje 42
 ```
 
+# Swap w C — Wskaźniki i Dereferencja
+
+W `main()` przekazujemy adresy `&x` i `&y`. W funkcji `swap()` parametry `a` i `b` otrzymują kopie tych adresów (czyli wskaźniki).
+## Implementacja
+
+```c
+void swap(int *a, int *b) {
+    int tmp = *a;    // tmp = wartość z x
+    *a = *b;         // x dostaje wartość y
+    *b = tmp;        // y dostaje starą wartość x
+}
+```
+
+## Krok po kroku
+
+1. `tmp = *a` — dereferencja, pobieramy wartość na którą wskazuje `a`
+2. `*a = *b` — przypisujemy wartość z `*b` do adresu na który wskazuje `a`
+3. `*b = tmp` — przypisujemy starą wartość `x` do adresu na który wskazuje `b`
+
+Po powrocie do `main()` — `x` i `y` są zamienione.
+
+## ❌ Błąd — czemu `a = b;` nie działa
+
+```c
+void swap(int *a, int *b) {
+    int tmp = *a;
+    a = b;           // ← a wskazuje teraz na y
+    *b = tmp;        // zapisujemy na y, nie na x!
+}
+```
+
+Zmieniamy sam wskaźnik `a`, a nie wartość na którą wskazuje. Zapisujemy `tmp` na złym adresie.
+
+## Kluczowe rozróżnienie
+
+- **`a = b;`** — zmienia sam wskaźnik (nie widać w `main()`)
+- **`*a = *b;`** — zmienia wartość na którą wskazuje (widać w `main()`)
+
+
+
+
+
+
+
+
+
+
+
 ## Typowe Błędy
 
 ### ❌ Błąd: Dereferencja przy Przypisaniu
