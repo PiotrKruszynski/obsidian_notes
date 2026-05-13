@@ -107,6 +107,61 @@ int main(void)
 
 ```
 
+_super_
+```c
+#include <unistd.h>
+
+void ft_putstr(char *str)
+{
+	int len;
+	
+	len = 0;
+	while (str[len] != '\0')
+	{
+		len++;
+	}
+	
+	write(1, str, len);
+}
+
+int main(void)
+{
+	ft_putstr("Cześć!");
+	return (0);
+}
+```
+
+_TO SAMO ZNAK O ZNAKU_
+
+```c
+void ft_putstr(char *str)
+{
+	int i;
+	
+	i = 0;
+	while (str[i] != '\0')
+	{
+		write(1, &str[i], 1);  // Napisz jeden znak
+		i++;
+	}
+}
+```
+
+```c
+int ft_strlen(char *str)
+{
+	int len;
+	
+	len = 0;
+	while (str[len])
+		len++;
+	
+	return (len);
+}
+```
+
+
+
 
 ---
 
