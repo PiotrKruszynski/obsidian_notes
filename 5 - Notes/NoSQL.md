@@ -38,16 +38,26 @@ CAP jest uproszczeniem — patrz też **PACELC** (trade-off latency vs consisten
 
 ---
 
-## PACELC — rozszerzenie CAP
+## ten sam problem można rozważyć inaczej
 
-```
-If Partition → (A vs C)
-Else (normalnie) → (L vs C)
-                    Latency vs Consistency
-```
+### Yield i Harvest — lepszy model niż CAP
 
-DynamoDB: AP/EL — wysoka dostępność przy partycji, niski latency kosztem consistency normalnie.  
-Spanner (Google): CP/EC — spójność zawsze, latency wyższa.
+Zamiast binarnego C/A, patrzysz na dwa wymiary:
+
+**Yield** = `ile zapytań dostało odpowiedź / wszystkie zapytania`  
+→ dostępność z punktu widzenia klienta
+
+**Harvest** = `ile danych zwróciłeś / ile danych istnieje`  
+→ kompletność odpowiedzi
+
+Przykład z notatki (wyszukiwarka "cassandra database"):
+
+- Jeden shard z wynikami niedostępny
+- Możesz **odmówić odpowiedzi** → niski yield, harvest 100%
+- Możesz **odpowiedzieć tym co masz** → yield 100%, harvest 80%
+
+To jest decyzja biznesowa: czy użytkownik woli błąd, czy niepełny wynik? Google wybrało harvest — wolą pokazać niekompletne wyniki niż error 500.
+
 
 ---
 
