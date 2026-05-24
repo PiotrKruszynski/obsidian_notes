@@ -29,10 +29,10 @@ P — Partition Tol.   (system działa mimo utraty połączeń między węzłami
 
 **P jest obowiązkowe** w systemach rozproszonych — sieć zawsze może się podzielić. Więc wybór to **CP vs AP**.
 
-|Typ|Przykłady|Wybór|
-|---|---|---|
-|CP|MongoDB, HBase, Zookeeper|Spójność ważniejsza niż dostępność|
-|AP|Cassandra, CouchDB, DynamoDB|Dostępność ważniejsza niż ścisła spójność|
+| Typ | Przykłady                    | Wybór                                     |
+| --- | ---------------------------- | ----------------------------------------- |
+| CP  | MongoDB, HBase, Zookeeper    | Spójność ważniejsza niż dostępność        |
+| AP  | Cassandra, CouchDB, DynamoDB | Dostępność ważniejsza niż ścisła spójność |
 
 CAP jest uproszczeniem — patrz też **PACELC** (trade-off latency vs consistency nawet bez partition).
 
@@ -44,10 +44,10 @@ CAP jest uproszczeniem — patrz też **PACELC** (trade-off latency vs consisten
 
 Zamiast binarnego C/A, patrzysz na dwa wymiary:
 
-**Yield** = `ile zapytań dostało odpowiedź / wszystkie zapytania`  
+**Yield** AP _plon_= `ile zapytań dostało odpowiedź / wszystkie zapytania`  
 → dostępność z punktu widzenia klienta
 
-**Harvest** = `ile danych zwróciłeś / ile danych istnieje`  
+**Harvest** CP _żniwo_ = `ile danych zwróciłeś / ile danych istnieje`  
 → kompletność odpowiedzi
 
 Przykład z notatki (wyszukiwarka "cassandra database"):
@@ -306,9 +306,6 @@ Alternatywa dla dual-write (write do dwóch baz w aplikacji) — dual-write jest
 - **Vendor lock-in** — DynamoDB API nie jest standardem; migracja droga
 - **"NoSQL skaluje lepiej"** — PostgreSQL z właściwym indeksem i connection poolingiem obsługuje miliony zapytań/s; nie uciekaj do NoSQL przed profilerem
 
----
-
-_Źródła: "Designing Data-Intensive Applications" (Kleppmann), AWS re:Invent talks, dokumentacje oficjalne_
 
 ___
 Metadate:
