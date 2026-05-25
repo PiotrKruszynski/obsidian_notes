@@ -4,111 +4,355 @@ Status: #pending
 
 Created: 2026-05-24  18:03
 ___
+# NoSQL — architektura, skalowanie i systemy rozproszone
 
-Baza danych to nic innego jak zbiór danych 
-- model danych żeby dane były ustrukturyzowane
-- dostęp (serwer, silnik, konsystencja)
+## Czym jest baza danych?
 
-SQL - schema
-NoSQL - _schemaless_
-# Dlaczego NoSQL istnieje
+Baza danych to:
+- zbiór danych,
+- model organizacji danych,
+- mechanizm dostępu i przetwarzania danych.
 
-Relacyjne bazy danych zostały zaprojektowane dla spójności i struktury — nie dla skali i elastyczności. W 2000+ internet 2.0 produkuje dużo danych, dane różne i w sql dużo kolumn w null. Null spowalnia sql. Drugi czynnik to kiedyś używało się HDD, dziś SSD.
-SQL jest szybszy jak dane są ustrukturyzowane.
+Każda baza danych rozwiązuje trzy problemy:
+1. jak przechowywać dane,
+2. jak je odnajdywać,
+3. jak zachować spójność przy współbieżności i awariach.
+# SQL vs NoSQL
 
-**Główne motywacje:**
+| SQL                | NoSQL                |
+| ------------------ | -------------------- |
+| schema-based       | schemaless           |
+| relacje i JOINy    | denormalizacja       |
+| ACID               | BASE                 |
+| pionowe skalowanie | poziome skalowanie   |
+| silna spójność     | eventual consistency |
+| transakcje         | wysoka dostępność    |
+| structured data    | heterogeneous data   |
 
-- Horyzontalna skalowalność (sharding bez bólu)
-- _Schemaless_ — dane heterogeniczne lub ewoluujące szybko
-- Specjalizacja pod konkretny access pattern (grafowe, time-series, wyszukiwanie)
-- Latencja — brak joinów, dane denormalizowane
+# Dlaczego NoSQL istnieje?
 
----
+Relacyjne bazy danych były projektowane:
+- dla struktury,
+- spójności,
+- transakcji,
+- pojedynczych lub małych klastrów.
 
-## CAP Theorem — fundament
 
-Dystrybuowany system może mieć jednocześnie tylko **2 z 3**:
+Nie były projektowane pod:
 
+- Internet-scale,
+- miliony requestów,
+- globalne klastry,
+- dynamiczne dane,
+- ogromny write throughput.
+
+# Problemy klasycznych RDBMS
+
+## 1. Skalowanie poziome
+
+SQL dobrze skaluje się pionowo:
+
+- więcej RAM,
+- szybszy CPU,
+- większy storage.
+
+Ale Internet wymusił:
+
+  
+
+- dziesiątki,
+- setki,
+- tysiące maszyn.
+
+  
+
+Problem:
+
+- JOIN między serwerami jest bardzo kosztowny,
+- distributed transactions są trudne,
+- locki i synchronizacja spowalniają system.
+
+## 2. Dynamiczne dane
+
+W Web 2.0 dane stały się:
+
+- heterogeniczne,
+- szybko zmienne,
+- częściowo nieustrukturyzowane.
+
+  
+
+Przykład:
+- każdy użytkownik może mieć inne pola profilu,
+- różne dokumenty mają różną strukturę.
+
+W SQL prowadzi to do:
+- ogromnej liczby NULL,
+- szerokich tabel,
+- kosztownych migracji schematu.
+
+## 3. HDD vs SSD
+Relacyjne DB były projektowane pod HDD.
+
+HDD:
+- mają talerze,
+- wymagają seek operation,
+- random access jest bardzo kosztowny.
+
+JOINy generują:
+- dużo seeków,
+- dużo skakania po danych.
+
+SSD usunęły ten problem:
+- brak ruchomych części,
+- szybki random access,
+- dużo niższe latency.
+
+To umożliwiło rozwój nowoczesnych systemów NoSQL.
+# Big Data
+## Charakterystyka Big Data
+Big Data to dane:
+- zbyt duże dla jednej maszyny,
+- szybko rosnące,
+- pochodzące z wielu źródeł,
+- wymagające rozproszonego przetwarzania.
+## Wymagania Big Data
+- wysoka dostępność,
+- szybki odczyt i zapis,
+- regionalna replikacja,
+- odporność na awarie,
+- brak single point of failure,
+- skalowanie horyzontalne.
+# Shared Nothing Architecture
+Większość NoSQL opiera się o:
+- shared nothing.
+
+Każdy node:
+- jest niezależny,
+- ma własny storage,
+- własny RAM,
+- własny CPU.
+
+Nie istnieje centralny serwer zarządzający.
+
+Zalety:
+- łatwe skalowanie,
+- brak bottlenecku,
+- brak single point of failure.
+# Fundamentalne techniki NoSQL
+## 1. Replikacja
+Te same dane są kopiowane na wiele node’ów.
+
+Cel:
+- odporność na awarie,
+- większa dostępność,
+- szybszy odczyt lokalny.
+## 2. Partycjonowanie (Sharding)
+Dane są dzielone na partycje między serwery.
+Przykład:
+```text
+
+Node A -> users 1-1M
+Node B -> users 1M-2M
+Node C -> users 2M-3M
 ```
-C — Consistency      (każdy odczyt widzi ostatni zapis)
-A — Availability     (każde zapytanie dostaje odpowiedź)
-P — Partition Tol.   (system działa mimo utraty połączeń między węzłami)
+
+Pozwala:
+- rozłożyć ruch,
+- zwiększać throughput liniowo.
+# CAP Theorem
+W systemie rozproszonym nie można jednocześnie zapewnić:
+
+| skrót | znaczenie           |
+| ----- | ------------------- |
+| C     | Consistency         |
+| A     | Availability        |
+| P     | Partition Tolerance |
+## Definicje
+### Consistency
+Każdy odczyt widzi najnowszy zapis lub błąd.
+### Availability
+Każde żądanie dostaje odpowiedź.
+Nie ma gwarancji:
+- że dane są najnowsze.
+### Partition Tolerance
+System działa mimo:
+- utraty połączeń,
+- awarii części klastra,
+- problemów sieciowych.
+# Najważniejszy wniosek CAP
+  W systemie rozproszonym:
+- P jest obowiązkowe.
+Sieć zawsze może się podzielić.
+
+Więc realny wybór to:
+- CP
+- albo AP.
+# CP vs AP
+
+| Typ | Charakterystyka | Przykłady |
+|---|---|---|
+| CP | spójność ważniejsza niż dostępność | MongoDB, HBase, ZooKeeper |
+| AP | dostępność ważniejsza niż ścisła spójność | Cassandra, DynamoDB, CouchDB |
+# PACELC
+CAP jest uproszczeniem.
+PACELC mówi:
+- jeśli jest partition → wybierasz A lub C,
+- jeśli nie ma partition → wybierasz latency lub consistency.
+
+Nowoczesne systemy często optymalizują:
+- latency,
+- throughput,
+- availability.
+# Yield i Harvest
+Lepszy praktyczny model niż CAP.
+## Yield
+```text
+yield = odpowiedziane requesty / wszystkie requesty
+```
+Mierzy:
+- dostępność z perspektywy klienta.
+## Harvest
+```text
+harvest = zwrócone dane / wszystkie dane
 ```
 
-**P jest obowiązkowe** w systemach rozproszonych — sieć zawsze może się podzielić. Więc wybór to **CP vs AP**.
+Mierzy:
+- kompletność odpowiedzi.
+## Przykład
+Wyszukiwarka:
+- jeden shard niedostępny.
 
-| Typ | Przykłady                    | Wybór                                     |
-| --- | ---------------------------- | ----------------------------------------- |
-| CP  | MongoDB, HBase, Zookeeper    | Spójność ważniejsza niż dostępność        |
-| AP  | Cassandra, CouchDB, DynamoDB | Dostępność ważniejsza niż ścisła spójność |
+Opcja 1:
+- zwróć error,
+- harvest = 100%,
+- yield niski.
 
-CAP jest uproszczeniem — patrz też **PACELC** (trade-off latency vs consistency nawet bez partition).
+Opcja 2:
+- zwróć częściowe wyniki,
+- yield = 100%,
+- harvest niższy.
 
----
+Google zwykle wybiera:
+- wysoki yield,
+- częściowe odpowiedzi.
+# ACID vs BASE
 
-## ten sam problem można rozważyć inaczej
+## ACID
+Relacyjne podejście.
 
-### Yield i Harvest — lepszy model niż CAP
-
-Zamiast binarnego C/A, patrzysz na dwa wymiary:
- 
-**Yield** AP _plon_= `ile zapytań dostało odpowiedź / wszystkie zapytania`  
-→ dostępność z punktu widzenia klienta
-
-**Harvest** CP _żniwo_ = `ile danych zwróciłeś / ile danych istnieje`  
-→ kompletność odpowiedzi
-
-Przykład z notatki (wyszukiwarka "cassandra database"):
-
-- Jeden shard z wynikami niedostępny
-- Możesz **odmówić odpowiedzi** → niski yield, harvest 100%
-- Możesz **odpowiedzieć tym co masz** → yield 100%, harvest 80%
-
-To jest decyzja biznesowa: czy użytkownik woli błąd, czy niepełny wynik? Google wybrało harvest — wolą pokazać niekompletne wyniki niż error 500.
-
-
-# Rodzaje baz danych
-[[types of databases]]
-
----
-
-## Indeksy w NoSQL — porównanie
-
-|Typ bazy|Indeksowanie|
+| Litera | Znaczenie |
 |---|---|
-|Key-Value|Brak (tylko po kluczu)|
-|Document|Secondary indexes na polach dokumentu|
-|Wide-Column|Primary key only (SAI/SI w Cassandzie jako dodatek)|
-|Graph|Automatyczne na węzłach/krawędziach|
-|Time-Series|Tag-based index, kompresja temporalna|
-|Search|Inverted index (Lucene)|
+| A | Atomicity |
+| C | Consistency |
+| I | Isolation |
+| D | Durability |
+## BASE
+NoSQL podejście.
 
----
-
-## Eventual Consistency — jak działa w praktyce
-
-Replikacja async → węzeł B może mieć starszą wersję danych niż węzeł A przez chwilę.
-
-**Mechanizmy rozwiązywania konfliktów:**
-
-- **Last Write Wins (LWW)** — wygrywa zapis z wyższym timestamp. Problem: zegary w klastrze nie są idealnie zsynchronizowane (NTP ≠ atomowy). Cassandra domyślnie używa LWW.
-- **Vector Clocks** — każdy węzeł trzyma wektor wersji. Umożliwia wykrycie konfliktów (nie rozwiązuje automatycznie). Riak, Dynamo.
-- **CRDTs** (Conflict-free Replicated Data Types) — struktury matematycznie zaprojektowane tak, żeby merge był zawsze deterministyczny. Redis, Riak, niektóre Cassandra typy (Counter, Set).
-- **Operational Transform / Paxos / Raft** — consensus-based, silna spójność, wyższy latency.
-
----
-
-## Transakcje w NoSQL
-
-|System|Transakcje|
+| Litera | Znaczenie |
 |---|---|
-|MongoDB 4.0+|ACID multi-document (replica set), multi-shard (droższe)|
-|Cassandra|LWT (Paxos, tylko CAS) lub BATCH (atomowość, nie izolacja)|
-|DynamoDB|TransactWriteItems (do 25 items, cross-table)|
-|Redis|MULTI/EXEC (optimistic locking przez WATCH)|
-|Neo4j|ACID (single-node), ograniczone w klastrze|
-|FaunaDB/Spanner|Pełne ACID dystrybuowane|
+| B | Basically Available |
+| S | Soft State |
+| E | Eventually Consistent |
 
-**Reguła:** jeśli potrzebujesz ACID często i na wielu encjach — rozważ relacyjną bazę lub NewSQL (CockroachDB, Spanner, YugabyteDB).
+# Różnice ACID vs BASE
+
+| ACID           | BASE                   |
+| -------------- | ---------------------- |
+| silna spójność | eventual consistency   |
+| izolacja       | optimistic concurrency |
+| transakcje     | availability           |
+| constraints    | elastyczność           |
+| schema         | schemaless             |
+
+---
+
+# Eventual Consistency
+
+Dane propagują się asynchronicznie.
+Przez chwilę:
+- różne node’y mogą mieć różne wersje danych.
+System finalnie osiąga spójność.
+
+# Rozwiązywanie konfliktów
+## Last Write Wins (LWW)
+Wygrywa rekord:
+- z najwyższym timestamp.
+Problem:
+- zegary nie są idealnie zsynchronizowane.
+Cassandra domyślnie używa LWW.
+
+## Vector Clocks
+Każdy node trzyma historię wersji.
+Pozwala:
+- wykryć konflikt,
+- ale nie rozwiązuje go automatycznie.
+
+## CRDT
+Struktury matematyczne:
+- zaprojektowane do bezkonfliktowego merge.
+
+Merge zawsze daje:
+- deterministyczny wynik.
+
+---
+
+## Paxos / Raft
+
+Consensus algorithms.
+Zapewniają:
+- silną spójność,
+- kosztem latency.
+# Parametry R, W, N
+## N
+Liczba replik danych.
+## R
+Ile replik musi odpowiedzieć przy odczycie.
+## W
+Ile replik musi potwierdzić zapis.
+# Reguła spójności
+Spójność zachodzi gdy:
+R \+ W \> N
+
+---
+
+# Charakterystyczne przypadki
+## Bardzo szybki odczyt
+$begin:math:display$
+
+R \= 1\,\\ W \= N
+
+$end:math:display$
+- odczyt z jednej repliki,
+- zapis musi trafić wszędzie.
+
+---
+
+## Bardzo szybki zapis
 
 
+R \= N\,\\ W \= 1
+
+
+- zapis szybki,
+- odczyt kosztowny.
+
+---
+
+## Maksymalna wydajność
+
+$R \= 1\,\\ W \= 1$
+
+- bardzo szybki system,
+- niska spójność.
+# Indeksy w NoSQL
+
+| Typ | Indeksy |
+|---|---|
+| Key-Value | tylko po kluczu |
+| Document | secondary indexes |
+| Wide-Column | głównie primary key |
+| Graph | indeksy węzłów i relacji |
+| Time-Series | tag-based indexes |
+| Search | inverted indexes |
