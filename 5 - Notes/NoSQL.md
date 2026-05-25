@@ -51,7 +51,7 @@ CAP jest uproszczeniem — patrz też **PACELC** (trade-off latency vs consisten
 ### Yield i Harvest — lepszy model niż CAP
 
 Zamiast binarnego C/A, patrzysz na dwa wymiary:
-
+ 
 **Yield** AP _plon_= `ile zapytań dostało odpowiedź / wszystkie zapytania`  
 → dostępność z punktu widzenia klienta
 

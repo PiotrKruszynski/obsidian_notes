@@ -5,8 +5,8 @@
   "primary-theme@@h4-color@@dark": "#2C5E3B",
   "primary-theme@@h5-color@@dark": "#4A6984",
   "primary-theme@@h6-color@@dark": "#5A4565",
-  "primary-theme@@bold-color@@dark": "#2F2F2F",
   "primary-theme@@italic-color@@dark": "#6E8E75",
   "primary-theme@@bold-italic-color@@dark": "#3B5241",
-  "primary-theme@@bold-italic-strikethrough-color@@dark": "#8A8A8A"
+  "primary-theme@@bold-italic-strikethrough-color@@dark": "#8A8A8A",
+  "primary-theme@@bold-color@@dark": "#5C3A21"
 }
