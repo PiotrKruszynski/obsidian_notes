@@ -22,3 +22,6 @@ SQL
 - DDL _data definition language_ komendy, które pozwalają manipulować schema
 	- CREATE
 	- DROP
+- TCL _transaction definition language_
+	- COMMIT
+	- ROLLBACK
