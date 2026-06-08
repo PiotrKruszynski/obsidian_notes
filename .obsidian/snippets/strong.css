@@ -1,0 +1,6 @@
+/* Pogrubienie - zmiana z zielonego na inny kolor */
+strong,
+.cm-strong {
+  color: #ff79c6 !important;  /* różowy z palety Dracula */
+  font-weight: bold;
+}

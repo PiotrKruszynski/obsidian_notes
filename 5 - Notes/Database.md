@@ -11,7 +11,7 @@ DBMS - data base management system
 RDBMS używają Structured Query Language
 
 SQL 
- - DML (_data manipulation language_) CRUD 
+ - **DML** (_data manipulation language_) CRUD 
 	 -  INSERT INTO
 	 - SELECT
 	 - UPDATE
