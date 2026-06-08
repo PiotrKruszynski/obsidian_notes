@@ -1,5 +1,6 @@
 {
   "accentColor": "#5cf591",
   "cssTheme": "Dracula Official",
-  "theme": "system"
+  "theme": "system",
+  "translucency": true
 }

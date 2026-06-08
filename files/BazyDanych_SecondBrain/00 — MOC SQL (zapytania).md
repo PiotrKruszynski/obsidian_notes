@@ -5,8 +5,11 @@ typ: map-of-content
 
 # 00 — MOC: SQL (pod rozmowę kwalifikacyjną)
 
-> [!summary] Czym jest ta notatka
+> [!summary] Baza danych
+> dane zebrane w jakieś miejsce.
+> - DBMS
 > Punkt wejścia do vaultu SQL pod **rozmowę kwalifikacyjną**. Zakres przekrojowy: fundament → średni → kluczowe zaawansowane (window functions, CTE, indeksy), z naciskiem na pułapki, które rozmówcy najczęściej testują. Dialekt: standardowy SQL; różnice PostgreSQL/MySQL zaznaczone tam, gdzie istotne.
+
 
 ## Jak używać
 Koncepcje (`Koncepcje/`) tłumaczą "dlaczego". Zestawy pytań (`Pytania-rozmowa SQL/`) to symulacja rozmowy — każde pytanie linkuje do koncepcji z odpowiedzią. Na powtórkę: czytaj pytania, przy każdym sprawdzaj, czy umiesz odpowiedzieć bez zaglądania.
