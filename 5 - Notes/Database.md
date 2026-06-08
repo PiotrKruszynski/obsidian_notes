@@ -21,3 +21,4 @@ SQL
 	- REVOKE _odebranie_
 - DDL _data definition language_ komendy, które pozwalają manipulować schema
 	- CREATE
+	- DROP
