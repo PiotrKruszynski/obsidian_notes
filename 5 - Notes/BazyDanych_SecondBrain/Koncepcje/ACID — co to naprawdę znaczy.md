@@ -36,7 +36,6 @@ Pełna izolacja (`SERIALIZABLE`) dostępna, ale rzadko używana w produkcji — 
 
 ## Połączenia
 - [[Transakcje i ACID]] — praktyczne ujęcie i typowe pytania rozmowowe
-
 - [[Poziomy izolacji transakcji]] — jak Isolation jest implementowane w praktyce
 - [[Dirty Read, Non-Repeatable Read, Phantom Read]] — anomalie bez pełnej izolacji
 - [[MVCC — Snapshot Isolation]] — wydajna implementacja izolacji

@@ -7,12 +7,12 @@
 
 Od najsłabszego do najsilniejszego, wraz z anomaliami, które **dopuszczają**:
 
-| Poziom | Dirty Read | Non-Repeatable Read | Phantom Read |
-|---|---|---|---|
-| READ UNCOMMITTED | możliwy | możliwy | możliwy |
-| READ COMMITTED | nie | możliwy | możliwy |
-| REPEATABLE READ | nie | nie | możliwy* |
-| SERIALIZABLE | nie | nie | nie |
+| Poziom           | Dirty Read | Non-Repeatable Read | Phantom Read |
+| ---------------- | ---------- | ------------------- | ------------ |
+| READ UNCOMMITTED | możliwy    | możliwy             | możliwy      |
+| READ COMMITTED   | nie        | możliwy             | możliwy      |
+| REPEATABLE READ  | nie        | nie                 | możliwy*     |
+| SERIALIZABLE     | nie        | nie                 | nie          |
 
 \* W PostgreSQL REPEATABLE READ (oparty na snapshotach) eliminuje też phantomy; w standardzie SQL — niekoniecznie. Szczegóły anomalii: [[Dirty Read, Non-Repeatable Read, Phantom Read]].
 
