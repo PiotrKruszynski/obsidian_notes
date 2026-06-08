@@ -1,7 +1,7 @@
 dane zebrane w jakieś miejsce
 
 DBMS - data base management system
-- PostgresSQK
+- PostgresSQL
 - Oracle
 - MySQL
 - SQL Server pierwsza z ‘79
@@ -22,6 +22,15 @@ SQL
 - DDL _data definition language_ komendy, które pozwalają manipulować schema
 	- CREATE
 	- DROP
+	- ALTER
+	- TRUNCATE
 - TCL _transaction definition language_
 	- COMMIT
 	- ROLLBACK
+
+ACID
+atomic
+consistency - mamy spójność na wejściu i na wyjściu
+isolation
+durability
+![[Pasted image 20260608174518.png]]
