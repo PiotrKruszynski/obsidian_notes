@@ -32,5 +32,6 @@ ACID
 atomic
 consistency - mamy spójność na wejściu i na wyjściu
 isolation
-durability
+durability - trwałość
+[[5 - Notes/BazyDanych_SecondBrain/Koncepcje/ACID — co to naprawdę znaczy|ACID — co to naprawdę znaczy]]]
 ![[Pasted image 20260608174518.png]]
