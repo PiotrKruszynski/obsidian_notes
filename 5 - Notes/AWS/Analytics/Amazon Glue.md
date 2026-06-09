@@ -2,14 +2,10 @@
 title: "Amazon Glue"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-28  14:30
-___
-Note:
 
 # AWS Glue
 
@@ -85,17 +81,3 @@ Przetwarzanie danych **w czasie rzeczywistym** zamiast w partiach. Zbudowany na 
 how to convert data into Parquet format (kolumny)
 
 ![[Pasted image 20260228143333.png]]
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

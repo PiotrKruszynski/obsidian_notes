@@ -2,15 +2,10 @@
 title: "metaclass"
 type: concept
 topic: python
-tags: []
+tags: ["introspection", "metaclass", "oop", "python", "typing"]
 created: 2026-06-09
 status: draft
 ---
-
-
-Created: 2025-12-24  13:38
-___
-Note:
 
 >[!IMPORTANT]
 > `__prepare__` odpowiada za **utworzenie przestrzeni nazw klasy** jeszcze _przed_ wykonaniem ciała klasy i umożliwia kontrolę struktury namespace (np. OrderedDict, walidację, rejestrowanie definicji).
@@ -134,22 +129,3 @@ Hello
 ![[Pasted image 20251225122652.png]]
 
 type(C) -> metaC
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: 
-- #python
-- #metaclass
-- #type
-- #oop
-- #introspection
-- #class-creation

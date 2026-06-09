@@ -2,7 +2,7 @@
 title: "project"
 type: project
 topic: projects
-tags: []
+tags: ["projects"]
 created: 2026-06-09
 status: draft
 ---
@@ -10,6 +10,3 @@ status: draft
 [[poc]] - max 6 tyg
 [[mvp]] 
 [[product]]
-
-
-

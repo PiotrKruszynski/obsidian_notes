@@ -2,7 +2,7 @@
 title: "method resolution order"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -19,4 +19,3 @@ dziedziczenie - kopiowanie property klas nadrzędnych
 
 
 [[inheritence]]
-

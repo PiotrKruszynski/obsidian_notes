@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, fundament]
+tags: ["sql"]
 powiązane: ["[[NULL i logika trójwartościowa]]", "[[CASE WHEN]]"]
 ---
 

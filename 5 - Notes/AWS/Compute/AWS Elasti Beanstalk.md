@@ -2,14 +2,10 @@
 title: "AWS Elasti Beanstalk"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-15  00:25
-___
-Note:
 
 >[! Important]
 >**WS Elastic Beanstalk** is a managed service that provides a **developer-centric** approach to deploying and scaling applications on AWS. It simplifies the process of getting code into the cloud by handling the underlying infrastructure automatically.
@@ -129,17 +125,3 @@ If requirement is:
 - Managed PaaS for web app → Beanstalk
 - Containers with orchestration control → ECS / EKS
 - Event-driven compute → Lambda
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

@@ -2,15 +2,10 @@
 title: "auto scaling group"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-05  21:25
-___
-Note:
-
 
 >[!important]
 >**scale out** → increase instances  
@@ -160,16 +155,3 @@ ASG analizuje **historyczny ruch** i sam przewiduje kiedy będzie potrzeba więc
 ## Information to Launch Template
 
 ![[Pasted image 20260205212931.png]]
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

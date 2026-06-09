@@ -2,15 +2,10 @@
 title: "Amazon ECS"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-04  20:50
-___
-Note:
-
 
 >[!Definition]
 >- ECS → **managed container orchestration (Docker)** bez Kubernetes
@@ -255,16 +250,3 @@ SQS  →  ECS Service  →  CloudWatch Alarm (QueueDepth)  →  Scale Out/In
 ```
 
 ![[Pasted image 20260224122332.png]]
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

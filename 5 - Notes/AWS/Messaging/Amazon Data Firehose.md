@@ -2,14 +2,11 @@
 title: "Amazon Data Firehose"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
 
-Created: 2026-02-23  19:09
-___
-Note:
 # AWS Kinesis Data Firehose
 
 >[!Definition]
@@ -115,18 +112,3 @@ Aplikacja  ->  SNS  ->  Firehose  ->  S3  ->  Athena / Redshift
 ```
 EC2 (CloudWatch Logs)  ->  Firehose  ->  S3 (partycjonowane)
 ```
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

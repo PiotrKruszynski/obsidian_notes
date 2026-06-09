@@ -2,12 +2,10 @@
 title: "MIT2 RRN Transformers"
 type: concept
 topic: ai-ml
-tags: []
+tags: ["ai"]
 created: 2026-06-09
 status: draft
 ---
-
-#MIT 
 
 MIT pokazuje podstawowy schemat:
 
@@ -66,5 +64,3 @@ ten pipeline (Q, K, V → attention → weighted sum) to **jeden moduł zwany _s
 ![[Pasted image 20260417152609.png]]
 
 ![[Pasted image 20260417152900.png]]
-
-

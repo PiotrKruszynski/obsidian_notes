@@ -2,14 +2,10 @@
 title: "container protocol"
 type: concept
 topic: python
-tags: []
+tags: ["data-model", "duck-typing", "protocols", "python"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-17  10:27
-___
-Note:
 
 https://docs.python.org/3/library/collections.abc.html#collections-abstract-base-classes 
 
@@ -83,15 +79,3 @@ class Container(ABC):
 - **Sized** → „wiem, ile tego jest”
 
 ![[Pasted image 20251229171055.png]]
-___
-Metadata:
-
-```yaml
----
-type: concept    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #python #protocols #duck-typing #data-model

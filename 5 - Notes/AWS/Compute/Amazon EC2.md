@@ -2,14 +2,10 @@
 title: "Amazon EC2"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-03  12:27
-___
-Note:
 
 >[!important]
 - EC2 = **compute (VM) w AWS**
@@ -261,18 +257,3 @@ EFA jest specjalnym interfejsem sieciowym dla workloadów **HPC / tightly couple
 - EBS = trwałe dane, instance store = ephemeral
 - HA = ASG + multi-AZ + LB
 - więcej kontroli = więcej responsibility
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

@@ -2,15 +2,10 @@
 title: "ssh config"
 type: concept
 topic: networking
-tags: []
+tags: ["linux", "ssh"]
 created: 2026-06-09
 status: draft
 ---
-
-
-#ssh #linux
-
-
 
 `~/.ssh/config`
 
@@ -26,4 +21,3 @@ od teraz:
 agent
 `eval "$(ssh-agent -s)"`
 `ssh-add ~/.ssh/id_ed25519`
-

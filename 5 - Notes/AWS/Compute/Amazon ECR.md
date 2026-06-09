@@ -2,14 +2,10 @@
 title: "Amazon ECR"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-24  09:10
-___
-Note:
 
 >[!tip]
 >Prywatne repozytorium obrazów Docker na AWS.
@@ -27,17 +23,3 @@ docker push 123456.dkr.ecr.eu-west-1.amazonaws.com/my-app:latest
 - skanowanie obrazów pod kątem podatności (CVE)
 - replikacja między regionami
 - integracja z ECS, EKS, Lambda
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

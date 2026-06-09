@@ -2,47 +2,51 @@
 title: "Database"
 type: concept
 topic: databases
-tags: []
+tags: ["databases", "sql"]
 created: 2026-06-09
 status: draft
 ---
 
-dane zebrane w jakieś miejsce
+# Baza danych
 
-DBMS - data base management system
-- PostgresSQL
-- Oracle
-- MySQL
-- SQL Server pierwsza z ‘79
-- Mongo DB
-- Redis
+> [!summary] W jednym zdaniu
+> Baza danych to zbiór danych z mechanizmem zapisu, odczytu, aktualizacji i wyszukiwania — zarządzany przez DBMS.
 
-RDBMS używają Structured Query Language
+**DBMS** (Database Management System) — oprogramowanie zarządzające bazą:
+- PostgreSQL, MySQL, Oracle, SQL Server
+- MongoDB, Redis (NoSQL)
 
-SQL 
- - **DML** (_data manipulation language_) CRUD 
-	 -  INSERT INTO
-	 - SELECT
-	 - UPDATE
-	 - DELETE
-- DCL (_data control language)
-	- GRANT _nadanie uprawnienia_
-	- REVOKE _odebranie_
-- DDL _data definition language_ komendy, które pozwalają manipulować schema
-	- CREATE
-	- DROP
-	- ALTER
-	- TRUNCATE
-- TCL _transaction definition language_
-	- COMMIT
-	- ROLLBACK
+---
 
-ACID
-atomic
-consistency - mamy spójność na wejściu i na wyjściu
-isolation
-durability - trwałość
-[[5 - Notes/BazyDanych_SecondBrain/Koncepcje/ACID — co to naprawdę znaczy|ACID — co to naprawdę znaczy]]]
-![[Pasted image 20260608174518.png]]
+## SQL — języki poleceń
 
-![[Pasted image 20260609115239.png]]
+Polecenia SQL dzielą się na cztery grupy:
+
+**DML** — Data Manipulation Language (CRUD na danych)
+```sql
+SELECT, INSERT INTO, UPDATE, DELETE
+```
+
+**DDL** — Data Definition Language (manipulacja schematem)
+```sql
+CREATE, DROP, ALTER, TRUNCATE
+```
+
+**DCL** — Data Control Language (uprawnienia)
+```sql
+GRANT, REVOKE
+```
+
+**TCL** — Transaction Control Language
+```sql
+COMMIT, ROLLBACK
+```
+
+---
+
+## Powiązane notatki
+- [[Typy baz danych]] — przegląd wszystkich typów (SQL, NoSQL, Graph, Vector…)
+- [[Model relacyjny]] — tabele, wiersze, klucze
+- [[ACID — co to naprawdę znaczy]] — gwarancje transakcyjne
+- [[Transakcje i ACID]] — praktyczne ujęcie z przykładami SQL
+- [[Kiedy SQL, kiedy NoSQL]] — jak wybrać

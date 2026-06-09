@@ -2,14 +2,10 @@
 title: "SSL TLS"
 type: concept
 topic: networking
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-05  16:37
-___
-Note:
 
 ## 1️⃣ Czym jest SSL/TLS  
   
@@ -140,20 +136,3 @@ W środowisku produkcyjnym zaleca się:
 - TLS 1.2+  
 - automatyczne odnawianie certyfikatów  
 - rotację kluczy
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

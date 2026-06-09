@@ -2,14 +2,10 @@
 title: "AWS FSx"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-18  22:39
-___
-Note:
 
 >[!important]
 >- FSx = **managed file systems** (nie object, nie block)
@@ -121,16 +117,3 @@ FSx = „**gotowy, zarządzany system plików** w AWS”
 - Windows = SMB + AD  
 - ONTAP / OpenZFS = enterprise Linux workloads  
 - wybierasz FSx gdy EFS jest za wolny albo za prosty
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

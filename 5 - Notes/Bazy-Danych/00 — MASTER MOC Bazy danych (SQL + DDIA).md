@@ -1,5 +1,5 @@
 ---
-tags: [moc, sql, ddia, bazy-danych, master]
+tags: ["databases", "ddia", "moc", "sql"]
 typ: master-map-of-content
 ---
 

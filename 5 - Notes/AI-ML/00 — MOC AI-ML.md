@@ -2,9 +2,9 @@
 title: "MOC AI-ML"
 type: moc
 topic: ai-ml
-tags: [moc, ai, ml]
+tags: ["ai", "moc"]
 created: 2026-06-09
-status: done
+status: draft
 ---
 
 # MOC — AI / ML

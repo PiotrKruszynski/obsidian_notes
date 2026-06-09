@@ -2,14 +2,10 @@
 title: "aws caa scenatio"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-14  17:13
-___
-Note:
 
 >[! Important]
 >definition
@@ -86,16 +82,3 @@ next
 ![[Pasted image 20260225112142.png]]
 ![[Pasted image 20260225112149.png]]
 ![[Pasted image 20260225112203.png]]![[Pasted image 20260225112238.png]]![[Pasted image 20260225112248.png]]![[Pasted image 20260225112257.png]]
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

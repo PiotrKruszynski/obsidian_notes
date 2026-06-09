@@ -2,7 +2,7 @@
 title: "weak reference"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -19,4 +19,3 @@ jeżeli obiekt istniał ma podpiętą słabą i przestał istnieć to słaba ref
 
 
 robimy słabą referencję aby nie trzymać obiektów po ich zakończeniu działania
-

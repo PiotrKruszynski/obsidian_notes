@@ -1,5 +1,5 @@
 ---
-tags: [fastapi, koncepcja, async]
+tags: ["async", "fastapi"]
 powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[async def vs def w FastAPI — kiedy co]]"]
 ---
 

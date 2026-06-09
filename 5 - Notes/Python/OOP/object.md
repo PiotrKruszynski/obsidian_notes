@@ -2,12 +2,12 @@
 title: "object"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
 
- funkcjonalności i właściwości
+funkcjonalności i właściwości
 
 Właściwości (ang. properties / attributes / state)
 

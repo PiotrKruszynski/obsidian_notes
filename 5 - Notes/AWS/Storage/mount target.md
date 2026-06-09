@@ -2,14 +2,10 @@
 title: "mount target"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-04  11:39
-___
-Note:
 
 >[! Important]
 >> **wejście do [[Amazon EFS - elastic file system]] w danej AZ**
@@ -23,17 +19,3 @@ Note:
 - Security group: można ustawić zasady dostępu
 
 Bez Mount Targetu w danej AZ ❌ **nie da się zamontować EFS**
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

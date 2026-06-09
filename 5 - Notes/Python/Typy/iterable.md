@@ -2,17 +2,12 @@
 title: "iterable"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
 
-
-Created: 2025-12-17  22:47
-___
-Note:
-
-	po czym można iterować
+po czym można iterować
 	iterator -> obiekt, który iteruje
 	Iterable = fabry iteratorów `__iter__`, Iterator = maszyna krokowa `__next__`
 	W Python Iterable ≠ Iterator
@@ -61,16 +56,3 @@ class ForwardIterator:
 ```
 
 ![[Pasted image 20251229171254.png]]
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #empty

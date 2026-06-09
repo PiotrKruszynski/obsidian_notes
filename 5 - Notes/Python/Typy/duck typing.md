@@ -2,14 +2,10 @@
 title: "duck typing"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-27  15:14
-___
-Note:
 
 paradygmat
 o zgodności typu decyduje zachowanie obiektu, a nie jego dziedziczenie 
@@ -74,24 +70,3 @@ liczy się **interfejs operacyjny** (metody/atrybuty dostępne na obiekcie)
 			metaklasa nie wymaga dziedziczenia
 			tylko sprawdza obecność metody
 			zgodność wynika ze struktury klasy
-		
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: paradygmat    # paradigm | concept | tool | pattern | practice
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #empty
-
-
-

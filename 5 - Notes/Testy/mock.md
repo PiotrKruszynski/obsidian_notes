@@ -2,12 +2,12 @@
 title: "mock"
 type: concept
 topic: testing
-tags: []
+tags: ["testing"]
 created: 2026-06-09
 status: draft
 ---
 
-	tworzenie wirtualnych elementów
+tworzenie wirtualnych elementów
 	to błędna nazwa na double !!
 
 	 to obiekt weryfikujący zachowanie. Jego głównym celem nie jest „zwracanie czegoś” (to robi stub), ale sprawdzenie, czy został wywołany, jak został wywołany, z jakimi argumentami, ile razy itd.

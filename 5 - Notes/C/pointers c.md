@@ -2,16 +2,12 @@
 title: "pointers c"
 type: concept
 topic: c
-tags: []
+tags: ["c"]
 created: 2026-06-09
 status: draft
 ---
 
 main:  #c
-Status: #pending 
-
-Created: 2026-05-09  11:00
-___
 
 > [!NOTE]
 > definicaja
@@ -25,5 +21,3 @@ ___
 
 ___
 Metadate:
-
-Tags: #empty

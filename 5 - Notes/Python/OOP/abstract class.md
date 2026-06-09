@@ -2,14 +2,10 @@
 title: "abstract class"
 type: concept
 topic: python
-tags: []
+tags: ["architecture", "contract", "oop"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-31  17:30
-___
-Note:
 
 >[! Important]
 > Klasa w Pythonie to tylko **namespace**.  
@@ -169,15 +165,3 @@ Nie używaj ABC gdy:
 - [https://docs.python.org/3/library/abc.html](https://docs.python.org/3/library/abc.html)
 - [https://peps.python.org/pep-3119/](https://peps.python.org/pep-3119/)
 - [https://realpython.com/python-abc/](https://realpython.com/python-abc/)
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Tags: #abc #oop #architecture #contract 

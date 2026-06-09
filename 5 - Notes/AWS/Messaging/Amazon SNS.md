@@ -2,14 +2,10 @@
 title: "Amazon SNS"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-23  15:39
-___
-Note:
 
 >[!important]  
 >- SNS = **pub/sub messaging (push model)**  
@@ -133,6 +129,3 @@ type: tool    # concept | service | comparison
 language: aws
 ---
 ```
-
-Status: #pending
-Tags: #aws

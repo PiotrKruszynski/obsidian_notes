@@ -2,14 +2,10 @@
 title: "AWS Transfer Family"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-18  21:58
-___
-Note:
 
 >[!important]
 >- Transfer Family = usługa **managed file transfer in/out of S3 or EFS using FTP protocol**
@@ -80,16 +76,3 @@ migracja z legacy FTP serverów
 |AWS Transfer Family|SFTP, FTPS, FTP|Integracja z tradycyjnymi systemami|Bezpieczny, zarządzany transfer|Ograniczony do obsługiwanych protokołów|
 |AWS Snowball/ Snowmobile|Fizyczne urządzenia (offline)|Transfer petabajtów danych (np. migracja)|Duże wolumeny, offline|Fizyczny transport, dłuższy lead time|
 |aws s3 sync (CLI)|HTTPS (CLI narzędzie)|Rekurencyjny sync folderów do/z S3|Proste i szybkie w CLI|Tylko do S3, brak zaawansowanej orkiestracji|
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

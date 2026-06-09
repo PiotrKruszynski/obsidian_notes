@@ -2,14 +2,10 @@
 title: "scalability"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-04  17:34
-___
-Note:
 
 >[! Important]
 > to handle grater loads( users) by adapting
@@ -22,20 +18,3 @@ Note:
 - for web applications / modern app
 - auto scaling group
 - load balancer
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

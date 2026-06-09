@@ -2,9 +2,9 @@
 title: "MOC Algorytmy"
 type: moc
 topic: algorithms
-tags: [moc, algorithms]
+tags: ["algorithms", "moc"]
 created: 2026-06-09
-status: done
+status: draft
 ---
 
 # MOC — Algorytmy i Struktury Danych

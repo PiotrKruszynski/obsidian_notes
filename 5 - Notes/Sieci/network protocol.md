@@ -2,11 +2,10 @@
 title: "network protocol"
 type: concept
 topic: networking
-tags: []
+tags: ["networking"]
 created: 2026-06-09
 status: draft
 ---
-
 
 sposób komunikacji  i wymiany danych określający **reguły i zasady** tej komunikacji
 
@@ -49,6 +48,3 @@ Switches, Bridges
 ![[Pasted image 20260330140051.png]]
 Physical
 ![[Pasted image 20260330140309.png]]
-
-#sieci_komputerowe
-#network

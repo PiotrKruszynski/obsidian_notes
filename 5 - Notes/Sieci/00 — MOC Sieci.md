@@ -2,9 +2,9 @@
 title: "MOC Sieci"
 type: moc
 topic: networking
-tags: [moc, networking]
+tags: ["moc", "networking"]
 created: 2026-06-09
-status: done
+status: draft
 ---
 
 # MOC — Sieci

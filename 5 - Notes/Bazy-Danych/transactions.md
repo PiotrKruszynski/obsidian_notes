@@ -1,30 +1,18 @@
 ---
-title: "transactions"
+title: "Transakcje w Pythonie"
 type: concept
 topic: databases
-tags: []
+tags: ["databases", "python", "context-managers"]
 created: 2026-06-09
 status: draft
 ---
 
+# Transakcje w Pythonie — context manager
 
+> [!summary] Zakres tej notatki
+> Implementacja transakcji przez context manager w Pythonie + SQLAlchemy. Teoria ACID → [[Transakcje i ACID]].
 
-# 🟦 Transakcje i Context Managery — Notatka
-
-## 1. Definicja transakcji  
-**Transakcja = operacja atomowa: wykonuje się w całości albo wcale.**  
-Gwarantuje spójność i bezpieczeństwo przy operacjach wieloetapowych.
-
-### ACID:
-- **Atomicity** – brak stanów pośrednich; przerwanie = pełny rollback.
-- **Consistency** – transakcja nie może złamać zasad systemu.
-- **Isolation** – transakcje równoległe są od siebie odizolowane.
-- **Durability** – commit jest trwały i odporny na awarie.
-
----
-
-## 2. Transakcje a context manager  
-Transakcja idealnie pasuje do konstrukcji:
+Transakcja idealnie pasuje do wzorca `with`:
 
 ```python
 with Transaction() as tx:
@@ -32,34 +20,30 @@ with Transaction() as tx:
 ```
 
 Mechanika:
-
-- `__enter__` → start transakcji
-- kod bloku
+- `__enter__` → BEGIN transakcji
+- kod bloku wykonuje się
 - `__exit__(exc_type, exc_val, exc_tb)`:
-  - brak błędu → commit  
-  - błąd → rollback + decyzja o propagacji
+  - brak błędu → COMMIT
+  - błąd → ROLLBACK + decyzja o propagacji
 
 ---
 
-## 3. Działanie __exit__ i propagacja błędów
+## Działanie `__exit__` i propagacja błędów
 
 Python wywołuje:
-
 - `__exit__(None, None, None)` → brak błędu
 - `__exit__(ExcType, ExcVal, ExcTB)` → błąd w bloku
 
-### Reguła:
-
 | return | efekt |
-|--------|--------|
-| **True** | tłumi wyjątek — brak propagacji |
-| **False** | pozwala wyjątek propagować wyżej (traceback) |
+|--------|-------|
+| `True` | tłumi wyjątek — brak propagacji |
+| `False` | pozwala wyjątek propagować wyżej |
 
-`False` ma znaczenie tylko, gdy wystąpił wyjątek.
+`False` ma znaczenie tylko gdy wystąpił wyjątek.
 
 ---
 
-## 4. Minimalna implementacja transakcji
+## Minimalna implementacja
 
 ```python
 class Transaction:
@@ -70,32 +54,26 @@ class Transaction:
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type is None:
             print("COMMIT")
-            return False
         else:
             print("ROLLBACK:", exc_type.__name__)
-            return False
+        return False  # zawsze propaguj wyjątek
 ```
-
-Zachowanie:
-- brak błędu → COMMIT  
-- błąd → ROLLBACK + propagacja
 
 ---
 
-## 5. Transakcje w SQLAlchemy
+## SQLAlchemy
 
 ```python
 with engine.begin() as conn:
-    conn.execute(...)
+    conn.execute(insert(users).values(name="Jan"))
+    conn.execute(insert(orders).values(user_id=1, amount=100))
+# commit automatyczny; wyjątek → rollback automatyczny
 ```
 
-SQLAlchemy:
-- `__enter__` → otwarcie transakcji  
-- `__exit__` → commit lub rollback  
+SQLAlchemy działa identycznie — `__enter__` otwiera transakcję, `__exit__` commituje lub rollbackuje.
 
 ---
 
-## 6. Esencja
-
-**Transakcja = blok operacji z automatycznym commit/rollback.  
-Context manager steruje, czy wyjątek jest tłumiony (`True`), czy propagowany (`False`).**
+## Powiązane notatki
+- [[Transakcje i ACID]] — teoria: co to jest transakcja, cztery gwarancje ACID
+- [[ACID — co to naprawdę znaczy]] — głębsze ujęcie (Kleppmann, DDIA)

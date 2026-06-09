@@ -2,15 +2,10 @@
 title: "AWS Cognito"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-20  22:05
-___
-Note:
-
 
 ## 🔑 Core mental model
 
@@ -41,17 +36,3 @@ służy do przyznawania tymczasowych **IAM Role**  na podstawie już uwierzyteln
 
 Auth → User Pool  
 AWS access → Identity Pool
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

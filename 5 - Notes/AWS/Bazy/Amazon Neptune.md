@@ -2,14 +2,10 @@
 title: "Amazon Neptune"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-27  00:56
-___
-Note:
 
 >[!tip]
 >graph database
@@ -22,18 +18,3 @@ Neptune Stream - real time ordered sequence of every change to your graph data
 no duplicate, strict order
 
 Usecase : send notification when certain changes are made
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

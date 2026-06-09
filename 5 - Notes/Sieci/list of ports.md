@@ -2,14 +2,10 @@
 title: "list of ports"
 type: concept
 topic: networking
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-11  12:20
-___
-Note:
 
 **Important ports:**
 
@@ -27,16 +23,3 @@ Note:
 - MSSQL Server: 1433
 - MariaDB: 3306 (same as MySQL)
 - Aurora: 5432 (if PostgreSQL compatible) or 3306 (if MySQL compatible)
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

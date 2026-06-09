@@ -2,7 +2,7 @@
 title: "00 — MOC SQL (DDIA)"
 type: concept
 topic: databases
-tags: []
+tags: ["databases"]
 created: 2026-06-09
 status: draft
 ---

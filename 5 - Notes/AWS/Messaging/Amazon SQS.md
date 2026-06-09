@@ -2,14 +2,10 @@
 title: "Amazon SQS"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-23  10:19
-___
-Note:
 
 >[!important]  
 >- SQS = **managed durable message queue** (asynchronous decoupling layer między komponentami)
@@ -288,17 +284,3 @@ SQS to decouple between application tiers
 `Queue Policy    → przyczepiasz do SQS kolejki`
 `Bucket Policy   → przyczepiasz do S3 bucketa`
 `Key Policy      → przyczepiasz do KMS klucza`
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

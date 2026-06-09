@@ -2,7 +2,7 @@
 title: "attribute lookup vs fallback vs descriptors"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -95,6 +95,3 @@ F -- tak --> F1[zwróć z __getattr__] --> Z
 F -- nie --> G[AttributeError]
 Z[✓]
 ```
-
-
-

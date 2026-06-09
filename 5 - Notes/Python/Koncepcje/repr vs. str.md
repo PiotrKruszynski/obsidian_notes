@@ -2,11 +2,10 @@
 title: "repr vs. str"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
 
 - __repr__ → służy aby pokazać programiście w jaki sposób została zrobiona instancja obiektu.
 		w każdej chwili można zwalidować na jakiej podstawie powstał obiekt

@@ -2,16 +2,12 @@
 title: "bits operator - c"
 type: concept
 topic: c
-tags: []
+tags: ["c"]
 created: 2026-06-09
 status: draft
 ---
 
 main:  #c
-Status: #pending 
-
-Created: 2026-05-13  12:03
-___
 
 ## Co to bity?
 
@@ -175,5 +171,3 @@ Operatory bitowe pracują na zerach i jedynkach. AND (`&`) bierze części wspó
 
 ___
 Metadate:
-
-Tags: #empty

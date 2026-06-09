@@ -2,13 +2,12 @@
 title: "ssh"
 type: concept
 topic: networking
-tags: []
+tags: ["networking"]
 created: 2026-06-09
 status: draft
 ---
 
-
- #ssh, #linux
+#ssh, #linux
 
 > SSH to **zaszyfrowany transport TCP z wbudowaną możliwością uruchamiania zdalnych procesów**
 

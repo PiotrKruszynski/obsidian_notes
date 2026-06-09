@@ -2,11 +2,10 @@
 title: "IP adres"
 type: concept
 topic: networking
-tags: []
+tags: ["networking"]
 created: 2026-06-09
 status: draft
 ---
-
 
 Adres IP = adres interfejsu sieciowego, nie urządzenia
 
@@ -32,6 +31,3 @@ Obliczamy adres sieci dla podanego adresu IP
 
 
 [[port]]
-
-#sieci_komputerowe
-#network

@@ -2,15 +2,10 @@
 title: "Amazon MQ"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-23  21:42
-___
-Note:
-
 
 >[!Definition]
 >- Amazon MQ → **managed message broker** (ActiveMQ / RabbitMQ)
@@ -72,19 +67,3 @@ Aplikacja używa standardowego brokera (np. JMS) → Amazon MQ hostuje go w AWS 
 
 
 ![[Pasted image 20260223214534.png]]
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

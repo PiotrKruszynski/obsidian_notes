@@ -2,7 +2,7 @@
 title: "type annotations"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -41,4 +41,3 @@ T = TyperVar("T", intm str ) # ale mogą być wszystkie z __add__
 
 def magic(a: T  ,  b: T ) -> T
 	return a  +  b
-

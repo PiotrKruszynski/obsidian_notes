@@ -2,12 +2,12 @@
 title: "closure"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
 
-	dostęp do zmiennych z poza aktualnie obsługiwanego zasięgu
+dostęp do zmiennych z poza aktualnie obsługiwanego zasięgu
 
   
 Tworzenie closure:  

@@ -2,15 +2,10 @@
 title: "globals()"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
-
-Created: 2025-12-22  16:43
-___
-Note:
 
 nie reprezentuje, a **jest** zasięgiem globalnym
 
@@ -20,17 +15,3 @@ poniżej słownik:
 ![[Pasted image 20251222164532.png]]
 
 istnieje jeszcze zasięg [locals()]
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #empty

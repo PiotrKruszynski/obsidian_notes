@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, fundament]
+tags: ["sql"]
 powiązane: ["[[Logiczna kolejność wykonania zapytania]]", "[[NULL i logika trójwartościowa]]", "[[Agregacje i GROUP BY]]"]
 ---
 

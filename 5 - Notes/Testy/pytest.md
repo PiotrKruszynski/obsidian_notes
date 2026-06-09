@@ -2,16 +2,10 @@
 title: "pytest"
 type: concept
 topic: testing
-tags: []
+tags: ["pytest", "python", "tdd", "testing"]
 created: 2026-06-09
 status: draft
 ---
-
-
-
-Created: 2025-12-16  22:53
-___
-Note:
 
 [[test runner]] do testów automatycznych w Pythonie. Upraszcza pisanie testów (brak klas testowych), oferuje czytelne asserty, rozbudowany system _fixtures_ oraz potężny mechanizm pluginów. Jest standardem de-facto w projektach Pythonowych
 
@@ -70,19 +64,3 @@ pytest -x        # stop po pierwszym błędzie
 pytest --lf     # tylko ostatnie nieudane
 pytest -k name  # filtr po nazwie
 ```
-
-
-
-
-___
-Metadata:
-```yaml
-type: tool
-category: testing
-language: python
-level: beginner-intermediate
-```
-
-
-Status: #pending
-Tags: #python #testing #pytest #tdd #qa

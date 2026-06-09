@@ -2,7 +2,7 @@
 title: "proxy"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -43,5 +43,3 @@ class LoggingProxy:
 [[oop]]
 [[design pattern]]
 [[metaprogramming]]
-
-#study

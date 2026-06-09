@@ -2,16 +2,13 @@
 title: "Cassandra database"
 type: concept
 topic: databases
-tags: []
+tags: ["databases"]
 created: 2026-06-09
 status: draft
 ---
 
 main:  #database #nosql #distributed #cassandra
-Status: #pending 
 
-Created: 2026-05-24  19:50
-___
 # Apache Cassandra — Architektura
 
 Rozproszona baza bez żadnego SPOF, share nothing
@@ -345,5 +342,3 @@ _Źródła: Apache Cassandra Docs, Datastax Academy, "Cassandra: The Definitive 
 
 ___
 Metadate:
-
-Tags: #empty

@@ -2,14 +2,10 @@
 title: "ruff"
 type: tool
 topic: python
-tags: []
+tags: ["linting", "python"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-17  00:36
-___
-Note:
 
 https://docs.astral.sh/ruff/
 
@@ -64,17 +60,3 @@ indent-style ="tab"
 docstring-code-format = true  
 docstring-code-line-length = 50
 ```
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags:  #python #ruff #linting #formatter #code-quality #static-analysis

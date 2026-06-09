@@ -2,15 +2,10 @@
 title: "Amazon ElastiCache"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-11  11:58
-___
-Note:
-
 
 >[!Definition]
 >ElastiCache = **managed in-memory cache (_Redis_, _Memcached_)**
@@ -216,17 +211,3 @@ gdy brak pamięci:
 - cel: latency ↓ + DB load ↓
 
 `App → Cache → (MISS) → DB → Cache → App`
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

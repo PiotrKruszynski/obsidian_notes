@@ -2,12 +2,10 @@
 title: "PyTorch"
 type: concept
 topic: ai-ml
-tags: []
+tags: ["pytorch"]
 created: 2026-06-09
 status: draft
 ---
-
-#pytorch
 
 ## Tensory
 
@@ -220,4 +218,3 @@ model.named_parameters()         # wagi + nazwy
 
 sum(p.numel() for p in model.parameters())   # liczba parametrów
 ```
-

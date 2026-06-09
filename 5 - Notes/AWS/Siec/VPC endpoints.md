@@ -2,15 +2,12 @@
 title: "VPC endpoints"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
 
-Created: 2026-03-09  21:24
-___
-Note:
-  ![[Pasted image 20260324115941.png|100]]
+![[Pasted image 20260324115941.png|100]]
   
 >[!important]  
 >- VPC Endpoint = **private access to AWS services** (bez Internetu, to nie tunel)
@@ -138,16 +135,3 @@ VPC Endpoint = private AWS access
 S3/DynamoDB → Gateway (FREE)  
 reszta → Interface (PrivateLink)  
 no Internet, no NAT
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

@@ -2,15 +2,10 @@
 title: "Agentic AI Architecture"
 type: concept
 topic: ai-ml
-tags: []
+tags: ["agentic-ai", "ai"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-04-21  22:11
-___
-#ai 
-Note:
 
 ```
 # 🚀 AGENTIC AI – REFERENCE ARCHITECTURE (2026)
@@ -57,16 +52,3 @@ Note:
                  │ (Code / Insights / Actions)  │
                  └──────────────────────────────┘
 ```
-
-___
-Metadata:
-
-```yaml
----
-type: concept    # concept | tool | pattern
-language: ai # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #ai #agentic_ai

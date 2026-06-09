@@ -2,14 +2,10 @@
 title: "decorator class"
 type: concept
 topic: python
-tags: []
+tags: ["decorators", "metaprogramming", "namespaces", "oop", "python", "python-internals"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-01-04  02:41
-___
-Note:
 
 >[! Definicja]
 >Dekorator klas to funkcja, która przyjmuje obiekt klasy i zwraca obiekt klasy (ten sam lub zmodyfikowany)
@@ -188,16 +184,3 @@ x = f(x)     # x → inny obiekt
 - https://docs.python.org/3/reference/compound_stmts.html#class-definitions
     
 - https://www.python.org/dev/peps/pep-0318/
-
-___
-Metadata:
-
-```yaml
----
-type: pattern   # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #python #class-decorator #dekorator-klasy #metaprogramming #class-object #namespace #name-binding #reference-model #oop-python #python-senior #second-brain #obsidian

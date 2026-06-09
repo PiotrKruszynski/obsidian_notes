@@ -2,11 +2,10 @@
 title: "snippets - class positive class planet"
 type: tool
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
 
 ![[Pasted image 20251206135205.png]]
 

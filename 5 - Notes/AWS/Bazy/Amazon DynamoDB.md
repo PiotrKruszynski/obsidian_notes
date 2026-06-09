@@ -2,14 +2,10 @@
 title: "Amazon DynamoDB"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-24  16:38
-___
-Note:
 
 >[! Important]
 >- AWS native technology
@@ -218,17 +214,3 @@ Users (US)  →  DynamoDB Global Table (us-east-1)
 ```
 App  →  DAX  →  DynamoDB
 ```
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

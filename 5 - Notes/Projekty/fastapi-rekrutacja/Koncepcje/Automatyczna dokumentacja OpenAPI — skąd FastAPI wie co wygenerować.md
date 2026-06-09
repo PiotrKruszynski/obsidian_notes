@@ -1,5 +1,5 @@
 ---
-tags: [fastapi, koncepcja, openapi]
+tags: ["fastapi", "openapi"]
 powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Pydantic model — co robi i dlaczego]]", "[[Dekorator @app.get i co się za nim kryje]]"]
 ---
 

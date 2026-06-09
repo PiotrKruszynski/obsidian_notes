@@ -2,7 +2,7 @@
 title: "road to project"
 type: project
 topic: projects
-tags: []
+tags: ["projects"]
 created: 2026-06-09
 status: draft
 ---
@@ -99,4 +99,3 @@ uv sync
 
 
 [writing your pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
-

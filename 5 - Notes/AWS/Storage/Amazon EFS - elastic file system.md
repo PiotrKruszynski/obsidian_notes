@@ -2,15 +2,10 @@
 title: "Amazon EFS - elastic file system"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-03  13:10
-___
-Note:
-
 
 >[!Definition]
 >EFS = **POSIX file storage (system plików NFS)**  for Linux instanecs 
@@ -70,20 +65,4 @@ EFS = **network shared drive (jak NAS)**
 - EFS = shared file system  
 - multi-AZ  
 - NFS  
-- autoscaling  
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-[[Amazon EBS Volume]]
-Status: #pending
-Tags: #aws
+- autoscaling

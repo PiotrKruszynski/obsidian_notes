@@ -2,14 +2,10 @@
 title: "Big Data"
 type: service
 topic: aws
-tags: []
+tags: ["big-data"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-28  23:17
-___
-Note:
 
 >[! Definition ]
 > **Big data** is _high-volume_, _high-velocity_ and _high-variety_ information assets that demand cost-effective, innovative forms of information processing for enhanced insight and decision making.
@@ -74,17 +70,3 @@ ssc = StreamingContext(sc, batchDuration=2)
 
 **Databases** — np. Cassandra, PostgreSQL, Redis — zapis do bazy.
 **Dashboards** — np. Grafana, Kibana — wizualizacja na żywo.
-
-
-
-___
-Metadata:
-
-```yaml
----
-language: bigdata
----
-```
-
-Status: #pending
-Tags: #bigdata 

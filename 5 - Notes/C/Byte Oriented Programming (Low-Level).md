@@ -2,7 +2,7 @@
 title: "Byte Oriented Programming (Low-Level)"
 type: concept
 topic: c
-tags: []
+tags: ["c"]
 created: 2026-06-09
 status: draft
 ---

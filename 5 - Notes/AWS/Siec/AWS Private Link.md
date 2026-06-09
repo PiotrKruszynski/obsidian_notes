@@ -2,12 +2,11 @@
 title: "AWS Private Link"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
 
-  
 >[!important]  
 >- PrivateLink = **private connection to service via VPC Endpoint**  
 >- ruch NIE wychodzi do Internetu    

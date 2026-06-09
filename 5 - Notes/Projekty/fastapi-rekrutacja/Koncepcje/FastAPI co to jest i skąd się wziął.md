@@ -1,5 +1,5 @@
 ---
-tags: [fastapi, koncepcja]
+tags: ["fastapi"]
 powiązane: ["[[ASGI vs WSGI]]", "[[Pydantic model — co robi i dlaczego]]", "[[Automatyczna dokumentacja OpenAPI — skąd FastAPI wie co wygenerować]]"]
 ---
 

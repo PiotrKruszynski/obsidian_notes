@@ -2,14 +2,10 @@
 title: "AWS Route 53"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-11  13:07
-___
-Note:
 
 # Route 53 — minimum pod SAA
 
@@ -84,18 +80,4 @@ Outbound → AWS → ON-PREM DNS
 - Alias dla AWS resources  
 - Failover = DR  
 - Weighted = traffic split  
-- Latency = performance  
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws
+- Latency = performance

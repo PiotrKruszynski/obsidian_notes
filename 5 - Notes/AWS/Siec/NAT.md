@@ -2,14 +2,10 @@
 title: "NAT"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-07  21:24
-___
-Note:
 
 ![[Pasted image 20260320123302.png|100]]
   
@@ -146,16 +142,3 @@ IPv6 = Egress-only IGW
 # NAT Gateway
 
 ![[Pasted image 20260320123126.png]]
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

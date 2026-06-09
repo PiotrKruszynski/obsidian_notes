@@ -2,11 +2,10 @@
 title: "__slots__"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
 
 - **__slots__ = deklaracja pól instancji** , dzięki czemu interpreter nie tworzy standardowego **__dict__** w obiekcie.
 - powoduje **ograniczenie**: nie możesz przypisać atrybutu spoza listy w __slots__.
@@ -21,6 +20,3 @@ status: draft
 >
 >class Y(X):
 >__slots__ = ('magic') # musimy dodać
-
-
-

@@ -2,13 +2,10 @@
 title: "AWS ENI"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-03  10:53
-___
 
 >[!Core concepts]
 >- ENI (Elastic Network Interface) = **virtual NIC w VPC (network identity)**
@@ -143,25 +140,3 @@ ___
 - EC2 używa ENI do komunikacji
 - failover = przeniesienie ENI lub secondary IP
 - AZ-bound → kluczowe ograniczenie
-
-
-
-
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws
-

@@ -1,5 +1,5 @@
 ---
-tags: [fastapi, koncepcja, testowanie]
+tags: ["fastapi", "testing"]
 powiązane: ["[[Depends — jak działa DI w FastAPI]]", "[[Pydantic model — co robi i dlaczego]]"]
 ---
 

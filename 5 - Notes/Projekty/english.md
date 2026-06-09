@@ -2,7 +2,7 @@
 title: "english"
 type: project
 topic: projects
-tags: []
+tags: ["projects"]
 created: 2026-06-09
 status: draft
 ---
@@ -24,5 +24,3 @@ My decision to change careers wasn’t because I felt stuck in a rut. Things wer
 **get into** - I'm looking to get into IT/Python because I enjoy the community, and I like building practical solutions
 
 _I’m aiming to get into the software development field, as it offers long-term growth and meaningful challenges._
-
-

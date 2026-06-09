@@ -2,13 +2,10 @@
 title: "Amazon S3"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-
-Created: 2026-02-16 11:05
 
 istnieją block storage / file storage / object storage
 
@@ -371,16 +368,3 @@ Bucket Policy   → przyczepiasz do S3 bucketa
 Key Policy      → przyczepiasz do KMS klucza
 
 ```
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

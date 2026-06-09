@@ -2,12 +2,10 @@
 title: "MIT1 introduction to deep learning"
 type: concept
 topic: ai-ml
-tags: []
+tags: ["ai"]
 created: 2026-06-09
 status: draft
 ---
-
-#MIT
 
 iloczyn kropkowy
 ![[Pasted image 20260415144919.png]]

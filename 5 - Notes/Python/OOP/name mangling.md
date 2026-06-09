@@ -2,14 +2,10 @@
 title: "name mangling"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-01-04  16:07
-___
-Note:
 
 **Name mangling** to mechanizm _kompilacyjny_ (na etapie tworzenia klasy), który **zmienia nazwę atrybutów/metod zaczynających się od __ i niekończących się __**.
 
@@ -46,16 +42,3 @@ X._X__value      # OK
 - **Mnemonika**: __ → „_Rename me for this class_”
 - **Asocjacja**: _ClassName__attr = „należy do tej klasy”
 - **Wzorzec strukturalny**: _namespace isolation_, nie access control
-
-___
-Metadata:
-
-```yaml
----
-type: concept    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #empty

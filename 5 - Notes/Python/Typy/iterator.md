@@ -2,13 +2,12 @@
 title: "iterator"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
 
-	
-	obiekt <iterable objects> , który iteruje
+obiekt <iterable objects> , który iteruje
 	 `__iter__()` -> zwraca samego siebie (self)
 	 `__next__()` -> zwraca kolejny element albo StopIteration
 

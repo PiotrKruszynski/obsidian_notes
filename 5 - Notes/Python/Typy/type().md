@@ -2,14 +2,10 @@
 title: "type()"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-24  11:41
-___
-Note:
 
 wbudowana [[metaclass]] , której wywołanie z argumentami
 
@@ -37,16 +33,3 @@ print(obj.foo())
 Jeśli nie podasz metaclass=..., używany jest **type**.
 
 ![[Pasted image 20251224124722.png]]
-
-___
-Metadata:
-[[oop]]  , [[class]] , 
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #empty

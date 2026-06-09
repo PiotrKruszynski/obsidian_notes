@@ -2,12 +2,10 @@
 title: "lambda python"
 type: concept
 topic: python
-tags: []
+tags: ["lambda"]
 created: 2026-06-09
 status: draft
 ---
-
-#annonymousfunction
 
 ```python
 add = lambda x, y: x + y
@@ -20,4 +18,3 @@ square = lambda x: x * x
 
 print(square(4))
 ```
-

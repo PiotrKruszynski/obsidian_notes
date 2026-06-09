@@ -2,17 +2,12 @@
 title: "function C"
 type: concept
 topic: c
-tags: []
+tags: ["functional-programming"]
 created: 2026-06-09
 status: draft
 ---
 
 main:  #c
-Status: #pending 
-
-Created: 2026-05-06  10:21
-___
-
 
 > [!NOTE]
 > Zbiór instrukcji zamknięty pod identyfikatorem. 
@@ -183,15 +178,3 @@ int ft_strlen(char *str)
 | **Argumenty nazwane**          | Tak                    | Nie                                  |
 | **Wiele wartości zwracanych**  | Tak (jako krotka)      | Nie (wymaga struktur lub wskaźników) |
 | **Przeciążanie (overloading)** | Nie (ale jest `*args`) | Nie (wymaga różnych nazw lub C++)    |
-
-
-
-
-
-
-
-
-___
-Metadata:
-
-Tags: #c #functions

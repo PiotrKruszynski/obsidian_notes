@@ -2,11 +2,10 @@
 title: "dict()"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
 
 1. Hashmap
 2. kolekcja
@@ -122,6 +121,4 @@ d.items()   # Widok par klucz-wartość
   
  Inne metody  
 _d.update({'x': 1, 'y': 2})  # Aktualizuje/dodaje wiele par  
-d.setdefault('key', 'default')  # Zwraca wartość lub ustawia domyślną_  
-  
-
+d.setdefault('key', 'default')  # Zwraca wartość lub ustawia domyślną_

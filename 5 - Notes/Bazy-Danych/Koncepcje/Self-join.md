@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, średni]
+tags: ["sql"]
 powiązane: ["[[JOIN — typy i co zwracają]]", "[[Klucz główny i obcy]]"]
 ---
 

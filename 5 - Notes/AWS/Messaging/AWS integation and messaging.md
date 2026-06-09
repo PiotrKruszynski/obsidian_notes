@@ -2,15 +2,10 @@
 title: "AWS integation and messaging"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-
-Created: 2026-02-23  10:29
-___
-Note:
 
 >[!tip]
 >definition
@@ -105,15 +100,3 @@ Note:
     
 
 ---
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

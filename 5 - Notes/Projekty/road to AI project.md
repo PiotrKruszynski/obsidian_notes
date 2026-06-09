@@ -2,12 +2,10 @@
 title: "road to AI project"
 type: project
 topic: projects
-tags: []
+tags: ["ai"]
 created: 2026-06-09
 status: draft
 ---
-
-#ai 
 
 research - business / ux / technical
 
@@ -107,5 +105,3 @@ sqlite bo nie che narazie wprowadzać Docker
 `przeanalizuj dokładnie execution_plan i stwórz sobie subagentów do wykonania całej pracy`
 - ard.md 
 Architectural Decision Record opisuje w jaki sposób podejmować decyzje
-
-

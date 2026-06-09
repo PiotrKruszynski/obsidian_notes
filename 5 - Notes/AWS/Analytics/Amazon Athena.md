@@ -2,15 +2,10 @@
 title: "Amazon Athena"
 type: service
 topic: aws
-tags: []
+tags: ["aws", "big-data"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-28  12:37
-___
-Note:
-
 
 >[!Definition]
 >- Athena → **serverless query engine (SQL on S3)**
@@ -60,7 +55,6 @@ when you want to analyze data in S3 using serverless SQL -> Athena
 - optymalizacja: **Parquet + partitioning**
 
 
-#bigdata 
 każde zapytanie w Athena to osobny request
 
 #### **4. Convert to columnar (ETL step)** -> techniki na tańsze query
@@ -84,17 +78,3 @@ każde zapytanie w Athena to osobny request
 
 ❌ małe pliki (small files problem)
 → overhead + wolniej
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

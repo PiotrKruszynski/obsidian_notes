@@ -2,14 +2,10 @@
 title: "CloudWatch Metrics"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-17  15:08
-___
-Note:
 
 >[! ]
 >metrics for every services in AWS
@@ -23,21 +19,3 @@ Note:
 
 **CloudWatch Metric Streams**
 - dodajesz [[Amazon Data Firehose]] i do S3 -> Athena / Redfhift / OpenSearch
-
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

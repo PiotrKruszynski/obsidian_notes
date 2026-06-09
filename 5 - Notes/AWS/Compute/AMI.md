@@ -2,14 +2,10 @@
 title: "AMI"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-03  11:57
-___
-Note:
 
 >[!Definition]
 >AMI = **template (image)** używany do uruchamiania EC2  
@@ -69,18 +65,4 @@ AMI = **"golden image" serwera**
 - AMI = template EC2  
 - built from snapshot EBS  
 - immutable  
-- region-based  
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws
+- region-based

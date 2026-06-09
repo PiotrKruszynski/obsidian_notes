@@ -2,14 +2,10 @@
 title: "__new__"
 type: concept
 topic: python
-tags: []
+tags: ["oop"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-24  11:28
-___
-Note:
 
 konstruktor, który tworzy obiekt. 
 ma go tylko **object**
@@ -78,21 +74,3 @@ class OnlyPositive:
     def __init__(self, value):
         self.value = value
 ```
-
-
-
-
-
-___
-Metadata:
-[[class]]
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #class 

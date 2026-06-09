@@ -2,12 +2,10 @@
 title: "lekarz_app"
 type: project
 topic: projects
-tags: []
+tags: ["projects"]
 created: 2026-06-09
 status: draft
 ---
-
-
 
 wybierz plan
 ![[Pasted image 20260422131808.png]]

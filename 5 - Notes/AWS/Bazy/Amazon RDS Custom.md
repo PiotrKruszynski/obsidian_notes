@@ -2,14 +2,10 @@
 title: "Amazon RDS Custom"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-11  10:34
-___
-Note:
 
 >[! Important]
 >**Amazon RDS Custom** to wyspecjalizowana usługa bazodanowa przeznaczona dla silników:
@@ -31,16 +27,3 @@ Dzięki temu możesz:
 
 
 ![[Pasted image 20260211104014.png]]
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws #rds

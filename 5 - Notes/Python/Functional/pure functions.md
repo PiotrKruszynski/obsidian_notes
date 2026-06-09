@@ -2,11 +2,10 @@
 title: "pure functions"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
 
 - są predyktywne, 
 - dla tego samego inputu, dają ten sam output,

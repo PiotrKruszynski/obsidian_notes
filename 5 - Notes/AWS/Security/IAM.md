@@ -2,14 +2,10 @@
 title: "IAM"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-03  19:22
-___
-Note:
 
 # AWS IAM (Identity and Access Management)
 
@@ -153,22 +149,3 @@ potrzeba zaufania między kontami
 - role > user  
 - deny > allow  
 - zawsze **least privilege**
-
-
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

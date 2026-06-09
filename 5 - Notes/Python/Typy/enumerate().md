@@ -2,14 +2,10 @@
 title: "enumerate()"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-18  13:53
-___
-Note:
 
 [Build-in](https://docs.python.org/3/library/functions.html)
 
@@ -24,10 +20,3 @@ def enumerate(iterable, start=0):
         yield n, elem
         n += 1
 ```
-
-
-___
-Metadata:
-
-Status: #pending
-Tags: #empty

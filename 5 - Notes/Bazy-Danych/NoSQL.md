@@ -2,41 +2,15 @@
 title: "NoSQL"
 type: concept
 topic: databases
-tags: []
+tags: ["databases"]
 created: 2026-06-09
 status: draft
 ---
 
-main:  #database #nosql #distributed #architecture
+# NoSQL — systemy rozproszone i architektura
 
-Status: #pending 
-
-Created: 2026-05-24  18:03
-___
-# NoSQL — architektura, skalowanie i systemy rozproszone
-
-## Czym jest baza danych?
-
-Baza danych to:
-- zbiór danych,
-- model organizacji danych,
-- mechanizm dostępu i przetwarzania danych.
-
-Każda baza danych rozwiązuje trzy problemy:
-1. jak przechowywać dane,
-2. jak je odnajdywać,
-3. jak zachować spójność przy współbieżności i awariach.
-# SQL vs NoSQL
-
-| SQL                | NoSQL                |
-| ------------------ | -------------------- |
-| schema-based       | schemaless           |
-| relacje i JOINy    | denormalizacja       |
-| ACID               | BASE                 |
-| pionowe skalowanie | poziome skalowanie   |
-| silna spójność     | eventual consistency |
-| transakcje         | wysoka dostępność    |
-| structured data    | heterogeneous data   |
+> [!summary] Zakres tej notatki
+> Teoria distributed systems: dlaczego NoSQL powstał, CAP, BASE, eventual consistency, replikacja, sharding, quorum R/W/N. Porównanie typów → [[Typy baz danych]].
 
 # Dlaczego NoSQL istnieje?
 

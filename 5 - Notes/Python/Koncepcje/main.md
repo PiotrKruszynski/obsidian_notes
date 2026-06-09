@@ -2,7 +2,7 @@
 title: "main"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -18,4 +18,3 @@ status: draft
 2. Level mid
 
 3. Level mikro
-

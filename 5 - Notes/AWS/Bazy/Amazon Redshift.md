@@ -2,15 +2,10 @@
 title: "Amazon Redshift"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-28  13:17
-___
-Note:
-
 
 >[!Definition]
 >- Redshift → **managed data warehouse (OLAP)** online _analytical processing_
@@ -78,18 +73,3 @@ umożliwia niewchodzenie w internet, wszystko po VPC miedzy S3 a Redshift (COPY 
 - columnar + MPP = high performance
 - S3 integration → COPY / Spectrum
 - wybór: **heavy analytics → Redshift, ad-hoc → Athena**
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

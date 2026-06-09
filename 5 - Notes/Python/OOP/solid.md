@@ -2,7 +2,7 @@
 title: "solid"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -12,4 +12,3 @@ status: draft
 [[liskov substitution]]
 [[interface segregation]]
 [[dependency inversion]]
-

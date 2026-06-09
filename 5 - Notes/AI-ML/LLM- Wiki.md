@@ -2,14 +2,10 @@
 title: "LLM- Wiki"
 type: concept
 topic: ai-ml
-tags: []
+tags: ["ai", "rag"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-04-21  23:31
-___
-Note:
 
 [Karpathy‑style](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
 
@@ -89,17 +85,3 @@ Schema (np. `CLAUDE.md`, `AGENTS.md`) mówi LLM:
 ### **A. Wiedza jest kompilowana, nie wyszukiwana**
 
 RAG = „szukaj i improwizuj”. LLM‑Wiki = „kompiluj i utrzymuj”.
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #ai
-#RAG

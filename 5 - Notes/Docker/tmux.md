@@ -2,15 +2,10 @@
 title: "tmux"
 type: tool
 topic: docker
-tags: []
+tags: ["linux", "tmux"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-14  13:35
-___
-Note:
-
 
 | Klawisz | Znaczenie |
 |---|---|
@@ -59,17 +54,3 @@ Note:
 | logi obok    | `Ctrl + b` `%` lub `"` |
 | odłączenie   | `Ctrl + b` `d`         |
 | powrót       | `tmux attach -t dev`   |
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: linux  # tmux
----
-```
-
-Status: #pending
-Tags: #tmux  #linux

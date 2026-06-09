@@ -2,15 +2,10 @@
 title: "Amazon EMR"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-28  14:20
-___
-Note:
-
 
 >[!Definition]
 >- EMR → **managed big data platform (Hadoop/Spark ecosystem)**
@@ -71,17 +66,3 @@ Note:
 - EMR = **big data processing (Spark/Hadoop)**
 - S3 = storage, EMR = compute
 - wybór: **ETL/transform → EMR, SQL query → Athena**
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

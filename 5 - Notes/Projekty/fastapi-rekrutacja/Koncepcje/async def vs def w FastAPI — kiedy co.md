@@ -1,5 +1,5 @@
 ---
-tags: [fastapi, koncepcja, async]
+tags: ["async", "fastapi"]
 powiązane: ["[[ASGI vs WSGI]]", "[[Await i event loop — model mentalny]]"]
 ---
 

@@ -2,12 +2,10 @@
 title: "test double"
 type: concept
 topic: testing
-tags: []
+tags: ["testing"]
 created: 2026-06-09
 status: draft
 ---
-
-
 
 **collaborator** doubles- „bierni pomocnicy”
 

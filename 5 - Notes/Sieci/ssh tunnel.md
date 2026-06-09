@@ -2,14 +2,10 @@
 title: "ssh tunnel"
 type: concept
 topic: networking
-tags: []
+tags: ["linux", "ssh"]
 created: 2026-06-09
 status: draft
 ---
-
-#ssh #linux 
-  
-  
 
 tunel SSH przekierowuje **lokalny port → zdalny port**  
   

@@ -2,14 +2,10 @@
 title: "DocumentDB"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-27  00:55
-___
-Note:
 
 >[!tip]
 >similar to _Aurora_ (architektura rozproszona storage + compute) but compatible with  _MongoDB_ API
@@ -21,20 +17,3 @@ Note:
 [[MongoDB]] is used to store, query and index JSON data
 
 DocumentDB (Mongodb) is not serverless! and is not Global
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

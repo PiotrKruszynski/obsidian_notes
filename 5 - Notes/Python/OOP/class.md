@@ -2,7 +2,7 @@
 title: "class"
 type: concept
 topic: python
-tags: []
+tags: ["data-model", "descriptors", "metaclass", "namespaces", "oop", "python", "typing"]
 created: 2026-06-09
 status: draft
 ---
@@ -116,7 +116,3 @@ metaclass.__init__(Widget2, name, bases, namespace, **kwargs)
 w2 = Widget2()  
 print(w2) # <__main__.Widget2 object at 0x10179b4d0>
 ```
-
-#study
-
-#python #oop #metaclass #type #namespace #__dict__ #descriptor #object-model

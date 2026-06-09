@@ -2,14 +2,10 @@
 title: "annotations"
 type: concept
 topic: python
-tags: []
+tags: ["dataclasses", "introspection", "mypy", "pydantic", "typing"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-23  09:43
-___
-Note:
 
 `__annotations__` -> specjalny atrybut (słownik) Pythona przechowujący _adnotacje typów_ (type hints) dla zmiennych, argumentów funkcji i wartości zwracanych. Jest podstawą typowania statycznego, introspekcji oraz narzędzi takich jak mypy, pydantic, dataclasses.
 
@@ -47,21 +43,3 @@ sig.return_annotation               # int
 num_vowels.__annotations__
 # {'text': <class 'str'>, 'return': <class 'int'>}
 ```
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: concept    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #empty
-
- #__annotations__  #type-hints  #static-typing  #inspect  #mypy #dataclasses #pydantic
-[[ann]]

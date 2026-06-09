@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, średni]
+tags: ["sql"]
 powiązane: ["[[EXISTS kontra IN]]", "[[CTE (WITH)]]", "[[Agregacje i GROUP BY]]"]
 ---
 

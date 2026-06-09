@@ -2,14 +2,10 @@
 title: "Amazon EKS"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-24  09:11
-___
-Note:
 
 > [!Definition]
 > 
@@ -113,19 +109,3 @@ EKS wspiera montowanie storage przez **Container Storage Interface (CSI) driver*
 - logi kontenerów
 - metryki sieciowe
 Wymaga zainstalowania agenta CloudWatch na nodach.
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

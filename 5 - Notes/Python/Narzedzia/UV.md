@@ -2,14 +2,10 @@
 title: "UV"
 type: tool
 topic: python
-tags: []
+tags: ["projects", "tooling"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-15 23:19
-___
-Note:
 
 uv to nowoczesny, ultralekki i szybki menedżer pakietów dla Python, alternatywa dla pip i virtualenv. Wysoka wydajność dzięki implementacji w **Rust**. 
 
@@ -145,6 +141,3 @@ Managing and inspecting uv's state, such as the cache, storage directories, or p
 
 
 Metadata:
-
-Status: #pending
-Tags: #pip #virtualenv #python_projects

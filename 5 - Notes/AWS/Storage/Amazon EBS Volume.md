@@ -2,14 +2,10 @@
 title: "Amazon EBS Volume"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-03  10:20
-___
-
 
 >[!Definition]
 >EBS = **block storage (pamięć blokowa)** dla EC2  
@@ -115,17 +111,3 @@ ___
 
 
 ![[Pasted image 20260203104908.png]]
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws #ebs #volume

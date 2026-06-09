@@ -2,14 +2,10 @@
 title: "Kinesis Data Streams"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-23  16:27
-___
-Note:
 
 >[!Definition]
 >- KDS → **real-time streaming platform (ordered, replay able event log)**
@@ -167,17 +163,3 @@ kliknięcia użytkowników → KDS → Lambda (real-time analityka)
                                → KDF (zapis do S3)
                                → ElasticSearch (wyszukiwanie)
 ```
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

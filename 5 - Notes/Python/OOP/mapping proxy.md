@@ -2,12 +2,12 @@
 title: "mapping proxy"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
 
- to **specjalny wrapper typu read-only na słownik** w Pythonie
+to **specjalny wrapper typu read-only na słownik** w Pythonie
 
 ```python
 from types import MappingProxyType
@@ -22,4 +22,3 @@ print(proxy["c"])     # 3 (proxy widzi aktualizację)
 proxy["c"] = 4        # TypeError – nie można zmieniać
 
 ```
-

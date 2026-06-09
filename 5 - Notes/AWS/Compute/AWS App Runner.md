@@ -2,14 +2,10 @@
 title: "AWS App Runner"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-24  12:48
-___
-Note:
 
 >[!Definition]  
 >- **App Runner** → fully managed PaaS dla web apps (code / Docker → running service)  
@@ -58,16 +54,3 @@ existing app → containerize → deploy target
 - App Runner = **najprostszy deploy web app**  
 - A2C = **narzędzie migracyjne → kontenery**  
 - wybór: **simplicity → App Runner, control → ECS/EKS**
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

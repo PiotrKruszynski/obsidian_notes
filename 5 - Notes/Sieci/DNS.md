@@ -2,7 +2,7 @@
 title: "DNS"
 type: concept
 topic: networking
-tags: []
+tags: ["aws", "networking"]
 created: 2026-06-09
 status: draft
 ---
@@ -15,6 +15,3 @@ usługa sieciowa zamieniająca nazwy zrozumiałe dla człowieka na adres IP urz�
 
 
 ![[Pasted image 20260211173144.png]]
-#sieci_komputerowe
-#aws #route53
-#network

@@ -2,7 +2,7 @@
 title: "data structure"
 type: concept
 topic: algorithms
-tags: []
+tags: ["algorithms"]
 created: 2026-06-09
 status: draft
 ---
@@ -29,6 +29,4 @@ binarne - wydajność, po to by przeczytać paczkę: -> paczka w C++ numpy -> ko
 
 [[byte]] - 
 [[byte array]] - 
-[[memory view]] - 
-
-
+[[memory view]] -

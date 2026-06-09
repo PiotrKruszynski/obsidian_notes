@@ -2,15 +2,10 @@
 title: "AWS Global Accelerator"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-18  20:49
-___
-Note:
-
 
 ![[Pasted image 20260218205113.png]]
 
@@ -111,17 +106,4 @@ Global Accelerator ≠ S3 service
 # TL;DR
 - static IP → Global Accelerator  
 - TCP/UDP → Global Accelerator  
-- cache → CloudFront  
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws
+- cache → CloudFront

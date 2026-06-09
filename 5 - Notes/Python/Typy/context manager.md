@@ -2,14 +2,10 @@
 title: "context manager"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-01-03  15:28
-___
-Note:
 
 >[! Important]
 np. open(), służy do wyjątków, błędów i automatyzacji powtarzających się czynności (pliki, locki, połączenia, transakcje, zmiana global).
@@ -141,21 +137,3 @@ def test_iter(sorted_frozen_set_duplicates):
     with pytest.raises(StopIteration):  
         next(iterator)
 ```
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: pattern    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-[[protocols]] 
-Status: #pending
-Tags: #empty

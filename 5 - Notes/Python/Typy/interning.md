@@ -2,11 +2,10 @@
 title: "interning"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
 
 reużywanie obiektu pod inną zmienną
 algorytm optymalizujący 
@@ -18,4 +17,4 @@ logikę możemy napisać w [[__new__]] -> zamist tworzyć nowy, sprawdzamy czy j
 to nie to samo co [[single tone]]
 
 w [[single tone]] jedna klasa tworzy jeden obiekt
-w [[interning]] mam wiele obiektów ale każdy może mieć tylko jedną wartość. Nie istnieją dwa obiekty o tym samym typie i tej samej wartości. 
+w [[interning]] mam wiele obiektów ale każdy może mieć tylko jedną wartość. Nie istnieją dwa obiekty o tym samym typie i tej samej wartości.

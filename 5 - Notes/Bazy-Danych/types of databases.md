@@ -2,16 +2,11 @@
 title: "types of databases"
 type: concept
 topic: databases
-tags: []
+tags: ["databases"]
 created: 2026-06-09
 status: draft
 ---
 
-main:  #db #cap #sql #nosql
-Status: #pending 
-
-Created: 2026-05-25  12:05
-___
 # Rodzaje baz danych
 ## 1. Relacyjne bazy danych (SQL)
 **Przykłady:** PostgreSQL, MySQL, SQL Server, Oracle, DB2
@@ -392,13 +387,3 @@ W praktyce większość dużych systemów używa wielu baz jednocześnie:
 To podejście nazywa się:
 - polyglot persistence.
 
-Notes:
-
-![[Pasted image 20260315152833.png]]
-
-allegro na nosql szybszy bo kategorie zmieniaja sie zadziej a mamy przyspieszenie na odczycie
-nosql skaluja sie lepiej niz sql
-
-![[Pasted image 20260315153116.png]]
-
-NoSQL wtedy kiedyd model jest idealnie, albo zaczyna nam brakować w SQL

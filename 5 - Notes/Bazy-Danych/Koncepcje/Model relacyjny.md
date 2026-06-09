@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, fundament]
+tags: ["sql"]
 powiązane: ["[[Klucz główny i obcy]]", "[[Normalizacja (1NF, 2NF, 3NF)]]"]
 ---
 

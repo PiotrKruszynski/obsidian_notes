@@ -2,14 +2,10 @@
 title: "AWS Lake Formation"
 type: service
 topic: aws
-tags: []
+tags: ["big-data"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-28  14:39
-___
-Note:
 
 # AWS Lake Formation + Data Lake
 
@@ -68,19 +64,3 @@ S3 → Glue Catalog → Lake Formation permissions → query (Athena/Redshift)
 - Data Lake = **S3 + raw data**
 - Glue = schema, Lake Formation = access control
 - wybór: **flexible analytics → Data Lake, structured BI → Redshift**
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: data
----
-```
-
-Status: #pending
-Tags: #bigdata

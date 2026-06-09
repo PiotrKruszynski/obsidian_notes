@@ -2,14 +2,10 @@
 title: "on-premises with AWS"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-11  10:48
-___
-Note:
 
 >[!tip]
 >Strategia **On-Premises + AWS** polega na integracji infrastruktury lokalnej z chmurą AWS.  
@@ -170,17 +166,3 @@ Dlatego istnieją narzędzia do:
 - **utrzymania środowiska hybrydowego**  
   
 To pozwala migrować systemy **stopniowo**, a nie w jednym ryzykownym kroku.
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

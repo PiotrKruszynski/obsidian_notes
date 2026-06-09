@@ -2,14 +2,10 @@
 title: "load balancer"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-04  18:02
-___
-Note:
 
 >[!Important]
 >Load Balancer = **managed service, który rozdziela ruch na wiele backendów (targets)**
@@ -159,19 +155,3 @@ Load Balancer (DNS)
           └─ IP
 
 ```
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

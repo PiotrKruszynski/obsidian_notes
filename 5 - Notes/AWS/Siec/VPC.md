@@ -2,14 +2,10 @@
 title: "VPC"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-01  16:32
-___
-Note:
 
 >[!tip]
 >**VPC (Virtual Private Cloud):** A private network within AWS
@@ -123,16 +119,3 @@ Note:
 - VPC = boundary routingu  
 - Peering → łączy **dwa boundary**  
 - Sharing → usuwa problem, bo jest **jedno boundary**
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws #vpc

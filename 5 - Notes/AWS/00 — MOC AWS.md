@@ -2,9 +2,9 @@
 title: "MOC AWS"
 type: moc
 topic: aws
-tags: [moc, aws]
+tags: ["aws", "moc"]
 created: 2026-06-09
-status: done
+status: draft
 ---
 
 # MOC — AWS

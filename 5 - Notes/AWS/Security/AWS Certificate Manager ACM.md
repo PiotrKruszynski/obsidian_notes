@@ -2,15 +2,10 @@
 title: "AWS Certificate Manager ACM"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-16  09:58
-___
-Note:
-
 
 >Easily provision, manage, and deploy TLS Certificates
 
@@ -27,18 +22,3 @@ Integrations with (load TLS certificates on)
 #### Cannot use ACM with EC2 directly (can’t be extracted)
 
 ![[Pasted image 20260316142503.png]]
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

@@ -2,7 +2,7 @@
 title: "interface segregation principle"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -18,6 +18,3 @@ wymuszenie implementacji na dziecku
 powinna wymuszać spełnianie interfejsów
 	w moim świecie definiuje, że samochód ma cztery koła i silnik. Teraz jeżeli ktoś chce zbudować samochód musi przestrzegać moich zasad
 		To klasa powinna decydować
-
-
-

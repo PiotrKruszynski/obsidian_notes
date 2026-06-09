@@ -2,7 +2,7 @@
 title: "reprezentacja tekstowa obiektu"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -76,4 +76,3 @@ class Vector:
             return f"r=?, θ=?"
         return str(self)
 ```
-

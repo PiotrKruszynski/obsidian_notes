@@ -2,16 +2,11 @@
 title: "VPN"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
 
-Created: 2026-03-20  14:48
-___
-Note:
-
-  
 >[!important]  
 >- VPN = **encrypted tunnel over Internet**  
 >- łączy on-premises z VPC ale nadal w internet
@@ -171,20 +166,3 @@ ale NIE daje:
 
 VPN → security  
 Direct Connect → performance
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

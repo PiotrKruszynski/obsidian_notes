@@ -2,17 +2,12 @@
 title: "introspection"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
 
-
-Created: 2025-12-22  16:54
-___
-Note:
-
-	odczytywanie kodu, 
+odczytywanie kodu, 
 	sprawdzanie z jakimi parametrami poszła funkcja, jakich ma memberów.
 
 Metody do introspekcji:
@@ -212,17 +207,3 @@ class Batch: # wywołuje metaklasę type i tworzy nowy obiekt
 ```bash
 
 ```
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #empty

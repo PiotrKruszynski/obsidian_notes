@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, fundament]
+tags: ["sql"]
 powiązane: ["[[SELECT i filtrowanie (WHERE)]]", "[[Agregacje i GROUP BY]]"]
 ---
 

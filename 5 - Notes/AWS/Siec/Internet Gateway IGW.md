@@ -2,14 +2,10 @@
 title: "Internet Gateway IGW"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-01  16:34
-___
-Note:
 
 >[!tip]
 >komponent [[VPC]]  , który zapewnia dwukierunkową komunikację między zasobami w twojej chmurze a Internetem. Umożliwia instancją z **publicznymi adresami IP** odbieranie i wysyłanie ruchu. Nie przekłada ruchu wewnętrznego, nie dokonuje translacji. 
@@ -131,16 +127,3 @@ EC2 ma Internet **tylko jeśli spełnia WSZYSTKIE:**
 - route `0.0.0.0/0 → IGW`
 - public subnet → IGW
 - inbound + outbound
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-
-
-Status: #pending
-Tags: #aws #vpc

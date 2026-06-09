@@ -2,12 +2,10 @@
 title: "memoizing"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
-
 
 zapamiętywanie wyniku funkcji, żeby reużyć, bez ponownego obliczania
 to technika cach'owania  
@@ -54,4 +52,3 @@ print(calculate_tribonachi_cache(1,2,4))
 print(calculate_tribonachi_cache(2,2,3))
 
 ```
-

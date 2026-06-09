@@ -2,15 +2,10 @@
 title: "Amazon CloudFront"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-18  12:13
-___
-Note:
-
 
 >[!important]
 >- CloudFront = **CDN (Content Delivery Network)**
@@ -108,17 +103,4 @@ Lambda@Edge:
 - CDN → CloudFront  
 - cache → edge locations  
 - origin → S3 / ALB / EC2  
-- security → WAF + Shield  
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws
+- security → WAF + Shield

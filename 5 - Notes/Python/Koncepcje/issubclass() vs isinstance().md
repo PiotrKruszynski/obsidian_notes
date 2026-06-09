@@ -2,14 +2,10 @@
 title: "issubclass() vs isinstance()"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-22  15:03
-___
-Note:
 
 ```python
 
@@ -33,17 +29,3 @@ isinstance(object, classinfo, /)
 | Sprawdzanie API / framework | issubclass      |
 | ABC / duck typing           | oba             |
 | Typowanie statyczne         | Protocol + mypy |
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #empty

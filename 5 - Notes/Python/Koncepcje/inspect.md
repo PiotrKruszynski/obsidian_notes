@@ -2,14 +2,11 @@
 title: "inspect"
 type: concept
 topic: python
-tags: []
+tags: ["decorators", "introspection", "metaprogramming", "python-internals", "reflection"]
 created: 2026-06-09
 status: draft
 ---
 
-Created: 2026-01-04  14:47
-___
-Note:
 # inspect — introspekcja runtime w Pythonie
 
 ## Idea (Second Brain → **Concept**)
@@ -163,16 +160,3 @@ def require_kw_only(fn):
 ## type: concept  
 language: python  
 tags: introspection inspect reflection metaprogramming decorators runtime
-
-___
-Metadata:
-
-```yaml
----
-type: concept    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #introspection #inspect #reflection #metaprogramming #decorators #runtime

@@ -2,14 +2,10 @@
 title: "DMS AWS Database Migration Service"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-10  13:13
-___
-Note:
 
 > [!important]
 > 
@@ -78,19 +74,3 @@ odpowiada za strukture i logikę
 ![[Pasted image 20260310132036.png]]
 
 ![[Pasted image 20260310132047.png]]
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

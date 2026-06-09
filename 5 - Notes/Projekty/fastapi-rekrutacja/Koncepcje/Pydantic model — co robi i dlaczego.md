@@ -1,5 +1,5 @@
 ---
-tags: [fastapi, koncepcja, pydantic, walidacja]
+tags: ["fastapi", "pydantic", "validation"]
 powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Response model — dlaczego oddzielny schemat wyjściowy]]", "[[Walidacja danych wejściowych — co się dzieje przed wywołaniem funkcji]]"]
 ---
 

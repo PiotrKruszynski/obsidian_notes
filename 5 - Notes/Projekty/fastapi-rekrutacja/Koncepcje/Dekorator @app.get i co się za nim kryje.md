@@ -1,5 +1,5 @@
 ---
-tags: [fastapi, koncepcja, routing]
+tags: ["fastapi", "routing"]
 powiązane: ["[[Path parameters vs Query parameters]]", "[[Request body — jak FastAPI parsuje JSON]]", "[[Status codes w FastAPI]]", "[[Automatyczna dokumentacja OpenAPI — skąd FastAPI wie co wygenerować]]"]
 ---
 

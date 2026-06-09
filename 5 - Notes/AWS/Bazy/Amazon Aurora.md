@@ -2,14 +2,10 @@
 title: "Amazon Aurora"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-11  10:41
-___
-Note:
 
 >[!Definition]  
 >Aurora = **AWS-native relational DB (MySQL/PostgreSQL compatible)**  
@@ -157,17 +153,3 @@ Note:
 
 
 ![[Pasted image 20260211111158.png]]
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

@@ -2,7 +2,7 @@
 title: "RESTful API"
 type: concept
 topic: networking
-tags: []
+tags: ["networking"]
 created: 2026-06-09
 status: draft
 ---
@@ -191,4 +191,4 @@ Using API Gateway, you can:
 - Provide users with high-speed performance for both API requests and responses.
 - Authorize access to your APIs with AWS Identity and Access Management (IAM) and Amazon. Cognito, both of which provide native OAuth support.
 - Run multiple versions of the same API simultaneously with API Gateway to quickly iterate, test, and release new versions.
-- Monitor performance metrics and information about API calls, data latency, and error rates from the API Gateway. 
+- Monitor performance metrics and information about API calls, data latency, and error rates from the API Gateway.

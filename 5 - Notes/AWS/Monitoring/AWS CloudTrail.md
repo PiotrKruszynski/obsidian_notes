@@ -2,15 +2,11 @@
 title: "AWS CloudTrail"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
 
-Created: 2026-03-17  22:10
-___
-Note:
-  
 >[!important]  
 >- CloudTrail = **audit + logging**  wykonanej akcji, kliknięcia (API calls) w AWS  
 >- zapisuje: **kto zrobił co, kiedy, skąd**  
@@ -175,17 +171,3 @@ debug/security → CloudTrail first
 
 
 ---
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

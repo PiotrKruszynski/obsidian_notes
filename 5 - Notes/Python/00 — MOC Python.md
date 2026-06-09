@@ -2,9 +2,9 @@
 title: "MOC Python"
 type: moc
 topic: python
-tags: [moc, python]
+tags: ["moc", "python"]
 created: 2026-06-09
-status: done
+status: draft
 ---
 
 # MOC — Python

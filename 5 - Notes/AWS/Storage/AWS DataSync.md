@@ -2,15 +2,10 @@
 title: "AWS DataSync"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-18  22:02
-___
-Note:
-
 
 >[!important]
 >- DataSync = **automatyczny, szybki transfer danych (on-prem ↔ AWS / AWS ↔ AWS)**
@@ -95,16 +90,3 @@ automatycznie:
 |AWS Transfer Family|SFTP, FTPS, FTP|Integracja z tradycyjnymi systemami|Bezpieczny, zarządzany transfer|Ograniczony do obsługiwanych protokołów|
 |AWS Snowball/ Snowmobile|Fizyczne urządzenia (offline)|Transfer petabajtów danych (np. migracja)|Duże wolumeny, offline|Fizyczny transport, dłuższy lead time|
 |aws s3 sync (CLI)|HTTPS (CLI narzędzie)|Rekurencyjny sync folderów do/z S3|Proste i szybkie w CLI|Tylko do S3, brak zaawansowanej orkiestracji|
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

@@ -2,15 +2,11 @@
 title: "AWS Storage Gateway"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
 
-Created: 2026-03-18  21:50
-___
-Note:
- 
 >[!important]
 >- Storage Gateway = **hybrid _ONLY_ storage (on-prem ↔ AWS)**
 >- lokalny dostęp + wszystko finalnie ląduje w **S3** (pośrednio lub bezpośrednio)
@@ -84,19 +80,4 @@ Storage Gateway = **proxy/cache między on-prem a AWS**
 - hybrid (on-prem + AWS) → Storage Gateway  
 - file (NFS/SMB) → S3  
 - block (iSCSI) → S3 + EBS snapshots  
-- tape (VTL) → Glacier  
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws
+- tape (VTL) → Glacier

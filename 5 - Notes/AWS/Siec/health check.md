@@ -2,14 +2,10 @@
 title: "health check"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-11  18:55
-___
-Note:
 
 >[! Important]
 >definition
@@ -115,20 +111,3 @@ ALB
 - ALB **lokalnie** wycina złe instancje
     
 - Route 53 **globalnie** wycina cały ALB (np. region)
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

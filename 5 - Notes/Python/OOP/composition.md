@@ -2,12 +2,11 @@
 title: "composition"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
 
- 
 - funkcje można komponować ze sobą  , wynika to z [[higher-order functions]]
 - elastyczna alternatywa dla dziedziczenia  
 - wynik jednej fn staje się argumentem kolejnej  

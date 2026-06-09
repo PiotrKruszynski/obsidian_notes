@@ -2,14 +2,10 @@
 title: "AWS snowball"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-18  22:28
-___
-Note:
 
 >[!tip]
 >Highly-secure, 
@@ -41,16 +37,3 @@ Solutions Architect Tip
 For ongoing data replication (not a one-time move), use services like **AWS DataSync** or **AWS Database Migration Service (DMS)** over a VPN or Direct Connect. Use Snowball for the initial "bulk" transfer to save time.
 
 ![[Pasted image 20260218223516.png]]
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

@@ -2,7 +2,7 @@
 title: "functional programming"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -34,4 +34,3 @@ dane to zmienne opisujące aktualny state obiektu. Każdy state to dane, ale nie
 13. [[referential tansparency]]  
 14. [[stream and pipelines ]] 
 15. [[monads and functors]]
-

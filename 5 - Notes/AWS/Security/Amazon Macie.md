@@ -2,14 +2,10 @@
 title: "Amazon Macie"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-21  00:26
-___
-Note:
 
 #### dla S3
 
@@ -30,20 +26,3 @@ Note:
 
 
 ![[Pasted image 20260321002759.png]]
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

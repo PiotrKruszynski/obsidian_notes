@@ -2,14 +2,10 @@
 title: "VPC Flow Logs"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-24  12:34
-___
-Note:
 
 >[! ]
 >**VPC Flow Logs** to funkcja, która zbiera informacje o ruchu sieciowym w Twoim VPC. Rejestruje zarówno ruch przychodzący, jak i wychodzący, a także to, czy dany ruch został dozwolony czy zablokowany. 
@@ -25,17 +21,3 @@ Może łapać na poziomie:
 Query VPC flow logs using **Athena** on S3 or **CloudWatch Logs Insights**.
 
 ![[Pasted image 20260324123911.png]]
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

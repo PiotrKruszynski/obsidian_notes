@@ -2,9 +2,9 @@
 title: "MOC Testy"
 type: moc
 topic: testing
-tags: [moc, testing]
+tags: ["moc", "testing"]
 created: 2026-06-09
-status: done
+status: draft
 ---
 
 # MOC — Testy

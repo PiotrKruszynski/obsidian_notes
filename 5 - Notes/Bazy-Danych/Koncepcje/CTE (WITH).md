@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, zaawansowany]
+tags: ["sql"]
 powiązane: ["[[Podzapytania (subqueries)]]", "[[Window functions]]"]
 ---
 

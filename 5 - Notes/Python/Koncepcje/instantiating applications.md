@@ -2,14 +2,10 @@
 title: "instantiating applications"
 type: concept
 topic: python
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-14  21:44
-___
-Note:
 
 >[! Important]
 >Uruchamianie pełnego stosu technologicznego (EC2, EBS, RDS) tradycyjnymi metodami może być czasochłonne ze względu na potrzebę instalacji oprogramowania, konfigurację zasobów oraz wprowadzanie danych początkowych. AWS oferuje kilka strategii przyspieszających ten proces:
@@ -42,16 +38,3 @@ Note:
 • **AWS App2Container (A2C):** Narzędzie CLI do modernizacji aplikacji Java i .NET poprzez ich konteneryzację i wdrożenie na ECS, EKS lub App Runner.
 
 • **Serverless (Lambda/Fargate):** Pozwala na uruchamianie kodu lub kontenerów bez konieczności zarządzania serwerami, co drastycznie skraca czas potrzebny na wdrożenie
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

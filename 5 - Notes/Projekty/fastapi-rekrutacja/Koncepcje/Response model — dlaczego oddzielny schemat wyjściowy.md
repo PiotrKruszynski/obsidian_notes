@@ -1,5 +1,5 @@
 ---
-tags: [fastapi, koncepcja, pydantic, bezpieczenstwo]
+tags: ["fastapi", "pydantic", "security"]
 powiązane: ["[[Pydantic model — co robi i dlaczego]]", "[[Dekorator @app.get i co się za nim kryje]]"]
 ---
 

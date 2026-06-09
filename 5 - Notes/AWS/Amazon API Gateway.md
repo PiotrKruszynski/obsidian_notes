@@ -2,14 +2,10 @@
 title: "Amazon API Gateway"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-24  08:42
-___
-Note:
 
 ![[Pasted image 20260320112651.png|100]]
 
@@ -123,16 +119,3 @@ Trade-offs:
 
 - API Gateway ≠ Load Balancer  
 - API Gateway ≠ CloudFront (choć może używać CF)
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

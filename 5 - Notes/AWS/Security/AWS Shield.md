@@ -2,14 +2,10 @@
 title: "AWS Shield"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-13  15:26
-___
-Note:
 
 >[!tip]
 >**DDoS (Distributed Denial of Service)** to atak polegający na **zalaniu systemu ogromną ilością ruchu**, aby przestał działać dla normalnych użytkowników.
@@ -74,17 +70,3 @@ Used for protecting critical workloads.
 - "Global edge protection" → **Shield + CloudFront**
 
 If your organization has multiple AWS accounts, then you can subscribe multiple AWS Accounts to AWS Shield Advanced by individually enabling it on each account using the AWS Management Console or API. You will pay the monthly fee once as long as the AWS accounts are all under a single _consolidated billing_, and you own all the AWS accounts and resources in those accounts.
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

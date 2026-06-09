@@ -2,7 +2,7 @@
 title: "typing"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---

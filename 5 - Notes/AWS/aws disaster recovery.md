@@ -2,14 +2,10 @@
 title: "aws disaster recovery"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-10  13:09
-___
-Note:
 
 >[!tip]
 >definition
@@ -23,16 +19,3 @@ Note:
 
 quick and easy recovery
 continous block-level replication for your servers
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

@@ -2,14 +2,10 @@
 title: "Running scripts"
 type: tool
 topic: python
-tags: []
+tags: ["python", "scripting", "tooling"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-16  14:40
-___
-Note:
 
 Uruchomienie skryptu python z instalacją tymczasową zależności przy użyciu [[UV]].
 
@@ -48,11 +44,3 @@ print(r.json())
 ```shell
 uv run example.py
 ```
-
-
-___
-Metadata:
-
-Status: #pending
-Tags: #uv #python_scripts #virtualenv #python 
-

@@ -2,12 +2,12 @@
 title: "monkey patching"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
 
-	technika do podmiany kolaboranta, działa w runtime
+technika do podmiany kolaboranta, działa w runtime
 	pytest --fixture info o wszystkich 
 
 **Monkey patching** to **dynamiczna modyfikacja kodu w trakcie działania programu** (w runtime), polegająca na **nadpisaniu metod, funkcji, klas lub atrybutów**, **bez zmiany ich źródła**.

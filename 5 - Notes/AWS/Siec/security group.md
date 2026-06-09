@@ -2,14 +2,10 @@
 title: "security group"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-04  11:47
-___
-Note:
 
 ![[Pasted image 20260206121052.png]]
 
@@ -115,18 +111,3 @@ Security Group = **stateful firewall dla EC2 (ENI)**
 
 
 ![[Pasted image 20260204115120.png]]
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

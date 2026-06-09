@@ -2,7 +2,7 @@
 title: "recursion"
 type: concept
 topic: algorithms
-tags: []
+tags: ["algorithms"]
 created: 2026-06-09
 status: draft
 ---
@@ -25,4 +25,3 @@ def square_area_recursive(a: int) -> int:
 usuwanie folderów
 
 [[functional programming]]
-

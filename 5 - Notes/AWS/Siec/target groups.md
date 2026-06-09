@@ -2,14 +2,10 @@
 title: "target groups"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-04  20:46
-___
-Note:
 
 >[! Important]
 >**target groups = collection of backends** (np. EC2, ECS tasks, IP adress) do których [[load balancer]] faktycznie wysyła ruch
@@ -52,18 +48,3 @@ Note:
 - IP Adresses
 	- must be private IPs only
 	- useful for on-permises nr non-EC@ targets
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

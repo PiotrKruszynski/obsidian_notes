@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, fundament]
+tags: ["sql"]
 powiązane: ["[[Model relacyjny]]", "[[JOIN — typy i co zwracają]]", "[[Normalizacja (1NF, 2NF, 3NF)]]", "[[Indeks — jak działa i kiedy pomaga]]"]
 ---
 

@@ -2,7 +2,7 @@
 title: "pattern matching"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -90,5 +90,3 @@ def ex_5():
             print(f"The answer is {the_answer}")
             
 ```
-
-

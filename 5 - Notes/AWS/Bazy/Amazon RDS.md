@@ -2,14 +2,10 @@
 title: "Amazon RDS"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-06  14:37
-___
-Note:
 
 >[!info]
 >- RDBMS_ystem_ (=SQL _język_  /OLTP online transaction processing - _typ obciążenia_) 
@@ -157,20 +153,4 @@ RDS = **DB server bez zarządzania infrastrukturą**
 - Multi-AZ = HA  
 - Read Replicas = scaling  
 - backups = auto + snapshot  
-- Proxy = connection pooling  
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws
+- Proxy = connection pooling

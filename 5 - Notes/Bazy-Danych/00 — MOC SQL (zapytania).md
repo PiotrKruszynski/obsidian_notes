@@ -1,5 +1,5 @@
 ---
-tags: [moc, sql, rozmowa]
+tags: ["interview", "moc", "sql"]
 typ: map-of-content
 ---
 

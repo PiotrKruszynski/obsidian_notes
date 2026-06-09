@@ -2,14 +2,10 @@
 title: "AWS Config"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-19  23:55
-___
-Note:
 
 # AWS Config
 
@@ -29,18 +25,3 @@ Note:
 - automatyczna ocena compliance  (zgodność)
 
 **Use case**: security audits, drift detection, policy enforcement
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

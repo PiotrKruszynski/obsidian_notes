@@ -2,7 +2,7 @@
 title: "data object descriptor"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -80,6 +80,3 @@ del a.x        # DELETE
 - **Data descriptor**: ma __set__ lub __delete__, zawsze wygrywa z __dict__.
     
 - **Non-data descriptor**: tylko __get__, może zostać przesłonięty wpisem w __dict__.
-
-
-#study

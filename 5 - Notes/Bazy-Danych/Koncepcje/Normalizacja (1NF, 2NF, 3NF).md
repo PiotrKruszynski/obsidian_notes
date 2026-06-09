@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, projektowanie]
+tags: ["design-patterns", "sql"]
 powiązane: ["[[Model relacyjny]]", "[[Klucz główny i obcy]]"]
 ---
 

@@ -1,6 +1,6 @@
 ---
-tags: [sql, rozmowa, pytania]
-status: do-powtórki
+tags: ["interview", "sql"]
+status: draft
 ---
 
 # Pytania: kolejność wykonania i WHERE vs HAVING

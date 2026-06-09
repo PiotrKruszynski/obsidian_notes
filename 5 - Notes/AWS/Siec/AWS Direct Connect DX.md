@@ -2,14 +2,11 @@
 title: "AWS Direct Connect DX"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
 
-Created: 2026-02-14  15:07
-___
-Note:
 ![[Pasted image 20260321012503.png|100]]
 
 >[!important]  
@@ -108,16 +105,3 @@ Direct Connect + VPN
 Direct Connect = private link to AWS  
 VPN = szybki + encrypted  
 Best: DX + VPN
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

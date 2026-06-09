@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, fundament, pułapka]
+tags: ["sql"]
 powiązane: ["[[Transakcje i ACID]]", "[[Model relacyjny]]"]
 ---
 

@@ -2,12 +2,12 @@
 title: "self"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
 
-	obiekt
+obiekt
 
 to referencja do bieżącej instancji klasy / do obiektu , który powstał z `__new__`
 

@@ -2,17 +2,12 @@
 title: "array - c"
 type: concept
 topic: c
-tags: []
+tags: ["c"]
 created: 2026-06-09
 status: draft
 ---
 
 main:  #c
-Status: #pending 
-
-Created: 2026-05-13  00:26
-___
-
 
 Tablica to grupa zmiennych tego samego typu, umieszczonych obok siebie w pamięci. Zamiast pisać `int x1, x2, x3;`, piszesz `int tab[3];` i masz trzy liczby w jednym pakiecie.
 
@@ -182,5 +177,3 @@ Tablica to ciąg zmiennych jednego typu, indeksowanych od 0. `tab[i]` to to samo
 
 ___
 Metadate:
-
-Tags: #empty

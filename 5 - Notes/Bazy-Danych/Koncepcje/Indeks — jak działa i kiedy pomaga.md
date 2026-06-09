@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, wydajność, kluczowe]
+tags: ["sql"]
 powiązane: ["[[Klucz główny i obcy]]", "[[SELECT i filtrowanie (WHERE)]]", "[[JOIN — typy i co zwracają]]"]
 ---
 
@@ -22,6 +22,11 @@ Koszt, o którym trzeba wspomnieć na rozmowie:
 - **Miejsce na dysku** — indeks to dodatkowe dane.
 - Zbyt wiele indeksów szkodzi tabelom intensywnie zapisywanym.
 
+> [!warning] Kiedy indeks bardziej szkodzi niż pomaga
+> - Kolumna z niską selektywnością (np. `gender` — tylko 2 wartości) — full scan bywa szybszy, bo planner i tak odczyta większość tabeli.
+> - Tabela intensywnie zapisywana z małą liczbą odczytów — każdy INSERT aktualizuje wszystkie indeksy.
+> - MySQL `ALTER TABLE` na dużej tabeli = kopiowanie całości (może trwać godziny); PostgreSQL robi to lepiej.
+
 > [!warning] Kiedy indeks NIE pomoże
 > - Funkcja na kolumnie: `WHERE YEAR(created_at) = 2024` zwykle psuje użycie indeksu na `created_at` (chyba że jest indeks funkcyjny). Lepiej `WHERE created_at >= '2024-01-01' AND created_at < '2025-01-01'`.
 > - `LIKE '%abc'` (wzorzec zaczynający się od `%`) — indeks nie pomoże, bo nie zna początku.
@@ -32,7 +37,7 @@ Koszt, o którym trzeba wspomnieć na rozmowie:
 
 ## Połączenia
 - [[B-Tree — jak SQL przechowuje dane]] — fizyczna struktura indeksu (DDIA)
-- [[Indeks — koszt i korzyść]] — to samo widziane od strony silnika
+- [[LSM-Tree vs B-Tree — porównanie]] — alternatywa write-heavy
 - [[LSM-Tree vs B-Tree — porównanie]] — alternatywa dla obciążeń write-heavy
 - [[Klucz główny i obcy]] — PK zwykle ma indeks automatycznie
 - [[SELECT i filtrowanie (WHERE)]] — indeks działa na warunkach WHERE

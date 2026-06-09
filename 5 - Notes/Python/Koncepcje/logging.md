@@ -2,14 +2,10 @@
 title: "logging"
 type: concept
 topic: python
-tags: []
+tags: ["debugging", "logging"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-01-04  16:58
-___
-Note:
 
 Pythonowy moduł **logging** to **standardowy, produkcyjny mechanizm obserwowalności** aplikacji.  
 Zapewnia:
@@ -278,17 +274,3 @@ OUTPUT
 - [https://docs.python.org/3/library/logging.html](https://docs.python.org/3/library/logging.html)
 - [https://docs.python.org/3/howto/logging.html](https://docs.python.org/3/howto/logging.html)
 - [https://docs.python.org/3/howto/logging-cookbook.html](https://docs.python.org/3/howto/logging-cookbook.html)
-    
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | tool | pattern
-language: python # python | js | sql | etc.
----
-```
-
-Status: #pending
-Tags: #logging #debuggin 

@@ -2,14 +2,10 @@
 title: "NACLs"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-09  18:46
-___
-Note:
 
 # Network Access Control List (NACL) 
 
@@ -64,17 +60,3 @@ _(Wytłumaczenie: NACL to pierwsza linia obrony na poziomie całej podsieci. Zan
 - **Inbound REJECT:** Could be either the NACL or the Security Group.
 - **Inbound ACCEPT but Outbound REJECT:** This is almost certainly a **NACL** issue, as Security Groups would have automatically allowed the return traffic (stateful), but the NACL blocked it (stateless).
 - **Analysis:** Flow logs can be sent to S3 and analyzed using **Amazon Athena** or viewed in **CloudWatch Logs Insights**.
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

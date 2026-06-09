@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, średni, pułapka]
+tags: ["sql"]
 powiązane: ["[[Podzapytania (subqueries)]]", "[[NULL i logika trójwartościowa]]"]
 ---
 

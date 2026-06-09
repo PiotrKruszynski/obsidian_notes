@@ -1,5 +1,5 @@
 ---
-tags: [fastapi, koncepcja, dependency-injection]
+tags: ["dependency-injection", "fastapi"]
 powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Zależności jako bramki — auth, DB session, config]]", "[[TestClient — jak testować FastAPI bez serwera]]"]
 ---
 

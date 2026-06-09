@@ -2,7 +2,7 @@
 title: "docker image"
 type: tool
 topic: docker
-tags: []
+tags: ["docker"]
 created: 2026-06-09
 status: draft
 ---

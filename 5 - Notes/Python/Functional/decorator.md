@@ -2,14 +2,10 @@
 title: "decorator"
 type: concept
 topic: python
-tags: []
+tags: ["closures", "decorators", "design-patterns", "functional-programming", "metaprogramming", "namespaces", "python-internals"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-01-04  11:47
-___
-Note:
 
 >[! Definicja]
 > **binduje name do nowego obiektu**
@@ -104,17 +100,3 @@ print(hello('ola'))
 # <h1>Hello <b>Ola</b></h1>
 
 ```
-
-
-___
-Metadata:
-
-```yaml
----
-type: pattern
-language: python
----
-```
-
-Status: #pending
-Tags: #decorator #rebinding #namespace #losure #functional-programming #design-pattern #proxy #wrapper #metaprogramming #python-internals

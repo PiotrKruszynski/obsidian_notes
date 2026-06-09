@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, pułapka, kluczowe]
+tags: ["sql"]
 powiązane: ["[[SELECT i filtrowanie (WHERE)]]", "[[Agregacje i GROUP BY]]", "[[EXISTS kontra IN]]"]
 ---
 

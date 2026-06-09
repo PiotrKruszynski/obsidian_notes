@@ -2,14 +2,10 @@
 title: "virtual inheritance"
 type: concept
 topic: python
-tags: []
+tags: ["oop", "python"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2025-12-16  16:00
-___
-Note:
 
 mechanizm, w którym klasa **jest uznawana** za podklasę interfejsu/klasy bazowej, mimo że nie dziedziczy po niej nominalnie
 
@@ -88,13 +84,3 @@ Python nie ma słowa kluczowego virtual jak w C++, ale rozwiązuje problem **wł
 - Python **gwarantuje jedną kopię** bazowej klasy w drzewie dziedziczenia.
     
 - Kolejność wyszukiwania metod/atrybutów jest deterministyczna i jednoznaczna.
-
-
-
-
-___
-Metadata:
-
-Status: #pending
-Tags: #python #oop 
-

@@ -2,14 +2,10 @@
 title: "AWS Organizations"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-19  23:56
-___
-Note:
 
 >[!important]  
 >**AWS Organizations** to control plane dla multi-account AWS → zamiast jednego konta robisz **isolation + governance** przez wiele kont, a Organizations spina to w jedną strukturę. Działa jak organizacyjny "policy + billing + account factory layer" nad wszystkimi kontami.
@@ -103,19 +99,3 @@ Konto dostaje **iloczyn** wszystkich SCP po drodze. Blokada wyżej = blokada wsz
 - ❌ Volume discount działa tylko przy consolidated billing
 - ❌ Account nie może być w wielu Organizations
 - ❌ RI sharing między kontami można wyłączyć w billing preferences
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

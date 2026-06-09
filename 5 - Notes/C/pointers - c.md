@@ -2,11 +2,10 @@
 title: "pointers - c"
 type: concept
 topic: c
-tags: []
+tags: ["c"]
 created: 2026-06-09
 status: draft
 ---
-
 
 **Zmienna** przechowuje wartość. **Pointer** przechowuje adres zmiennej.
 

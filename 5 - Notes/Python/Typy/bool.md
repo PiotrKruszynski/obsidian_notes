@@ -2,7 +2,7 @@
 title: "bool"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -21,4 +21,4 @@ print(bool(x))
 ```
 
 puste false "0j"
-niepuste true "0" , 
+niepuste true "0" ,

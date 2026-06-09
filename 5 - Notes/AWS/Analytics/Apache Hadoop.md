@@ -2,15 +2,10 @@
 title: "Apache Hadoop"
 type: service
 topic: aws
-tags: []
+tags: ["big-data"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-28  22:50
-___
-Note:
-
 
 >[! Definition ]
 >**Hadoop** = **batch processing** + **distributed storage** [[HDFS]]
@@ -143,15 +138,3 @@ Rozwiązanie:
 - **przetwarzanie blisko danych**
 - **fault tolerance przez replikację**
 - **batch → wolny → wypierany przez Spark**
-
-___
-Metadata:
-
-```yaml
----
-language: bigdata
----
-```
-
-Status: #pending
-Tags: #bigdata 

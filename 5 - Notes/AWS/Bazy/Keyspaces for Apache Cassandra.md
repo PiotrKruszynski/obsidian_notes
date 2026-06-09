@@ -2,14 +2,10 @@
 title: "Keyspaces for Apache Cassandra"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-03-16  10:12
-___
-Note:
 
 >[! ]
 >-  managed Apache Cassandra-compatible database service
@@ -27,17 +23,3 @@ Note:
 >- **PITR** up to 35 days
 
 **Use cases**: store IoT devices info, time-series data
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws

@@ -2,12 +2,10 @@
 title: "constrains for agentic ai"
 type: concept
 topic: ai-ml
-tags: []
+tags: ["ai"]
 created: 2026-06-09
 status: draft
 ---
-
-#ai 
 
 ##### Constraints dla projektu Agentic AI
 - krótkie pliki
@@ -26,7 +24,3 @@ status: draft
 | Docs          | sphinx         | typedoc / docusaurus        | godoc                  |
 | Build/dev     | poetry / uv    | vite                        | go build               |
 | Coverage      | pytest-cov     | c8 / vitest coverage        | go test -cover         |
-
-
-
-

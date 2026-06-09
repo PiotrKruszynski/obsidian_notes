@@ -1,5 +1,5 @@
 ---
-tags: [sql, koncepcja, zaawansowany, kluczowe]
+tags: ["sql"]
 powiązane: ["[[Agregacje i GROUP BY]]", "[[CTE (WITH)]]", "[[Logiczna kolejność wykonania zapytania]]"]
 ---
 

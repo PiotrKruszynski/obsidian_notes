@@ -2,14 +2,10 @@
 title: "Amazon EventBridge"
 type: service
 topic: aws
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-24  12:18
-___
-Note:
 
 >[!tip]
 >centralny router zdarzeń **event bus**, który działa w modelu **push + filtering + routing**
@@ -276,17 +272,3 @@ EventBridge = router zdarzeń
 SQS = bufor  
 SNS = broadcast  
 Kinesis = streaming
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws
-

@@ -2,7 +2,7 @@
 title: "race condition"
 type: concept
 topic: python
-tags: []
+tags: ["python"]
 created: 2026-06-09
 status: draft
 ---
@@ -101,4 +101,3 @@ asyncio.run(main())
 ```
 
 📌 Teraz koparka **nie zacznie pracy**, dopóki wywrotka **nie jest gotowa** – **brak race condition**.
-

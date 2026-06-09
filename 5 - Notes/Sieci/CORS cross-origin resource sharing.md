@@ -2,14 +2,10 @@
 title: "CORS cross-origin resource sharing"
 type: concept
 topic: networking
-tags: []
+tags: ["aws"]
 created: 2026-06-09
 status: draft
 ---
-
-Created: 2026-02-17  14:49
-___
-Note:
 
 >[!tip]
 >**CORS** is a web browser-based mechanism that allows a web application running at one origin to access resources from a different origin. To understand this, we must first define what an **Origin** is.
@@ -57,21 +53,3 @@ Configuring CORS is a common requirement when using S3 for static website hostin
 • **Origin** (Źródło) musi być identyczne pod kątem protokołu, domeny i portu. Jeśli choć jeden z tych elementów się różni, mamy do czynienia z "Cross-Origin".
 
 • W **Amazon S3** najczęściej spotkasz się z tym problemem, gdy trzymasz pliki HTML w jednym koszyku (Bucket), a obrazki lub czcionki w drugim. Bez ustawienia polityki CORS w tym drugim koszyku, Twoja strona nie wyświetli tych plików.
-
-
-
-
-
-
-___
-Metadata:
-
-```yaml
----
-type: tool    # concept | service | comparison
-language: aws
----
-```
-
-Status: #pending
-Tags: #aws
