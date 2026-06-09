@@ -42,3 +42,17 @@ X._X__value      # OK
 - **Mnemonika**: __ → „_Rename me for this class_”
 - **Asocjacja**: _ClassName__attr = „należy do tej klasy”
 - **Wzorzec strukturalny**: _namespace isolation_, nie access control
+
+---
+
+## Kiedy stosować?
+
+- gdy chcesz uniknąć kolizji nazw w dziedziczeniu
+- gdy atrybut ma być „bardziej prywatny” niż zwykłe `_nazwa`
+- gdy mechanika klasy nie powinna być łatwo nadpisywana z zewnątrz
+
+## Kiedy NIE stosować?
+
+- gdy prywatność nie jest potrzebna
+- gdy chcesz, by kod był czytelny i łatwo rozszerzalny
+- gdy nie używasz dziedziczenia — wtedy `_nazwa` zwykle wystarcza

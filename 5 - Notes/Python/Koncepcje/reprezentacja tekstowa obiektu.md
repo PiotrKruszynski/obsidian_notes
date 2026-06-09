@@ -58,7 +58,34 @@ class Packet:
         return b"\x01\x02\x03"
 ```
 
-Wzorzec proodukcyjny
+## Fallback logic
+
+| Definicja | `str(obj)` | `repr(obj)` |
+|-----------|-----------|------------|
+| brak obu | default `object.__repr__` | default `object.__repr__` |
+| tylko `__repr__` | używa `__repr__` (fallback) | używa `__repr__` |
+| tylko `__str__` | używa `__str__` | default `object.__repr__` |
+| oba | używa `__str__` | używa `__repr__` |
+
+> [!tip] Zasada
+> `__str__` nie istnieje → Python używa `__repr__` jako fallback. Odwrotnie NIE zachodzi.
+
+## `repr` jako ewaluowalny string
+
+Dobry `__repr__` powinien zwracać string, który można `eval()`-ować z powrotem do obiektu:
+
+```python
+>>> import datetime
+>>> x = datetime.date(2025, 1, 11)
+>>> repr(x)
+'datetime.date(2025, 1, 11)'
+>>> eval(repr(x)) == x
+True
+```
+
+---
+
+## Wzorzec produkcyjny
 ```python
 class Vector:
     def __init__(self, x: float, y: float):
