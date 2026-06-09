@@ -35,3 +35,5 @@ isolation
 durability - trwałość
 [[5 - Notes/BazyDanych_SecondBrain/Koncepcje/ACID — co to naprawdę znaczy|ACID — co to naprawdę znaczy]]]
 ![[Pasted image 20260608174518.png]]
+
+![[Pasted image 20260609115239.png]]
