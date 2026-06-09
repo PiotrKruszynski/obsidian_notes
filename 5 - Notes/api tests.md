@@ -1,3 +1,0 @@
-	programista
-	Postman - lider
-	[[swagger]]

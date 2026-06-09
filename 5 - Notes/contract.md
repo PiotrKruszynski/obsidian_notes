@@ -1,1 +1,0 @@
-zbiór wymagań, które obiekt musi spełniać, aby być akceptowany przez dany interfejs

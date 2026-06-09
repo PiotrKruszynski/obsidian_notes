@@ -1,1 +1,0 @@
-	**wysokopoziomowe**, które sprawdzają, czy cały system spełnia **wymagania biznesowe** i jest gotowy do odbioru przez klienta/użytkownika końcowego.

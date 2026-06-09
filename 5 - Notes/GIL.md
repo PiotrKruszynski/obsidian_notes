@@ -1,1 +1,0 @@
-global interpreter lock

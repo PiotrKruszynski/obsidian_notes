@@ -1,1 +1,0 @@
-strategia testowania

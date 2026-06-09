@@ -1,1 +1,0 @@
-reagujemy na zdarzenia

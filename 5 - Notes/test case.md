@@ -1,1 +1,0 @@
-sprawdzenie konkretnego przypadku

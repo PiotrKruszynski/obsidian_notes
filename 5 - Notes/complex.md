@@ -1,1 +1,0 @@
-liczba urojona

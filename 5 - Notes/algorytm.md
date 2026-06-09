@@ -1,1 +1,0 @@
-skończony zbiór kroków prowadzący do rozwiązania danego problemu

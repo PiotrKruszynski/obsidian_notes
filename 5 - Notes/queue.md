@@ -1,1 +1,0 @@
-struktura danych FIFO

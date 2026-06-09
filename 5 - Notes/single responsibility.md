@@ -1,2 +1,0 @@
-jedna klasa = jedna odpowiedzialność
-

@@ -1,0 +1,15 @@
+---
+title: "hasattr()"
+type: concept
+topic: python
+tags: []
+created: 2026-06-09
+status: draft
+---
+
+hasattr(_object_, _name_, _/_)[](https://docs.python.org/3/library/functions.html#hasattr "Link to this definition")
+
+The arguments are an object and a string. 
+The result is `True` if the string is the name of one of the object’s attributes, `False` if not. 
+(This is implemented by calling `getattr(object, name)` and seeing whether it raises an [`AttributeError`](https://docs.python.org/3/library/exceptions.html#AttributeError "AttributeError") or not.)
+

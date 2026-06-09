@@ -1,1 +1,0 @@
-- fn są najwyższej poziomu abstrakcją (są obiektami)
