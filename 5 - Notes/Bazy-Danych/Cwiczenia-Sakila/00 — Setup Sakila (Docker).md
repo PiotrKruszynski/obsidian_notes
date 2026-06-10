@@ -79,6 +79,8 @@ Rdzeń wypożyczalni:
 
 Serie zadań leżą obok (Seria 1–4, od ★ do ★★★★). Zasady w [[AGENTS.md]] (operacja `ćwicz`): najpierw rozwiązujesz **sam** w kontenerze, dopiero potem agent sprawdza. Wnioski i błędy wracają do notatek koncepcji jako `[!warning]`/`[!tip]`.
 
+Do każdej serii jest też plik `przyklady-seria-*.sql` — gotowe, skomentowane use case'y do czytania i odpalania blok po bloku w DataGrip (celowo INNE niż zadania serii, żeby nie spoilować). Dobra kolejność: przeczytaj/odpal przykłady → rozwiąż zadania serii → `ćwicz` do sprawdzenia.
+
 ## Połączenia
 
 - [[00 — MOC SQL (zapytania)]] — koncepcje, które te ćwiczenia utrwalają
