@@ -40,6 +40,14 @@ SELECT * FROM actor LIMIT 5;
 SHOW TABLES;
 ```
 
+### Wariant: DataGrip (GUI)
+
+Data Source → MySQL: host `localhost`, port `3306`, user `sakila`, hasło `p_ssW0rd`, database `sakila`. Przy pierwszym połączeniu „Download missing driver files".
+
+- Błąd „Public Key Retrieval is not allowed" → Advanced → `allowPublicKeyRetrieval=true`.
+- Nie widać tabel → zakładka Schemas → zaznacz `sakila`.
+- Diagram ERD: prawy klik na schemat → Diagrams → Show Visualization — cała mapa kluczy obcych Sakili.
+
 Stop / start / kasowanie:
 
 ```bash
