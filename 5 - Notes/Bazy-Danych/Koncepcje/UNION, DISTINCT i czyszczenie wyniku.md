@@ -10,14 +10,14 @@ powiązane: ["[[SELECT i filtrowanie (WHERE)]]", "[[Agregacje i GROUP BY]]"]
 
 **DISTINCT** — odsiewa powtórzone wiersze wyniku:
 ```sql
-SELECT DISTINCT country FROM users;   -- każdy kraj raz
+SELECT DISTINCT rating FROM film;   -- każdy rating raz
 ```
 
-**UNION vs UNION ALL** — częste pytanie z subtelną różnicą:
+**UNION vs UNION ALL** — częste pytanie z subtelną różnicą (Sakila: wszystkie osoby — klienci i pracownicy):
 ```sql
-SELECT city FROM customers
+SELECT first_name, last_name FROM customer
 UNION ALL                 -- albo UNION
-SELECT city FROM suppliers;
+SELECT first_name, last_name FROM staff;
 ```
 - `UNION` — łączy i **usuwa duplikaty** (musi posortować/zahaszować → wolniej).
 - `UNION ALL` — łączy i **zostawia wszystko** (szybciej, bo nie deduplikuje).

@@ -15,10 +15,13 @@ powiązane: ["[[Transakcje i ACID]]", "[[Model relacyjny]]"]
 | `DROP`    | całą tabelę (struktura + dane) | nie | nie | n/d |
 
 ```sql
-DELETE FROM users WHERE active = FALSE;  -- tylko nieaktywni
-TRUNCATE TABLE logs;                     -- opróżnij całą tabelę
-DROP TABLE temp_data;                    -- tabela przestaje istnieć
+DELETE FROM payment WHERE amount = 0;  -- tylko płatności zerowe
+TRUNCATE TABLE payment;                -- opróżnij całą tabelę
+DROP TABLE tmp_raport;                 -- tabela (np. robocza z analizy) przestaje istnieć
 ```
+
+> [!warning] Klucze obce blokują usuwanie
+> W Sakili `DELETE FROM customer` padnie, bo na klienta wskazują `rental` i `payment` (FK). To nie złośliwość — to [[Klucz główny i obcy|klucze obce]] chronią spójność. `TRUNCATE` wymaga, by NA tabelę nic nie wskazywało (`payment` przejdzie, `customer` nie). Po eksperymentach: `docker compose down && up -d` przywraca bazę.
 
 > [!tip] Pytanie-klasyk: DELETE vs TRUNCATE
 > "DELETE to DML — usuwa wybrane wiersze, działa w [[Transakcje i ACID|transakcji]], można cofnąć, ale jest wolniejszy bo loguje każdy wiersz. TRUNCATE to DDL — zrzuca całą tabelę naraz, bardzo szybko, zwykle bez możliwości ROLLBACK i resetuje liczniki auto-increment." Ta różnica pada bardzo często.

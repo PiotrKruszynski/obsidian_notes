@@ -9,13 +9,13 @@ powiązane: ["[[Podzapytania (subqueries)]]", "[[NULL i logika trójwartościowa
 > `IN` sprawdza przynależność do listy wartości, `EXISTS` sprawdza, czy podzapytanie zwraca cokolwiek — różnią się zachowaniem przy [[NULL i logika trójwartościowa|NULL]] i często wydajnością.
 
 ```sql
--- IN: czy id jest w zbiorze user_id z orders
-SELECT name FROM users
-WHERE id IN (SELECT user_id FROM orders);
+-- IN: czy customer_id jest w zbiorze wypożyczających
+SELECT first_name, last_name FROM customer
+WHERE customer_id IN (SELECT customer_id FROM rental);
 
--- EXISTS: czy istnieje pasujące zamówienie
-SELECT name FROM users u
-WHERE EXISTS (SELECT 1 FROM orders o WHERE o.user_id = u.id);
+-- EXISTS: czy istnieje pasujące wypożyczenie
+SELECT first_name, last_name FROM customer c
+WHERE EXISTS (SELECT 1 FROM rental r WHERE r.customer_id = c.customer_id);
 ```
 
 > [!warning] Pułapka NOT IN z NULL (klasyk rozmów)

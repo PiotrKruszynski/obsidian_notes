@@ -25,7 +25,7 @@ WHERE pt.amount > avpc.avg_payment
 GROUP BY c.customer_id  
 LIMIT 500;
 ```
-`dept_avg` to tymczasowa, nazwana "tabela" widoczna tylko w tym zapytaniu. Zamiast zagnieżdżać [[Podzapytania (subqueries)|podzapytanie]] w środku, definiujesz je raz na górze i odwołujesz po nazwie.
+`av_payment_per_customer` to tymczasowa, nazwana "tabela" widoczna tylko w tym zapytaniu. Zamiast zagnieżdżać [[Podzapytania (subqueries)|podzapytanie]] w środku, definiujesz je raz na górze i odwołujesz po nazwie.
 
 **Rekurencyjne CTE** — `WITH RECURSIVE` — przetwarza hierarchie (drzewo kategorii, struktura podwładnych): część bazowa + część odwołująca się do samej siebie, aż przestanie zwracać wiersze.
 

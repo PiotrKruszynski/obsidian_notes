@@ -8,23 +8,24 @@ powiązane: ["[[JOIN — typy i co zwracają]]", "[[Klucz główny i obcy]]"]
 > [!summary] W jednym zdaniu
 > Self-join to [[JOIN — typy i co zwracają|JOIN]] tabeli **z samą sobą** — używasz dwóch aliasów tej samej tabeli, by porównywać wiersze między sobą; typowe dla hierarchii i par.
 
-Tabela `employees(id, name, salary, manager_id)`, gdzie `manager_id` wskazuje na `id` innego pracownika ([[Klucz główny i obcy|FK na własną tabelę]]).
-
-**Hierarchia — pracownik i jego przełożony:**
+**Pary w obrębie jednej tabeli — aktorzy o tym samym nazwisku (Sakila):**
 ```sql
-SELECT e.name AS pracownik, m.name AS przelozony
-FROM employees e
-LEFT JOIN employees m ON e.manager_id = m.id;
+SELECT a1.first_name AS aktor_1, a2.first_name AS aktor_2, a1.last_name
+FROM actor a1
+JOIN actor a2 ON a1.last_name = a2.last_name
+             AND a1.actor_id < a2.actor_id;
 ```
-Ta sama tabela występuje dwa razy pod aliasami `e` i `m`. `LEFT JOIN` zachowa też prezesa (bez przełożonego → `m` jako NULL).
+Ta sama tabela występuje dwa razy pod aliasami `a1` i `a2`. Warunek `a1.actor_id < a2.actor_id` załatwia dwa problemy naraz: wyklucza parowanie aktora z samym sobą i duplikaty par (A-B oraz B-A).
 
-**Klasyczne pytanie: kto zarabia więcej niż jego przełożony:**
+**Porównywanie wierszy między sobą — filmy o identycznej długości:**
 ```sql
-SELECT e.name
-FROM employees e
-JOIN employees m ON e.manager_id = m.id
-WHERE e.salary > m.salary;
+SELECT f1.title, f2.title, f1.length
+FROM film f1
+JOIN film f2 ON f1.length = f2.length
+            AND f1.film_id < f2.film_id;
 ```
+
+Drugi kanon self-joina to hierarchia `employees(id, manager_id)` — FK wskazujący na własny PK ([[Klucz główny i obcy]]); pracownik i przełożony to wtedy dwa aliasy tej samej tabeli (`LEFT JOIN` zachowa prezesa bez szefa jako NULL). Sakila hierarchii nie ma, ale na rozmowie ten wariant pada najczęściej.
 
 > [!tip] Dlaczego to pyta rozmówca
 > Self-join sprawdza, czy rozumiesz, że alias to "egzemplarz" tabeli, a nie sama tabela. Bez aliasów `employees JOIN employees` byłoby niejednoznaczne. Umiejętność porównywania wierszy w obrębie jednej tabeli to sygnał dojrzałości w SQL.

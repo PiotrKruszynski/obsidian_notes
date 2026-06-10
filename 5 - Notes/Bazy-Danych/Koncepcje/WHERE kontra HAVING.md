@@ -9,19 +9,19 @@ powiązane: ["[[Logiczna kolejność wykonania zapytania]]", "[[Agregacje i GROU
 > WHERE filtruje **wiersze przed grupowaniem**, HAVING filtruje **grupy po grupowaniu** — różnica wynika wprost z [[Logiczna kolejność wykonania zapytania|kolejności wykonania]] i jest jednym z najczęstszych pytań.
 
 ```sql
-SELECT country, COUNT(*) AS n
-FROM users
-WHERE active = TRUE      -- najpierw: tylko aktywni (pojedyncze wiersze)
-GROUP BY country
-HAVING COUNT(*) > 100;   -- potem: tylko grupy liczniejsze niż 100
+SELECT rating, COUNT(*) AS n
+FROM film
+WHERE length > 90        -- najpierw: tylko filmy dłuższe niż 90 min (pojedyncze wiersze)
+GROUP BY rating
+HAVING COUNT(*) > 120;   -- potem: tylko ratingi z ponad 120 takimi filmami
 ```
 
 - **WHERE** działa w kroku 2 — zanim powstaną grupy. Dlatego **nie** może używać agregatów (`COUNT`, `SUM` jeszcze nie istnieją).
 - **HAVING** działa w kroku 4 — po `GROUP BY`. Dlatego **może** filtrować po agregatach.
 
-Test myślowy: "odfiltruj kraje, które mają ponad 100 aktywnych użytkowników":
-- `active = TRUE` dotyczy pojedynczego użytkownika → **WHERE**.
-- `COUNT(*) > 100` dotyczy całej grupy → **HAVING**.
+Test myślowy: "odfiltruj ratingi, które mają ponad 120 filmów dłuższych niż 90 minut":
+- `length > 90` dotyczy pojedynczego filmu → **WHERE**.
+- `COUNT(*) > 120` dotyczy całej grupy → **HAVING**.
 
 > [!warning] Częsty błąd kandydata
 > Wrzucenie `COUNT(*) > 100` do WHERE → błąd składni ("aggregate not allowed here"). Albo odwrotnie: filtr na pojedynczym wierszu w HAVING — zadziała, ale jest nieefektywny (baza najpierw grupuje wszystko, potem odrzuca). Filtruj jak najwcześniej: pojedyncze wiersze w WHERE.

@@ -8,15 +8,17 @@
 **Imperatywny kod** (stary CODASYL, aplikacyjny kod):
 ```python
 results = []
-for user in users:
-    if user.country == "PL":
-        for order in get_orders(user.id):
-            results.append(order)
+for customer in customers:
+    if customer.store_id == 1:
+        for rental in get_rentals(customer.customer_id):
+            results.append(rental)
 ```
 
-**Deklaratywny SQL**:
+**Deklaratywny SQL** (Sakila):
 ```sql
-SELECT * FROM orders WHERE user_country = 'PL';
+SELECT r.* FROM rental r
+JOIN customer c ON c.customer_id = r.customer_id
+WHERE c.store_id = 1;
 ```
 
 W deklaratywnym: mówisz CO chcesz. Baza decyduje JAK.
@@ -24,7 +26,7 @@ W deklaratywnym: mówisz CO chcesz. Baza decyduje JAK.
 ## Dlaczego to ważne dla wydajności
 
 > [!example]
-> Masz tabelę `orders` z 10 mln wierszy. Dodajesz indeks na `user_country`.
+> Wyobraź sobie `rental` z 10 mln wierszy (w Sakili ma ~16 tys.). Dodajesz indeks na `customer_id`.
 > - Stare zapytanie SQL → automatycznie zacznie używać indeksu. Bez zmiany kodu.
 > - Imperatywny kod aplikacji → musisz go przepisać, żeby korzystał z nowej struktury.
 

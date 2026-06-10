@@ -9,9 +9,9 @@ powiązane: ["[[Logiczna kolejność wykonania zapytania]]", "[[NULL i logika tr
 > `SELECT` wybiera kolumny, `FROM` źródło, `WHERE` odfiltrowuje wiersze po warunku — to szkielet każdego zapytania odczytującego dane.
 
 ```sql
-SELECT name, email
-FROM users
-WHERE country = 'PL' AND active = TRUE;
+SELECT first_name, email
+FROM customer
+WHERE store_id = 1 AND active = 1;
 ```
 - `SELECT` — które kolumny (lub wyrażenia) zwrócić. `SELECT *` bierze wszystkie.
 - `FROM` — z jakiej tabeli (lub połączenia tabel).
@@ -23,7 +23,7 @@ Operatory w `WHERE`: porównania (`=`, `<>`, `<`, `>=`), `BETWEEN a AND b`, `IN 
 > `WHERE col = NULL` **nigdy** nie zwróci wierszy — porównanie z NULL daje UNKNOWN, nie TRUE. Do NULL-i służy `IS NULL` / `IS NOT NULL`. Szczegóły: [[NULL i logika trójwartościowa]].
 
 > [!tip] Aliasy
-> `SELECT price * qty AS total` nazywa wynik `total`. Ale aliasu nie użyjesz w `WHERE` (powstaje za późno) — patrz [[Logiczna kolejność wykonania zapytania]].
+> `SELECT rental_rate * rental_duration AS koszt FROM film` nazywa wynik `koszt`. Ale aliasu nie użyjesz w `WHERE` (powstaje za późno) — patrz [[Logiczna kolejność wykonania zapytania]].
 
 ## Połączenia
 - [[Logiczna kolejność wykonania zapytania]] — gdzie WHERE jest w kolejności

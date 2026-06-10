@@ -8,7 +8,7 @@ powiązane: ["[[Klucz główny i obcy]]", "[[NULL i logika trójwartościowa]]",
 > [!summary] W jednym zdaniu
 > JOIN łączy wiersze z dwóch tabel po warunku (zwykle PK=FK); typ JOIN-a decyduje, co zrobić z wierszami **bez dopasowania** — i to jest sedno pytań rozmowowych.
 
-Dane przykładowe: `users` i `orders` powiązane przez `orders.user_id = users.id`.
+Dane przykładowe (Sakila): `customer` i `rental` powiązane przez `rental.customer_id = customer.customer_id`.
 
 | Typ | Co zwraca |
 |-----|-----------|
@@ -19,14 +19,14 @@ Dane przykładowe: `users` i `orders` powiązane przez `orders.user_id = users.i
 | `CROSS JOIN` | iloczyn kartezjański — każdy z każdym (bez warunku) |
 
 ```sql
-SELECT u.name, o.amount
-FROM users u
-LEFT JOIN orders o ON o.user_id = u.id;
+SELECT c.first_name, r.rental_date
+FROM customer c
+LEFT JOIN rental r ON r.customer_id = c.customer_id;
 ```
-Tu użytkownik **bez** zamówień i tak pojawi się w wyniku — z `amount` równym NULL. Przy `INNER JOIN` zniknąłby.
+Tu klient **bez** wypożyczeń i tak pojawi się w wyniku — z `rental_date` równym NULL. Przy `INNER JOIN` zniknąłby.
 
 > [!warning] LEFT JOIN + WHERE na prawej tabeli
-> `LEFT JOIN ... WHERE o.amount > 100` po cichu zamienia się w INNER JOIN — bo warunek na NULL (dla niedopasowanych) daje UNKNOWN i odfiltrowuje je. Jeśli chcesz zachować lewe wiersze, warunek przenieś do `ON`, nie do `WHERE`.
+> `LEFT JOIN ... WHERE r.rental_date > '2005-08-01'` po cichu zamienia się w INNER JOIN — bo warunek na NULL (dla niedopasowanych) daje UNKNOWN i odfiltrowuje je. Jeśli chcesz zachować lewe wiersze, warunek przenieś do `ON`, nie do `WHERE`.
 
 > [!tip] Pytanie-klasyk
 > "Różnica INNER vs LEFT?" — INNER odrzuca niedopasowane, LEFT zachowuje wszystkie lewe i wstawia NULL po prawej. "Kiedy LEFT JOIN daje duplikaty lewych wierszy?" — gdy jednemu lewemu odpowiada wiele prawych.

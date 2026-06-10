@@ -10,22 +10,22 @@ powiązane: ["[[EXISTS kontra IN]]", "[[CTE (WITH)]]", "[[Agregacje i GROUP BY]]
 
 **Skalarne** — zwraca jedną wartość, użyjesz jak liczby:
 ```sql
-SELECT name FROM users
-WHERE age > (SELECT AVG(age) FROM users);
+SELECT title FROM film
+WHERE length > (SELECT AVG(length) FROM film);
 ```
 
 **Wielowierszowe** — zwraca kolumnę wartości, do `IN` / `ANY` / `EXISTS`:
 ```sql
-SELECT name FROM users
-WHERE id IN (SELECT user_id FROM orders);
+SELECT first_name, last_name FROM customer
+WHERE customer_id IN (SELECT customer_id FROM rental);
 ```
 
 **Skorelowane** — podzapytanie zależy od wiersza zewnętrznego, więc wykonuje się **raz na każdy** taki wiersz:
 ```sql
-SELECT u.name FROM users u
-WHERE EXISTS (SELECT 1 FROM orders o WHERE o.user_id = u.id);
+SELECT c.first_name FROM customer c
+WHERE EXISTS (SELECT 1 FROM rental r WHERE r.customer_id = c.customer_id);
 ```
-`o.user_id = u.id` odwołuje się do `u` z zewnątrz — to czyni je skorelowanym.
+`r.customer_id = c.customer_id` odwołuje się do `c` z zewnątrz — to czyni je skorelowanym.
 
 > [!warning] Wydajność skorelowanych
 > Skorelowane podzapytanie potrafi działać dla każdego wiersza zewnętrznego — przy dużych tabelach drogo. Często da się je zamienić na [[JOIN — typy i co zwracają|JOIN]] albo [[CTE (WITH)|CTE]] dla czytelności i szybkości. To dobry temat na rozmowie ("jak byś to zoptymalizował").

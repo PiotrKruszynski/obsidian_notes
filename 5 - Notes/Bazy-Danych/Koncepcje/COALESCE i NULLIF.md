@@ -10,17 +10,18 @@ powiązane: ["[[NULL i logika trójwartościowa]]", "[[CASE WHEN]]"]
 
 **COALESCE** — "weź pierwsze, co nie jest NULL":
 ```sql
-SELECT name, COALESCE(phone, email, 'brak kontaktu') AS kontakt
-FROM users;
+SELECT first_name, COALESCE(email, phone, 'brak kontaktu') AS kontakt
+FROM customer c
+JOIN address a ON a.address_id = c.address_id;
 ```
 Sprawdza argumenty po kolei, zwraca pierwszy nie-NULL. Klasyczne użycie: domyślna wartość zamiast NULL, np. `COALESCE(discount, 0)` żeby liczyć NULL jako zero (bo [[Agregacje i GROUP BY|agregaty]] i arytmetyka traktują NULL specjalnie).
 
 **NULLIF** — "jeśli równe, zrób NULL":
 ```sql
-SELECT amount / NULLIF(quantity, 0) AS cena_jedn
-FROM orders;
+SELECT title, rental_rate / NULLIF(length, 0) AS stawka_za_minute
+FROM film;
 ```
-`NULLIF(quantity, 0)` zwraca NULL, gdy `quantity = 0` — dzięki temu unikasz **dzielenia przez zero** (dzielenie przez NULL daje NULL, nie błąd). To jego najczęstsze zastosowanie.
+`NULLIF(length, 0)` zwraca NULL, gdy `length = 0` — dzięki temu unikasz **dzielenia przez zero** (dzielenie przez NULL daje NULL, nie błąd). To jego najczęstsze zastosowanie.
 
 > [!tip] Para na rozmowie
 > "Jak uniknąć dzielenia przez zero?" → `x / NULLIF(y, 0)`. "Jak pokazać 0 zamiast NULL w wyniku?" → `COALESCE(col, 0)`. Obie sztuczki padają przy zadaniach z arytmetyką i raportami.

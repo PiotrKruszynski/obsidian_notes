@@ -17,11 +17,11 @@ Konsekwencje, które padają na rozmowach:
 - **Agregaty pomijają NULL.** `COUNT(col)`, `SUM`, `AVG` ignorują NULL-e. `COUNT(*)` liczy wiersze (z NULL-ami), `COUNT(col)` liczy tylko nie-NULL — patrz [[Agregacje i GROUP BY]].
 - **`NOT IN` z NULL-em jest zdradliwe.** Jeśli podzapytanie w `NOT IN` zwróci choć jeden NULL, całość może dać zero wyników — dlatego na rozmowach poleca się `NOT EXISTS` zamiast `NOT IN` ([[EXISTS kontra IN]]).
 
-> [!example] Klasyczny "gotcha"
+> [!example] Klasyczny "gotcha" (Sakila)
 > ```sql
-> SELECT * FROM t WHERE col <> 'A';
+> SELECT * FROM rental WHERE return_date <> '2005-06-02';
 > ```
-> Wiersze, gdzie `col IS NULL`, **nie** wejdą do wyniku — choć intuicyjnie "nie jest A". Bo `NULL <> 'A'` to UNKNOWN, nie TRUE. Żeby je złapać: `WHERE col <> 'A' OR col IS NULL`.
+> Wypożyczenia **niezwrócone** (`return_date IS NULL` — w Sakili jest ich 183) **nie** wejdą do wyniku — choć intuicyjnie "nie są z 2 czerwca". Bo `NULL <> '2005-06-02'` to UNKNOWN, nie TRUE. Żeby je złapać: `WHERE return_date <> '2005-06-02' OR return_date IS NULL`.
 
 > [!tip] Co odpowiedzieć
 > "NULL to nieznane, nie zero; porównania z NULL dają UNKNOWN; WHERE przepuszcza tylko TRUE; do NULL-i służą IS NULL / IS NOT NULL; agregaty pomijają NULL." Ta jedna odpowiedź pokrywa większość pytań o NULL.

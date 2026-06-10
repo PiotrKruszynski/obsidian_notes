@@ -13,29 +13,33 @@ CREATE VIEW nazwa_widoku AS
 SELECT kolumny FROM tabela WHERE warunek;
 ```
 
+upraszczają pracę!
+pozwala zrzucić dane w dowolnej postaci i ograniczyć dostęp -> mega dla stażystów
+pozwalaja bezpieczniej zarzadzać danymi
+
 ## Syntax podstawowy
 
 ```sql
--- Widok prosty
-CREATE VIEW vw_pracownicy_aktywni AS
-SELECT id, imie, nazwisko, pensja
-FROM pracownicy
-WHERE status = 'aktywny';
+-- Widok prosty (Sakila)
+CREATE VIEW vw_klienci_aktywni AS
+SELECT customer_id, first_name, last_name, email
+FROM customer
+WHERE active = 1;
 
--- Widok ze złożonym zapytaniem (JOINy, agregacje)
-CREATE VIEW vw_sprzedaz_miesieczna AS
-SELECT 
-    DATE_TRUNC('month', data_zamowienia) AS miesiac,
-    COUNT(*) AS liczba_zamowien,
-    SUM(kwota) AS przychod
-FROM zamowienia
-GROUP BY DATE_TRUNC('month', data_zamowienia);
+-- Widok ze złożonym zapytaniem (JOINy, agregacje) — MySQL
+CREATE VIEW vw_przychod_miesieczny AS
+SELECT
+    DATE_FORMAT(payment_date, '%Y-%m') AS miesiac,
+    COUNT(*) AS liczba_platnosci,
+    SUM(amount) AS przychod
+FROM payment
+GROUP BY DATE_FORMAT(payment_date, '%Y-%m');
 
 -- Usunięcie widoku
-DROP VIEW vw_pracownicy_aktywni;
+DROP VIEW vw_klienci_aktywni;
 
 -- Usunięcie jeśli istnieje (PostgreSQL, MySQL 5.7+)
-DROP VIEW IF EXISTS vw_pracownicy_aktywni;
+DROP VIEW IF EXISTS vw_klienci_aktywni;
 ```
 
 ## Use-case-y
@@ -52,27 +56,27 @@ DROP VIEW IF EXISTS vw_pracownicy_aktywni;
 ```sql
 -- 1. Widok do raportowania (bez detali, tylko podsumowanie)
 CREATE VIEW vw_klienci_zloci AS
-SELECT 
-    k.id, k.nazwa,
-    COUNT(z.id) AS liczba_zamowien,
-    SUM(z.kwota) AS laczna_wartosc
-FROM klienci k
-LEFT JOIN zamowienia z ON k.id = z.klient_id
-WHERE z.kwota > 10000
-GROUP BY k.id, k.nazwa;
+SELECT
+    c.customer_id, c.first_name, c.last_name,
+    COUNT(p.payment_id) AS liczba_platnosci,
+    SUM(p.amount)       AS laczna_wartosc
+FROM customer c
+LEFT JOIN payment p ON p.customer_id = c.customer_id
+GROUP BY c.customer_id, c.first_name, c.last_name
+HAVING SUM(p.amount) > 150;
 
 -- 2. Widok bezpieczny (bez sensytywnych pól)
-CREATE VIEW vw_pracownicy_publiczny AS
-SELECT id, imie, nazwisko, stanowisko, dz_pracy
-FROM pracownicy
--- pensja jest UKRYTA
+CREATE VIEW vw_staff_publiczny AS
+SELECT staff_id, first_name, last_name, email, store_id
+FROM staff;
+-- password i picture są UKRYTE
 
 -- 3. Query na widoku (widok działa jak normalna tabela!)
-SELECT * FROM vw_klienci_zloci WHERE liczba_zamowien > 5;
+SELECT * FROM vw_klienci_zloci WHERE liczba_platnosci > 35;
 
 -- 4. Złożony widok (widok na widoku = czasem OK, ale rób ostrożnie)
 CREATE VIEW vw_top_klienci AS
-SELECT * FROM vw_klienci_zloci WHERE laczna_wartosc > 50000;
+SELECT * FROM vw_klienci_zloci WHERE laczna_wartosc > 190;
 ```
 
 ## Pułapki
@@ -90,17 +94,17 @@ SELECT * FROM vw_klienci_zloci WHERE laczna_wartosc > 50000;
 Zamiast na każde zapytanie liczyć widok od nowa, możesz go "zamrozić":
 
 ```sql
--- PostgreSQL
-CREATE MATERIALIZED VIEW mv_sprzedaz_cache AS
-SELECT DATE_TRUNC('month', data)::DATE AS dzien, SUM(kwota) AS przychod
-FROM zamowienia
-GROUP BY DATE_TRUNC('month', data);
+-- PostgreSQL (w MySQL/Sakili materialized views nie istnieją — emuluje się je tabelą + jobem)
+CREATE MATERIALIZED VIEW mv_przychod_cache AS
+SELECT DATE_TRUNC('month', payment_date)::DATE AS miesiac, SUM(amount) AS przychod
+FROM payment
+GROUP BY DATE_TRUNC('month', payment_date);
 
 -- Odśwież (ręcznie lub w cronie)
-REFRESH MATERIALIZED VIEW mv_sprzedaz_cache;
+REFRESH MATERIALIZED VIEW mv_przychod_cache;
 
 -- Query
-SELECT * FROM mv_sprzedaz_cache WHERE dzien > '2024-01-01';
+SELECT * FROM mv_przychod_cache WHERE miesiac > '2005-06-01';
 ```
 
 Tradeoff: szybsze SELECTy, ale stare dane (aż do `REFRESH`).
@@ -108,6 +112,7 @@ Tradeoff: szybsze SELECTy, ale stare dane (aż do `REFRESH`).
 ## Kiedy VIEW, kiedy nie
 
 **Rób VIEW:**
+- ==simplified queries==
 - Logika biznesowa skomplikowana, powtarzalna
 - Potrzebujesz abstrakcji (aplikacja nie powinna znać schemat)
 - Segurność (ukryj sensytywne kolumny)

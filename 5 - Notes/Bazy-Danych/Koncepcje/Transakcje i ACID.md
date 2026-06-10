@@ -8,14 +8,15 @@ powiązane: ["[[Model relacyjny]]"]
 > [!summary] W jednym zdaniu
 > Transakcja grupuje kilka operacji w jedną "wszystko albo nic"; ACID to cztery gwarancje, które baza relacyjna daje takim grupom.
 
-Transakcja:
+Transakcja (Sakila — zwrot filmu i pobranie opłaty):
 ```sql
 BEGIN;
-UPDATE accounts SET balance = balance - 100 WHERE id = 1;
-UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+UPDATE rental SET return_date = NOW() WHERE rental_id = 1;
+INSERT INTO payment (customer_id, staff_id, rental_id, amount, payment_date)
+VALUES (130, 1, 1, 2.99, NOW());
 COMMIT;   -- albo ROLLBACK, by cofnąć całość
 ```
-Przelew to dwie operacje, które muszą się wykonać **razem albo wcale** — inaczej znikłyby pieniądze. `COMMIT` zatwierdza, `ROLLBACK` cofa.
+Zwrot to dwie operacje, które muszą się wykonać **razem albo wcale** — inaczej film wróciłby "za darmo" (albo klient zapłaciłby bez odnotowania zwrotu). `COMMIT` zatwierdza, `ROLLBACK` cofa.
 
 **ACID** — cztery litery, które warto umieć rozwinąć:
 - **Atomicity (atomowość)** — wszystko albo nic; częściowe wykonanie jest cofane.
@@ -24,7 +25,7 @@ Przelew to dwie operacje, które muszą się wykonać **razem albo wcale** — i
 - **Durability (trwałość)** — po `COMMIT` dane przetrwają nawet awarię zasilania.
 
 > [!tip] Pytanie rozmowowe
-> "Rozwiń ACID" pada często. Atomowość zilustruj przelewem (dwa UPDATE-y jako całość). Izolację możesz podlinkować do zjawisk jak dirty read / phantom read, jeśli rozmowa idzie głębiej.
+> "Rozwiń ACID" pada często. Atomowość zilustruj przelewem bankowym (dwa UPDATE-y sald jako całość — kanon rozmów) albo zwrotem+płatnością jak wyżej. Izolację możesz podlinkować do zjawisk jak dirty read / phantom read, jeśli rozmowa idzie głębiej.
 
 ## Połączenia
 - [[ACID — co to naprawdę znaczy]] — głębsze ujęcie (DDIA): czemu „C” to marketing

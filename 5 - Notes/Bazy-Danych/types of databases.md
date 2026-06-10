@@ -30,10 +30,10 @@ Model relacyjny został zaprojektowany wokół:
 W SQL struktura danych jest definiowana wcześniej:
 
 ```sql
-CREATE TABLE users (
-    id INT PRIMARY KEY,
-    name TEXT,
-    age INT
+CREATE TABLE actor (
+    actor_id   INT PRIMARY KEY,
+    first_name VARCHAR(45),
+    last_name  VARCHAR(45)
 );
 ```
 

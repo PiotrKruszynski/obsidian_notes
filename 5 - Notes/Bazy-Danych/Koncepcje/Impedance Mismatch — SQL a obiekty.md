@@ -5,25 +5,22 @@
 
 ## Na czym polega problem
 
-W aplikacji masz obiekt:
+W aplikacji masz obiekt (Sakila: film z obsadą):
 ```python
-user = {
-  name: "Jan",
-  addresses: [
-    {type: "home", city: "Warszawa"},
-    {type: "work", city: "Kraków"}
-  ]
+film = {
+  "title": "ALIEN CENTER",
+  "actors": ["PENELOPE GUINESS", "NICK WAHLBERG"]
 }
 ```
 
-W relacyjnej bazie nie możesz wstawić listy w jedno pole. Musisz rozbić:
+W relacyjnej bazie nie możesz wstawić listy w jedno pole. Musisz rozbić na tabele i tabelę łączącą:
 ```sql
-INSERT INTO users (name) VALUES ('Jan');
-INSERT INTO addresses (user_id, type, city) VALUES (1, 'home', 'Warszawa');
-INSERT INTO addresses (user_id, type, city) VALUES (1, 'work', 'Kraków');
+INSERT INTO film (title, language_id) VALUES ('ALIEN CENTER', 1);
+INSERT INTO film_actor (actor_id, film_id) VALUES (1, 1001);
+INSERT INTO film_actor (actor_id, film_id) VALUES (2, 1001);
 ```
 
-To impedance mismatch — dwie reprezentacje tego samego.
+To impedance mismatch — dwie reprezentacje tego samego (a w kodzie `film.actors` to po stronie SQL aż trzy tabele: `film`, `film_actor`, `actor`).
 
 ## Konsekwencje
 
