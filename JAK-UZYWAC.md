@@ -24,6 +24,12 @@
 - **Czytanie/myślenie** → Obsidian (graf, przeglądanie, linki).
 - **Pisanie/utrzymanie** → agent w VS Code, np. Codex (ingest, lint, nowe notatki).
 
+## Szukanie wiedzy
+
+- Pamiętasz **gdzie** → Obsidian, klikasz.
+- Pamiętasz **słowo** → Obsidian: `Cmd+O` (nazwa notatki) lub `Cmd+Shift+F` (pełnotekstowo).
+- Pamiętasz tylko **sens** albo pytanie jest przekrojowe → agent: **„znajdź [pytanie]"** — odpowiada wyłącznie z notatek, podaje ścieżki; brak notatki zgłasza jako lukę.
+
 ## Bezpieczeństwo
 
 - Większe zmiany akceptuj **z diffa** — agent ma obowiązek go pokazać przed zapisem.
@@ -35,3 +41,4 @@
 - `ingest [plik]` — rozłóż źródło/inbox na atomowe notatki, zaktualizuj istniejące, pokaż diff.
 - `lint` — raport zdrowia vaultu, bez zmian.
 - `nowa notatka [pojęcie]` — pojedyncza notatka wg zasad.
+- `znajdź [pytanie]` — szukanie tylko w notatkach, ze ścieżkami; brak = luka.

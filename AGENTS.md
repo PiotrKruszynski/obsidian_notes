@@ -71,6 +71,16 @@ Pole `źródło` jest **obowiązkowe** — mówi, skąd pochodzi twierdzenie, ż
 
 To ważne: część wiedzy pochodzi z rozmów z LLM, które bywają błędne. Bez proweniencji nie da się odróżnić twierdzenia z dokumentacji od halucynacji.
 
+Nie zgaduj proweniencji wstecz. Przy uzupełnianiu starych notatek, dla których prawdziwe źródło nie jest znane, użyj wartości `"nieznane (sprzed LLM Wiki)"` zamiast przypisywać im fałszywe źródło. Fałszywa proweniencja jest gorsza niż brak.
+
+Jeśli agent dopisuje do starej notatki nową treść od siebie (np. `> [!summary]`, nowe wyjaśnienia, `## Połączenia`, poprawki cross-linków), ta nowa treść też ma proweniencję. Dodaj albo uzupełnij pole:
+
+```yaml
+źródło_uzupełnień: ["sesja LLM, GPT-5 Codex, 2026-06-10"]
+```
+
+Nie mieszaj tego z pierwotnym `źródło`: `źródło` opisuje skąd pochodzi rdzeń notatki, a `źródło_uzupełnień` opisuje późniejsze dopiski agenta.
+
 ## Callouty Obsidian — do tłumaczenia, nie ozdoby
 
 - `> [!summary]` — **sedno w jednym zdaniu, zawsze na górze notatki** (zaraz pod tytułem).
@@ -113,11 +123,36 @@ Przejdź cały vault (`5 - Notes/` + indeksy) i wypisz raport:
 - **luki** — pojęcia często linkowane, dla których nie istnieje notatka,
 - dodatkowo: brakujący frontmatter / brak pola `źródło` / brak `## Połączenia`.
 
+Resolver wikilinków MUSI działać jak Obsidian, nie jak prosty skaner `.md`:
+
+- sprawdzaj cały vault, nie tylko notatki `.md`;
+- uwzględnij `7 - Assets/` oraz inne załączniki;
+- rozpoznawaj basename z rozszerzeniem (`![[obraz.png]]`), basename bez rozszerzenia (`[[Notatka]]`), ścieżki względne i ścieżki od root vaultu;
+- link do istniejącego assetu nie jest luką koncepcyjną.
+
+Zanim uznasz martwy wikilink za lukę do napisania, wykonaj mapowanie:
+
+1. `martwy link → istniejąca podobna notatka/asset`;
+2. oznacz wynik jako `do przelinkowania`, jeśli istnieje bliska notatka (np. `[[Typy baz danych]]` → `[[types of databases]]`, `[[Indeks — koszt i korzyść]]` → bliska notatka o indeksach);
+3. dopiero linki bez sensownego istniejącego celu raportuj jako **luki**.
+
+Nie twórz nowej notatki tylko dlatego, że wikilink jest martwy. Martwy link często oznacza rename, zmianę języka tytułu albo niekonsekwentny alias — i najpierw trzeba go naprawić przez przelinkowanie.
+
 **Tylko raport — niczego nie zmieniaj bez wyraźnej zgody.** Po raporcie zaproponuj kolejność napraw.
 
 ### `nowa notatka [pojęcie]`
 
 Pojedyncza notatka koncepcji/zadania wg tych samych zasad: sprawdzenie duplikatów → atomowość → frontmatter ze `źródło` → callouty → `## Połączenia` → aktualizacja notatek powiązanych → diff do akceptacji.
+
+### `znajdź [pytanie]`
+
+Wyszukiwanie wiedzy w vaulcie — operacja **tylko do odczytu**:
+
+1. Szukaj odpowiedzi **wyłącznie w notatkach vaultu** (`5 - Notes/`, indeksy, ew. `2 - Source Materials/`) — NIE odpowiadaj z własnej wiedzy modelu.
+2. Zawsze podawaj **ścieżki do plików** + jedno zdanie, co w którym jest.
+3. Synteza z wielu notatek jest OK, ale tylko z ich treści i z listą plików źródłowych.
+4. Jeśli odpowiedzi w vaulcie nie ma — powiedz wprost: **„brak notatki — to luka"** i zaproponuj `nowa notatka [pojęcie]`. Nie maskuj braku własną wiedzą.
+5. Jeśli Twoja wiedza przeczy treści notatki — nie poprawiaj po cichu; zgłoś jako potencjalną sprzeczność do weryfikacji (z proweniencją notatki).
 
 ## Zasady bezpieczeństwa (zawsze)
 
