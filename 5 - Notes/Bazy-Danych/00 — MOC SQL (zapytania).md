@@ -38,6 +38,7 @@ Koncepcje (`Koncepcje/`) tłumaczą "dlaczego". Zestawy pytań (`Pytania-rozmowa
 - [[Transakcje i ACID]]
 - [[UNION, DISTINCT i czyszczenie wyniku]]
 - [[DELETE, TRUNCATE i DROP]]
+- [[CREATE VIEW]]
 
 ## Zestawy pytań (symulacja rozmowy)
 - [[Pytania: kolejność wykonania i WHERE vs HAVING]]
