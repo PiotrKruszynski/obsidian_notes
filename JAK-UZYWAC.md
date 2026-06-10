@@ -10,6 +10,7 @@
 
 - Trwałe źródło (PDF, artykuł, transkrypt) → wrzuć do `2 - Source Materials/`.
 - Luźny wniosek z sesji nauki → wrzuć do `1 - Raw Notes/`.
+- Najszybciej z LLM: skopiuj odpowiedź (Cmd+C) i w terminalu `raw nazwa-pliku [model]` — funkcja zapisuje schowek do `1 - Raw Notes/` z datą i źródłem (instalacja: `6 - Commands/raw — schowek do inboxu`).
 - Potem powiedz agentowi: **„zrób ingest [plik]"**.
 
 ## Utrzymanie
