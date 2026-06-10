@@ -10,7 +10,7 @@ status: draft
 # Baza danych
 
 > [!summary] W jednym zdaniu
-> Baza danych to zbiór danych z mechanizmem zapisu, odczytu, aktualizacji i wyszukiwania — zarządzany przez DBMS.
+> Baza danych to zbiór danych  + mechanizmy zapisu, odczytu, aktualizacji i wyszukiwania, wysoka dostępność dla wielu aktorów , potrzebny jest cały system -> DBMS.
 
 **DBMS** (Database Management System) — oprogramowanie zarządzające bazą:
 - PostgreSQL, MySQL, Oracle, SQL Server
