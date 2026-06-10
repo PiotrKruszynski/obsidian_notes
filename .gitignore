@@ -3,4 +3,10 @@
 
 # Obsidian – pliki tymczasowe
 .obsidian/workspace*
-.obsidian/cach
+.obsidian/cache
+.trash/
+
+# Pliki tymczasowe edytorów
+*.tmp
+*.swp
+~$*
