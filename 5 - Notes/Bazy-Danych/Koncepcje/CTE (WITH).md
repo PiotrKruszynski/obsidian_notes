@@ -9,15 +9,21 @@ powiązane: ["[[Podzapytania (subqueries)]]", "[[Window functions]]"]
 > CTE (Common Table Expression, klauzula `WITH`) to nazwane podzapytanie zdefiniowane na górze zapytania — poprawia czytelność i pozwala odwołać się do tego samego wyniku wielokrotnie; bywa też rekurencyjne.
 
 ```sql
-WITH dept_avg AS (
-    SELECT department, AVG(salary) AS avg_sal
-    FROM employees
-    GROUP BY department
-)
-SELECT e.name, e.salary, d.avg_sal
-FROM employees e
-JOIN dept_avg d ON d.department = e.department
-WHERE e.salary > d.avg_sal;
+WITH av_payment_per_customer AS (  
+    SELECT customer_id,  
+           AVG(amount) AS avg_payment  
+    FROM payment  
+    GROUP BY customer_id  
+)  
+SELECT c.first_name,  
+       c.last_name,  
+       COUNT(pt.amount)  
+FROM payment pt  
+INNER JOIN av_payment_per_customer avpc ON pt.customer_id = avpc.customer_id  
+INNER JOIN customer c ON pt.customer_id = c.customer_id  
+WHERE pt.amount > avpc.avg_payment  
+GROUP BY c.customer_id  
+LIMIT 500;
 ```
 `dept_avg` to tymczasowa, nazwana "tabela" widoczna tylko w tym zapytaniu. Zamiast zagnieżdżać [[Podzapytania (subqueries)|podzapytanie]] w środku, definiujesz je raz na górze i odwołujesz po nazwie.
 
