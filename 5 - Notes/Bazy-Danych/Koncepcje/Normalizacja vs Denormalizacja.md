@@ -46,6 +46,6 @@ Dokumentowe bazy (MongoDB) naturalnie faworyzują denormalizację — cały "dok
 - [[Normalizacja (1NF, 2NF, 3NF)]] — postaci normalne w praktyce
 
 - [[JOIN — siła relacyjnego modelu]] — normalizacja zakłada sprawne JOINy
-- [[Indeks — koszt i korzyść]] — znormalizowane tabele potrzebują indeksów na kluczach obcych
+- [[Indeks — jak działa i kiedy pomaga|Indeks — koszt i korzyść]] — znormalizowane tabele potrzebują indeksów na kluczach obcych
 - [[Kiedy SQL, kiedy NoSQL]] — wybór między normalizacją a denormalizacją wpływa na wybór bazy
 - [[Impedance Mismatch — SQL a obiekty]] — normalizacja pogłębia impedance mismatch

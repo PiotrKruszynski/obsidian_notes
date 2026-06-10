@@ -1,6 +1,6 @@
 ---
 tags: ["dependency-injection", "fastapi"]
-powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Zależności jako bramki — auth, DB session, config]]", "[[TestClient — jak testować FastAPI bez serwera]]"]
+powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Depends — wstrzykiwanie zależności|Zależności jako bramki — auth, DB session, config]]", "[[TestClient — jak testować FastAPI bez serwera]]"]
 ---
 
 # Depends — jak działa DI w FastAPI
@@ -64,6 +64,6 @@ def get_users(db: Session = Depends(get_db)):
 > FastAPI sam ogarnie kolejność i współdzielenie — `get_db` wywoła się raz na request nawet jeśli kilka funkcji go potrzebuje.
 
 ## Połączenia
-- [[Zależności jako bramki — auth, DB session, config]] — praktyczne wzorce użycia
+- [[Depends — wstrzykiwanie zależności|Zależności jako bramki — auth, DB session, config]] — praktyczne wzorce użycia
 - [[TestClient — jak testować FastAPI bez serwera]] — `app.dependency_overrides` pozwala podmieniać Depends w testach
 - [[FastAPI co to jest i skąd się wziął]] — DI to jeden z filarów architektury FastAPI

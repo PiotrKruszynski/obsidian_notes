@@ -29,6 +29,6 @@ Kluczowy przełom: **query optimizer**. Zamiast ręcznego prowadzenia przez ści
 - [[Model relacyjny]] — praktyczne podstawy: tabele, wiersze, kolumny
 
 - [[SQL jako język deklaratywny]] — deklaratywność to bezpośrednia konsekwencja tego modelu
-- [[Indeks — koszt i korzyść]] — właśnie dlatego można dodawać indeksy bez zmiany zapytań
+- [[Indeks — jak działa i kiedy pomaga|Indeks — koszt i korzyść]] — właśnie dlatego można dodawać indeksy bez zmiany zapytań
 - [[B-Tree — jak SQL przechowuje dane]] — fizyczna implementacja tabel i indeksów
 - [[Kiedy SQL, kiedy NoSQL]] — historia pokazuje, że poprzednicy modelu relacyjnego mają nowych następców (dokumentowe bazy)

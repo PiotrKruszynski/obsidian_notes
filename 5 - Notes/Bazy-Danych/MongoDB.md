@@ -65,6 +65,6 @@ MongoDB domyślnie jest CP — przy partycji sieciowej wybiera spójność nad d
 ---
 
 ## Powiązane notatki
-- [[Typy baz danych]] — porównanie z innymi NoSQL
+- [[types of databases|Typy baz danych]] — porównanie z innymi NoSQL
 - [[Kiedy SQL, kiedy NoSQL]] — kiedy document DB to dobry wybór
 - [[JOIN — siła relacyjnego modelu]] — czego MongoDB nie ma natywnie

@@ -9,6 +9,6 @@ status: draft
 
 auto wykrywanie typu
 
-[[type annotations]]
+[[annotations|type annotations]]
 
 [[oop]]

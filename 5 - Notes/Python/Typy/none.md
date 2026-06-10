@@ -7,7 +7,7 @@ created: 2026-06-09
 status: draft
 ---
 
-- [[singeltone]] w Pythonie – istnieje tylko **jeden obiekt None** w całym procesie.
+- [[single tone|singeltone]] w Pythonie – istnieje tylko **jeden obiekt None** w całym procesie.
     
 - Reprezentuje brak wartości, pusty wynik funkcji, „nic”.
 

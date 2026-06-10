@@ -10,5 +10,5 @@ status: draft
 [[single responsibility]]
 [[open close]]
 [[liskov substitution]]
-[[interface segregation]]
+[[interface segregation principle|interface segregation]]
 [[dependency inversion]]

@@ -45,7 +45,7 @@ COMMIT, ROLLBACK
 ---
 
 ## Powiązane notatki
-- [[Typy baz danych]] — przegląd wszystkich typów (SQL, NoSQL, Graph, Vector…)
+- [[types of databases|Typy baz danych]] — przegląd wszystkich typów (SQL, NoSQL, Graph, Vector…)
 - [[Model relacyjny]] — tabele, wiersze, klucze
 - [[ACID — co to naprawdę znaczy]] — gwarancje transakcyjne
 - [[Transakcje i ACID]] — praktyczne ujęcie z przykładami SQL

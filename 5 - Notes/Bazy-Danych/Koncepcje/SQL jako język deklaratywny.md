@@ -44,5 +44,5 @@ Deklaratywne języki łatwiej zrównoleglić, bo nie ma narzuconych zależności
 - [[Logiczna kolejność wykonania zapytania]] — jak SQL faktycznie przetwarza zapytanie
 
 - [[Model Relacyjny — dlaczego wygrał]] — deklaratywność wynika z filozofii modelu relacyjnego
-- [[Indeks — koszt i korzyść]] — optymalizator automatycznie używa indeksów
+- [[Indeks — jak działa i kiedy pomaga|Indeks — koszt i korzyść]] — optymalizator automatycznie używa indeksów
 - [[B-Tree — jak SQL przechowuje dane]] — query plan często opiera się na B-Tree

@@ -17,4 +17,4 @@ Race condition to **błąd współbieżności**, który występuje, gdy **wynik 
     
 - _multiprocessing (procesy)_
 
-[[event loop]] - mechanizm (generator nieskończony), aby mógł przenosić na [[call stack]], korzyta z [[queue]]
+[[event loop]] - mechanizm (generator nieskończony), aby mógł przenosić na [[stack|call stack]], korzyta z [[queue]]

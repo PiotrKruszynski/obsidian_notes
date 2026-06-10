@@ -10,7 +10,7 @@ status: draft
 # NoSQL — systemy rozproszone i architektura
 
 > [!summary] Zakres tej notatki
-> Teoria distributed systems: dlaczego NoSQL powstał, CAP, BASE, eventual consistency, replikacja, sharding, quorum R/W/N. Porównanie typów → [[Typy baz danych]].
+> Teoria distributed systems: dlaczego NoSQL powstał, CAP, BASE, eventual consistency, replikacja, sharding, quorum R/W/N. Porównanie typów → [[types of databases|Typy baz danych]].
 
 # Dlaczego NoSQL istnieje?
 

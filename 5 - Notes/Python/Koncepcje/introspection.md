@@ -23,7 +23,7 @@ type(i)
 i.__class__
 ```
 
-2️⃣ `repr()` - reprezentacja tekstowa stworzona do użycia obiektu ( [[repr vs. str]] )
+2️⃣ `repr()` - reprezentacja tekstowa stworzona do użycia obiektu ( [[reprezentacja tekstowa obiektu|repr vs. str]] )
 ```python
 i = 7
 repr(i)

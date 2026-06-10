@@ -1,6 +1,6 @@
 ---
 tags: ["fastapi", "routing"]
-powiązane: ["[[Path parameters vs Query parameters]]", "[[Request body — jak FastAPI parsuje JSON]]", "[[Status codes w FastAPI]]", "[[Automatyczna dokumentacja OpenAPI — skąd FastAPI wie co wygenerować]]"]
+powiązane: ["[[Skąd FastAPI bierze parametry|Path parameters vs Query parameters]]", "[[Skąd FastAPI bierze parametry|Request body — jak FastAPI parsuje JSON]]", "[[HTTPException|Status codes w FastAPI]]", "[[Automatyczna dokumentacja OpenAPI — skąd FastAPI wie co wygenerować]]"]
 ---
 
 # Dekorator @app.get i co się za nim kryje
@@ -54,7 +54,7 @@ FastAPI patrzy na parametry i decyduje:
 > `@app.post()`, `@app.put()`, `@app.patch()`, `@app.delete()` — działają identycznie, tylko metoda HTTP się zmienia. `@app.api_route("/path", methods=["GET", "POST"])` jeśli chcesz kilka metod na jednej ścieżce.
 
 ## Połączenia
-- [[Path parameters vs Query parameters]] — szczegóły skąd FastAPI bierze wartości
-- [[Request body — jak FastAPI parsuje JSON]] — jak działa parsowanie ciała requestu
-- [[Status codes w FastAPI]] — jak ustawiać kody odpowiedzi
+- [[Skąd FastAPI bierze parametry|Path parameters vs Query parameters]] — szczegóły skąd FastAPI bierze wartości
+- [[Skąd FastAPI bierze parametry|Request body — jak FastAPI parsuje JSON]] — jak działa parsowanie ciała requestu
+- [[HTTPException|Status codes w FastAPI]] — jak ustawiać kody odpowiedzi
 - [[Automatyczna dokumentacja OpenAPI — skąd FastAPI wie co wygenerować]] — dekorator = źródło dokumentacji

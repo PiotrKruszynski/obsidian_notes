@@ -21,7 +21,7 @@ status: draft
 
 ## Typy i Protokoły
 [[bool]] · [[int]] · [[str]] · [[list()]] · [[dict()]] · [[set()]] · [[tuple()]]
-[[iterator]] · [[iterable]] · [[generator]] · [[protocols]] · [[typing]]
+[[iterator]] · [[iterable]] · [[generators|generator]] · [[protocols]] · [[typing]]
 
 ## Koncepcje Języka
 [[namespace]] · [[GIL]] · [[async]] · [[exceptions]] · [[context manager]]

@@ -19,7 +19,7 @@ Każdy wiersz to jedno pojęcie widziane z dwóch stron — klikaj w zależnośc
 |---|---|---|
 | Transakcje | [[Transakcje i ACID]] | [[ACID — co to naprawdę znaczy]] |
 | Izolacja | [[Transakcje i ACID]] | [[Poziomy izolacji transakcji]], [[MVCC — Snapshot Isolation]], [[Dirty Read, Non-Repeatable Read, Phantom Read]] |
-| Indeksy | [[Indeks — jak działa i kiedy pomaga]] | [[B-Tree — jak SQL przechowuje dane]], [[Indeks — koszt i korzyść]], [[LSM-Tree vs B-Tree — porównanie]] |
+| Indeksy | [[Indeks — jak działa i kiedy pomaga]] | [[B-Tree — jak SQL przechowuje dane]], [[Indeks — jak działa i kiedy pomaga|Indeks — koszt i korzyść]], [[LSM-Tree vs B-Tree — porównanie]] |
 | Model relacyjny | [[Model relacyjny]] | [[Model Relacyjny — dlaczego wygrał]], [[Impedance Mismatch — SQL a obiekty]] |
 | Normalizacja | [[Normalizacja (1NF, 2NF, 3NF)]] | [[Normalizacja vs Denormalizacja]] |
 | Wykonanie zapytania | [[Logiczna kolejność wykonania zapytania]] | [[SQL jako język deklaratywny]] |

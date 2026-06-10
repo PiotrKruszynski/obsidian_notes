@@ -44,7 +44,7 @@ Rozwiązanie: **WAL** (Write-Ahead Log) — każda zmiana najpierw trafia do dzi
 ## Połączenia
 - [[Indeks — jak działa i kiedy pomaga]] — kiedy i jak używać indeksu w zapytaniach
 
-- [[Indeks — koszt i korzyść]] — B-Tree jest strukturą indeksu
+- [[Indeks — jak działa i kiedy pomaga|Indeks — koszt i korzyść]] — B-Tree jest strukturą indeksu
 - [[WAL — Write-Ahead Log]] — szczegóły mechanizmu crash recovery
 - [[LSM-Tree vs B-Tree — porównanie]] — alternatywa dla write-heavy workloads
 - [[SQL jako język deklaratywny]] — query optimizer decyduje kiedy użyć B-Tree

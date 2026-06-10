@@ -42,5 +42,5 @@ LSM wie, że "ten klucz NA PEWNO nie istnieje" dzięki Bloom filterowi (probabil
 ## Połączenia
 
 - [[B-Tree — jak SQL przechowuje dane]] — szczegóły B-Tree
-- [[Indeks — koszt i korzyść]] — oba są strukturami indeksów
+- [[Indeks — jak działa i kiedy pomaga|Indeks — koszt i korzyść]] — oba są strukturami indeksów
 - [[Kiedy SQL, kiedy NoSQL]] — wybór silnika zależy od workloadu

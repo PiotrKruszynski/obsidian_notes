@@ -25,7 +25,7 @@ Punkt wejścia do notatek z *Designing Data-Intensive Applications* (Kleppmann, 
 - [[B-Tree — jak SQL przechowuje dane]]
 - [[LSM-Tree vs B-Tree — porównanie]]
 - [[WAL — Write-Ahead Log]]
-- [[Indeks — koszt i korzyść]]
+- [[Indeks — jak działa i kiedy pomaga|Indeks — koszt i korzyść]]
 
 ## Transakcje i ACID
 

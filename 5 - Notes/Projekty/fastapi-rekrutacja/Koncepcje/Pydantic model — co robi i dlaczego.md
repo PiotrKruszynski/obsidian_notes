@@ -1,6 +1,6 @@
 ---
 tags: ["fastapi", "pydantic", "validation"]
-powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Response model — dlaczego oddzielny schemat wyjściowy]]", "[[Walidacja danych wejściowych — co się dzieje przed wywołaniem funkcji]]"]
+powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Response model — dlaczego oddzielny schemat wyjściowy]]", "[[Model Pydantic|Walidacja danych wejściowych — co się dzieje przed wywołaniem funkcji]]"]
 ---
 
 # Pydantic model — co robi i dlaczego
@@ -47,5 +47,5 @@ Gdy FastAPI dostaje JSON `{"name": "Jan", "age": "25", "email": "jan@x.pl"}`:
 ## Połączenia
 - [[FastAPI co to jest i skąd się wziął]] — Pydantic to jeden z filarów FastAPI
 - [[Response model — dlaczego oddzielny schemat wyjściowy]] — osobny model dla output
-- [[Walidacja danych wejściowych — co się dzieje przed wywołaniem funkcji]] — co Pydantic robi przed wywołaniem twojej funkcji
+- [[Model Pydantic|Walidacja danych wejściowych — co się dzieje przed wywołaniem funkcji]] — co Pydantic robi przed wywołaniem twojej funkcji
 - [[Automatyczna dokumentacja OpenAPI — skąd FastAPI wie co wygenerować]] — model → Swagger

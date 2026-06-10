@@ -1,6 +1,6 @@
 ---
 tags: ["async", "fastapi"]
-powiązane: ["[[ASGI vs WSGI]]", "[[Await i event loop — model mentalny]]"]
+powiązane: ["[[ASGI vs WSGI]]", "[[async def vs def w FastAPI|Await i event loop — model mentalny]]"]
 ---
 
 # async def vs def w FastAPI — kiedy co
@@ -55,4 +55,4 @@ Dlaczego `def` jest "bezpieczniejszy" gdy nie wiesz? Bo FastAPI uruchamia go w t
 
 ## Połączenia
 - [[ASGI vs WSGI]] — dlaczego w ogóle istnieje ten wybór
-- [[Await i event loop — model mentalny]] — co się dzieje "pod spodem" podczas await
+- [[async def vs def w FastAPI|Await i event loop — model mentalny]] — co się dzieje "pod spodem" podczas await

@@ -12,7 +12,7 @@ status: draft
 [[functional programming]]
 [[oop]]
 [[data structure]]
-[[paradygmats]]
+[[paradigms|paradygmats]]
 
 
 2. Level mid
