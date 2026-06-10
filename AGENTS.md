@@ -1,4 +1,6 @@
-# CLAUDE.md — konstytucja vaultu (LLM Wiki)
+# AGENTS.md — konstytucja vaultu (LLM Wiki)
+
+> Plik w otwartym standardzie [AGENTS.md](https://agents.md) — czytany automatycznie przez Codex CLI, GitHub Copilot, Cursor, Gemini CLI i inne; Claude Code używa go jako fallbacku, gdy brak CLAUDE.md.
 
 Ten vault to LLM Wiki w trzech warstwach (wzorzec Karpathy'ego):
 
@@ -64,7 +66,7 @@ Pole `źródło` jest **obowiązkowe** — mówi, skąd pochodzi twierdzenie, ż
 
 - `"2 - Source Materials/plik.pdf"` — notatka z ingestu źródła (ścieżka do pliku!)
 - `"1 - Raw Notes/plik.md"` — notatka z ingestu inboxu
-- `"sesja LLM, Claude Fable 5"` — wiedza z rozmowy z LLM (podaj model!)
+- `"sesja LLM, <model>"` — wiedza z rozmowy z LLM, np. `"sesja LLM, GPT-5 Codex"`, `"sesja LLM, Claude Fable 5"` (zawsze podaj model!)
 - `"dokumentacja python.org"`, `"wykład 42"` itp.
 
 To ważne: część wiedzy pochodzi z rozmów z LLM, które bywają błędne. Bez proweniencji nie da się odróżnić twierdzenia z dokumentacji od halucynacji.
