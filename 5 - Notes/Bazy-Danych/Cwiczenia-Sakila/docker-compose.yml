@@ -1,0 +1,7 @@
+services:
+  sakila:
+    image: sakiladb/mysql:8
+    container_name: sakila
+    ports:
+      - "3306:3306"
+    restart: unless-stopped

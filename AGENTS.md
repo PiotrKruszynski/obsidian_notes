@@ -154,6 +154,16 @@ Wyszukiwanie wiedzy w vaulcie — operacja **tylko do odczytu**:
 4. Jeśli odpowiedzi w vaulcie nie ma — powiedz wprost: **„brak notatki — to luka"** i zaproponuj `nowa notatka [pojęcie]`. Nie maskuj braku własną wiedzą.
 5. Jeśli Twoja wiedza przeczy treści notatki — nie poprawiaj po cichu; zgłoś jako potencjalną sprzeczność do weryfikacji (z proweniencją notatki).
 
+### `ćwicz [temat]`
+
+Praktyka, która zasila wiki (nie żyje obok niej):
+
+1. Zadania buduj **wokół koncepcji istniejących w vaulcie** i linkuj je w treści zadania (`[[...]]`). Pojęcie potrzebne do zadań, ale bez notatki → zgłoś jako lukę, nie przemycaj po cichu.
+2. Trudność stopniuj ★–★★★★. Zadania na realnej bazie (SQL: Sakila — setup i serie w `5 - Notes/Bazy-Danych/Cwiczenia-Sakila/`).
+3. **Nie pokazuj rozwiązania, zanim użytkownik nie pokaże swojej próby.** Potem oceń: poprawność wyniku, pułapki (NULL-e, duplikaty, brakujące JOIN-y), czytelność, wydajność (EXPLAIN, gdy ma sens).
+4. Po sesji zaproponuj domknięcie pętli: błąd użytkownika → `[!warning]` z realnym skutkiem do notatki koncepcji; zaskoczenie/trik → `[!tip]`; rozwiązania i wnioski → sekcja „Moje rozwiązania i wnioski" w notatce serii. Wszystko jako diff do akceptacji.
+5. Nowa seria zadań = nowa notatka wg wzoru istniejących serii (frontmatter, `źródło`, zadania z linkami, sekcja wniosków, `## Połączenia`).
+
 ## Zasady bezpieczeństwa (zawsze)
 
 - Zmiany w **istniejących** notatkach: najpierw diff, zapis po akceptacji.
