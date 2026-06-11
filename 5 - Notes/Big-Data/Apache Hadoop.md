@@ -15,13 +15,16 @@ status: draft
 > - Core: [[HDFS]] + [[YARN]] + [[MapReduce]]
 > - Dziś często zastępowany przez [[Spark]] / cloud-native (_S3 + EMR / Glue_)
 
-# Definition
-- **Apache Hadoop** → open-source framework do **distributed storage + distributed processing**
-- działa na **klastrze commodity hardware (tanie maszyny)**
-- core:
-    - **HDFS** → storage
-    - **MapReduce** → processing
-- klucz: **data locality (liczenie tam gdzie dane)**
+![[Pasted image 20260612000446.png]]
+
+![[Pasted image 20260612000503.png]]
+
+![[Pasted image 20260612000609.png]]
+
+![[Pasted image 20260612000645.png]]
+
+
+
 
 # Mental model 
 > ** przenosisz compute do danych** -> wysyłam kod (kilka KB) do node’a z dannymi
