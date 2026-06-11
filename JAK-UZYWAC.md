@@ -42,4 +42,5 @@
 - `lint` — raport zdrowia vaultu, bez zmian.
 - `nowa notatka [pojęcie]` — pojedyncza notatka wg zasad.
 - `znajdź [pytanie]` — szukanie tylko w notatkach, ze ścieżkami; brak = luka.
+- `odpowiedz [pytanie]` — merytoryczna odpowiedź zbudowana wyłącznie z notatek, ze źródłami na końcu; braki wskazane wprost.
 - `ćwicz [temat]` — zadania praktyczne z koncepcji, które masz; błędy wracają do notatek jako [!warning]. SQL: baza Sakila w `Bazy-Danych/Cwiczenia-Sakila/`.

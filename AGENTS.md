@@ -154,6 +154,18 @@ Wyszukiwanie wiedzy w vaulcie — operacja **tylko do odczytu**:
 4. Jeśli odpowiedzi w vaulcie nie ma — powiedz wprost: **„brak notatki — to luka"** i zaproponuj `nowa notatka [pojęcie]`. Nie maskuj braku własną wiedzą.
 5. Jeśli Twoja wiedza przeczy treści notatki — nie poprawiaj po cichu; zgłoś jako potencjalną sprzeczność do weryfikacji (z proweniencją notatki).
 
+### `odpowiedz [pytanie]`
+
+Merytoryczna odpowiedź na pytanie, której źródłem jest vault (nie wiedza modelu) — operacja **tylko do odczytu**:
+
+1. Odpowiedz na pytanie treściwie, ale buduj odpowiedź **wyłącznie z treści notatek** (`5 - Notes/`, ew. `2 - Source Materials/`). Synteza z wielu notatek jest pożądana.
+2. Nie dolewaj wiedzy modelu spoza notatek. Jeśli notatki pokrywają temat częściowo — odpowiedz tym, co jest, i powiedz wprost, czego w vaulcie brakuje.
+3. Na końcu odpowiedzi sekcja **Źródła:** z listą ścieżek użytych notatek.
+4. Jeśli vault nie pokrywa tematu wcale — nie odpowiadaj z głowy: zgłoś lukę i zaproponuj `nowa notatka [pojęcie]`.
+5. Gdy Twoja wiedza przeczy treści notatki — odpowiedz wg notatki, ale jawnie zaznacz potencjalną sprzeczność do weryfikacji.
+
+Różnica względem `znajdź`: `znajdź` mówi GDZIE wiedza leży, `odpowiedz` mówi CO z niej wynika. Pierwsze do nawigacji, drugie do powtórek i sprawdzania własnego zrozumienia.
+
 ### `ćwicz [temat]`
 
 Praktyka, która zasila wiki (nie żyje obok niej):
