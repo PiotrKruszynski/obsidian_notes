@@ -1,7 +1,7 @@
 ---
 title: "MapReduce"
 type: service
-topic: aws
+topic: big-data
 tags: ["big-data"]
 created: 2026-06-09
 status: draft
