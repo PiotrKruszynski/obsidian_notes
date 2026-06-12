@@ -37,3 +37,6 @@ pamięci
 i strumieniowe
 
 ![[Pasted image 20260612001127.png]]
+
+![[Pasted image 20260612144444.png]]
+
