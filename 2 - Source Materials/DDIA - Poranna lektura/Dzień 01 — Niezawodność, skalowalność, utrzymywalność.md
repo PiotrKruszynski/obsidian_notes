@@ -12,7 +12,7 @@ Rozdział definiuje trzy filary, wokół których kręci się cała książka. *
 
 ## Najważniejsze cytaty
 
-> "We can understand reliability as meaning, roughly, 'continuing to work correctly, even when things go wrong.'"
+> "We can understand reliability as ‘continuing to work correctly, even when things go wrong.'"
 
 Niezawodność = działać poprawnie dalej, *gdy* coś pójdzie nie tak — nie „jeśli". Usterki są pewne; awarie nie muszą być.
 
