@@ -40,3 +40,4 @@ i strumieniowe
 
 ![[Pasted image 20260612144444.png]]
 
+![[Pasted image 20260612152457.png]]
