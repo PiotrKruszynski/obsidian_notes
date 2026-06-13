@@ -141,3 +141,8 @@ Rozwiązanie:
 - **przetwarzanie blisko danych**
 - **fault tolerance przez replikację**
 - **batch → wolny → wypierany przez Spark**
+
+Hadoop zajecia 2
+
+docs
+[https://tinyurl.com/pw-hadoop-03](https://tinyurl.com/pw-hadoop-03 "https://tinyurl.com/pw-hadoop-03")
