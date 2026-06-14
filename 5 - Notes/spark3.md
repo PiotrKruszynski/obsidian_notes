@@ -15,3 +15,6 @@ duż info
 ![[Pasted image 20260614121004.png]]
 ![[Pasted image 20260614121015.png]]
 
+streaming
+odpalamy scripty i przechodzimy do jupiter notebook STREAM
+![[Pasted image 20260614141016.png]]
