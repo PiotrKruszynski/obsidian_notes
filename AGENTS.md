@@ -1,7 +1,5 @@
 # AGENTS.md — konstytucja vaultu (LLM Wiki)
 
-> Plik w otwartym standardzie [AGENTS.md](https://agents.md) — czytany automatycznie przez Codex CLI, GitHub Copilot, Cursor, Gemini CLI i inne; Claude Code używa go jako fallbacku, gdy brak CLAUDE.md.
-
 Ten vault to LLM Wiki w trzech warstwach (wzorzec Karpathy'ego):
 
 1. **Źródła niemutowalne** — `2 - Source Materials/` (agent tylko czyta)
@@ -10,21 +8,21 @@ Ten vault to LLM Wiki w trzech warstwach (wzorzec Karpathy'ego):
 
 Rola agenta: nie tylko tworzyć nowe notatki, ale **ciągle utrzymywać istniejące** — aktualizować, łapać sprzeczności, wykrywać braki i duplikaty, poprawiać cross-referencje. Wiki ma się starzeć w stronę spójności, nie entropii.
 
-Język vaultu: **polski** (terminy techniczne mogą zostać po angielsku).
+Język vaultu: **polski** (terminy techniczne po angielsku).
 
 ## Struktura vaultu
 
-| Folder | Rola |
-|---|---|
-| `1 - Raw Notes/` | **Inbox** — ulotne wnioski z sesji nauki, bałagan do rozłożenia przez `ingest`. Po przetworzeniu można czyścić. |
+| Folder                  | Rola                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `1 - Raw Notes/`        | **Inbox** — ulotne wnioski z sesji nauki, bałagan do rozłożenia przez `ingest`. Po przetworzeniu można czyścić.                      |
 | `2 - Source Materials/` | **Raw / źródła niemutowalne** — PDF-y, artykuły, transkrypty, dumpy. TYLKO DO CZYTANIA: agent nie edytuje, nie kasuje, nie przenosi. |
-| `3 - Indexes/` | Indeksy / MOC-e przekrojowe. |
-| `4 - Templates/` | Szablony notatek (Concept Note, AWS Service, MOC...). |
-| `5 - Notes/` | **Wiki właściwe** — atomowe notatki w folderach modułów. |
-| `6 - Commands/` | Cheatsheety komend. |
-| `7 - Assets/` | Załączniki, obrazy. |
-| `8 - Daily/` | Notatki dzienne. |
-| `9 - Prompt template/` | Szablony promptów. |
+| `3 - Indexes/`          | Indeksy / MOC-e przekrojowe.                                                                                                         |
+| `4 - Templates/`        | Szablony notatek (Concept Note, AWS Service, MOC...).                                                                                |
+| `5 - Notes/`            | **Wiki właściwe** — atomowe notatki w folderach modułów.                                                                             |
+| `6 - Commands/`         | Cheatsheety komend.                                                                                                                  |
+| `7 - Assets/`           | Załączniki, obrazy.                                                                                                                  |
+| `8 - Daily/`            | Notatki dzienne.                                                                                                                     |
+| `9 - Prompt template/`  | Szablony promptów.                                                                                                                   |
 
 W `5 - Notes/` foldery modułów: `Python/`, `AWS/`, `Bazy-Danych/`, `Sieci/`, `Testy/`, `C/`, `Docker/`, `AI-ML/`, `Algorytmy/`, `FastAPI-vault/`, `Projekty/` (per projekt, np. `Projekty/fastapi-rekrutacja/`).
 
