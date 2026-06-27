@@ -1,5 +1,7 @@
 snowflake
 
+
+
 warehouse -> compute
 data catalog - catalog - horizon catalog (wewnetrzny)
 
@@ -91,3 +93,9 @@ https://hub.getdbt.com/metaplane/dbt_expectations/latest/ zbior gotoywch testow!
 https://hub.getdbt.com/elementary-data/elementary/latest/ - to samo uzupelniaja sie
 
 generuje dashboard
+
+
+w swiece deweloperow wszystko jest oczywiste testy, odpalanie user experience
+
+teraz programisci sql moga pracowac z kodem sql tak jak od dawna pracowali deweloperzy
+podniesi jakosc pracy
