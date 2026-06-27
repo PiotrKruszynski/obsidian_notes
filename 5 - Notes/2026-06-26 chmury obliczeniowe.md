@@ -1,6 +1,6 @@
 snowflake
 
-
+![[Pasted image 20260627153523.png]]
 
 warehouse -> compute
 data catalog - catalog - horizon catalog (wewnetrzny)
