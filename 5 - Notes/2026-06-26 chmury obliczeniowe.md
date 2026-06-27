@@ -25,3 +25,5 @@ wszystkie info o projekcie![[Pasted image 20260627115903.png]]
 
 konfikuracje powiinno sie podawac pod katalog / projekt
 
+zaelismy od tego a potem zrobimy projekt nowy z github
+![[Pasted image 20260627121508.png]]
