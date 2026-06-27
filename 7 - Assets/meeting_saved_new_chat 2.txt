@@ -1,0 +1,251 @@
+2026-06-27 09:33:12 Od Radosław Szmit do Wszyscy:
+	https://docs.google.com/presentation/d/1crSBfi3Vnt_YrrgNFmpG_KtZCI1__xvO-9v4x00tqjE/edit?slide=id.p#slide=id.p
+	
+2026-06-27 09:33:29 Od Radosław Szmit do Wszyscy:
+	https://signup.snowflake.com/
+	
+2026-06-27 09:39:40 Od Radosław Szmit do Wszyscy:
+	Snowflake nie ogranicza liczby kont trial założonych na tego samego maila 🙂
+	
+2026-06-27 09:46:26 Od Radosław Szmit do Wszyscy:
+	Admin - Accounts
+	
+2026-06-27 09:59:08 Od Radosław Szmit do Wszyscy:
+	https://www.snowflake.com/en/pricing-options/
+	
+2026-06-27 10:24:57 Od Radosław Szmit do Wszyscy:
+	Project -> Workspaces -> my workspace - add new - sql file
+	
+2026-06-27 10:26:34 Od Radosław Szmit do Wszyscy:
+	show databases;
+	
+2026-06-27 10:33:12 Od Radosław Szmit do Wszyscy:
+	Robimy 15 minut przerwy do 10.47 🙂
+	
+2026-06-27 10:50:36 Od Radosław Szmit do Wszyscy:
+	show databases;
+	use database snowflake_sample_data;
+	
+	show schemas;
+	use schema tpch_sf1;
+	
+	show tables;
+	
+	show warehouses;
+	use warehouse compute_wh;
+	
+	show roles;
+	use role accountadmin;
+	
+	
+	select * from customer limit 10;
+	
+2026-06-27 10:52:36 Od Radosław Szmit do Wszyscy:
+	https://github.com/bigdatapassionpl/lakehouse-analytics/blob/main/snowflake/movielens_data.sql
+	
+2026-06-27 11:07:34 Od Radosław Szmit do Wszyscy:
+	movielens_query.sql
+	
+2026-06-27 11:07:48 Od Radosław Szmit do Wszyscy:
+	https://github.com/bigdatapassionpl/lakehouse-analytics/blob/main/snowflake/movielens.sql
+	
+2026-06-27 11:09:48 Od Radosław Szmit do Wszyscy:
+	sample_data.sql
+	
+2026-06-27 11:09:58 Od Radosław Szmit do Wszyscy:
+	https://github.com/bigdatapassionpl/lakehouse-analytics/blob/main/snowflake/sample_data.sql
+	
+2026-06-27 11:11:01 Od Radosław Szmit do Wszyscy:
+	https://www.tpc.org/tpch/
+	
+2026-06-27 11:17:11 Od Radosław Szmit do Wszyscy:
+	CREATE OR REPLACE WAREHOUSE power_warehouse
+	WITH WAREHOUSE_SIZE = 'MEDIUM'
+	AUTO_SUSPEND = 300
+	AUTO_RESUME = TRUE;
+	
+2026-06-27 11:23:05 Od Radosław Szmit do Wszyscy:
+	ALTER SESSION SET USE_CACHED_RESULT = FALSE;
+	
+2026-06-27 11:25:05 Od Radosław Szmit do Wszyscy:
+	ALTER WAREHOUSE power_warehouse SET WAREHOUSE_SIZE = 'MEDIUM';
+	
+2026-06-27 11:36:33 Od Radosław Szmit do Wszyscy:
+	https://github.com/dbt-labs/dbt-core
+	
+2026-06-27 11:40:04 Od Radosław Szmit do Wszyscy:
+	https://www.getdbt.com/
+	
+2026-06-27 11:44:12 Od Radosław Szmit do Wszyscy:
+	dbt.sql
+	
+2026-06-27 11:44:37 Od Radosław Szmit do Wszyscy:
+	create database politechnika;
+	create schema radek;
+	
+2026-06-27 11:46:22 Od Radosław Szmit do Wszyscy:
+	politechnikadbt
+	
+2026-06-27 12:00:56 Od Radosław Szmit do Wszyscy:
+	https://docs.getdbt.com/docs/supported-data-platforms?version=2.0&name=Fusion
+	
+2026-06-27 12:16:17 Od Radosław Szmit do Wszyscy:
+	Robimy 1h przerwy obiadowej i widzimy się 13.15 🙂
+	
+2026-06-27 13:18:52 Od Radosław Szmit do Wszyscy:
+	create or replace api integration github
+	    api_provider = git_https_api
+	    api_allowed_prefixes = ('https://github.com')
+	    enabled = true
+	    allowed_authentication_secrets = all;
+	
+	SHOW API INTEGRATIONS;
+	
+2026-06-27 13:20:25 Od Radosław Szmit do Wszyscy:
+	+ Git workspace
+	
+2026-06-27 13:20:51 Od Radosław Szmit do Wszyscy:
+	https://github.com/bigdatapassionpl/dbt_tpch
+	
+2026-06-27 13:21:00 Od Radosław Szmit do Wszyscy:
+	https://github.com/bigdatapassionpl/dbt_tpch.git
+	
+2026-06-27 13:28:37 Od Radosław Szmit do Wszyscy:
+	+ add new - file (bez sql)
+	
+2026-06-27 13:31:42 Od Radosław Szmit do Wszyscy:
+	project:
+	  target: dev
+	  outputs:
+	    dev:
+	      type: snowflake
+	      role: ACCOUNTADMIN
+	      warehouse: COMPUTE_WH
+	      database: POLITECHNIKA
+	      schema: RADEK
+	      threads: 8
+	
+2026-06-27 13:31:53 Od Radosław Szmit do Wszyscy:
+	profiles.yml
+	
+2026-06-27 13:32:27 Od Radosław Szmit do Wszyscy:
+	https://github.com/bigdatapassionpl/dbt_tpch.git
+	
+2026-06-27 13:32:34 Od Radosław Szmit do Wszyscy:
+	https://github.com/bigdatapassionpl/dbt_tpch
+	
+2026-06-27 13:39:31 Od Radosław Szmit do Wszyscy:
+	dbt seed
+	
+2026-06-27 13:41:44 Od Radosław Szmit do Wszyscy:
+	dbt run
+	
+2026-06-27 13:43:07 Od Radosław Szmit do Wszyscy:
+	https://www.databricks.com/blog/what-is-medallion-architecture
+	
+2026-06-27 14:07:02 Od Radosław Szmit do Wszyscy:
+	sources:
+	  - name: tpch
+	    database: snowflake_sample_data
+	    schema: TPCH_SF1
+	
+2026-06-27 14:10:20 Od Radosław Szmit do Wszyscy:
+	dbt docs generate
+	
+2026-06-27 14:19:09 Od Radosław Szmit do Wszyscy:
+	https://hub.getdbt.com/
+	
+2026-06-27 14:19:27 Od Radosław Szmit do Wszyscy:
+	https://hub.getdbt.com/metaplane/dbt_expectations/latest/
+	
+2026-06-27 14:19:42 Od Radosław Szmit do Wszyscy:
+	https://hub.getdbt.com/elementary-data/elementary/latest/
+	
+2026-06-27 14:43:33 Od Piotr Dziubinski do Wszyscy:
+	jest matillion , chociaż popularny raczej w USA
+	
+2026-06-27 14:57:00 Od Radosław Szmit do Wszyscy:
+	https://www.databricks.com/learn/free-edition
+	
+2026-06-27 14:58:17 Od Radosław Szmit do Wszyscy:
+	Robimy 15 minut przerwy do godziny 15.14 🙂
+	
+2026-06-27 15:20:58 Od Radosław Szmit do Wszyscy:
+	https://mlflow.org/
+	
+2026-06-27 15:22:15 Od Radosław Szmit do Wszyscy:
+	https://www.databricks.com/blog/what-is-data-lakehouse
+	
+2026-06-27 15:22:47 Od Radosław Szmit do Wszyscy:
+	https://delta.io/
+	
+2026-06-27 15:33:33 Od Radosław Szmit do Wszyscy:
+	https://www.databricks.com/product/photon
+	
+2026-06-27 15:50:14 Od Radosław Szmit do Wszyscy:
+	https://www.databricks.com/product/unity-catalog
+	
+2026-06-27 15:53:58 Od Radosław Szmit do Wszyscy:
+	Prawy górny róg w workspace - create - git folder
+	
+2026-06-27 15:54:25 Od Radosław Szmit do Wszyscy:
+	https://github.com/bigdatapassionpl/dbt_tpch.git
+	
+2026-06-27 15:59:38 Od Radosław Szmit do Wszyscy:
+	SQL Editor
+	
+2026-06-27 15:59:52 Od Radosław Szmit do Wszyscy:
+	New SQL Query
+	
+2026-06-27 16:04:56 Od Radosław Szmit do Wszyscy:
+	Run -> odklikać można Run all statements
+	
+2026-06-27 16:09:09 Od Radosław Szmit do Wszyscy:
+	show catalogs;
+	create catalog if not exists politechnika;
+	use catalog politechnika;
+	
+	show schemas;
+	show databases; -- schema == database
+	create schema radek;
+	use schema radek;
+	
+	show tables;
+	
+2026-06-27 16:09:27 Od Radosław Szmit do Wszyscy:
+	use catalog samples;
+	use schema tpch;
+	
+	select * from customer limit 10;
+	
+2026-06-27 16:10:20 Od Radosław Szmit do Wszyscy:
+	dbt_tpch
+	
+	models
+	
+	staging
+	
+2026-06-27 16:10:34 Od Radosław Szmit do Wszyscy:
+	_tpch__sources.yml
+	
+2026-06-27 16:10:57 Od Radosław Szmit do Wszyscy:
+	models/staging/tpch/_tpch__sources.yml
+	
+2026-06-27 16:11:32 Od Radosław Szmit do Wszyscy:
+	sources:
+	  - name: tpch
+	    database: samples
+	    schema: tpch
+	
+2026-06-27 16:12:12 Od Radosław Szmit do Wszyscy:
+	Jobs & Pipelines
+	
+2026-06-27 16:12:38 Od Radosław Szmit do Wszyscy:
+	Create -> Job
+	
+2026-06-27 16:13:39 Od Radosław Szmit do Wszyscy:
+	Dbt task
+
+Dbt build
+Run now
+	

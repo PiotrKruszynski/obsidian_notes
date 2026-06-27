@@ -101,4 +101,9 @@ teraz programisci sql moga pracowac z kodem sql tak jak od dawna pracowali dewel
 podniesi jakosc pracy
 
 
-glue data katalog - muzg to o ten katalog chodzi jak mowimy catalog i jest w brick i w snowflake
+glue data katalog - mózg to o ten katalog chodzi jak mowimy catalog i jest w brick i w snowflake
+
+
+
+czat
+![[meeting_saved_new_chat 2.txt]]
