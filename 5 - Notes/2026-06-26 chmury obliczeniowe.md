@@ -99,3 +99,6 @@ w swiece deweloperow wszystko jest oczywiste testy, odpalanie user experience
 
 teraz programisci sql moga pracowac z kodem sql tak jak od dawna pracowali deweloperzy
 podniesi jakosc pracy
+
+
+glue data katalog - muzg to o ten katalog chodzi jak mowimy catalog i jest w brick i w snowflake
