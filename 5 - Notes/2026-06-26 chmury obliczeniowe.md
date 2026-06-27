@@ -69,3 +69,25 @@ te katalogi odpowiadaja kataloga bronze silver gold i moznaby je zmienic. pamiet
 tu info co gdzie trafia
 ![[Pasted image 20260627135323.png]]
 
+dbt ma 3 obiekty seed models sources
+sources definiujemy w modelach
+tam jest plik sources i tam definiujemy co jes zrodlem np taki schemat taka baza danych
+
+polecenia do pycharm
+dbt seed
+dbt run
+
+dbt docs generate
+
+data lineage -> co z czego jest zbudowane, co jest zrodlem, chcemy widziec co jest zrodlem raportu, mega przydatne
+
+data qualiti i data lineage to must by projektu
+
+dbt hub - zbior bibliotek rozszerzen dla dbt, np testy!!
+https://hub.getdbt.com/
+
+https://hub.getdbt.com/metaplane/dbt_expectations/latest/ zbior gotoywch testow!!!!
+
+https://hub.getdbt.com/elementary-data/elementary/latest/ - to samo uzupelniaja sie
+
+generuje dashboard
