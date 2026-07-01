@@ -16,5 +16,8 @@ status: draft
 2. praca z API  
 3. praca z bazą danych (bo API)  
   
+
+
+
 -------------------------------------------------
 [[functional programming]]
