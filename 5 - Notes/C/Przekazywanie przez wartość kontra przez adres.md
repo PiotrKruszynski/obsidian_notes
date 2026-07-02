@@ -1,12 +1,19 @@
 ---
-tags: [c, c08, koncepcja, wskaźniki]
-powiązane: ["[[Wskaźnik]]", "[[ex00 ft.h]]"]
+tags: [c, koncepcja, wskaźniki]
+powiązane: ["[[Wskaźnik]]"]
+sr_due: 2026-07-06
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Przekazywanie przez wartość kontra przez adres
 
 > [!summary] W jednym zdaniu
-> W C funkcja dostaje **kopię** argumentu, więc żeby zmienić oryginał wywołującego, musisz przekazać jego **adres** — to cały powód, dla którego `ft_swap` bierze `int *`.
+> W C funkcja dostaje **kopię** argumentu, więc żeby zmienić oryginał wywołującego, musisz przekazać jego **adres** — to cały powód, dla którego `my_swap` bierze `int *`.
 
 W C argumenty idą do funkcji **przez wartość** — funkcja pracuje na kopii. Zmiana kopii nie rusza oryginału:
 ```c
@@ -19,7 +26,7 @@ void zepsuty_swap(int a, int b)  // kopie!
 
 Żeby naprawdę zmienić zmienne wywołującego, dajesz funkcji ich **adresy** ([[Wskaźnik]]) — wtedy może sięgnąć do oryginalnych komórek [[Pamięć to taśma adresów|pamięci]]:
 ```c
-void ft_swap(int *a, int *b)
+void my_swap(int *a, int *b)
 {
     int tmp;
 
@@ -31,7 +38,7 @@ void ft_swap(int *a, int *b)
 Wołasz, przekazując adresy:
 ```c
 int x = 5, y = 10;
-ft_swap(&x, &y);   // &x, &y to ADRESY
+my_swap(&x, &y);   // &x, &y to ADRESY
 // teraz x == 10, y == 5
 ```
 
@@ -40,4 +47,3 @@ ft_swap(&x, &y);   // &x, &y to ADRESY
 
 ## Połączenia
 - [[Wskaźnik]] — narzędzie, które to umożliwia
-- [[ex00 ft.h]] — `ft_swap` to wzorcowy przykład

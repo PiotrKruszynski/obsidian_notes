@@ -1,12 +1,19 @@
 ---
-tags: [c, c08, koncepcja, fundament]
+tags: [c, koncepcja, fundament]
 powiązane: ["[[Preprocesor to silnik wklejania tekstu]]", "[[Header file]]", "[[Deklaracja kontra definicja]]"]
+sr_due: 2026-07-03
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Potok kompilacji w C
 
 > [!summary] W jednym zdaniu
-> `cc plik.c` to nie jeden krok, lecz potok czterech etapów — i cały C08 dotyczy dwóch pierwszych, więc warto wiedzieć, co dzieje się na każdym.
+> `cc plik.c` to nie jeden krok, lecz potok czterech etapów — warto wiedzieć, co dzieje się na każdym.
 
 Gdy wpisujesz `cc plik.c`, tekst przechodzi przez taśmę produkcyjną. Każdy etap bierze to, co dostał, i przekształca w coś bliższego maszynie:
 
@@ -33,7 +40,7 @@ Drugi wniosek: kompilator obrabia **każdy plik `.c` osobno** (każdy staje się
 > cc -S plik.c    # zatrzymaj po kompilatorze (powstaje plik.s — asembler)
 > cc -c plik.c    # zatrzymaj po asemblerze (powstaje plik.o)
 > ```
-> `cc -E` to najlepsze narzędzie dydaktyczne w całym C08 — dosłownie widzisz, jak makra i headery zamieniają się w zwykły kod.
+> `cc -E` to najlepsze narzędzie do nauki preprocesora — dosłownie widzisz, jak makra i headery zamieniają się w zwykły kod.
 
 ## Połączenia
 - [[Preprocesor to silnik wklejania tekstu]] — szczegóły etapu (1)

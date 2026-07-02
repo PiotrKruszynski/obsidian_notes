@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, stringi]
-powiązane: ["[[Wskaźnik]]", "[[Arytmetyka ASCII]]", "[[malloc, void gwiazdka i size_t]]", "[[ex05 ft_show_tab]]"]
+tags: [c, koncepcja, stringi]
+powiązane: ["[[Wskaźnik]]", "[[Arytmetyka ASCII]]", "[[malloc, void gwiazdka i size_t]]"]
+sr_due: 2026-07-11
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # String i null terminator
@@ -23,7 +30,7 @@ Napis "hi" ma 2 widoczne znaki, ale zajmuje **3 bajty** — `\0` też musi się 
 
 **Dlaczego pętle wyglądają jak `while (str[i])`** — bo `\0` ma wartość liczbową 0, a w C zero znaczy "fałsz":
 ```c
-int ft_strlen(char *str)
+int my_strlen(char *str)
 {
     int i = 0;
     while (str[i])     // kontynuuj, dopóki znak != '\0'
@@ -46,4 +53,3 @@ Gdy `i` trafi na `\0`, warunek staje się fałszem i pętla kończy — `i` jest
 - [[Wskaźnik]] — string to `char *`
 - [[Arytmetyka ASCII]] — jak znaki mają wartości liczbowe
 - [[malloc, void gwiazdka i size_t]] — dlaczego `+1` przy alokacji kopii
-- [[ex05 ft_show_tab]] — wypisywanie stringów znak po znaku

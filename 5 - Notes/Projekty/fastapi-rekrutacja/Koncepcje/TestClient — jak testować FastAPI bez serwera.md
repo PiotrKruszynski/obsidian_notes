@@ -1,6 +1,13 @@
 ---
 tags: ["fastapi", "testing"]
 powiązane: ["[[Depends — jak działa DI w FastAPI]]", "[[Pydantic model — co robi i dlaczego]]"]
+sr_due: 2026-07-13
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # TestClient — jak testować FastAPI bez serwera

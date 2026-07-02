@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, fundament, preprocesor]
+tags: [c, koncepcja, fundament, preprocesor]
 powiązane: ["[[Potok kompilacji w C]]", "[[Makro]]", "[[Header file]]", "[[Include guard]]"]
+sr_due: 2026-07-03
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Preprocesor to silnik wklejania tekstu
@@ -18,7 +25,7 @@ Wyobraź sobie, że przed kompilacją siada przy Twoim kodzie ktoś, kto **nie r
 
 To **wszystko**, co robi preprocesor. Nie wie, czym jest funkcja ani zmienna. Nie liczy. Nie sprawdza typów. Tylko przepisuje tekst. Dopiero wynik jego pracy — czysty, rozwinięty tekst — trafia do kompilatora.
 
-Zapamiętaj jedno zdanie, a połowa C08 stanie się oczywista: **`#include` to wklejanie, a `#define` to znajdź-i-zamień.**
+Zapamiętaj jedno zdanie, a połowa preprocesora stanie się oczywista: **`#include` to wklejanie, a `#define` to znajdź-i-zamień.**
 
 > [!example] Co dokładnie się dzieje
 > Ten kod:

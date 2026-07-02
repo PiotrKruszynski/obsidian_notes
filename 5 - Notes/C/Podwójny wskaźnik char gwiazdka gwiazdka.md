@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, wskaźniki, kluczowe]
-powiązane: ["[[Wskaźnik]]", "[[argc i argv]]", "[[String i null terminator]]", "[[ex04 ft_strs_to_tab]]"]
+tags: [c, koncepcja, wskaźniki, kluczowe]
+powiązane: ["[[Wskaźnik]]", "[[argc i argv]]", "[[String i null terminator]]"]
+sr_due: 2026-07-10
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Podwójny wskaźnik (char **)
@@ -8,7 +15,7 @@ powiązane: ["[[Wskaźnik]]", "[[argc i argv]]", "[[String i null terminator]]",
 > [!summary] W jednym zdaniu
 > `char **` to wskaźnik na wskaźnik — w praktyce **tablica stringów**: każdy element to `char *` (jeden napis), a `char **` wskazuje na początek tej tablicy.
 
-To pojęcie jest sercem ex04, a często bywa pomijane. Rozłóżmy je warstwami:
+Rozłóżmy to pojęcie warstwami:
 
 - `char` — jeden znak.
 - `char *` — adres pierwszego znaku, czyli jeden **string** ([[String i null terminator]]).
@@ -29,7 +36,7 @@ Dwa poziomy indeksowania:
 - `av[i]` → i-ty **string** (typ `char *`).
 - `av[i][j]` → j-ty **znak** i-tego stringa (typ `char`).
 
-Tak właśnie wygląda `argv` z `main` (patrz [[argc i argv]]) — i tak samo `av` w `ft_strs_to_tab(int ac, char **av)`.
+Tak właśnie wygląda `argv` z `main` (patrz [[argc i argv]]) — i tak samo `av` w `my_strs_to_tab(int ac, char **av)`.
 
 > [!example] Przejście po wszystkich znakach
 > ```c
@@ -52,4 +59,3 @@ Tak właśnie wygląda `argv` z `main` (patrz [[argc i argv]]) — i tak samo `a
 ## Połączenia
 - [[Wskaźnik]] — pojęcie bazowe
 - [[argc i argv]] — skąd `char **` bierze się w `main`
-- [[ex04 ft_strs_to_tab]] — gdzie przetwarzasz `char **av`

@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, preprocesor]
+tags: [c, koncepcja, preprocesor]
 powiązane: ["[[Preprocesor to silnik wklejania tekstu]]", "[[Pułapka precedencji w makrach]]", "[[typedef]]"]
+sr_due: 2026-07-10
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Makro
@@ -16,7 +23,7 @@ Gdy napiszesz `#define BUFFER 42`, preprocesor dostaje rozkaz: "wszędzie, gdzie
 ```
 `EVEN(argc - 1)` nie "wywołuje" niczego — preprocesor podstawia tekst `argc - 1` w miejsce `nbr`, dając `((argc - 1) % 2 == 0)`.
 
-**Stałe-makra** używane w C, bo C (w wersji 42) nie ma wbudowanych typów logicznych:
+**Stałe-makra** — klasyczne C (przed C99 i `<stdbool.h>`) nie ma wbudowanego typu logicznego, stąd zwyczaj definiowania własnych:
 ```c
 #define TRUE 1
 #define FALSE 0
@@ -32,4 +39,3 @@ W C "prawda" to dowolna wartość różna od zera, "fałsz" to dokładnie zero �
 ## Połączenia
 - [[Pułapka precedencji w makrach]] — najważniejsza zasada przy makrach z argumentem
 - [[Preprocesor to silnik wklejania tekstu]] — kto i kiedy wykonuje zamianę
-- [[ex01 ft_boolean.h]], [[ex02 ft_abs.h]] — ćwiczenia oparte na makrach

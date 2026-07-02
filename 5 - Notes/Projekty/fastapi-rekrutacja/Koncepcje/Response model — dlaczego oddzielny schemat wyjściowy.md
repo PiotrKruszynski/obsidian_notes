@@ -1,6 +1,13 @@
 ---
 tags: ["fastapi", "pydantic", "security"]
 powiązane: ["[[Pydantic model — co robi i dlaczego]]", "[[Dekorator @app.get i co się za nim kryje]]"]
+sr_due: 2026-07-03
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Response model — dlaczego oddzielny schemat wyjściowy

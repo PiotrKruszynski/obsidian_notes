@@ -1,6 +1,13 @@
 ---
 tags: ["design-patterns", "sql"]
 powiązane: ["[[Model relacyjny]]", "[[Klucz główny i obcy]]"]
+sr_due: 2026-07-14
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Normalizacja (1NF, 2NF, 3NF)

@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, preprocesor, pułapka]
+tags: [c, koncepcja, preprocesor, pułapka]
 powiązane: ["[[Makro]]", "[[Preprocesor to silnik wklejania tekstu]]"]
+sr_due: 2026-07-17
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Pułapka precedencji w makrach
@@ -28,15 +35,14 @@ Dwa poziomy ochrony, każdy ma swój cel:
 - nawias **wewnętrzny** `(x)` chroni przed precedencją *wewnątrz* argumentu (`2 + 3`),
 - nawias **zewnętrzny** `(...)` chroni przed precedencją *na zewnątrz* (gdy ktoś napisze `SQUARE(3) + 1`).
 
-> [!example] To samo w ex02
+> [!example] To samo w makrze ABS
 > ```c
 > #define ABS(Value) ((Value) < 0 ? -(Value) : (Value))
 > ```
-> Wyobraź `ABS(a - b)`. Bez nawisów `-Value` stałoby się `-a - b` (czyli `-a` minus `b`) — błąd. Z nawiasami: `-(a - b)`. Poprawnie. Identyczna logika jak w `EVEN(nbr)` z ex01: bez nawiasów `argc - 1 % 2` policzyłoby `argc - (1 % 2)`, bo `%` ma wyższą precedencję niż `-`.
+> Wyobraź `ABS(a - b)`. Bez nawisów `-Value` stałoby się `-a - b` (czyli `-a` minus `b`) — błąd. Z nawiasami: `-(a - b)`. Poprawnie. Identyczna logika w `EVEN(n)`: bez nawiasów `n - 1 % 2` policzyłoby `n - (1 % 2)`, bo `%` ma wyższą precedencję niż `-`.
 
 > [!tip] Reguła kciuka
 > Pisząc makro z argumentem, owiń w nawiasy każde wystąpienie argumentu i całe wyrażenie. Zawsze. To tańsze niż godzina debugowania cichego błędu.
 
 ## Połączenia
 - [[Makro]] — pojęcie nadrzędne
-- [[ex02 ft_abs.h]] — gdzie stosujesz tę zasadę wprost

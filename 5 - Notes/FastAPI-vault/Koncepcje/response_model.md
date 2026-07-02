@@ -1,6 +1,13 @@
 ---
 tags: [fastapi, pydantic, koncepcja, bezpieczeństwo]
 powiązane: ["[[Model Pydantic]]", "[[Path operation]]"]
+sr_due: 2026-07-05
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # response_model

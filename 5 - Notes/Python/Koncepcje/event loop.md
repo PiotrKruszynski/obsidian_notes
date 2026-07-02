@@ -6,6 +6,13 @@ tags: ["python", "async"]
 created: 2026-06-10
 status: draft
 źródło: "sesja LLM, GPT-5 Codex, 2026-06-10"
+sr_due: 2026-07-05
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # event loop

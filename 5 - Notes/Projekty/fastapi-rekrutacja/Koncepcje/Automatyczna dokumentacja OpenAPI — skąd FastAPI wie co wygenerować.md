@@ -1,6 +1,13 @@
 ---
 tags: ["fastapi", "openapi"]
 powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Pydantic model — co robi i dlaczego]]", "[[Dekorator @app.get i co się za nim kryje]]"]
+sr_due: 2026-07-20
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Automatyczna dokumentacja OpenAPI — skąd FastAPI wie co wygenerować

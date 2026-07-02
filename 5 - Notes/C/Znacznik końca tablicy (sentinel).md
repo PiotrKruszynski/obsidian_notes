@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, wzorzec]
-powiązane: ["[[String i null terminator]]", "[[argc i argv]]", "[[ex04 ft_strs_to_tab]]", "[[ex05 ft_show_tab]]"]
+tags: [c, koncepcja, wzorzec]
+powiązane: ["[[String i null terminator]]", "[[argc i argv]]"]
+sr_due: 2026-07-20
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Znacznik końca tablicy (sentinel)
@@ -11,29 +18,27 @@ powiązane: ["[[String i null terminator]]", "[[argc i argv]]", "[[ex04 ft_strs_
 To wzorzec, który widziałeś już trzy razy, choć pod różnymi postaciami:
 - [[String i null terminator|`\0`]] kończy string,
 - `NULL` kończy `argv` (patrz [[argc i argv]]),
-- a w ex04/ex05 **struktura z `str == 0`** kończy tablicę struktur.
+- **element-strażnik** (np. struktura z polem `str == 0`) kończy tablicę struktur.
 
 Idea jest zawsze ta sama: zamiast przekazywać długość osobno, wstawiasz na końcu wartość, która "normalnie nie wystąpi", i traktujesz ją jako "tu koniec".
 
-> [!example] Dwie strony umowy: ex04 ustawia, ex05 czyta
-> ex04 alokuje o jeden element więcej i oznacza ostatni:
+> [!example] Dwie strony umowy: producent ustawia, konsument czyta
+> Funkcja budująca tablicę alokuje o jeden element więcej i oznacza ostatni:
 > ```c
-> tab = malloc(sizeof(t_stock_str) * (ac + 1));  // +1 na strażnika
+> tab = malloc(sizeof(t_item) * (n + 1));  // +1 na strażnika
 > ...
-> tab[ac].str = 0;                               // znacznik końca
+> tab[n].str = 0;                          // znacznik końca
 > ```
-> ex05 jedzie, dopóki nie trafi na strażnika:
+> Funkcja czytająca jedzie, dopóki nie trafi na strażnika:
 > ```c
 > while (par[i].str != 0)   // zatrzymaj się na znaczniku
 > { ... i++; }
 > ```
-> Gdyby ex04 nie ustawił `str = 0`, pętla w ex05 czytałaby pamięć w nieskończoność → segfault. To dlatego obie funkcje muszą trzymać się **tej samej umowy**.
+> Gdyby producent nie ustawił `str = 0`, pętla konsumenta czytałaby pamięć w nieskończoność → segfault. Obie strony muszą trzymać się **tej samej umowy**.
 
 > [!tip] Czemu w ogóle ten wzorzec
-> `ft_show_tab` dostaje tylko wskaźnik na początek tablicy — nie dostaje jej długości. Strażnik to jedyny sposób, by funkcja wiedziała, gdzie przestać. Alternatywą byłoby przekazywanie rozmiaru osobnym argumentem, ale PDF wymaga wariantu ze strażnikiem.
+> Funkcja dostająca sam wskaźnik na początek tablicy nie zna jej długości. Strażnik mówi jej, gdzie przestać; alternatywą jest przekazywanie rozmiaru osobnym argumentem.
 
 ## Połączenia
 - [[String i null terminator]] — ten sam wzorzec dla znaków
 - [[argc i argv]] — `NULL` jako strażnik `argv`
-- [[ex04 ft_strs_to_tab]] — ustawia strażnika
-- [[ex05 ft_show_tab]] — reaguje na strażnika

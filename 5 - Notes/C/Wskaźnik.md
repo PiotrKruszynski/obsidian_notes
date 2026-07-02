@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, wskaźniki]
+tags: [c, koncepcja, wskaźniki]
 powiązane: ["[[Pamięć to taśma adresów]]", "[[Przekazywanie przez wartość kontra przez adres]]", "[[Podwójny wskaźnik char gwiazdka gwiazdka]]"]
+sr_due: 2026-07-05
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Wskaźnik

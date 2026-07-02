@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, podstawy]
-powiązane: ["[[Podwójny wskaźnik char gwiazdka gwiazdka]]", "[[ex01 ft_boolean.h]]", "[[ex04 ft_strs_to_tab]]"]
+tags: [c, koncepcja, podstawy]
+powiązane: ["[[Podwójny wskaźnik char gwiazdka gwiazdka]]"]
+sr_due: 2026-07-08
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # argc i argv
@@ -20,12 +27,10 @@ Dla wywołania `./program one two`:
 - `argv[3]` → `NULL` (standard gwarantuje `NULL` na końcu — wartowniczy znacznik, patrz [[Znacznik końca tablicy (sentinel)]]).
 
 > [!warning] Klasyczna pomyłka: argc liczy nazwę programu
-> Liczba **prawdziwych** argumentów to `argc - 1`. Dlatego w ex01 `main` woła `ft_is_even(argc - 1)` — sprawdza parzystość liczby argumentów *bez* nazwy programu. `./prog` (zero argumentów) → `argc - 1 == 0` → parzyste.
+> Liczba **prawdziwych** argumentów to `argc - 1` — licz je *bez* nazwy programu. `./prog` (zero argumentów) → `argc - 1 == 0`.
 
-> [!example] Związek z ex04
-> `ft_strs_to_tab(int ac, char **av)` to po prostu te same `argc`/`argv` przekazane dalej pod innymi nazwami. `av` jest typu `char **`, więc przetwarzasz je tak jak w [[Podwójny wskaźnik char gwiazdka gwiazdka]].
+> [!example] Przekazywanie dalej
+> Funkcja `f(int ac, char **av)` dostaje te same `argc`/`argv` pod innymi nazwami. `av` jest typu `char **`, więc przetwarzasz je tak jak w [[Podwójny wskaźnik char gwiazdka gwiazdka]].
 
 ## Połączenia
 - [[Podwójny wskaźnik char gwiazdka gwiazdka]] — typ `argv`
-- [[ex01 ft_boolean.h]] — używa `argc - 1`
-- [[ex04 ft_strs_to_tab]] — przetwarza `argv` jako `av`

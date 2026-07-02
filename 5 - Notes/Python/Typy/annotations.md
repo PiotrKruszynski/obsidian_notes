@@ -5,6 +5,13 @@ topic: python
 tags: ["dataclasses", "introspection", "mypy", "pydantic", "typing"]
 created: 2026-06-09
 status: draft
+sr_due: 2026-07-13
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 `__annotations__` -> specjalny atrybut (słownik) Pythona przechowujący _adnotacje typów_ (type hints) dla zmiennych, argumentów funkcji i wartości zwracanych. Jest podstawą typowania statycznego, introspekcji oraz narzędzi takich jak mypy, pydantic, dataclasses.

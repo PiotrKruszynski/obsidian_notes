@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, pamięć, alokacja]
-powiązane: ["[[Stos kontra sterta]]", "[[free, leak i use-after-free]]", "[[Wskaźnik]]", "[[ex04 ft_strs_to_tab]]"]
+tags: [c, koncepcja, pamięć, alokacja]
+powiązane: ["[[Stos kontra sterta]]", "[[free, leak i use-after-free]]", "[[Wskaźnik]]"]
+sr_due: 2026-07-02
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # malloc, void * i size_t
@@ -16,7 +23,7 @@ Rozbiór sygnatury — trzy rzeczy, które warto rozumieć:
 
 **`size_t size`** — `size_t` to specjalny typ całkowity **bez znaku** (nieujemny), używany do rozmiarów i liczników w pamięci. Rozmiar nie może być ujemny, więc nie marnuje bitu na znak. `sizeof` też zwraca `size_t`.
 
-**zwraca `void *`** — `void *` to "wskaźnik na coś, typu jeszcze nieokreślonego". `malloc` nie wie, na co przeznaczysz pamięć, więc oddaje neutralny adres. W C przypisanie `void *` do dowolnego wskaźnika jest automatyczne — **nie rzutujesz** (norma 42 i tak nie chce rzutowania `malloc`):
+**zwraca `void *`** — `void *` to "wskaźnik na coś, typu jeszcze nieokreślonego". `malloc` nie wie, na co przeznaczysz pamięć, więc oddaje neutralny adres. W C przypisanie `void *` do dowolnego wskaźnika jest automatyczne — **nie rzutujesz** (rzutowanie wyniku `malloc` w C jest zbędne):
 ```c
 int *arr = malloc(10 * sizeof(int));   // void* → int* samo
 ```
@@ -35,13 +42,12 @@ int *arr = malloc(10 * sizeof(int));  // DOBRZE: poprawne na każdej maszynie
 >     return (NULL);     // obsłuż błąd
 > ```
 
-> [!example] Alokacja tablicy struktur w ex04
+> [!example] Alokacja tablicy struktur
 > ```c
-> tab = malloc(sizeof(t_stock_str) * (ac + 1));
+> tab = malloc(sizeof(t_entry) * (n + 1));
 > ```
-> `sizeof(t_stock_str)` to rozmiar jednej struktury; `(ac + 1)` to liczba struktur (z jednym dodatkowym miejscem na [[Znacznik końca tablicy (sentinel)|znacznik końca]]).
+> `sizeof(t_entry)` to rozmiar jednej struktury; `(n + 1)` to liczba struktur (z jednym dodatkowym miejscem na [[Znacznik końca tablicy (sentinel)|znacznik końca]]).
 
 ## Połączenia
 - [[Stos kontra sterta]] — dlaczego w ogóle alokujesz na stercie
 - [[free, leak i use-after-free]] — każdy malloc to dług do spłacenia
-- [[ex04 ft_strs_to_tab]] — malloc w praktyce

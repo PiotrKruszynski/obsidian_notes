@@ -1,6 +1,13 @@
 ---
 tags: ["sql"]
 powiązane: ["[[JOIN — typy i co zwracają]]", "[[Klucz główny i obcy]]"]
+sr_due: 2026-07-01
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Self-join

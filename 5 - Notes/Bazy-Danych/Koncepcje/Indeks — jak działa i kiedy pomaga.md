@@ -1,6 +1,13 @@
 ---
 tags: ["sql"]
 powiązane: ["[[Klucz główny i obcy]]", "[[SELECT i filtrowanie (WHERE)]]", "[[JOIN — typy i co zwracają]]"]
+sr_due: 2026-07-09
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Indeks — jak działa i kiedy pomaga

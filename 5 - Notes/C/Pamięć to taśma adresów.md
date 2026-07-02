@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, fundament, pamięć]
+tags: [c, koncepcja, fundament, pamięć]
 powiązane: ["[[Wskaźnik]]", "[[Stos kontra sterta]]"]
+sr_due: 2026-07-02
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Pamięć to taśma adresów

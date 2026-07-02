@@ -13,6 +13,18 @@
 - Najszybciej z LLM: skopiuj odpowiedź (Cmd+C) i w terminalu `raw nazwa-pliku [model]` — funkcja zapisuje schowek do `1 - Raw Notes/` z datą i źródłem (instalacja: `6 - Commands/raw — schowek do inboxu`).
 - Potem powiedz agentowi: **„zrób ingest [plik]"**.
 
+## Codzienna powtórka (SM-2)
+
+- W terminalu vaultu: `python3 sr.py` — otwiera po kolei zaległe notatki w Obsidian; czytasz (~30 s) i wpisujesz ocenę 0–5.
+- Skala: **5** idealnie · **4** z wahaniem · **3** ledwo · **2–0** nie pamiętam (notatka wraca na jutro).
+- Trafiła się pusta/śmieciowa notatka → **`z`** zawiesza ją na stałe (potem uzupełnij treść albo skasuj plik). `s` tylko odkłada na jutro.
+- Po przerwie (dzień, tydzień): nic nie przepada — zaległe czekają w kolejce od najstarszych. Nadrabiaj porcjami: `python3 sr.py --limit 30`.
+- Terminy liczy SM-2 (krzywa zapominania): dobre oceny wydłużają odstęp (1 → 6 → ~2× dni), wpadka zeruje licznik.
+- Powtórka z konkretnego działu: `python3 sr.py oop` (dowolny fragment ścieżki, np. `python`, `bazy`); z `--all` przelatujesz cały dział niezależnie od terminów — tryb przed egzaminem/rozmową.
+- `python3 sr.py stats` — zaległości, % wpadek, streak, prognoza tygodnia (czyli: jak nieefektywny jesteś).
+- `python3 sr.py add` — włącza do powtórek notatki dodane do vaultu ręcznie (agent inicjalizuje pola `sr_*` sam).
+- Ściąga: `sr.py` sesja · `sr.py oop` dział · `sr.py oop --all` dział bez terminów · `sr.py due [dział]` podgląd · `sr.py stats` raport · `sr.py add` nowe · `--limit N` porcja. W sesji: `0–5` ocena · `s` jutro · `z` zawieś · `o` otwórz · `q` koniec.
+
 ## Utrzymanie
 
 - Co jakiś czas: **„zrób lint vaultu"**.

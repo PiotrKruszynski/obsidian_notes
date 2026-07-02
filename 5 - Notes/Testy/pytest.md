@@ -5,6 +5,13 @@ topic: testing
 tags: ["pytest", "python", "tdd", "testing"]
 created: 2026-06-09
 status: draft
+sr_due: 2026-07-10
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 [[test runner]] do testów automatycznych w Pythonie. Upraszcza pisanie testów (brak klas testowych), oferuje czytelne asserty, rozbudowany system _fixtures_ oraz potężny mechanizm pluginów. Jest standardem de-facto w projektach Pythonowych

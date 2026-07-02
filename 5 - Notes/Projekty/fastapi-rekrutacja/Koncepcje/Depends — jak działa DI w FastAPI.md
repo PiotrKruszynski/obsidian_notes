@@ -1,6 +1,13 @@
 ---
 tags: ["dependency-injection", "fastapi"]
 powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Depends — wstrzykiwanie zależności|Zależności jako bramki — auth, DB session, config]]", "[[TestClient — jak testować FastAPI bez serwera]]"]
+sr_due: 2026-07-13
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Depends — jak działa DI w FastAPI

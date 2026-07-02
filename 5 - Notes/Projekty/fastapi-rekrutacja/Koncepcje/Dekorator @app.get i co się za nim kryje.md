@@ -1,6 +1,13 @@
 ---
 tags: ["fastapi", "routing"]
 powiązane: ["[[Skąd FastAPI bierze parametry|Path parameters vs Query parameters]]", "[[Skąd FastAPI bierze parametry|Request body — jak FastAPI parsuje JSON]]", "[[HTTPException|Status codes w FastAPI]]", "[[Automatyczna dokumentacja OpenAPI — skąd FastAPI wie co wygenerować]]"]
+sr_due: 2026-07-04
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Dekorator @app.get i co się za nim kryje

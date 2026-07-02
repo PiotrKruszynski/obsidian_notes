@@ -35,14 +35,20 @@ Foldery `Koncepcje/` żyją **per moduł** (np. `Python/Koncepcje/`, `Bazy-Danyc
 - Pojęcie ogólne (np. GIL, ACID) trafia do `Koncepcje/` modułu tematycznego; notatka specyficzna dla projektu — do folderu projektu, z linkami do koncepcji ogólnych.
 - **Nazwy plików unikalne w całym vaulcie** (wikilinki Obsidian rozwiązują po nazwie pliku).
 
-## Zasady atomowości
+## Zasady atomowości (styl: krótkie notatki pod powtórki)
+
+Cel notatki: dać się ponownie przeczytać w ~30 sekund przy codziennej powtórce.
+Notatka, której nie da się tak przeczytać, nie będzie czytana wcale. Głębia
+siedzi w grafie linków, nie w pojedynczym pliku.
 
 - **Jedna notatka = jedna myśl.** Tytuł nazywa tę jedną myśl. Jeśli tytuł wymaga "i"/"oraz" łączącego dwa pojęcia — to dwie notatki.
+- **Bullety, nie akapity.** Każdy punkt to jedna linia: hasło + rozwinięcie po myślniku, gdy samo hasło nie wystarcza. Zero prozy wykładowej.
+- **Limit ~15 linii treści.** Wychodzi dłużej → podziel na dwie notatki i połącz linkiem.
+- **Głębia przez linki.** Coś wymaga dłuższego tłumaczenia → osobna notatka `[[...]]`, nie dodatkowy akapit.
+- **Duży temat → hub + atomy.** Temat kryjący wiele pojęć (np. AWS IAM) dostaje krótki hub (definicja 2–3 bullety + TL;DR + Połączenia) i osobne atomowe notatki podpojęć; pułapki/exam trapy jako `[!warning]` w notatce, której dotyczą.
 - **Notatka samodzielna**: zrozumiała bez czytania innych. Kontekst dopowiadają linki, nie kolejność czytania.
-- **Model mentalny / analogia przed kodem.** Najpierw obraz w głowie, potem składnia.
-- **Tłumacz DLACZEGO, nie tylko CO.** Definicja bez przyczyny to katalog, nie wiedza.
 - **Gęste linkowanie** `[[wikilinkami]]` w treści, wszędzie gdzie pada powiązane pojęcie.
-- **Każda notatka kończy się sekcją `## Połączenia`** — lista linków, każdy z jednym zdaniem WYJAŚNIENIA, czemu pojęcia są powiązane. Sam link bez wyjaśnienia się nie liczy.
+- **Każda notatka kończy się sekcją `## Połączenia`** — lista linków, każdy z pół zdaniem wyjaśnienia, czemu pojęcia są powiązane. Sam link bez wyjaśnienia się nie liczy.
 
 ## Frontmatter i proweniencja
 
@@ -71,7 +77,7 @@ To ważne: część wiedzy pochodzi z rozmów z LLM, które bywają błędne. Be
 
 Nie zgaduj proweniencji wstecz. Przy uzupełnianiu starych notatek, dla których prawdziwe źródło nie jest znane, użyj wartości `"nieznane (sprzed LLM Wiki)"` zamiast przypisywać im fałszywe źródło. Fałszywa proweniencja jest gorsza niż brak.
 
-Jeśli agent dopisuje do starej notatki nową treść od siebie (np. `> [!summary]`, nowe wyjaśnienia, `## Połączenia`, poprawki cross-linków), ta nowa treść też ma proweniencję. Dodaj albo uzupełnij pole:
+Jeśli agent dopisuje do starej notatki nową treść od siebie (np. nowe bullety, callouty, `## Połączenia`, poprawki cross-linków), ta nowa treść też ma proweniencję. Dodaj albo uzupełnij pole:
 
 ```yaml
 źródło_uzupełnień: ["sesja LLM, GPT-5 Codex, 2026-06-10"]
@@ -79,18 +85,34 @@ Jeśli agent dopisuje do starej notatki nową treść od siebie (np. `> [!summar
 
 Nie mieszaj tego z pierwotnym `źródło`: `źródło` opisuje skąd pochodzi rdzeń notatki, a `źródło_uzupełnień` opisuje późniejsze dopiski agenta.
 
-## Callouty Obsidian — do tłumaczenia, nie ozdoby
+## Powtórki (SM-2) — pola sr_*
 
-- `> [!summary]` — **sedno w jednym zdaniu, zawsze na górze notatki** (zaraz pod tytułem).
-- `> [!example]` — przykład **krok po kroku**, z danymi, nie abstrakcyjny.
-- `> [!warning]` — **realna pułapka z przykładem skutku** ("jeśli zrobisz X, stanie się Y"), nie ogólnikowe "uważaj".
+Vault ma system powtórek oparty o SM-2: skrypt `sr.py` w root (sesja: `python3 sr.py`,
+raport: `python3 sr.py stats`), historia ocen w `.sr_log.csv`.
+
+- Polami `sr_due / sr_last / sr_grade / sr_interval / sr_ease / sr_reps / sr_lapses`
+  zarządza **wyłącznie skrypt** — przy edycji notatki zachowaj je bez zmian
+  (nie przepisuj, nie kasuj, nie "poprawiaj" dat).
+- Nowa notatka koncepcji dostaje inicjalizację: `sr_due:` data utworzenia,
+  `sr_interval: 0`, `sr_ease: 2.5`, `sr_reps: 0`, `sr_lapses: 0` — dzięki temu
+  od razu wchodzi do kolejki powtórek.
+- MOC-e (`type: moc`) i pliki `00 — ...` nie podlegają powtórkom.
+
+## Callouty Obsidian — opcjonalne, max 2 linie
+
+- `> [!warning]` — **realna pułapka z konkretnym skutkiem** ("jeśli zrobisz X, stanie się Y"), nie ogólnikowe "uważaj".
 - `> [!tip]` — sztuczka pamięciowa, skojarzenie, mnemonik.
+- `> [!example]` — mini-przykład (1–2 linie).
 
-Callout bez treści tłumaczącej to szum — lepiej go nie dawać.
+Bez `> [!summary]` — krótka notatka sama jest swoim streszczeniem. Callout
+wymagający akapitu tłumaczenia to materiał na osobną notatkę.
 
 ## Czego unikać
 
 - **Notatek-katalogów**: ściana kodu/komend zamiast tłumaczenia. Kod ilustruje myśl, nie zastępuje jej.
+- **Akapitów prozy i "wykładów"** — notatka to bullety.
+- **Notatek ponad limit** — tnij na atomy zamiast rozwlekać.
+- **Calloutów dłuższych niż 2 linie.**
 - **Duplikowania pojęć** między modułami zamiast linkowania do jednej notatki.
 - **Tytułów łączących dwie myśli** ("X i Y") — rozbij na dwie notatki.
 - **Pomijania sekcji `## Połączenia`** albo linków bez wyjaśnienia związku.
@@ -119,6 +141,8 @@ Przejdź cały vault (`5 - Notes/` + indeksy) i wypisz raport:
 - **zduplikowane koncepcje** między modułami (to samo pojęcie w dwóch miejscach),
 - **sprzeczności** między notatkami (twierdzenia, które się wykluczają — podaj obie lokalizacje i cytaty),
 - **luki** — pojęcia często linkowane, dla których nie istnieje notatka,
+- **notatki ponad limit** (~15 linii treści) albo z akapitami prozy — kandydaci
+  do cięcia na atomy: raport z propozycją podziału, cięcie dopiero po akceptacji,
 - dodatkowo: brakujący frontmatter / brak pola `źródło` / brak `## Połączenia`.
 
 Resolver wikilinków MUSI działać jak Obsidian, nie jak prosty skaner `.md`:

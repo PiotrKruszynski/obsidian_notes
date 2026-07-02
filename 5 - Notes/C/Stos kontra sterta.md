@@ -1,12 +1,19 @@
 ---
-tags: [c, c08, koncepcja, fundament, pamięć]
+tags: [c, koncepcja, fundament, pamięć]
 powiązane: ["[[Pamięć to taśma adresów]]", "[[malloc, void gwiazdka i size_t]]", "[[Rekurencja i stos wywołań]]"]
+sr_due: 2026-07-16
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Stos kontra sterta
 
 > [!summary] W jednym zdaniu
-> Stos to dane lokalne sprzątane automatycznie po zakończeniu funkcji; sterta to dane, które żyją, dopóki sam ich nie zwolnisz — i to dlatego ex04 musi używać [[malloc, void gwiazdka i size_t|malloc]].
+> Stos to dane lokalne sprzątane automatycznie po zakończeniu funkcji; sterta to dane, które żyją, dopóki sam ich nie zwolnisz — do tego służy [[malloc, void gwiazdka i size_t|malloc]].
 
 Program ma dwa główne obszary na dane (oba to fragmenty [[Pamięć to taśma adresów|taśmy pamięci]]):
 
@@ -20,10 +27,10 @@ Program ma dwa główne obszary na dane (oba to fragmenty [[Pamięć to taśma a
 - Zarządzana **ręcznie**: to, co zaalokujesz, żyje **dopóki nie zwolnisz** przez `free`.
 - Przeżywa koniec funkcji.
 
-> [!example] Dlaczego ex04 nie może użyć stosu
-> `ft_strs_to_tab` tworzy tablicę i ją **zwraca**. Gdyby zbudowała ją na stosie:
+> [!example] Dlaczego funkcja nie może zwrócić tablicy ze stosu
+> Funkcja tworzy tablicę i ją **zwraca**. Gdyby zbudowała ją na stosie:
 > ```c
-> t_stock_str tab[100];   // na stosie
+> int tab[100];           // na stosie
 > return (tab);           // ZŁO: tab znika po return!
 > ```
 > tablica zniknęłaby w momencie `return`, a wywołujący dostałby wskaźnik na śmieci (tzw. dangling pointer). Dane, które mają przeżyć funkcję, **muszą** być na stercie — stąd `malloc`.

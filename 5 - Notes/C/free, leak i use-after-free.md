@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, pamięć, pułapka]
+tags: [c, koncepcja, pamięć, pułapka]
 powiązane: ["[[malloc, void gwiazdka i size_t]]", "[[Stos kontra sterta]]"]
+sr_due: 2026-07-05
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # free, leak i use-after-free
@@ -32,10 +39,10 @@ str[0] = 'a';   // USE-AFTER-FREE — niezdefiniowane!
 > ```
 
 > [!example] Sprawdź wycieki narzędziem
-> Na Linuksie: `valgrind ./program one two` — pokaże każdy zgubiony blok i miejsce alokacji. Na Macu zwykle używa się `leaks` albo Address Sanitizera (`cc -fsanitize=address`). W praktyce 42: jeśli alokujesz, dbaj o to, by każdy `malloc` miał parę.
+> Na Linuksie: `valgrind ./program one two` — pokaże każdy zgubiony blok i miejsce alokacji. Na Macu zwykle używa się `leaks` albo Address Sanitizera (`cc -fsanitize=address`). W praktyce: każdy `malloc` ma mieć parę z `free`.
 
-> [!warning] Subtelność z ex04
-> Jeśli któryś `malloc` kopii się nie uda i zwrócisz `NULL`, wcześniej zaalokowane bloki technicznie wyciekają. Moulinette w C08 zwykle nie testuje tego scenariusza, ale **sprawdzanie wyniku malloc jest obowiązkowe** — to nawyk, nie formalność.
+> [!warning] Częściowa awaria alokacji
+> Jeśli w serii alokacji któryś `malloc` się nie uda i zwrócisz `NULL`, wcześniej zaalokowane bloki wyciekają — zwolnij je przed `return`. **Sprawdzanie wyniku malloc jest obowiązkowe.**
 
 ## Połączenia
 - [[malloc, void gwiazdka i size_t]] — druga strona pary alokacji

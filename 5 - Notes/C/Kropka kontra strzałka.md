@@ -1,6 +1,13 @@
 ---
-tags: [c, c08, koncepcja, struktury, wskaźniki]
-powiązane: ["[[Struktura]]", "[[Wskaźnik]]", "[[ex03 ft_point.h]]"]
+tags: [c, koncepcja, struktury, wskaźniki]
+powiązane: ["[[Struktura]]", "[[Wskaźnik]]"]
+sr_due: 2026-07-15
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Kropka kontra strzałka
@@ -18,7 +25,7 @@ ptr->x = 42;        // STRZAŁKA
 
 Strzałka to czysty skrót. `ptr->x` znaczy dokładnie to samo co `(*ptr).x`: "najpierw idź pod adres w `ptr` (dereferencja `*`), potem wejdź do pola `x`". Skoro ten zapis jest częsty i brzydki w nawiasach, C daje krótszą formę `->`.
 
-> [!example] ex03 spina to w całość
+> [!example] Wskaźnik na strukturę w praktyce
 > ```c
 > void set_point(t_point *point)   // dostaje WSKAŹNIK
 > {
@@ -40,4 +47,3 @@ Strzałka to czysty skrót. `ptr->x` znaczy dokładnie to samo co `(*ptr).x`: "n
 ## Połączenia
 - [[Struktura]] — co zawiera pola
 - [[Wskaźnik]] — kiedy `->`
-- [[ex03 ft_point.h]] — wzorcowy przykład

@@ -1,6 +1,13 @@
 ---
 tags: ["sql"]
 powiązane: ["[[Klucz główny i obcy]]", "[[NULL i logika trójwartościowa]]", "[[Agregacje i GROUP BY]]"]
+sr_due: 2026-07-20
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # JOIN — typy i co zwracają

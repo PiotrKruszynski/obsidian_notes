@@ -1,6 +1,13 @@
 ---
 tags: ["fastapi", "pydantic", "validation"]
 powiązane: ["[[FastAPI co to jest i skąd się wziął]]", "[[Response model — dlaczego oddzielny schemat wyjściowy]]", "[[Model Pydantic|Walidacja danych wejściowych — co się dzieje przed wywołaniem funkcji]]"]
+sr_due: 2026-07-17
+sr_last: 
+sr_grade: 
+sr_interval: 0
+sr_ease: 2.5
+sr_reps: 0
+sr_lapses: 0
 ---
 
 # Pydantic model — co robi i dlaczego
