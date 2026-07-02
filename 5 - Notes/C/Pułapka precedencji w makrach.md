@@ -12,37 +12,13 @@ sr_lapses: 0
 
 # Pułapka precedencji w makrach
 
-> [!summary] W jednym zdaniu
-> Bo makro to ślepa zamiana tekstu, brak nawisów wokół argumentu zmienia kolejność działań i daje cichą, błędną odpowiedź — dlatego owijasz **każdy** argument i całość w nawiasy.
+- `#define SQUARE(x) x * x` + `SQUARE(2 + 3)` → dosłowne podstawienie: `2 + 3 * 2 + 3` = **11**, nie 25
+- zero błędów i ostrzeżeń — po prostu zła liczba; kod wygląda poprawnie
+- lekarstwo: `#define SQUARE(x) ((x) * (x))`
+- nawias **wewnętrzny** `(x)` chroni przed precedencją wewnątrz argumentu; **zewnętrzny** — na zewnątrz (`SQUARE(3) + 1`)
 
-Rozważ pozornie niewinne makro:
-```c
-#define SQUARE(x) x * x
-```
-Napiszesz `SQUARE(2 + 3)`. Preprocesor podstawia tekst `2 + 3` w miejsce każdego `x`, **dosłownie**:
-```
-SQUARE(2 + 3)   →   2 + 3 * 2 + 3
-```
-Teraz kompilator liczy z normalną precedencją (mnożenie przed dodawaniem): `2 + (3*2) + 3 = 11`. A chciałeś `(2+3)² = 25`. **Żadnego błędu, żadnego ostrzeżenia — po prostu zła liczba.** To koszmar do debugowania, bo kod wygląda poprawnie.
-
-Lekarstwo — nawiasy wokół każdego `(x)` i wokół całego wyrażenia:
-```c
-#define SQUARE(x) ((x) * (x))
-```
-Teraz `SQUARE(2 + 3)` → `((2 + 3) * (2 + 3))` = `25`.
-
-Dwa poziomy ochrony, każdy ma swój cel:
-- nawias **wewnętrzny** `(x)` chroni przed precedencją *wewnątrz* argumentu (`2 + 3`),
-- nawias **zewnętrzny** `(...)` chroni przed precedencją *na zewnątrz* (gdy ktoś napisze `SQUARE(3) + 1`).
-
-> [!example] To samo w makrze ABS
-> ```c
-> #define ABS(Value) ((Value) < 0 ? -(Value) : (Value))
-> ```
-> Wyobraź `ABS(a - b)`. Bez nawisów `-Value` stałoby się `-a - b` (czyli `-a` minus `b`) — błąd. Z nawiasami: `-(a - b)`. Poprawnie. Identyczna logika w `EVEN(n)`: bez nawiasów `n - 1 % 2` policzyłoby `n - (1 % 2)`, bo `%` ma wyższą precedencję niż `-`.
-
-> [!tip] Reguła kciuka
-> Pisząc makro z argumentem, owiń w nawiasy każde wystąpienie argumentu i całe wyrażenie. Zawsze. To tańsze niż godzina debugowania cichego błędu.
+> [!tip] Reguła: w makrze z argumentem owijaj w nawiasy każde wystąpienie argumentu i całe wyrażenie. Zawsze.
 
 ## Połączenia
+
 - [[Makro]] — pojęcie nadrzędne

@@ -12,41 +12,20 @@ sr_lapses: 0
 
 # Rekurencja i stos wywołań
 
-> [!summary] W jednym zdaniu
-> Funkcja może wołać samą siebie; każde wywołanie dostaje własną ramkę na [[Stos kontra sterta|stosie]], a ramki "odkładają się" i rozwijają w odwrotnej kolejności — to dlatego `my_putnbr` wypisuje cyfry we właściwym porządku.
+- każde wywołanie funkcji dostaje własną **ramkę** na stosie (argumenty + zmienne lokalne)
+- ramki odkładają się i rozwijają w odwrotnej kolejności — stos naturalnie odwraca porządek
+- klasyczne użycie: wypisywanie liczby — `% 10` daje cyfry od końca, więc najpierw rekurencja na `n / 10`, potem wypisz `n % 10`
+- schemat: `if (n >= 10) putnbr(n / 10); wypisz(n % 10);`
 
-Każde wywołanie funkcji tworzy **ramkę stosu** (stack frame) — prywatny obszar na jej argumenty i zmienne lokalne. Przy rekurencji ramki układają się jedna na drugiej, a gdy wywołanie się kończy, jego ramka jest zdejmowana i sterowanie wraca do tej pod spodem.
-
-Problem w `my_putnbr`: liczbę trzeba wypisać od **najbardziej** znaczącej cyfry, a `% 10` daje najpierw tę **najmniej** znaczącą. Rozwiązanie: zanim wypiszesz ostatnią cyfrę, najpierw rekurencyjnie obsłuż całą resztę (`nbr / 10`).
-
-```c
-void my_putnbr(int nbr)
-{
-    if (nbr < 0)
-    {
-        write(1, "-", 1);
-        nbr = -nbr;
-    }
-    if (nbr >= 10)
-        my_putnbr(nbr / 10);          // najpierw reszta liczby
-    write(1, &"0123456789"[nbr % 10], 1);  // potem ostatnia cyfra
-}
+```
+putnbr(123) → putnbr(12) → putnbr(1): wypisz '1'
+                       wróć: wypisz '2'
+              wróć: wypisz '3'          → "123"
 ```
 
-> [!example] Prześledź my_putnbr(123) — jak rosną i znikają ramki
-> ```
-> my_putnbr(123)        ← ramka A: 123>=10, wołaj my_putnbr(12), CZEKAJ
->   my_putnbr(12)       ← ramka B: 12>=10, wołaj my_putnbr(1), CZEKAJ
->     my_putnbr(1)      ← ramka C: 1<10, wypisz '1', koniec C
->   wróć do B: wypisz 12 % 10 = '2', koniec B
-> wróć do A: wypisz 123 % 10 = '3', koniec A
-> Wyjście: 1 2 3
-> ```
-> Najmłodsza cyfra (`3`) jest wypisana **ostatnia**, bo jej `write` czeka, aż wróci cała rekurencja pod spodem. Stos wywołań naturalnie odwraca kolejność.
-
-> [!warning] Rekurencja musi mieć warunek stopu
-> Tu stopem jest `if (nbr >= 10)` — gdy liczba jednocyfrowa, przestajemy się zagłębiać. Bez warunku stopu ramki rosłyby w nieskończoność → **stack overflow** (przepełnienie stosu) i crash.
+> [!warning] Rekurencja musi mieć warunek stopu — bez niego ramki rosną w nieskończoność → stack overflow.
 
 ## Połączenia
-- [[Stos kontra sterta]] — gdzie żyją ramki wywołań
-- [[Arytmetyka ASCII]] — jak każda cyfra staje się znakiem
+
+- [[Stos kontra sterta]] — gdzie żyją ramki
+- [[Arytmetyka ASCII]] — cyfra staje się znakiem

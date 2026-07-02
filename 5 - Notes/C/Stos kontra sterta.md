@@ -12,34 +12,16 @@ sr_lapses: 0
 
 # Stos kontra sterta
 
-> [!summary] W jednym zdaniu
-> Stos to dane lokalne sprzątane automatycznie po zakończeniu funkcji; sterta to dane, które żyją, dopóki sam ich nie zwolnisz — do tego służy [[malloc, void gwiazdka i size_t|malloc]].
+- **stos** — zmienne lokalne; sprzątany automatycznie po zakończeniu funkcji; szybki, krótkotrwały
+- **sterta** — pamięć z [[malloc, void gwiazdka i size_t|malloc]]; żyje, aż sam zwolnisz przez `free`; przeżywa koniec funkcji
+- reguła: dane na czas jednej funkcji → stos; dane zwracane / dłuższe → sterta
 
-Program ma dwa główne obszary na dane (oba to fragmenty [[Pamięć to taśma adresów|taśmy pamięci]]):
-
-**Stos (stack)**
-- Tu lądują zwykłe zmienne lokalne: `int x;`, `t_point p;`.
-- Zarządzany **automatycznie**: gdy funkcja się kończy, jej zmienne lokalne **znikają same**.
-- Szybki, ale krótkotrwały — żyje tylko tak długo jak funkcja, w której powstał.
-
-**Sterta (heap)**
-- Tu ląduje to, co alokujesz ręcznie przez `malloc`.
-- Zarządzana **ręcznie**: to, co zaalokujesz, żyje **dopóki nie zwolnisz** przez `free`.
-- Przeżywa koniec funkcji.
-
-> [!example] Dlaczego funkcja nie może zwrócić tablicy ze stosu
-> Funkcja tworzy tablicę i ją **zwraca**. Gdyby zbudowała ją na stosie:
-> ```c
-> int tab[100];           // na stosie
-> return (tab);           // ZŁO: tab znika po return!
-> ```
-> tablica zniknęłaby w momencie `return`, a wywołujący dostałby wskaźnik na śmieci (tzw. dangling pointer). Dane, które mają przeżyć funkcję, **muszą** być na stercie — stąd `malloc`.
-
-> [!tip] Reguła decyzyjna
-> Dane potrzebne tylko wewnątrz jednej funkcji → stos (zwykła zmienna). Dane, które funkcja zwraca lub które mają żyć dłużej → sterta (`malloc`). Każdy `malloc` to Twój dług — patrz [[free, leak i use-after-free]].
+> [!warning] Nie zwracaj tablicy ze stosu
+> `int tab[100]; return (tab);` — tab znika w momencie `return`, wywołujący dostaje wskaźnik na śmieci (dangling pointer). Dane, które mają przeżyć funkcję, muszą iść na stertę.
 
 ## Połączenia
+
 - [[Pamięć to taśma adresów]] — obraz nadrzędny
-- [[malloc, void gwiazdka i size_t]] — jak alokować na stercie
-- [[free, leak i use-after-free]] — jak oddawać stertę
-- [[Rekurencja i stos wywołań]] — jak stos rośnie przy zagnieżdżonych wywołaniach
+- [[malloc, void gwiazdka i size_t]] — alokacja na stercie
+- [[free, leak i use-after-free]] — spłata długu za malloc
+- [[Rekurencja i stos wywołań]] — jak stos rośnie przy wywołaniach

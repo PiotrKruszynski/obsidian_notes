@@ -24,7 +24,7 @@ typ: map-of-content
 
 ## Wskaźniki i pamięć
 - [[Wskaźnik]]
-- [[pointers - c]] — praktyczne przykłady, swap, pointer na pointer
+- [[pointers - c]] — praktyczne pułapki wskaźników
 - [[Przekazywanie przez wartość kontra przez adres]]
 - [[Podwójny wskaźnik char gwiazdka gwiazdka]]
 - [[argc i argv]]
@@ -38,13 +38,13 @@ typ: map-of-content
 - [[Struktura]]
 - [[Kropka kontra strzałka]]
 - [[String i null terminator]]
-- [[str - c]] — operacje na stringach, implementacje strlen/strcpy/strcmp
+- [[str - c]] — ściąga string.h, czytanie wejścia
 - [[Arytmetyka ASCII]]
 - [[write i deskryptory plików]]
 - [[Rekurencja i stos wywołań]]
 
 ## Funkcje i operatory
-- [[function C]] — anatomia funkcji, przykłady my_putchar/my_putstr/my_strlen
+- [[function C]] — anatomia funkcji, C vs Python
 - [[bits operator - c]] — AND/OR/XOR/NOT, shifty, manipulacja bitami
 
 > [!tip] Test zrozumienia

@@ -12,25 +12,14 @@ sr_lapses: 0
 
 # argc i argv
 
-> [!summary] W jednym zdaniu
-> To argumenty wiersza poleceń: `argc` liczy wszystkie tokeny (łącznie z nazwą programu), `argv` to [[Podwójny wskaźnik char gwiazdka gwiazdka|tablica stringów]] z ich treścią.
+- `int main(int argc, char **argv)` — argumenty wiersza poleceń
+- `argc` liczy wszystkie tokeny **łącznie z nazwą programu**; realne argumenty = `argc - 1`
+- `argv[0]` = nazwa programu; `argv[1..argc-1]` = argumenty; `argv[argc]` = `NULL` (gwarantowany strażnik)
+- `argv` to [[Podwójny wskaźnik char gwiazdka gwiazdka|tablica stringów]]
 
-```c
-int main(int argc, char **argv)
-```
-
-Dla wywołania `./program one two`:
-- `argc == 3` — bo liczy **też nazwę programu**: `./program`, `one`, `two`.
-- `argv[0]` → `"./program"` (nazwa programu).
-- `argv[1]` → `"one"`.
-- `argv[2]` → `"two"`.
-- `argv[3]` → `NULL` (standard gwarantuje `NULL` na końcu — wartowniczy znacznik, patrz [[Znacznik końca tablicy (sentinel)]]).
-
-> [!warning] Klasyczna pomyłka: argc liczy nazwę programu
-> Liczba **prawdziwych** argumentów to `argc - 1` — licz je *bez* nazwy programu. `./prog` (zero argumentów) → `argc - 1 == 0`.
-
-> [!example] Przekazywanie dalej
-> Funkcja `f(int ac, char **av)` dostaje te same `argc`/`argv` pod innymi nazwami. `av` jest typu `char **`, więc przetwarzasz je tak jak w [[Podwójny wskaźnik char gwiazdka gwiazdka]].
+> [!warning] `./prog` bez argumentów → `argc == 1`, nie 0. Iterację po argumentach użytkownika zaczynaj od `i = 1`.
 
 ## Połączenia
+
 - [[Podwójny wskaźnik char gwiazdka gwiazdka]] — typ `argv`
+- [[Znacznik końca tablicy (sentinel)]] — `NULL` na końcu `argv`
