@@ -245,7 +245,4 @@
 	
 2026-06-27 16:13:39 Od Radosław Szmit do Wszyscy:
 	Dbt task
-
-Dbt build
-Run now
 	
