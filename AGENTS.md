@@ -1,206 +1,205 @@
-# AGENTS.md — konstytucja vaultu (LLM Wiki)
+# AGENTS.md — vault constitution (LLM Wiki)
 
-Ten vault to LLM Wiki w trzech warstwach (wzorzec Karpathy'ego):
+This vault is an LLM Wiki in three layers (Karpathy's pattern):
 
-1. **Źródła niemutowalne** — `2 - Source Materials/` (agent tylko czyta)
-2. **Wiki utrzymywane przez agenta** — `5 - Notes/` (atomowe notatki, ciągle aktualizowane)
-3. **Schema** — ten plik (konwencje, operacje, zasady)
+1. **Immutable sources** — `2 - Source Materials/` (agent only reads)
+2. **Wiki maintained by the agent** — `5 - Notes/` (atomic notes, continuously updated)
+3. **Schema** — this file (conventions, operations, rules)
 
-Rola agenta: nie tylko tworzyć nowe notatki, ale **ciągle utrzymywać istniejące** — aktualizować, łapać sprzeczności, wykrywać braki i duplikaty, poprawiać cross-referencje. Wiki ma się starzeć w stronę spójności, nie entropii.
+Agent's role: not just create new notes, but **continuously maintain existing ones** — update them, catch contradictions, detect gaps and duplicates, fix cross-references. The wiki should age toward consistency, not entropy.
 
-Język vaultu: **polski** (terminy techniczne po angielsku).
+Vault language: **Polish** (technical terms in English).
 
-## Struktura vaultu
+## Vault structure
 
-| Folder                  | Rola                                                                                                                                 |
+| Folder                  | Role                                                                                                                                 |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `1 - Raw Notes/`        | **Inbox** — ulotne wnioski z sesji nauki, bałagan do rozłożenia przez `ingest`. Po przetworzeniu można czyścić.                      |
-| `2 - Source Materials/` | **Raw / źródła niemutowalne** — PDF-y, artykuły, transkrypty, dumpy. TYLKO DO CZYTANIA: agent nie edytuje, nie kasuje, nie przenosi. |
-| `3 - Indexes/`          | Indeksy / MOC-e przekrojowe.                                                                                                         |
-| `4 - Templates/`        | Szablony notatek (Concept Note, AWS Service, MOC...).                                                                                |
-| `5 - Notes/`            | **Wiki właściwe** — atomowe notatki w folderach modułów.                                                                             |
-| `6 - Commands/`         | Cheatsheety komend.                                                                                                                  |
-| `7 - Assets/`           | Załączniki, obrazy.                                                                                                                  |
-| `8 - Daily/`            | Notatki dzienne.                                                                                                                     |
-| `9 - Prompt template/`  | Szablony promptów.                                                                                                                   |
+| `1 - Raw Notes/`        | **Inbox** — loose takeaways from study sessions, clutter waiting to be sorted by `ingest`. Can be cleaned up after processing.       |
+| `2 - Source Materials/` | **Raw / immutable sources** — PDFs, articles, transcripts, dumps. READ-ONLY: the agent does not edit, delete, or move these.         |
+| `3 - Indexes/`          | Cross-cutting indexes / MOCs.                                                                                                        |
+| `4 - Templates/`        | Note templates (Concept Note, AWS Service, MOC...).                                                                                  |
+| `5 - Notes/`            | **The wiki proper** — atomic notes organized in module folders.                                                                      |
+| `6 - Commands/`         | Command cheatsheets.                                                                                                                 |
+| `7 - Assets/`           | Attachments, images.                                                                                                                 |
+| `8 - Daily/`            | Daily notes.                                                                                                                         |
+| `9 - Prompt template/`  | Prompt templates.                                                                                                                    |
 
-W `5 - Notes/` foldery modułów: `Python/`, `AWS/`, `Bazy-Danych/`, `Sieci/`, `Testy/`, `C/`, `Docker/`, `AI-ML/`, `Algorytmy/`, `FastAPI-vault/`, `Projekty/` (per projekt, np. `Projekty/fastapi-rekrutacja/`).
+Inside `5 - Notes/`, module folders: `Python/`, `AWS/`, `Bazy-Danych/`, `Sieci/`, `Testy/`, `C/`, `Docker/`, `AI-ML/`, `Algorytmy/`, `FastAPI-vault/`, `Projekty/` (per project, e.g. `Projekty/fastapi-rekrutacja/`).
 
-### Koncepcje — jedna koncepcja istnieje raz
+### Concepts — a concept exists exactly once
 
-Foldery `Koncepcje/` żyją **per moduł** (np. `Python/Koncepcje/`, `Bazy-Danych/Koncepcje/`). Konwencja:
+`Koncepcje/` folders live **per module** (e.g. `Python/Koncepcje/`, `Bazy-Danych/Koncepcje/`). Convention:
 
-- Koncepcja istnieje w **jednym miejscu** w całym vaulcie i jest reużywana przez linkowanie.
-- Przed utworzeniem nowej notatki koncepcji agent MUSI przeszukać **wszystkie** foldery `Koncepcje/` (i całe `5 - Notes/`) pod kątem istniejącej notatki o tym pojęciu. Jeśli istnieje — linkuj `[[...]]`, nie duplikuj. Jeśli istnieje, ale jest niepełna — zaproponuj aktualizację (diff).
-- Pojęcie ogólne (np. GIL, ACID) trafia do `Koncepcje/` modułu tematycznego; notatka specyficzna dla projektu — do folderu projektu, z linkami do koncepcji ogólnych.
-- **Nazwy plików unikalne w całym vaulcie** (wikilinki Obsidian rozwiązują po nazwie pliku).
+- A concept exists in **one place** across the entire vault and is reused via linking.
+- Before creating a new concept note, the agent MUST search **all** `Koncepcje/` folders (and all of `5 - Notes/`) for an existing note on that concept. If it exists — link `[[...]]`, don't duplicate. If it exists but is incomplete — propose an update (diff).
+- A general concept (e.g. GIL, ACID) goes into the `Koncepcje/` folder of its topic module; a project-specific note goes into the project's folder, with links to the general concepts.
+- **Filenames are unique across the whole vault** (Obsidian wikilinks resolve by filename).
 
-## Zasady atomowości (styl: krótkie notatki pod powtórki)
+## Atomicity rules (style: short notes for spaced repetition)
 
-Cel notatki: dać się ponownie przeczytać w ~30 sekund przy codziennej powtórce.
-Notatka, której nie da się tak przeczytać, nie będzie czytana wcale. Głębia
-siedzi w grafie linków, nie w pojedynczym pliku.
+Goal of a note: to be re-readable in ~30 seconds during a daily review.
+A note that can't be read that way won't be read at all. Depth lives in the link graph, not in a single file.
 
-- **Jedna notatka = jedna myśl.** Tytuł nazywa tę jedną myśl. Jeśli tytuł wymaga "i"/"oraz" łączącego dwa pojęcia — to dwie notatki.
-- **Bullety, nie akapity.** Każdy punkt to jedna linia: hasło + rozwinięcie po myślniku, gdy samo hasło nie wystarcza. Zero prozy wykładowej.
-- **Limit ~15 linii treści.** Wychodzi dłużej → podziel na dwie notatki i połącz linkiem.
-- **Głębia przez linki.** Coś wymaga dłuższego tłumaczenia → osobna notatka `[[...]]`, nie dodatkowy akapit.
-- **Duży temat → hub + atomy.** Temat kryjący wiele pojęć (np. AWS IAM) dostaje krótki hub (definicja 2–3 bullety + TL;DR + Połączenia) i osobne atomowe notatki podpojęć; pułapki/exam trapy jako `[!warning]` w notatce, której dotyczą.
-- **Notatka samodzielna**: zrozumiała bez czytania innych. Kontekst dopowiadają linki, nie kolejność czytania.
-- **Gęste linkowanie** `[[wikilinkami]]` w treści, wszędzie gdzie pada powiązane pojęcie.
-- **Każda notatka kończy się sekcją `## Połączenia`** — lista linków, każdy z pół zdaniem wyjaśnienia, czemu pojęcia są powiązane. Sam link bez wyjaśnienia się nie liczy.
+- **One note = one idea.** The title names that single idea. If the title needs "and" to join two concepts — that's two notes.
+- **Bullets, not paragraphs.** Each point is one line: term + elaboration after a dash, only when the term alone isn't enough. Zero lecture-style prose.
+- **~15-line content limit.** Runs longer → split into two notes and link them.
+- **Depth through links.** Something needs a longer explanation → a separate `[[...]]` note, not another paragraph.
+- **Big topic → hub + atoms.** A topic covering many concepts (e.g. AWS IAM) gets a short hub (2–3 bullet definition + TL;DR + Connections) plus separate atomic notes for sub-concepts; pitfalls/exam traps go as `[!warning]` in the note they apply to.
+- **Self-contained note**: understandable without reading others. Context comes from links, not reading order.
+- **Dense linking** `[[wikilinks]]` in the body, wherever a related concept comes up.
+- **Every note ends with a `## Połączenia` ("Connections") section** — a list of links, each with a half-sentence explaining why the concepts are related. A bare link with no explanation doesn't count.
 
-## Frontmatter i proweniencja
+## Frontmatter and provenance
 
-Każda notatka dostaje frontmatter wg istniejącej konwencji vaultu + pole `źródło`:
+Every note gets frontmatter per the vault's existing convention plus a `źródło` ("source") field:
 
 ```yaml
 ---
-title: "Nazwa notatki"
+title: "Note name"
 type: concept        # concept | service | moc | project | question
-topic: python        # moduł tematyczny
+topic: python        # topic module
 tags: ["python"]
 created: 2026-06-10
 status: draft        # draft | done
-źródło: "2 - Source Materials/nazwa-pliku.pdf"
+źródło: "2 - Source Materials/file-name.pdf"
 ---
 ```
 
-Pole `źródło` jest **obowiązkowe** — mówi, skąd pochodzi twierdzenie, żeby dało się je później zweryfikować. Możliwe wartości:
+The `źródło` field is **mandatory** — it says where the claim comes from, so it can be verified later. Possible values:
 
-- `"2 - Source Materials/plik.pdf"` — notatka z ingestu źródła (ścieżka do pliku!)
-- `"1 - Raw Notes/plik.md"` — notatka z ingestu inboxu
-- `"sesja LLM, <model>"` — wiedza z rozmowy z LLM, np. `"sesja LLM, GPT-5 Codex"`, `"sesja LLM, Claude Fable 5"` (zawsze podaj model!)
-- `"dokumentacja python.org"`, `"wykład 42"` itp.
+- `"2 - Source Materials/file.pdf"` — note from ingesting a source (path to the file!)
+- `"1 - Raw Notes/file.md"` — note from ingesting the inbox
+- `"sesja LLM, <model>"` ("LLM session, <model>") — knowledge from a conversation with an LLM, e.g. `"sesja LLM, GPT-5 Codex"`, `"sesja LLM, Claude Fable 5"` (always name the model!)
+- `"dokumentacja python.org"` ("python.org docs"), `"wykład 42"` ("lecture 42"), etc.
 
-To ważne: część wiedzy pochodzi z rozmów z LLM, które bywają błędne. Bez proweniencji nie da się odróżnić twierdzenia z dokumentacji od halucynacji.
+This matters: some knowledge comes from LLM conversations, which can be wrong. Without provenance you can't tell a claim from documentation apart from a hallucination.
 
-Nie zgaduj proweniencji wstecz. Przy uzupełnianiu starych notatek, dla których prawdziwe źródło nie jest znane, użyj wartości `"nieznane (sprzed LLM Wiki)"` zamiast przypisywać im fałszywe źródło. Fałszywa proweniencja jest gorsza niż brak.
+Don't guess provenance retroactively. When filling in old notes whose true source is unknown, use the value `"nieznane (sprzed LLM Wiki)"` ("unknown (predates LLM Wiki)") instead of assigning them a false source. False provenance is worse than none.
 
-Jeśli agent dopisuje do starej notatki nową treść od siebie (np. nowe bullety, callouty, `## Połączenia`, poprawki cross-linków), ta nowa treść też ma proweniencję. Dodaj albo uzupełnij pole:
+If the agent appends new content to an old note on its own initiative (e.g. new bullets, callouts, a `## Połączenia` section, cross-link fixes), that new content also has provenance. Add or fill in the field:
 
 ```yaml
 źródło_uzupełnień: ["sesja LLM, GPT-5 Codex, 2026-06-10"]
 ```
 
-Nie mieszaj tego z pierwotnym `źródło`: `źródło` opisuje skąd pochodzi rdzeń notatki, a `źródło_uzupełnień` opisuje późniejsze dopiski agenta.
+Don't mix this up with the original `źródło`: `źródło` describes where the note's core content came from, while `źródło_uzupełnień` ("source of additions") describes the agent's later additions.
 
-## Powtórki (SM-2) — pola sr_*
+## Spaced repetition (SM-2) — sr_* fields
 
-Vault ma system powtórek oparty o SM-2: skrypt `sr.py` w root (sesja: `python3 sr.py`,
-raport: `python3 sr.py stats`), historia ocen w `.sr_log.csv`.
+The vault has an SM-2-based review system: script `sr.py` in the root (session: `python3 sr.py`,
+report: `python3 sr.py stats`), grade history in `.sr_log.csv`.
 
-- Polami `sr_due / sr_last / sr_grade / sr_interval / sr_ease / sr_reps / sr_lapses`
-  zarządza **wyłącznie skrypt** — przy edycji notatki zachowaj je bez zmian
-  (nie przepisuj, nie kasuj, nie "poprawiaj" dat).
-- Nowa notatka koncepcji dostaje inicjalizację: `sr_due:` data utworzenia,
-  `sr_interval: 0`, `sr_ease: 2.5`, `sr_reps: 0`, `sr_lapses: 0` — dzięki temu
-  od razu wchodzi do kolejki powtórek.
-- MOC-e (`type: moc`) i pliki `00 — ...` nie podlegają powtórkom.
+- The fields `sr_due / sr_last / sr_grade / sr_interval / sr_ease / sr_reps / sr_lapses`
+  are managed **exclusively by the script** — when editing a note, leave them
+  unchanged (don't rewrite, delete, or "fix" the dates).
+- A new concept note gets initialized with: `sr_due:` creation date,
+  `sr_interval: 0`, `sr_ease: 2.5`, `sr_reps: 0`, `sr_lapses: 0` — this puts it
+  straight into the review queue.
+- MOCs (`type: moc`) and files named `00 — ...` are not subject to review.
 
-## Callouty Obsidian — opcjonalne, max 2 linie
+## Obsidian callouts — optional, max 2 lines
 
-- `> [!warning]` — **realna pułapka z konkretnym skutkiem** ("jeśli zrobisz X, stanie się Y"), nie ogólnikowe "uważaj".
-- `> [!tip]` — sztuczka pamięciowa, skojarzenie, mnemonik.
-- `> [!example]` — mini-przykład (1–2 linie).
+- `> [!warning]` — **a real pitfall with a concrete consequence** ("if you do X, Y happens"), not a generic "be careful."
+- `> [!tip]` — a memory trick, association, mnemonic.
+- `> [!example]` — a mini-example (1–2 lines).
 
-Bez `> [!summary]` — krótka notatka sama jest swoim streszczeniem. Callout
-wymagający akapitu tłumaczenia to materiał na osobną notatkę.
+No `> [!summary]` — a short note is its own summary. A callout that
+needs a paragraph of explanation is material for a separate note.
 
-## Czego unikać
+## What to avoid
 
-- **Notatek-katalogów**: ściana kodu/komend zamiast tłumaczenia. Kod ilustruje myśl, nie zastępuje jej.
-- **Akapitów prozy i "wykładów"** — notatka to bullety.
-- **Notatek ponad limit** — tnij na atomy zamiast rozwlekać.
-- **Calloutów dłuższych niż 2 linie.**
-- **Duplikowania pojęć** między modułami zamiast linkowania do jednej notatki.
-- **Tytułów łączących dwie myśli** ("X i Y") — rozbij na dwie notatki.
-- **Pomijania sekcji `## Połączenia`** albo linków bez wyjaśnienia związku.
+- **"Catalog" notes**: a wall of code/commands instead of an explanation. Code illustrates the idea, it doesn't replace it.
+- **Prose paragraphs and "lectures"** — a note is bullets.
+- **Notes over the limit** — cut into atoms instead of sprawling.
+- **Callouts longer than 2 lines.**
+- **Duplicating concepts** across modules instead of linking to a single note.
+- **Titles joining two ideas** ("X and Y") — split into two notes.
+- **Skipping the `## Połączenia` section** or links without an explanation of the relationship.
 
-## Operacje (wywoływane hasłem)
+## Operations (invoked by keyword)
 
-### `ingest [plik]`
+### `ingest [file]`
 
-Przeczytaj wskazane źródło z `2 - Source Materials/` lub plik z `1 - Raw Notes/`, następnie:
+Read the indicated source from `2 - Source Materials/` or a file from `1 - Raw Notes/`, then:
 
-1. Rozłóż treść na **atomowe notatki** wg zasad powyżej.
-2. Dla każdego pojęcia sprawdź, czy koncepcja **już istnieje** gdziekolwiek w `5 - Notes/` (wszystkie `Koncepcje/` i moduły). Jeśli tak — linkuj, nie duplikuj; jeśli wymaga uzupełnienia — zaproponuj zmianę.
-3. **Zaktualizuj powiązane istniejące notatki** (dopisz linki, skoryguj treść, dodaj do `## Połączenia`).
-4. Popraw cross-referencje w obu kierunkach.
-5. W frontmatter każdej nowej notatki: `źródło` ze ścieżką do pliku źródłowego.
-6. Na końcu pokaż **diff do akceptacji** (nowe pliki + każda zmiana w istniejących). Zapis dopiero po zgodzie.
+1. Break the content down into **atomic notes** per the rules above.
+2. For each concept, check whether it **already exists** anywhere in `5 - Notes/` (all `Koncepcje/` folders and modules). If so — link it, don't duplicate; if it needs updating — propose a change.
+3. **Update related existing notes** (add links, correct content, add to `## Połączenia`).
+4. Fix cross-references in both directions.
+5. In the frontmatter of every new note: `źródło` with the path to the source file.
+6. At the end, show a **diff for approval** (new files + every change to existing ones). Save only after approval.
 
-Plików w `2 - Source Materials/` nie wolno modyfikować. Plik z `1 - Raw Notes/` po zaakceptowanym ingestcie można oznaczyć/usunąć — tylko za zgodą.
+Files in `2 - Source Materials/` must not be modified. A file from `1 - Raw Notes/` can be marked/deleted after an approved ingest — only with consent.
 
 ### `lint`
 
-Przejdź cały vault (`5 - Notes/` + indeksy) i wypisz raport:
+Go through the whole vault (`5 - Notes/` + indexes) and produce a report of:
 
-- **martwe wikilinki** — `[[linki]]` do nieistniejących plików,
-- **notatki-sieroty** — bez żadnych linków przychodzących,
-- **zduplikowane koncepcje** między modułami (to samo pojęcie w dwóch miejscach),
-- **sprzeczności** między notatkami (twierdzenia, które się wykluczają — podaj obie lokalizacje i cytaty),
-- **luki** — pojęcia często linkowane, dla których nie istnieje notatka,
-- **notatki ponad limit** (~15 linii treści) albo z akapitami prozy — kandydaci
-  do cięcia na atomy: raport z propozycją podziału, cięcie dopiero po akceptacji,
-- dodatkowo: brakujący frontmatter / brak pola `źródło` / brak `## Połączenia`.
+- **dead wikilinks** — `[[links]]` to nonexistent files,
+- **orphan notes** — with no incoming links,
+- **duplicated concepts** across modules (the same concept in two places),
+- **contradictions** between notes (mutually exclusive claims — cite both locations and quotes),
+- **gaps** — frequently linked concepts that have no note,
+- **notes over the limit** (~15 lines of content) or with prose paragraphs — candidates
+  for splitting into atoms: report with a proposed split, cut only after approval,
+- additionally: missing frontmatter / missing `źródło` field / missing `## Połączenia`.
 
-Resolver wikilinków MUSI działać jak Obsidian, nie jak prosty skaner `.md`:
+The wikilink resolver MUST behave like Obsidian, not like a simple `.md` scanner:
 
-- sprawdzaj cały vault, nie tylko notatki `.md`;
-- uwzględnij `7 - Assets/` oraz inne załączniki;
-- rozpoznawaj basename z rozszerzeniem (`![[obraz.png]]`), basename bez rozszerzenia (`[[Notatka]]`), ścieżki względne i ścieżki od root vaultu;
-- link do istniejącego assetu nie jest luką koncepcyjną.
+- check the whole vault, not just `.md` notes;
+- include `7 - Assets/` and other attachments;
+- recognize basename with extension (`![[image.png]]`), basename without extension (`[[Note]]`), relative paths and paths from the vault root;
+- a link to an existing asset is not a conceptual gap.
 
-Zanim uznasz martwy wikilink za lukę do napisania, wykonaj mapowanie:
+Before flagging a dead wikilink as a gap, do a mapping pass:
 
-1. `martwy link → istniejąca podobna notatka/asset`;
-2. oznacz wynik jako `do przelinkowania`, jeśli istnieje bliska notatka (np. `[[Typy baz danych]]` → `[[types of databases]]`, `[[Indeks — koszt i korzyść]]` → bliska notatka o indeksach);
-3. dopiero linki bez sensownego istniejącego celu raportuj jako **luki**.
+1. `dead link → existing similar note/asset`;
+2. mark the result as `to relink` if a close note exists (e.g. `[[Typy baz danych]]` → `[[types of databases]]`, `[[Indeks — koszt i korzyść]]` → a close note about indexes);
+3. only report links with no reasonable existing target as **gaps**.
 
-Nie twórz nowej notatki tylko dlatego, że wikilink jest martwy. Martwy link często oznacza rename, zmianę języka tytułu albo niekonsekwentny alias — i najpierw trzeba go naprawić przez przelinkowanie.
+Don't create a new note just because a wikilink is dead. A dead link often signals a rename, a title language change, or an inconsistent alias — fix it via relinking first.
 
-**Tylko raport — niczego nie zmieniaj bez wyraźnej zgody.** Po raporcie zaproponuj kolejność napraw.
+**Report only — change nothing without explicit consent.** After the report, propose an order of fixes.
 
-### `nowa notatka [pojęcie]`
+### `nowa notatka [concept]` ("new note")
 
-Pojedyncza notatka koncepcji/zadania wg tych samych zasad: sprawdzenie duplikatów → atomowość → frontmatter ze `źródło` → callouty → `## Połączenia` → aktualizacja notatek powiązanych → diff do akceptacji.
+A single concept/task note following the same rules: duplicate check → atomicity → frontmatter with `źródło` → callouts → `## Połączenia` → update related notes → diff for approval.
 
-### `znajdź [pytanie]`
+### `znajdź [question]` ("find")
 
-Wyszukiwanie wiedzy w vaulcie — operacja **tylko do odczytu**:
+Searching for knowledge in the vault — a **read-only** operation:
 
-1. Szukaj odpowiedzi **wyłącznie w notatkach vaultu** (`5 - Notes/`, indeksy, ew. `2 - Source Materials/`) — NIE odpowiadaj z własnej wiedzy modelu.
-2. Zawsze podawaj **ścieżki do plików** + jedno zdanie, co w którym jest.
-3. Synteza z wielu notatek jest OK, ale tylko z ich treści i z listą plików źródłowych.
-4. Jeśli odpowiedzi w vaulcie nie ma — powiedz wprost: **„brak notatki — to luka"** i zaproponuj `nowa notatka [pojęcie]`. Nie maskuj braku własną wiedzą.
-5. Jeśli Twoja wiedza przeczy treści notatki — nie poprawiaj po cichu; zgłoś jako potencjalną sprzeczność do weryfikacji (z proweniencją notatki).
+1. Search for the answer **only in the vault's notes** (`5 - Notes/`, indexes, possibly `2 - Source Materials/`) — do NOT answer from the model's own knowledge.
+2. Always give **file paths** + one sentence on what's in each.
+3. Synthesizing across multiple notes is fine, but only from their content and with a list of source files.
+4. If the vault doesn't have the answer — say so plainly: **"no note — that's a gap"** and propose `nowa notatka [concept]`. Don't paper over the gap with your own knowledge.
+5. If your own knowledge contradicts a note's content — don't silently correct it; flag it as a potential contradiction to verify (with the note's provenance).
 
-### `odpowiedz [pytanie]`
+### `odpowiedz [question]` ("answer")
 
-Merytoryczna odpowiedź na pytanie, której źródłem jest vault (nie wiedza modelu) — operacja **tylko do odczytu**:
+A substantive answer to a question, sourced from the vault (not the model's knowledge) — a **read-only** operation:
 
-1. Odpowiedz na pytanie treściwie, ale buduj odpowiedź **wyłącznie z treści notatek** (`5 - Notes/`, ew. `2 - Source Materials/`). Synteza z wielu notatek jest pożądana.
-2. Nie dolewaj wiedzy modelu spoza notatek. Jeśli notatki pokrywają temat częściowo — odpowiedz tym, co jest, i powiedz wprost, czego w vaulcie brakuje.
-3. Na końcu odpowiedzi sekcja **Źródła:** z listą ścieżek użytych notatek.
-4. Jeśli vault nie pokrywa tematu wcale — nie odpowiadaj z głowy: zgłoś lukę i zaproponuj `nowa notatka [pojęcie]`.
-5. Gdy Twoja wiedza przeczy treści notatki — odpowiedz wg notatki, ale jawnie zaznacz potencjalną sprzeczność do weryfikacji.
+1. Answer the question concisely, but build the answer **only from the notes' content** (`5 - Notes/`, possibly `2 - Source Materials/`). Synthesizing across multiple notes is desirable.
+2. Don't add model knowledge from outside the notes. If the notes cover the topic only partially — answer with what's there, and say plainly what's missing from the vault.
+3. End the answer with a **Sources:** section listing the paths of notes used.
+4. If the vault doesn't cover the topic at all — don't answer off the top of your head: flag the gap and propose `nowa notatka [concept]`.
+5. When your own knowledge contradicts a note's content — answer per the note, but explicitly flag the potential contradiction for verification.
 
-Różnica względem `znajdź`: `znajdź` mówi GDZIE wiedza leży, `odpowiedz` mówi CO z niej wynika. Pierwsze do nawigacji, drugie do powtórek i sprawdzania własnego zrozumienia.
+Difference from `znajdź`: `znajdź` says WHERE the knowledge lives, `odpowiedz` says WHAT follows from it. The former is for navigation, the latter for review and checking your own understanding.
 
-### `ćwicz [temat]`
+### `ćwicz [topic]` ("practice")
 
-Praktyka, która zasila wiki (nie żyje obok niej):
+Practice that feeds the wiki (doesn't live alongside it):
 
-1. Zadania buduj **wokół koncepcji istniejących w vaulcie** i linkuj je w treści zadania (`[[...]]`). Pojęcie potrzebne do zadań, ale bez notatki → zgłoś jako lukę, nie przemycaj po cichu.
-2. Trudność stopniuj ★–★★★★. Zadania na realnej bazie (SQL: Sakila — setup i serie w `5 - Notes/Bazy-Danych/Cwiczenia-Sakila/`).
-3. **Nie pokazuj rozwiązania, zanim użytkownik nie pokaże swojej próby.** Potem oceń: poprawność wyniku, pułapki (NULL-e, duplikaty, brakujące JOIN-y), czytelność, wydajność (EXPLAIN, gdy ma sens).
-4. Po sesji zaproponuj domknięcie pętli: błąd użytkownika → `[!warning]` z realnym skutkiem do notatki koncepcji; zaskoczenie/trik → `[!tip]`; rozwiązania i wnioski → sekcja „Moje rozwiązania i wnioski" w notatce serii. Wszystko jako diff do akceptacji.
-5. Nowa seria zadań = nowa notatka wg wzoru istniejących serii (frontmatter, `źródło`, zadania z linkami, sekcja wniosków, `## Połączenia`).
+1. Build exercises **around concepts that already exist in the vault** and link them in the exercise text (`[[...]]`). A concept needed for the exercises but without a note → flag as a gap, don't smuggle it in silently.
+2. Grade difficulty ★–★★★★. Exercises on a real database (SQL: Sakila — setup and series in `5 - Notes/Bazy-Danych/Cwiczenia-Sakila/`).
+3. **Don't show the solution before the user shows their own attempt.** Then assess: correctness of the result, pitfalls (NULLs, duplicates, missing JOINs), readability, performance (EXPLAIN, when relevant).
+4. After the session, propose closing the loop: user's mistake → `[!warning]` with a concrete consequence added to the concept note; a surprise/trick → `[!tip]`; solutions and takeaways → a "My solutions and takeaways" section in the exercise series note. Everything as a diff for approval.
+5. A new exercise series = a new note following the pattern of existing series (frontmatter, `źródło`, exercises with links, takeaways section, `## Połączenia`).
 
-## Zasady bezpieczeństwa (zawsze)
+## Safety rules (always)
 
-- Zmiany w **istniejących** notatkach: najpierw diff, zapis po akceptacji.
-- Niczego nie kasuj i nie nadpisuj bez pytania. `2 - Source Materials/` jest nietykalne.
-- Nie zmieniaj uprawnień plików, nie rób operacji nieodwracalnych.
-- Commituj po sensownych etapach pracy (git jest siatką bezpieczeństwa — vault ma auto-backupy pluginu Obsidian Git, nie nadpisuj jego konfiguracji).
+- Changes to **existing** notes: diff first, save after approval.
+- Never delete or overwrite anything without asking. `2 - Source Materials/` is untouchable.
+- Don't change file permissions, don't do irreversible operations.
+- Commit after meaningful stages of work (git is a safety net — the vault has auto-backups via the Obsidian Git plugin; don't overwrite its config).
