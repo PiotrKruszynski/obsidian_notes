@@ -15,3 +15,7 @@ sr_lapses: 0
 ---
 
 każdą fn wieloparametrową można zamienić na wiele fn jednoparametrowych (unary functions)
+
+
+partial applications
+#todo
