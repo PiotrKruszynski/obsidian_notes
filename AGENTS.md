@@ -198,7 +198,6 @@ Practice that feeds the wiki (doesn't live alongside it):
 5. A new exercise series = a new note following the pattern of existing series (frontmatter, `źródło`, exercises with links, takeaways section, `## Połączenia`).
 
 ## Safety rules (always)
-
 - Changes to **existing** notes: diff first, save after approval.
 - Never delete or overwrite anything without asking. `2 - Source Materials/` is untouchable.
 - Don't change file permissions, don't do irreversible operations.
