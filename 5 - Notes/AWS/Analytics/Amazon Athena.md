@@ -25,7 +25,6 @@ sr_lapses: 0
 >- prefere bigger files (>128 MB) to minimize _overhead_
 >- commonly use with [[Amazon Quicksight]] for reporting
 
-
 **Use case:** Business Inteligence / analitics / reporting
 when you want to analyze data in S3 using serverless SQL -> Athena
 
