@@ -93,8 +93,25 @@ struktura wiekszosci operacji
 db.<nazwa_kolekcji>.<funkcja>(......)
 
 np.
-db.users.find() <- znajdz wszystkich w kolekcji users. > 
+db.users.find() <- znajdz wszystkich w kolekcji users. >
 
+```bash
+db.me.insertOne({name : "Pio",age : "39", address: {street : "Bluszczanska", city : "Warsaw" }})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6ad33f4969f7ff1c26bd7959')
+}
+test> db.me.find()
+[
+  {
+    _id: ObjectId('6ad33f4969f7ff1c26bd7959'),
+    name: 'Pio',
+    age: '39',
+    address: { street: 'Bluszczanska', city: 'Warsaw' }
+  }
+]
+test> 
+```
 
 ## Powiązane notatki
 - [[types of databases|Typy baz danych]] — porównanie z innymi NoSQL
