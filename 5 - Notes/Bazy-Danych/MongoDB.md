@@ -70,6 +70,20 @@ MongoDB dobrze pasuje gdy:
 MongoDB domyślnie jest CP — przy partycji sieciowej wybiera spójność nad dostępność.
 
 ---
+![[Pasted image 20261017101502.png]]
+
+etapy
+- pobrać binaria serwera mongod
+- utworzyć folder na dane
+- odpalić serwer mongod z flagą --dbpath <folder_na_dane>
+- pobrać binaria konsoli klienta
+- odpalic konsole klienta
+- wykonać testowe zapytanie
+----
+1. wlasny sprzet (.zip, .tar) - Win, Linux, Mac`
+2. AWS
+3. alteratywnie Docker / k8s
+
 
 ## Powiązane notatki
 - [[types of databases|Typy baz danych]] — porównanie z innymi NoSQL
