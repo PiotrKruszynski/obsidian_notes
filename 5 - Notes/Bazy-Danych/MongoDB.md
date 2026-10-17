@@ -83,6 +83,17 @@ etapy
 1. wlasny sprzet (.zip, .tar) - Win, Linux, Mac`
 2. AWS
 3. alteratywnie Docker / k8s
+---
+Zapytania:
+db. <- operacja bazodanowa
+rs. <- konfiguracja replikacji
+sh. <- konfiguracja shardingu
+
+struktura wiekszosci operacji
+db.<nazwa_kolekcji>.<funkcja>(......)
+
+np.
+db.users.find() <- znajdz wszystkich w kolekcji users. > 
 
 
 ## Powiązane notatki
